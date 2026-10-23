@@ -337,25 +337,210 @@ body.sel-on .toast{bottom:172px}
 }
 .ph-empty{text-align:center;padding:30px 10px;color:var(--muted)}
 .ph-empty .mirror{opacity:.55;max-width:220px}
+/* ===== v7: soft clay dashboard + gender themes ===== */
+:root{
+  --bg:#EEE6FF; --bg2:#F8F3FF; --surface:#FFFFFF; --surface2:#F6F1FF; --ink:#3B2A5A; --muted:#857AA3; --outline:rgba(104,78,160,.16);
+  --pink:#F6B8D2; --lilac:#C8B6FA; --butter:#FFE6A6; --sky:#CFE1FF; --mint:#C6EFDD; --berry:#8456DE;
+  --btn:#A98BF0; --btn2:#F4A9C8; --btn-ink:#FFFFFF; --bar-ink:#3B2A5A; --danger:#C23A5E;
+  --side1:#BCA6F6; --side2:#9D86EE; --side-ink:#FFFFFF;
+  --t1:#D9CCFF; --t2:#FFD3E3; --t3:#FFEBB3; --t4:#D3E5FF;
+  --shadow:0 10px 26px rgba(92,64,160,.13); --shadow-sm:0 4px 12px rgba(92,64,160,.12); --r:22px;
+  --hi:inset 0 1px 0 rgba(255,255,255,.85);
+}
+:root[data-g="pria"]{
+  --bg:#DFE7EF; --bg2:#EEF3F8; --surface:#F8FBFD; --surface2:#EDF2F7; --ink:#1E3246; --muted:#5D7286; --outline:rgba(38,68,98,.16);
+  --pink:#9CC9D6; --lilac:#9DB2DD; --butter:#D8E4EC; --sky:#C4D8EA; --mint:#BFE1DA; --berry:#2F6E8C;
+  --btn:#3F7F9C; --btn2:#7FB3C4; --btn-ink:#FFFFFF; --bar-ink:#1E3246; --danger:#B8384F;
+  --side1:#34506B; --side2:#24394F; --side-ink:#E9F2F8;
+  --t1:#BFE3E0; --t2:#C9D9EC; --t3:#D7E3F4; --t4:#C8C9EE;
+  --shadow:0 10px 26px rgba(24,48,74,.15); --shadow-sm:0 4px 12px rgba(24,48,74,.13);
+}
+:root[data-theme="dark"]{
+  --bg:#211733; --bg2:#2A1E40; --surface:#2F2347; --surface2:#3A2C56; --ink:#F1EAFF; --muted:#BFB0DD; --outline:rgba(220,200,255,.14);
+  --pink:#A1628A; --lilac:#7660C2; --butter:#9C8746; --sky:#435A88; --mint:#3D7A67; --berry:#C8A8FF;
+  --btn:#8C6CE6; --btn2:#C86F9C; --bar-ink:#F1EAFF; --side1:#3B2C5E; --side2:#2B2047; --side-ink:#F1EAFF;
+  --t1:#4B3B78; --t2:#5E3656; --t3:#5C5032; --t4:#334A70; --shadow:0 10px 26px rgba(0,0,0,.35); --shadow-sm:0 4px 12px rgba(0,0,0,.3); --hi:inset 0 1px 0 rgba(255,255,255,.06);
+}
+:root[data-theme="dark"][data-g="pria"]{
+  --bg:#121D2A; --bg2:#182636; --surface:#1C2B3C; --surface2:#24364A; --ink:#E6F0F7; --muted:#9FB4C6; --outline:rgba(190,215,235,.14);
+  --pink:#3F7686; --lilac:#4A5F8E; --butter:#53687A; --sky:#35506B; --mint:#2F6A62; --berry:#8CC8DD;
+  --btn:#3E89A6; --btn2:#4F7E8F; --bar-ink:#E6F0F7; --side1:#1F3247; --side2:#16263A; --side-ink:#E6F0F7;
+  --t1:#2E5A5C; --t2:#32485F; --t3:#3A4B63; --t4:#3C3F6A;
+}
+body{background:radial-gradient(900px 500px at 10% -10%,var(--bg2),transparent 60%),radial-gradient(700px 500px at 110% 20%,var(--bg2),transparent 60%),var(--bg)!important;background-attachment:fixed}
+.stars span{color:var(--surface);opacity:.6}
+/* soft surfaces instead of hard retro outlines */
+.win{border:1px solid var(--outline)!important;box-shadow:var(--shadow),var(--hi)!important;border-radius:var(--r)!important}
+.bar{border-bottom:0!important;border-radius:calc(var(--r) - 1px) calc(var(--r) - 1px) 0 0!important;background:linear-gradient(180deg,var(--bc,var(--lilac)),color-mix(in srgb,var(--bc,var(--lilac)) 82%,#000 4%))!important}
+.deco i{border:1px solid var(--outline)!important;border-radius:8px!important;background:rgba(255,255,255,.6)!important}
+:root[data-theme="dark"] .deco i{background:rgba(0,0,0,.2)!important}
+.btn{border:0!important;background:linear-gradient(180deg,color-mix(in srgb,var(--btn) 88%,#fff),var(--btn))!important;color:var(--btn-ink)!important;box-shadow:0 6px 16px color-mix(in srgb,var(--btn) 40%,transparent),inset 0 1px 0 rgba(255,255,255,.35)!important;font-weight:600}
+.btn:active{transform:translateY(1px)!important}
+.btn.alt{background:linear-gradient(180deg,color-mix(in srgb,var(--btn2) 85%,#fff),var(--btn2))!important;color:#2B1D3F!important;box-shadow:0 6px 16px color-mix(in srgb,var(--btn2) 40%,transparent)!important}
+.btn.butter{background:linear-gradient(180deg,#FFF3C9,var(--butter))!important;color:#3A2E12!important;box-shadow:0 6px 14px rgba(160,130,40,.18)!important}
+:root[data-g="pria"] .btn.butter{color:#1E3246!important;box-shadow:0 6px 14px rgba(40,70,100,.15)!important}
+.btn.ghost{background:var(--surface)!important;color:var(--ink)!important;border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)!important}
+:root[data-theme="dark"] .btn.alt,:root[data-theme="dark"] .btn.butter{color:#fff!important}
+input[type=text],input[type=url],select{border:1px solid var(--outline)!important;background:var(--surface2)!important;border-radius:14px!important}
+.chip span{border:1px solid var(--outline)!important;background:var(--surface)!important;box-shadow:var(--shadow-sm)}
+.chip input:checked + span{background:var(--lilac)!important;box-shadow:0 4px 12px color-mix(in srgb,var(--lilac) 50%,transparent)!important}
+:root[data-g="pria"] .chip input:checked + span{background:var(--pink)!important}
+.seg{border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)!important;background:var(--surface2)!important;padding:3px}
+.seg label+label span{border-left:0!important}
+.seg span{border-radius:999px}
+.seg input:checked + span{background:var(--surface)!important;box-shadow:var(--shadow-sm);color:var(--berry)}
+.trk{border:1px solid var(--outline)!important}
+.knob{border:1px solid var(--outline)!important}
+.tg input:checked + .trk{background:var(--btn)!important}
+.pal span{border-width:1px!important}
+.pal i{border:1px solid var(--outline)!important}
+.pal input:checked + span{background:var(--surface2)!important;border-color:var(--btn)!important}
+.dot,.sw{border:1px solid rgba(0,0,0,.18)!important}
+.tile{border:0!important;background:rgba(255,255,255,.55)!important;box-shadow:var(--shadow-sm)}
+.tile svg{stroke:var(--ink)!important}
+.card{border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)!important}
+.card .thumb{border-bottom:1px solid var(--outline)!important}
+.card.on{background:var(--t1)!important;box-shadow:0 0 0 2px var(--btn),var(--shadow)!important}
+.card .chk{border:1px solid var(--outline)!important}
+.card .edit{border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)}
+.look{border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)!important;background:var(--surface)!important}
+.look[aria-pressed="true"]{background:var(--t1)!important}
+.lfig,.mirror,.arch{border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)!important}
+.mirror{background:linear-gradient(180deg,var(--t1),var(--t2) 60%,var(--t3))!important}
+.board,.seq{border:1px solid var(--outline)!important;box-shadow:var(--shadow)!important}
+.pieces li,.items li,.hist li{border:1px solid var(--outline)!important;background:var(--surface2)!important;border-radius:16px!important}
+.reasons{border:1px dashed var(--outline)!important}
+.lookbar,.nudge{border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)!important;background:var(--t3)!important;color:var(--ink)!important}
+.toast{border:0!important;box-shadow:var(--shadow)!important;background:var(--ink)!important;color:var(--surface)!important}
+.selbar{border:0!important;background:var(--surface)!important;color:var(--ink)!important;box-shadow:var(--shadow)!important}
+.selbar .linkbtn{color:var(--ink)!important}
+.closet-tabs button{border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)}
+.closet-tabs button[aria-selected="true"]{background:var(--btn)!important;color:#fff!important}
+.photo-box{border:1px dashed var(--outline)!important}
+.photo-box .thumb{border:1px solid var(--outline)!important}
+.xbtn{border:1px solid var(--outline)!important}
+.how li::before{border:0!important;background:var(--t3)!important;box-shadow:var(--shadow-sm)}
+.logo{color:var(--berry)!important;text-shadow:none!important}
+.logo small{color:var(--berry)!important}
+/* safari-safe square thumbs (fix centang menutupi teks) */
+.card .thumb{aspect-ratio:auto!important;height:0;padding-top:100%;width:100%}
+.photo-box .thumb{aspect-ratio:auto!important;height:0;padding-top:100%}
+.seq .pc{aspect-ratio:auto!important;height:0!important;padding-top:78%}
+@media (min-width:860px){.seq .pc{padding-top:150px}}
+/* dock: soft */
+.dock{border:1px solid var(--outline)!important;box-shadow:var(--shadow)!important;background:color-mix(in srgb,var(--surface) 88%,transparent)!important;backdrop-filter:blur(10px)}
+.dock button[aria-current="page"] .tile{background:var(--btn)!important;transform:translateY(-2px)}
+.dock button[aria-current="page"] .tile svg{stroke:#fff!important}
+/* avatar */
+.avatar{position:relative;display:inline-grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--t1),var(--t2));color:var(--berry);font-family:var(--title);font-weight:700;font-size:18px;box-shadow:var(--shadow-sm);border:2px solid rgba(255,255,255,.8)}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.avatar.big{width:96px;height:96px;font-size:40px;border-width:4px}
+button.avatar{cursor:pointer;padding:0}
+.topbar .right{display:flex;align-items:center;gap:12px}
+/* hero */
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:20px 20px 20px 22px;margin:0 0 18px;border-radius:26px;background:linear-gradient(120deg,var(--t1),var(--t2));box-shadow:var(--shadow),var(--hi);overflow:hidden;border:1px solid var(--outline)}
+.hero::after{content:"\2726  \266A";position:absolute;right:22px;top:12px;color:var(--berry);opacity:.5;font-size:18px;letter-spacing:6px}
+.hero .kicker{font-size:13.5px;color:var(--muted);margin:0 0 4px;font-weight:700}
+.hero h1{font-size:clamp(24px,6.4vw,36px);margin:0 0 6px}
+.hero p.sub2{margin:0 0 14px;color:var(--ink);opacity:.85;max-width:38ch}
+.hero-art{width:clamp(96px,26vw,170px);aspect-ratio:1;border-radius:50%;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.75),rgba(255,255,255,.15));box-shadow:inset 0 0 0 6px rgba(255,255,255,.4)}
+.hero-art .avatar{position:absolute;inset:6%;width:auto;height:auto;font-size:56px;border:0;box-shadow:none;background:transparent}
+/* stat tiles */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 18px}
+@media (min-width:700px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stat{position:relative;padding:14px 14px 12px;border-radius:20px;background:var(--t1);box-shadow:var(--shadow-sm),var(--hi);border:1px solid var(--outline);min-height:112px}
+.stat:nth-child(2){background:var(--t2)} .stat:nth-child(3){background:var(--t3)} .stat:nth-child(4){background:var(--t4)}
+.stat .ic{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.7);box-shadow:var(--shadow-sm);margin-bottom:8px}
+:root[data-theme="dark"] .stat .ic{background:rgba(0,0,0,.2)}
+.stat .ic svg{width:20px;height:20px;stroke:var(--berry);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.stat .lb{font-size:13px;font-weight:800;color:var(--ink);opacity:.8;display:block}
+.stat .nv{font-family:var(--title);font-size:28px;font-weight:700;line-height:1.1;display:block}
+.stat .dl{font-size:12px;font-weight:700;color:var(--muted)}
+.stat .dl b{color:#2F8F5B}
+:root[data-theme="dark"] .stat .dl b{color:#7FE0A8}
+/* dashboard row */
+.dash2{display:grid;grid-template-columns:1fr;gap:0 22px}
+@media (min-width:860px){.dash2{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.donut{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.donut svg{width:132px;height:132px;flex:none}
+.legend{list-style:none;margin:0;padding:0;flex:1;min-width:130px;display:grid;gap:6px;font-size:13.5px;font-weight:700}
+.legend li{display:flex;align-items:center;gap:8px}
+.legend li span{margin-left:auto;color:var(--muted)}
+.bars{display:grid;grid-template-columns:24px repeat(7,minmax(0,1fr));align-items:end;gap:6px;height:150px;padding-top:6px}
+.bars .ax{display:flex;flex-direction:column;justify-content:space-between;height:100%;font-size:11px;color:var(--muted);text-align:right;padding-bottom:18px}
+.bars .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.bars .bar-v{width:70%;min-height:4px;border-radius:9px 9px 6px 6px;box-shadow:var(--shadow-sm)}
+.bars .col small{font-size:11px;color:var(--muted);font-weight:700}
+.recent{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.recent li{display:flex;align-items:center;gap:10px;padding:8px;border-radius:16px;background:var(--surface2);border:1px solid var(--outline)}
+.recent .minis{display:flex;flex:none}
+.recent .mini{position:relative;width:38px;height:38px;border-radius:10px;background:#FFFDF9;border:1px solid var(--outline);margin-left:-8px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.recent .mini:first-child{margin-left:0}
+.recent .mini .art{inset:6%}
+.recent .tx{flex:1;min-width:0;font-size:13.5px;line-height:1.3}
+.recent .tx b{display:block}
+.discover{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 18px;margin:4px 0 22px;border-radius:24px;background:linear-gradient(110deg,var(--t4),var(--t1));box-shadow:var(--shadow),var(--hi);border:1px solid var(--outline)}
+.discover .star{font-size:34px;line-height:1;filter:drop-shadow(0 4px 6px rgba(0,0,0,.12))}
+.discover div{flex:1;min-width:180px}
+.discover b{font-family:var(--title);font-size:18px;display:block}
+.discover span{font-size:14px;color:var(--muted)}
+/* model placeholder */
+.wait{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px;text-align:center;color:var(--ink);font-size:13.5px;font-weight:700;background:linear-gradient(110deg,rgba(255,255,255,.15) 30%,rgba(255,255,255,.55) 50%,rgba(255,255,255,.15) 70%);background-size:220% 100%;animation:shim 1.6s linear infinite}
+.wait .hanger{font-size:42px;opacity:.7}
+.wait.off{animation:none;background:rgba(255,255,255,.35)}
+@keyframes shim{to{background-position:-220% 0}}
+.lfig .wait{font-size:11px;gap:4px;padding:6px}
+.lfig .wait .hanger{font-size:26px}
+/* sidebar (desktop) */
+.side-cta{display:none}
+@media (min-width:900px){
+  .dock{background:linear-gradient(180deg,var(--side1),var(--side2))!important;border:0!important;width:220px!important;padding:18px 14px!important;border-radius:28px!important;min-height:calc(100vh - 32px)}
+  .dock button{color:var(--side-ink)!important;opacity:.9;padding:6px 8px!important;border-radius:16px!important}
+  .dock .tile{background:transparent!important;box-shadow:none!important;width:34px;height:34px}
+  .dock .tile svg{stroke:var(--side-ink)!important}
+  .dock button[aria-current="page"]{background:var(--surface)!important;color:var(--ink)!important;opacity:1;box-shadow:var(--shadow-sm)}
+  .dock button[aria-current="page"] .tile{background:transparent!important;transform:none}
+  .dock button[aria-current="page"] .tile svg{stroke:var(--berry)!important}
+  .brandbox{border-bottom:0!important;text-align:center;padding:2px 4px 10px!important}
+  .brandbox .logo{color:#fff!important;font-size:22px!important}
+  :root[data-g="pria"] .brandbox .logo{color:var(--side-ink)!important}
+  .brandbox .me{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px}
+  .brandbox .me b{font-family:var(--title);font-size:19px;color:var(--side-ink)}
+  .brandbox .me small{color:var(--side-ink);opacity:.8;font-size:12.5px}
+  .side-cta{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;margin-top:auto;padding:14px 12px;border-radius:20px;background:linear-gradient(180deg,var(--t2),var(--t1));color:var(--ink);box-shadow:var(--shadow-sm)}
+  .side-cta .crown{font-size:26px}
+  .side-cta small{font-size:12.5px;color:var(--muted)}
+  .topbar .logo{visibility:hidden}
+  .topbar .avatar{display:none}
+}
+@media (min-width:1100px){
+  #outfit-main>.hero,#outfit-main>.stats,#outfit-main>.dash2,#outfit-main>.discover{grid-column:1 / -1}
+}
+.brandbox .me{display:none}
+@media (min-width:900px){.brandbox .me{display:flex}}
+.pseg{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px}
+.pseg .lbl{margin:0!important}
 </style>
 </head>
 <body>
 <div class="stars" aria-hidden="true"><span style="top:8%;left:6%">&#10022;</span><span style="top:22%;right:8%">&#10023;</span><span style="top:48%;left:3%">&#10023;</span><span style="top:64%;right:4%">&#10022;</span><span style="top:86%;left:44%">&#10023;</span></div>
 <div class="shell">
   <nav class="dock" aria-label="Menu utama">
-    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" data-intro>Kurasi<small>&#10047;</small></span><p>Atelier lemarimu, satu ensemble setiap pagi</p></div>
+    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" data-intro>Kurasi<small>&#10047;</small></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Atelier lemarimu, satu ensemble setiap pagi</small></div></div>
     <button data-tab="outfit" aria-current="page"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg></span>Outfit</button>
     <button data-tab="lemari"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span>Lemari</button>
     <button data-tab="tema"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg></span>Tema</button>
     <button data-tab="warna"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.5-1.2-2-1.2-3.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-3.9-4-7-9-7z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg></span>Warna</button>
     <button data-tab="riwayat"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></span>Riwayat</button>
     <button data-tab="profil"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span>Profil</button>
+    <div class="side-cta"><span class="crown" aria-hidden="true">&#10022;</span><b>Kurasi di HP lain?</b><small>Pindahkan lemari, riwayat, dan ilustrasimu lewat satu file.</small><button class="btn small" type="button" data-go="profil">Pindahkan</button></div>
   </nav>
 
   <main id="main">
     <div class="topbar">
       <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" data-intro>Kurasi<small>&#10047;</small></span>
-      <label class="tg right" id="theme-wrap"><span class="tl">Mode gelap</span><input type="checkbox" id="theme-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></label>
+      <div class="right"><button class="avatar" id="top-avatar" type="button" data-go="profil" aria-label="Buka profil"></button>
+      <label class="tg right" id="theme-wrap"><span class="tl">Mode gelap</span><input type="checkbox" id="theme-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></label></div>
     </div>
 
     <!-- OUTFIT -->
@@ -385,8 +570,16 @@ body.sel-on .toast{bottom:172px}
       </div>
 
       <div id="outfit-main">
-        <h1 id="h-outfit">Ensemble hari ini</h1>
-        <p class="date" id="today"></p>
+        <section class="hero" aria-labelledby="h-outfit">
+          <div>
+            <p class="kicker">Ensemble hari ini · <span id="today"></span></p>
+            <h1 id="h-outfit">Selamat pagi!</h1>
+            <p class="sub2" id="hero-sub">Siap tampil memukau hari ini? Kurasi memadukan isi lemarimu dalam sekali ketuk.</p>
+            <button class="btn" type="button" id="hero-go">Kurasi outfit sekarang</button>
+          </div>
+          <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+        </section>
+        <div class="stats" id="stats"></div>
         <div class="nudge hidden" id="nudge"><span>Lengkapi profil agar saran dan ilustrasinya terasa seperti kamu.</span><button class="btn small butter" type="button" id="nudge-go">Isi profil</button></div>
 
         <div id="lookbar" class="lookbar hidden">
@@ -425,6 +618,12 @@ body.sel-on .toast{bottom:172px}
         </div>
 
         <div id="result" class="win butter hidden ph" aria-live="polite"></div>
+        <div class="dash2">
+          <div class="win sky"><div class="bar"><span>Warna lemarimu</span><span class="deco" aria-hidden="true"><i>&#9673;</i></span></div><div class="body" id="dash-donut"></div></div>
+          <div class="win pink"><div class="bar"><span>Outfit minggu ini</span><span class="deco" aria-hidden="true"><i>&#9776;</i></span></div><div class="body" id="dash-week"></div></div>
+          <div class="win mint"><div class="bar"><span>Terakhir dipakai</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body" id="dash-recent"></div></div>
+        </div>
+        <div class="discover"><span class="star" aria-hidden="true">&#11088;</span><div><b>Ada dresscode atau tema acara?</b><span>Ketik temanya, AI menyusun 3 look lalu Kurasi memadukan dari lemarimu.</span></div><button class="btn alt" type="button" data-go="tema">Jelajahi tema</button></div>
       </div>
     </section>
 
@@ -585,7 +784,7 @@ body.sel-on .toast{bottom:172px}
             <button class="btn alt hidden" type="button" id="move-share">Bagikan file</button>
           </div>
           <label class="btn butter filebtn">Buka file lemari<input type="file" id="move-open" accept=".json,application/json" aria-label="Buka file lemari"></label>
-          <p class="note" style="margin-top:10px">Membuka file akan mengganti isi Kurasi di perangkat ini dengan isi file.</p>
+          <p class="note" style="margin-top:22px">Membuka file akan mengganti isi Kurasi di perangkat ini dengan isi file.</p>
         </div>
       </div>
     </section>
@@ -634,7 +833,7 @@ var SEASONS = {
 };
 
 var CATS = [
-  {k:'hijab',l:'Hijab',w:1},{k:'scarf',l:'Scarf/syal'},{k:'atasan',l:'Atasan'},{k:'bawahan',l:'Bawahan'},{k:'gamis',l:'Gamis/dress',w:1},
+  {k:'hijab',l:'Hijab',w:1},{k:'scarf',l:'Scarf / syal'},{k:'atasan',l:'Atasan'},{k:'bawahan',l:'Bawahan'},{k:'gamis',l:'Gamis / dress',w:1},
   {k:'outer',l:'Outer'},{k:'sepatu',l:'Sepatu'},{k:'tas',l:'Tas'},{k:'aksesoris',l:'Aksesoris'}
 ];
 var CATL = {}; CATS.forEach(function(c){CATL[c.k]=c.l;});
@@ -664,7 +863,7 @@ var PRESETS = [
     {name:'Hutan',desc:'Olive dan sage dengan dasar cokelat atau cream.',colors:['olive','sage','cokelat','cream','beige'],motif:'boleh'},
     {name:'Senja',desc:'Terracotta dan mustard dengan dasar netral hangat.',colors:['terracotta','mustard','cokelat','cream','beige'],motif:'boleh'}
   ]},
-  {name:'Etnik/batik',looks:[
+  {name:'Etnik / batik',looks:[
     {name:'Batik formal',desc:'Satu item batik dengan warna gelap yang anggun.',colors:['cokelat','mocca','hitam','cream','navy','wine'],motif:'wajib'},
     {name:'Tenun ceria',desc:'Motif etnik bernuansa terracotta dan mustard.',colors:['terracotta','mustard','olive','cream','beige'],motif:'wajib'},
     {name:'Batik modern',desc:'Motif biru putih yang segar dan bersih.',colors:['navy','putih','birumuda','abumuda'],motif:'wajib'}
@@ -686,7 +885,7 @@ var state = {
   gender: load('gender', 'wanita'), opts: Object.assign({}, DEF_OPTS, load('opts', {})), aiImg: load('aiImg', true) !== false
 };
 state.profile = Object.assign({name:'',skin:'langsat',hair:'long',hijabStyle:'',vibes:[],avoid:[],done:false}, load('profile',{}));
-var ranked = [], rankIdx = 0, showIntro = false, resultView = 'model';
+var ranked = [], rankIdx = 0, showIntro = true, resultView = 'model';
 state.introSeen = load('introSeen', false);
 
 // ---------- Helpers ----------
@@ -1203,7 +1402,7 @@ function syncGender(){
 }
 function setGender(g){
   if(g===state.gender)return;
-  state.gender=g; save('gender',g); syncGender();
+  state.gender=g; save('gender',g); syncGender(); applyGenderTheme(); loadAvatar();
   ranked=[]; $('#result').classList.add('hidden'); $('#result').classList.add('ph');
   renderOutfitPage(); renderRunway();
   toast(g==='pria'?'Mode padu padan pria aktif.':'Mode padu padan wanita aktif.');
@@ -1489,9 +1688,9 @@ function wear(c,btn){
 }
 function renderOutfitPage(){
   var d=new Date(), ds=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long'});
-  $('#today').textContent=greet()+' '+ds.charAt(0).toUpperCase()+ds.slice(1)+'.'; $('#cover-issue').textContent='Edisi '+ds+(state.profile.name?' · untuk '+state.profile.name:'');
+  $('#today').textContent=ds.charAt(0).toUpperCase()+ds.slice(1); $('#h-outfit').textContent=greet()+' '+greetIcon(); $('#cover-issue').textContent='Edisi '+ds+(state.profile.name?' · untuk '+state.profile.name:'');
   $('#nudge').classList.toggle('hidden',!!state.profile.done);
-  var rs=$('#result'); if(rs.classList.contains('ph')) rs.innerHTML='<div class="bar"><span>Ensemble-mu muncul di sini</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div><div class="body ph-empty"><div class="mirror" aria-hidden="true">'+figSVG(RUNWAY[state.gender][0].p,150,state.gender,{pose:0})+'</div><p style="margin-top:14px">Atur acara dan item di kiri, lalu ketuk <b>Kurasi outfit</b>.</p></div>';
+  var rs=$('#result'); if(rs.classList.contains('ph')) rs.innerHTML='<div class="bar"><span>Ensemble-mu muncul di sini</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div><div class="body ph-empty"><div class="mirror" aria-hidden="true">'+imgTag('img/run-'+state.gender+'-1.webp')+'</div><p style="margin-top:14px">Atur acara dan item di kiri, lalu ketuk <b>Kurasi outfit</b>.</p></div>';
   var cats=catsFor(state.gender);
   var empty=!state.items.some(function(i){return cats.some(function(c){return c.k===i.cat;});});
   var cover=empty||!state.introSeen||showIntro;
@@ -1506,7 +1705,7 @@ function renderOutfitPage(){
   var lb=$('#lookbar');
   if(state.look){lb.classList.remove('hidden');$('#lookbar-text').innerHTML='Mengikuti tema <b>'+esc(state.look.theme)+'</b>, look <b>'+esc(state.look.name)+'</b>';}
   else lb.classList.add('hidden');
-  renderToggles(); syncGender();
+  renderToggles(); syncGender(); renderDash(); renderChrome();
 }
 function closeIntro(){ showIntro=false; if(!state.introSeen){state.introSeen=true;save('introSeen',true);} if(!state.profile.done&&!ONB.shown){ ONB.shown=true; setTimeout(openOnboarding,350); } }
 $('#nudge-go').addEventListener('click',function(){ openOnboarding(); });
@@ -1521,8 +1720,9 @@ $('#btn-clear-look').addEventListener('click',function(){state.look=null;save('l
 
 // ---------- Themes ----------
 function lookFig(lk,idx,src){
-  return '<span class="lfig" aria-hidden="true">'+figSVG(lookParts(lk),84,state.gender,{pose:idx||0})+imgTag(src)+'</span>';
+  return '<span class="lfig" aria-hidden="true">'+(src?imgTag(src):'<span class="wait'+(state.aiImg&&state.worker?'':' off')+'"><span class="hanger">&#128087;</span><span>Ilustrasi menyusul</span></span>')+'</span>';
 }
+var THEME_RETRY={};
 function lookBtn(theme,lk,idx,src){
   var active=state.look&&state.look.theme===theme&&state.look.name===lk.name;
   var mot={wajib:'Wajib satu item bermotif',hindari:'Tanpa motif',boleh:'Motif boleh'}[lk.motif]||'';
@@ -1537,6 +1737,7 @@ function renderThemes(){
     mt.innerHTML='<div class="win butter"><div class="bar"><span>Tema buatanmu</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div><div class="body">'+state.aiThemes.map(function(t,ti){return '<div class="theme"><h3 style="display:flex;justify-content:space-between;gap:8px">'+esc(t.name)+' <button class="linkbtn danger" data-del-theme="'+ti+'">Hapus</button></h3><div class="looks">'+t.looks.map(function(lk,i){return lookBtn(t.name,lk,i,'ai');}).join('')+'</div></div>';}).join('')+'</div></div>';
   } else mt.innerHTML='';
   $('#worker-url').value=state.worker||'';
+  state.aiThemes.forEach(function(t){ if(!THEME_RETRY[t.name]&&t.looks.some(function(l){return !l.img;})){ THEME_RETRY[t.name]=1; fillThemeImages(t); } });
   if(!state.worker)$('#ai-status').innerHTML='<span class="muted">Fitur AI belum disambungkan. Tema siap pakai tetap bisa dipakai.</span>';
 }
 document.addEventListener('click',function(e){
@@ -1692,7 +1893,7 @@ function itemKind(it){ var t=(it.name||'').toLowerCase(), c=it.cat;
 var ART_N=0;
 function itemSVG(it){
   var k=itemKind(it), c=hx(it.color), id='a'+(++ART_N), INK='#3B1E36', out=[];
-  var S=' stroke="'+INK+'" stroke-opacity=".8" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"';
+  var S=' stroke="#2C2430" stroke-opacity=".7" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"';
   function sh(d,col){ col=col||c; out.push('<path d="'+d+'" fill="'+col+'"'+S+'/>'); if(it.motif&&col===c)out.push('<path d="'+d+'" fill="url(#m'+id+')"/>'); out.push('<path d="'+d+'" fill="url(#g'+id+')"/>'); }
   function ln(d,o){ o=o||{}; out.push('<path d="'+d+'" fill="none" stroke="'+(o.c||'rgba(40,15,35,.38)')+'" stroke-width="'+(o.w||1.2)+'" stroke-linecap="round"/>'); }
   function strap(d,w){ out.push('<path d="'+d+'" fill="none" stroke="'+INK+'" stroke-opacity=".8" stroke-width="'+(w+3)+'" stroke-linecap="round"/><path d="'+d+'" fill="none" stroke="'+c+'" stroke-width="'+w+'" stroke-linecap="round"/>'); }
@@ -1954,12 +2155,15 @@ function boardHTML(c,view){
 }
 function mirrorHTML(c,pose){
   var prompt=comboPrompt(c), cached=state.aiImg?imgGet(imgKey(prompt)):null;
-  return '<div class="mirror" aria-hidden="true">'+figSVG({hijab:partOf(c.hijab,'hijab'),scarf:partOf(c.scarf,'scarf'),top:partOf(c.atasan,'atasan'),bottom:partOf(c.bawahan,'bawahan'),gamis:partOf(c.gamis,'gamis'),outer:partOf(c.outer,'outer'),shoes:partOf(c.sepatu,'sepatu'),bag:partOf(c.tas,'tas'),acc:partOf(c.aksesoris,'aksesoris')},150,state.gender,{pose:pose||0})+(cached?imgTag(cached):'')+'</div><p class="figcap">'+(cached?'Ilustrasi AI':(state.aiImg&&state.worker?'Sketsa sementara, ilustrasi AI sedang digambar…':'Sketsa ilustrasi'))+'</p>';
+  var can=state.aiImg&&state.worker;
+  return '<div class="mirror" aria-hidden="true">'+(cached?imgTag(cached):'<div class="wait'+(can?'':' off')+'"><span class="hanger">&#128087;</span><span>'+(can?'Ilustrasi model sedang digambar…':'Ilustrasi AI sedang dimatikan. Lihat tampilan Flat-lay.')+'</span></div>')+'</div><p class="figcap">'+(cached?'Ilustrasi AI':(can?'Biasanya 5–15 detik':'&nbsp;'))+'</p>';
 }
 function fillMirrorAI(box,c,stillOk){
   var prompt=comboPrompt(c); if(!state.aiImg||!state.worker||imgGet(imgKey(prompt)))return;
   aiImage(prompt).then(function(u){ if(!stillOk())return; var m=box.querySelector('.mirror'), cap=box.querySelector('.figcap'); if(!m)return;
-    if(u){ m.insertAdjacentHTML('beforeend',imgTag(u)); if(cap)cap.textContent='Ilustrasi AI'; } else if(cap)cap.textContent='Ilustrasi AI belum tersedia (cek koneksi atau kuota), menampilkan sketsa.'; });
+    var w=m.querySelector('.wait');
+    if(u){ if(w)w.remove(); m.insertAdjacentHTML('beforeend',imgTag(u)); if(cap)cap.textContent='Ilustrasi AI'; }
+    else { if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">&#128087;</span><span>Ilustrasi model belum tersedia (kuota AI habis atau koneksi terputus). Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
 }
 function viewTabs(name,cur,opts){ return '<div class="seg small" role="radiogroup" aria-label="'+opts.label+'">'+opts.items.map(function(o){return '<label><input type="radio" name="'+name+'" value="'+o[0]+'"'+(cur===o[0]?' checked':'')+'><span>'+o[1]+'</span></label>';}).join('')+'</div>'; }
 function renderBoard(){
@@ -2004,11 +2208,13 @@ function fxWrap(n){
   if(!hit)return; if(last<s.length)frag.appendChild(document.createTextNode(s.slice(last))); n.parentNode.replaceChild(frag,n);
 }
 var FX_SKIP='script,style,svg,option,select,textarea,em.fx,[data-nofx],.logo,a.pin';
+var SLASH_RE=/([^\s\/:<])\/(?=[^\s\/>])/g;
+function fixSlash(n){ var v=n.nodeValue; if(v.indexOf('/')<0||v.indexOf('://')>-1)return; var p=n.parentNode; if(!p||p.nodeType!==1||p.closest('script,style,svg,textarea'))return; var nv=v.replace(SLASH_RE,'$1 / '); if(nv!==v)n.nodeValue=nv; }
 function fxScan(root){
-  if(!root)return; if(root.nodeType===3){ var p=root.parentNode; if(p&&p.nodeType===1&&!p.closest(FX_SKIP)&&FX_TEST.test(root.nodeValue))fxWrap(root); return; }
+  if(!root)return; if(root.nodeType===3){ fixSlash(root); var p=root.parentNode; if(p&&p.nodeType===1&&!p.closest(FX_SKIP)&&FX_TEST.test(root.nodeValue))fxWrap(root); return; }
   if(root.nodeType!==1||root.closest(FX_SKIP))return;
   var tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), list=[], n;
-  while((n=tw.nextNode())){ var pe=n.parentNode; if(pe&&!pe.closest(FX_SKIP)&&FX_TEST.test(n.nodeValue))list.push(n); }
+  while((n=tw.nextNode())){ fixSlash(n); var pe=n.parentNode; if(pe&&!pe.closest(FX_SKIP)&&FX_TEST.test(n.nodeValue))list.push(n); }
   list.forEach(fxWrap);
 }
 var FX_OBS=new MutationObserver(function(ms){ ms.forEach(function(m){ if(m.type==='characterData')fxScan(m.target); else for(var i=0;i<m.addedNodes.length;i++)fxScan(m.addedNodes[i]); }); });
@@ -2016,17 +2222,18 @@ var FX_OBS=new MutationObserver(function(ms){ ms.forEach(function(m){ if(m.type=
 // ---------- Profile ----------
 var SKINS=[{k:'terang',l:'Terang',h:'#F7DCC9',h2:'#E8B9A0',en:'fair skin'},{k:'langsat',l:'Kuning langsat',h:'#F3CFBA',h2:'#E2AE96',en:'light warm skin'},{k:'sawo',l:'Sawo matang',h:'#D9A47F',h2:'#BC845F',en:'warm tan brown skin'},{k:'gelap',l:'Cokelat gelap',h:'#A9714E',h2:'#8A563A',en:'deep brown skin'}];
 var HAIRS=[{k:'long',l:'Panjang terurai',en:'long sleek dark hair'},{k:'pony',l:'Kuncir kuda',en:'a high ponytail'},{k:'bun',l:'Cepol',en:'a low elegant bun'},{k:'bob',l:'Pendek sebahu',en:'a chic shoulder-length bob'}];
-var HIJAB_STYLES=[{k:'',l:'Campur'},{k:'segi',l:'Segi empat'},{k:'pashmina',l:'Pashmina'},{k:'instan',l:'Instan/bergo'},{k:'khimar',l:'Khimar'},{k:'turban',l:'Turban'}];
+var HIJAB_STYLES=[{k:'',l:'Campur'},{k:'segi',l:'Segi empat'},{k:'pashmina',l:'Pashmina'},{k:'instan',l:'Instan / bergo'},{k:'khimar',l:'Khimar'},{k:'turban',l:'Turban'}];
 var VIBES=[{k:'minimalis',l:'Minimalis'},{k:'feminin',l:'Feminin'},{k:'kasual',l:'Kasual'},{k:'klasik',l:'Klasik dan rapi'},{k:'ceria',l:'Ceria dan berwarna'},{k:'sporty',l:'Sporty'}];
 function skinOf(){ var k=state.profile&&state.profile.skin; return SKINS.find(function(s){return s.k===k;})||SKINS[1]; }
-function greetWord(){ var h=new Date().getHours(); return h<11?'Selamat pagi':h<15?'Selamat siang':h<18?'Selamat sore':'Selamat malam'; }
+function greetWord(){ var h=new Date().getHours(); return (h>=4&&h<11)?'Selamat pagi':(h>=11&&h<15)?'Selamat siang':(h>=15&&h<18)?'Selamat sore':'Selamat malam'; }
+function greetIcon(){ var w=greetWord(); return w==='Selamat pagi'?'\u2600\uFE0F':w==='Selamat siang'?'\uD83C\uDF24\uFE0F':w==='Selamat sore'?'\uD83C\uDF07':'\uD83C\uDF19'; }
 function greet(){ var n=(state.profile.name||'').trim(); return greetWord()+(n?', '+n:'')+'!'; }
 function profileHTML(px){
   function chips(name,list,type,cls){ return '<div class="chips'+(cls?' '+cls:'')+'">'+list.map(function(o){return '<label class="chip"><input type="'+(type||'radio')+'" name="'+px+name+'" value="'+o.k+'"><span>'+o.l+'</span></label>';}).join('')+'</div>'; }
   return ''+
   '<fieldset class="pstep" data-step="1"><legend>Kenalan dulu</legend>'+
     '<label class="lbl" for="'+px+'name">Nama panggilan</label><input type="text" id="'+px+'name" maxlength="20" placeholder="Contoh: Adhesty" style="margin-bottom:14px">'+
-    '<span class="lbl">Padu padan untuk</span><div class="seg" role="radiogroup" aria-label="Padu padan untuk"><label><input type="radio" name="'+px+'gender" value="wanita"><span>Wanita</span></label><label><input type="radio" name="'+px+'gender" value="pria"><span>Pria</span></label></div>'+
+    '<div class="pseg"><span class="lbl">Padu padan untuk</span><div class="seg" role="radiogroup" aria-label="Padu padan untuk"><label><input type="radio" name="'+px+'gender" value="wanita"><span>Wanita</span></label><label><input type="radio" name="'+px+'gender" value="pria"><span>Pria</span></label></div></div>'+
   '</fieldset>'+
   '<fieldset class="pstep" data-step="2"><legend>Rambut dan hijab</legend>'+
     '<div class="only-w"><label class="tg" style="margin-bottom:8px"><input type="checkbox" role="switch" id="'+px+'hijab"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Saya berhijab</span></label>'+
@@ -2072,7 +2279,8 @@ function readProfile(box,px){
   var g=v('gender')||state.gender, hij=box.querySelector('#'+px+'hijab').checked;
   if(g==='wanita'&&state.opts.hijab!==hij){ state.opts.hijab=hij; save('opts',state.opts); }
   var se=v('season'); if(se!=null&&se!==(state.season||'')){ state.season=se||null; save('season',state.season); state.seasonInfo={src:'manual'}; save('seasonInfo',state.seasonInfo); }
-  if(g!==state.gender){ state.gender=g; save('gender',g); syncGender(); ranked=[]; $('#result').classList.add('hidden'); $('#result').classList.add('ph'); }
+  if(g!==state.gender){ state.gender=g; save('gender',g); syncGender(); applyGenderTheme(); ranked=[]; $('#result').classList.add('hidden'); $('#result').classList.add('ph'); }
+  loadAvatar();
 }
 // profile tab
 $('#profile-fields').innerHTML=profileHTML('p-');
@@ -2121,11 +2329,59 @@ $('#move-open').addEventListener('change',function(e){ var f=e.target.files&&e.t
     idbClear().then(function(){ var ks=Object.keys(o.images||{}); return ks.reduce(function(p,k){return p.then(function(){return idbPut(k,o.images[k]);});},Promise.resolve()); }).then(function(){ toast('Lemari dipindahkan. Memuat ulang…'); setTimeout(function(){location.reload();},700); });
   }; rd.readAsText(f); });
 
+// ---------- v7: dashboard, avatar, gender theme ----------
+function applyGenderTheme(){ document.documentElement.setAttribute('data-g',state.gender); var m=document.querySelector('meta[name=theme-color]'); if(m&&document.documentElement.getAttribute('data-theme')!=='dark')m.setAttribute('content',state.gender==='pria'?'#DFE7EF':'#EEE6FF'); }
+var AVATAR={src:null};
+function avatarVariant(){ return state.gender==='pria'?'pria':(state.opts.hijab?'hijab':'wanita'); }
+function avatarInner(){ var n=(state.profile.name||'').trim(), src=AVATAR.src||('img/avatar-'+avatarVariant()+'.webp');
+  return '<b>'+esc(n?n.charAt(0).toUpperCase():'❀')+'</b><img src="'+src+'" alt="" onerror="this.remove()">'; }
+function avatarHTML(cls){ return '<span class="avatar'+(cls?' '+cls:'')+'" aria-hidden="true">'+avatarInner()+'</span>'; }
+function avatarKey(){ var p=state.profile; return [avatarVariant(),p.skin,p.hair,p.hijabStyle].join('|'); }
+function avatarPrompt(){ var p=state.profile, sk=skinOf().en, bg=state.gender==='pria'?'soft steel blue':'soft lavender';
+  var who=state.gender==='pria'?'a friendly young Indonesian man with '+sk+' and short neat black hair, wearing a casual shirt':(state.opts.hijab?'a friendly young Indonesian woman with '+sk+' wearing a '+(p.hijabStyle==='turban'?'turban hijab':'soft pastel hijab')+' and a cozy knit top':'a friendly young Indonesian woman with '+sk+' and '+((HAIRS.find(function(h){return h.k===p.hair;})||HAIRS[0]).en)+', wearing a cozy knit top');
+  return 'Cute 3D clay cartoon avatar portrait of '+who+', warm smile, big expressive eyes, head and shoulders, centered, soft studio lighting, plain '+bg+' background, polished Pixar-like character render, no text.'; }
+function loadAvatar(){ idbGet('avatar').then(function(v){ if(v&&v.k===avatarKey()&&v.u){AVATAR.src=v.u;renderChrome();} else if(state.profile.done)makeAvatar(); }); }
+function makeAvatar(){ if(!state.worker||!state.aiImg)return; var k=avatarKey();
+  aiPost({type:'image',prompt:avatarPrompt()},50000).then(function(j){ if(!j.image)return; return loadImg('data:image/jpeg;base64,'+j.image).then(function(im){ if(!im)return; var c=document.createElement('canvas'); c.width=256; c.height=256; c.getContext('2d').drawImage(im,0,0,256,256); var u=c.toDataURL('image/webp',0.85); if(u.indexOf('data:image/webp')!==0)u=c.toDataURL('image/jpeg',0.86); AVATAR.src=u; idbPut('avatar',{k:k,u:u}); renderChrome(); }); }).catch(function(){}); }
+function renderChrome(){
+  var n=(state.profile.name||'').trim();
+  $('#side-avatar').innerHTML=avatarHTML('big'); $('#side-hello').textContent='Hai'+(n?', '+n:'')+'! 👋';
+  $('#top-avatar').innerHTML=avatarInner();
+  var ha=$('#hero-art'); if(ha)ha.innerHTML=avatarHTML();
+}
+function weekStart(){ var d=new Date(); d.setHours(0,0,0,0); var w=(d.getDay()+6)%7; d.setDate(d.getDate()-w); return d.getTime(); }
+function itemCreated(it){ var t=parseInt(String(it.id).slice(0,8),36); return isFinite(t)&&t>1.6e12&&t<4e12?t:0; }
+function streakDays(){ var days={}; state.history.forEach(function(h){var d=new Date(h.t);d.setHours(0,0,0,0);days[d.getTime()]=1;}); var d=new Date(); d.setHours(0,0,0,0); var n=0; if(!days[d.getTime()])d.setDate(d.getDate()-1); while(days[d.getTime()]){n++;d.setDate(d.getDate()-1);} return n; }
+var IC={closet:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/>',shirt:'<path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/>',moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',flame:'<path d="M12 3c1 3 4 4.5 4 9a4 4 0 0 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 0-8z"/>'};
+function statHTML(ic,lb,nv,dl){ return '<div class="stat"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">'+IC[ic]+'</svg></span><span class="lb">'+lb+'</span><span class="nv">'+nv+'</span><span class="dl">'+dl+'</span></div>'; }
+function renderDash(){
+  var cats=catsFor(state.gender), vis=state.items.filter(function(i){return cats.some(function(c){return c.k===i.cat;});});
+  var ws=weekStart(), now=Date.now(), added=vis.filter(function(i){return itemCreated(i)>=now-7*864e5;}).length;
+  var worn=state.history.filter(function(h){return h.t>=ws;}).length, rest=vis.filter(function(i){return restLeft(i)>0;}).length, st=streakDays();
+  $('#stats').innerHTML=statHTML('closet','Isi lemari',vis.length,added?'<b>+'+added+'</b> minggu ini':'item tercatat')+statHTML('shirt','Outfit dipakai',worn,'minggu ini')+statHTML('moon','Sedang istirahat',rest,'item, maks. 7 hari')+statHTML('flame','Hari beruntun',st,'hari berturut-turut');
+  // donut warna lemari
+  var cnt={}; vis.forEach(function(i){cnt[i.color]=(cnt[i.color]||0)+1;}); var keys=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a];}), tot=vis.length||1;
+  var top=keys.slice(0,5), other=keys.slice(5).reduce(function(s,k){return s+cnt[k];},0), seg=top.map(function(k){return {c:hx(k),l:colorLabel(k),n:cnt[k]};}); if(other)seg.push({c:'#C9C3D6',l:'Lainnya',n:other});
+  var R=44, C=2*Math.PI*R, off=0, arcs=vis.length?seg.map(function(s){var len=s.n/tot*C; var a='<circle r="'+R+'" cx="60" cy="60" fill="none" stroke="'+s.c+'" stroke-width="20" stroke-dasharray="'+Math.max(len-1.5,0.5).toFixed(2)+' '+(C-len+1.5).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'" transform="rotate(-90 60 60)"/>'; off+=len; return a;}).join(''):'<circle r="'+R+'" cx="60" cy="60" fill="none" stroke="var(--surface2)" stroke-width="20"/>';
+  $('#dash-donut').innerHTML='<div class="donut"><svg viewBox="0 0 120 120" aria-hidden="true"><circle r="'+R+'" cx="60" cy="60" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="22"/>'+arcs+'<text x="60" y="58" text-anchor="middle" font-family="Fredoka" font-size="20" font-weight="700" fill="currentColor">'+vis.length+'</text><text x="60" y="74" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">item</text></svg><ul class="legend">'+(vis.length?seg.map(function(s){return '<li><i class="dot" style="background:'+s.c+'"></i>'+esc(s.l)+'<span>'+Math.round(s.n/tot*100)+'%</span></li>';}).join(''):'<li>Lemari masih kosong</li>')+'</ul></div>';
+  // grafik minggu ini
+  var per=[0,0,0,0,0,0,0]; state.history.forEach(function(h){ if(h.t>=ws&&h.t<ws+7*864e5)per[Math.floor((h.t-ws)/864e5)]++; }); var mx=Math.max(2,Math.max.apply(null,per));
+  var cols=['var(--lilac)','var(--pink)','var(--butter)','var(--mint)','var(--sky)','var(--lilac)','var(--pink)'], dn=['Sen','Sel','Rab','Kam','Jum','Sab','Min'], today=(new Date().getDay()+6)%7;
+  $('#dash-week').innerHTML='<div class="bars" role="img" aria-label="Jumlah outfit dipakai per hari minggu ini"><div class="ax"><span>'+mx+'</span><span>'+Math.round(mx/2)+'</span><span>0</span></div>'+per.map(function(v,i){return '<div class="col"><span class="bar-v" style="height:'+Math.max(4,v/mx*100)+'%;background:'+cols[i]+(i===today?';outline:2px solid var(--btn);outline-offset:1px':'')+'" title="'+v+' outfit"></span><small>'+dn[i]+'</small></div>';}).join('')+'</div>'+(per.some(Boolean)?'':'<p class="note" style="margin-top:8px">Belum ada outfit tercatat minggu ini. Ketuk "Pakai outfit ini" setelah memilih.</p>');
+  // terakhir dipakai
+  var rec=state.history.slice(0,3);
+  $('#dash-recent').innerHTML=rec.length?'<ul class="recent">'+rec.map(function(h){var its=h.items.map(function(x){return byId(x.id)||x;}).slice(0,4);return '<li><span class="minis">'+its.map(function(it){return '<span class="mini">'+(it.cat?itemArt(it):'')+'</span>';}).join('')+'</span><span class="tx"><b>'+new Date(h.t).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'})+'</b>'+(h.look?esc(h.look):h.items.length+' item')+'</span></li>';}).join('')+'</ul><button class="linkbtn" data-go="riwayat" style="margin-top:8px">Lihat semua riwayat</button>':'<p class="muted small" style="margin:0">Belum ada riwayat. Outfit yang kamu pakai akan muncul di sini.</p>';
+}
+
+$('#hero-go').addEventListener('click',function(){ kurasi(); });
 // ---------- Init ----------
+applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
 renderOutfitPage();
 fxScan(document.body); FX_OBS.observe(document.body,{childList:true,subtree:true,characterData:true});
-idbAll().then(function(all){ Object.keys(all||{}).forEach(function(k){ if(k.indexOf('it.')===0)ITEM_IMG[k]=all[k]; }); IDB_READY=true; if(!$('#tab-lemari').classList.contains('hidden'))renderWardrobe(); setTimeout(pumpIll,1500); });
+idbAll().then(function(all){ Object.keys(all||{}).forEach(function(k){ if(k.indexOf('it.')===0)ITEM_IMG[k]=all[k]; }); IDB_READY=true; if(!$('#tab-lemari').classList.contains('hidden'))renderWardrobe(); if(!$('#tab-outfit').classList.contains('hidden'))renderDash(); setTimeout(pumpIll,1500); });
+loadAvatar();
+setInterval(function(){ var h=$('#h-outfit'); if(h)h.textContent=greet()+' '+greetIcon(); },60000);
 })();
 </script>
 </body>

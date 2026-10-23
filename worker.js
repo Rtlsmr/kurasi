@@ -135,7 +135,7 @@ if (res && res.choices && res.choices[0]) return res.choices[0].message?.content
 return JSON.stringify(res);
 }
 
-const ITEM_STYLE = 'Fashion flat-lay illustration, the garment laid flat and centered, front view, hand-drawn with alcohol markers and watercolor, fine ink outlines, soft fabric shading and folds, plain warm white paper background, single item only, no person, no mannequin, no hanger, no hands, no text.';
+const ITEM_STYLE = 'Photorealistic e-commerce product photo, the item laid flat and centered, front view, true-to-life fabric texture, folds and color, soft natural studio light, subtle soft shadow, plain pure white background, single item only, no person, no mannequin, no hanger, no hands, no text, no logo.';
 
 function dataUrlBytes(u) {
 const m = /^data:image\/(png|jpe?g|webp);base64,(.+)$/i.exec(String(u || ''));
@@ -153,10 +153,10 @@ const what = String(b.text || '').trim().slice(0, 300);
 let prompt;
 if (img) {
 form.append('input_image_0', new Blob([img.bytes], { type: img.type }), 'item.' + img.type.split('/')[1]);
-prompt = 'Redraw the clothing item from image 0' + (what ? ' (' + what + ')' : '') + ' as a fashion illustration. Keep exactly the same garment type, cut, length, color and pattern. ' + ITEM_STYLE;
+prompt = 'Recreate the clothing item from image 0' + (what ? ' (' + what + ')' : '') + ' as a clean product image. Keep exactly the same garment type, cut, length, color, material and pattern. ' + (String(b.style || '').slice(0, 500) || ITEM_STYLE);
 } else {
 if (!what) return null;
-prompt = 'A ' + what + '. ' + ITEM_STYLE;
+prompt = 'A ' + what + '. ' + (String(b.style || '').slice(0, 500) || ITEM_STYLE);
 }
 form.append('prompt', prompt);
 form.append('width', '512');
