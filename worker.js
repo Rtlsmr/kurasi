@@ -2,6 +2,7 @@
 // Menyusun 3 look untuk tema apa pun memakai Cloudflare Workers AI (paket gratis).
 // Pasang di dashboard Cloudflare: Workers & Pages > Create > Worker, tempel kode ini,
 // lalu tambahkan binding Workers AI dengan nama variabel: AI.
+// Mendukung look wanita berhijab, wanita tanpa hijab, dan pria (kirim gender dan hijab).
 
 const MODEL = '@cf/google/gemma-4-26b-a4b-it';
 
@@ -24,9 +25,13 @@ function json(body, status = 200) {
   });
 }
 
-const SYSTEM = `Kamu adalah stylist fashion muslimah Indonesia. Tugasmu menerjemahkan sebuah tema atau dresscode menjadi tepat 3 pilihan look yang sopan dan bisa dipakai dengan hijab.
+const PERSONA = {
+  hijab: 'Kamu adalah stylist fashion muslimah Indonesia. Tugasmu menerjemahkan sebuah tema atau dresscode menjadi tepat 3 pilihan look wanita yang sopan dan bisa dipakai dengan hijab.',
+  wanita: 'Kamu adalah stylist fashion wanita Indonesia. Tugasmu menerjemahkan sebuah tema atau dresscode menjadi tepat 3 pilihan look wanita yang rapi dan mudah dipadukan dari isi lemari.',
+  pria: 'Kamu adalah stylist fashion pria Indonesia. Tugasmu menerjemahkan sebuah tema atau dresscode menjadi tepat 3 pilihan look pria (kemeja, kaos, celana, blazer, jaket) yang mudah dipadukan dari isi lemari.',
+};
 
-Balas HANYA dengan JSON valid, tanpa teks lain, dengan bentuk:
+const RULES = `Balas HANYA dengan JSON valid, tanpa teks lain, dengan bentuk:
 {"looks":[{"name":"...","desc":"...","colors":["..."],"motif":"boleh|hindari|wajib","outer":true|false,"maxAccent":2}]}
 
 Aturan:
@@ -109,15 +114,15 @@ export default {
     if (request.method !== 'POST') return json({ error: 'Gunakan POST' }, 405);
     if (!env.AI) return json({ error: 'Binding Workers AI dengan nama AI belum dipasang' }, 500);
 
-    let theme = '', debug = false;
-    try { const b = await request.json(); theme = String(b.theme || '').trim().slice(0, 60); debug = !!b.debug; } catch (e) {}
+    let theme = '', debug = false, who = 'hijab';
+    try { const b = await request.json(); theme = String(b.theme || '').trim().slice(0, 60); debug = !!b.debug; who = b.gender === 'pria' ? 'pria' : (b.hijab === false ? 'wanita' : 'hijab'); } catch (e) {}
     if (!theme) return json({ error: 'Nama tema kosong' }, 400);
 
     try {
       const res = await env.AI.run(MODEL, {
         messages: [
-          { role: 'system', content: SYSTEM },
-          { role: 'user', content: `Tema: ${theme}` },
+          { role: 'system', content: PERSONA[who] + '\n\n' + RULES },
+          { role: 'user', content: `Tema: ${theme} (${who === 'pria' ? 'untuk pria' : who === 'wanita' ? 'untuk wanita tanpa hijab' : 'untuk wanita berhijab'})` },
         ],
         max_tokens: 2500,
         temperature: 0.6,
@@ -130,9 +135,9 @@ export default {
       else text = JSON.stringify(res);
 
       const looks = clean(extractJson(text));
-      if (debug) return json({ theme, looks, raw: (text || JSON.stringify(res)).slice(0, 3000), keys: res && typeof res === 'object' ? Object.keys(res) : typeof res });
+      if (debug) return json({ theme, who, looks, raw: (text || JSON.stringify(res)).slice(0, 3000), keys: res && typeof res === 'object' ? Object.keys(res) : typeof res });
       if (!looks.length) return json({ error: 'AI tidak memberi look yang bisa dipakai' }, 502);
-      return json({ theme, looks });
+      return json({ theme, who, looks });
     } catch (e) {
       const msg = String(e && e.message || e);
       if (/limit|quota|4006|neuron/i.test(msg)) return json({ error: 'Jatah AI gratis hari ini habis' }, 429);

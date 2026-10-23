@@ -1011,8 +1011,14 @@ $('#ai-form').addEventListener('submit',function(e){
   if(!state.worker){st.innerHTML='Fitur AI belum disambungkan. Isi alamat Worker di Pengaturan AI, atau pakai tema siap pakai.';$('#ai-settings').open=true;return;}
   btn.disabled=true; st.innerHTML='<span class="spin" aria-hidden="true"></span> Menyusun look untuk '+esc(theme)+', biasanya sekitar 30 detik…';
   var ctrl=('AbortController' in window)?new AbortController():null; var to=setTimeout(function(){if(ctrl)ctrl.abort();},60000);
-  fetch(state.worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:theme,gender:state.gender,hijab:headOn()}),signal:ctrl?ctrl.signal:undefined})
-  .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j&&j.error||('HTTP '+r.status));return j;});})
+  function ask(){return fetch(state.worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:theme,gender:state.gender,hijab:headOn()}),signal:ctrl?ctrl.signal:undefined})
+  .then(function(r){return r.json().then(function(j){if(!r.ok){var er=new Error(j&&j.error||('HTTP '+r.status));er.retry=(r.status===502);throw er;}return j;});});}
+  ask().catch(function(err){
+    if(!err.retry)throw err;
+    clearTimeout(to); to=setTimeout(function(){if(ctrl)ctrl.abort();},60000);
+    st.innerHTML='<span class="spin" aria-hidden="true"></span> Jawaban AI belum rapi, mencoba sekali lagi…';
+    return ask();
+  })
   .then(function(data){
     var looks=sanitizeLooks(data);
     if(!looks.length)throw new Error('AI tidak memberi look yang bisa dipakai');
