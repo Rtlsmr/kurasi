@@ -143,7 +143,7 @@ input[type=text],input[type=url],select{width:100%;padding:11px 12px;border:1px 
 .lookwrap{display:flex;flex-direction:column;gap:6px}
 .look{text-align:left;border:1px solid var(--line);background:linear-gradient(160deg,var(--surface),var(--blush-soft));border-radius:var(--radius-s);padding:12px;cursor:pointer;display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;min-height:44px;width:100%}
 .look .lt{display:flex;flex-direction:column;gap:6px;min-width:0}
-.lfig{display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 4px 8px;border-radius:999px 999px 14px 14px;background:var(--lilac-soft);border:1px solid var(--line)}
+.lfig{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 4px;border-radius:999px 999px 14px 14px;background:var(--lilac-soft);border:1px solid var(--line)}
 .lfig i{display:block;position:relative;border:1px solid rgba(0,0,0,.12)}
 .lfig .fh{width:26px;height:29px;border-radius:50% 50% 42% 42%/58% 58% 42% 42%}
 .lfig .ft{width:40px;height:28px;border-radius:10px 10px 3px 3px}
@@ -193,6 +193,26 @@ ol.steps li{margin-bottom:8px}
 .tswitch input:checked + .track .thumb{transform:translateX(22px)}
 .tswitch input:checked + .track .thumb::before{content:"\263E"}
 .tswitch input:focus-visible + .track{outline:2px solid var(--brass);outline-offset:2px}
+.cover{position:relative;padding:26px 20px 22px;border-radius:28px;background:linear-gradient(160deg,var(--blush-soft),var(--lilac-soft) 55%,var(--butter-soft));border:1px solid var(--line);overflow:hidden;margin-bottom:16px}
+.cover h1{font-style:italic;font-weight:600;font-size:clamp(36px,9.5vw,54px);line-height:1.02;margin:0 0 10px;max-width:16ch}
+.cover .issue{font-family:var(--display);font-style:italic;color:var(--brass);margin:0 0 12px;font-size:16px}
+.cover .sub{margin:0 0 4px;max-width:46ch;font-size:16.5px}
+.runway{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 18px}
+.runway figure{margin:0;text-align:center}
+.arch{display:flex;justify-content:center;align-items:flex-end;padding:14px 4px 6px;border-radius:999px 999px 18px 18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.arch svg{width:100%;max-width:96px;height:auto}
+.runway figcaption{font-family:var(--display);font-style:italic;font-size:15px;margin-top:8px}
+.how{list-style:none;counter-reset:how;margin:0 0 20px;padding:0;display:grid;gap:12px}
+.how li{counter-increment:how;display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start}
+.how li::before{content:counter(how);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--surface);border:1.5px solid var(--brass);color:var(--brass);font-family:var(--display);font-style:italic;font-size:19px;font-weight:600}
+.how b{display:block;font-family:var(--display);font-size:18px;font-weight:600;color:var(--ink)}
+.how span{color:var(--muted);font-size:15px}
+@media (min-width:900px){.cover{padding:36px 36px 30px}.runway{gap:18px;max-width:520px}}
+.figure svg{width:118px;height:auto}
+@media (max-width:420px){.figure svg{width:96px}}
+.lookhead{font-style:italic;margin:0 0 14px}
+.pieces li{padding:7px 12px 7px 10px;border-radius:8px 18px 18px 8px;background:var(--paper);border:1px dashed var(--line)}
+.lfig svg{width:46px;height:auto}
 .grid2{display:grid;grid-template-columns:1fr;gap:12px}
 @media (min-width:600px){.grid2{grid-template-columns:1fr 1fr}}
 </style>
@@ -213,16 +233,25 @@ ol.steps li{margin-bottom:8px}
     <div class="topbar"><span class="logo" aria-hidden="true">Kurasi</span><label class="tswitch">Mode gelap<input type="checkbox" id="theme-toggle" role="switch"><span class="track" aria-hidden="true"><span class="thumb"></span></span></label></div>
     <!-- OUTFIT -->
     <section id="tab-outfit" aria-labelledby="h-outfit">
+      <div id="outfit-head">
       <h1 id="h-outfit">Ensemble hari ini</h1>
       <p class="date" id="today"></p>
       <div class="tape" aria-hidden="true"></div>
+      </div>
 
-      <div id="outfit-empty" class="panel empty hidden">
-        <h2>Lemarimu masih kosong</h2>
-        <p class="muted">Kurasi memadukan outfit dari baju dan hijab yang kamu punya. Tambahkan isi lemarimu dulu, atau coba pakai lemari contoh.</p>
-        <div class="row" style="justify-content:center">
-          <button class="btn" data-go="lemari" data-open-form>Tambah item pertama</button>
-          <button class="btn ghost" id="btn-sample-1">Coba lemari contoh</button>
+      <div id="outfit-empty" class="cover hidden">
+        <p class="issue" id="cover-issue"></p>
+        <h1>Bingung mau pakai apa hari ini?</h1>
+        <p class="sub">Kurasi memadukan baju, hijab, dan aksesori dari lemarimu sendiri, sesuai acara, dresscode, dan personal color-mu.</p>
+        <div class="runway" id="runway"></div>
+        <ol class="how">
+          <li><span><b>Isi lemari</b><span>Catat baju dan hijab yang kamu punya, cukup nama dan warnanya.</span></span></li>
+          <li><span><b>Pilih acara atau tema</b><span>Kerja, kondangan, sampai dresscode 80's.</span></span></li>
+          <li><span><b>Dapat ensemble</b><span>Padanan lengkap siap pakai dalam hitungan detik.</span></span></li>
+        </ol>
+        <div class="row">
+          <button class="btn" id="btn-sample-1">Coba dengan lemari contoh</button>
+          <button class="btn ghost" data-go="lemari" data-open-form>Isi lemariku</button>
         </div>
       </div>
 
@@ -519,6 +548,48 @@ var toastTimer;
 function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show');},2800);}
 function byCat(cat){return state.items.filter(function(i){return i.cat===cat;});}
 
+// ---------- Croquis figure ----------
+var FIGN=0;
+function figSVG(p,w){
+  var id='fp'+(++FIGN), S='#F3D5C0', st=' stroke="rgba(60,30,50,.25)" stroke-width="0.8"';
+  function mot(d,o){return o&&o.m?'<path d="'+d+'" fill="url(#'+id+')"/>':'';}
+  var v='<svg viewBox="0 0 120 242" width="'+w+'" aria-hidden="true" focusable="false"><defs><pattern id="'+id+'" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.5" fill="rgba(255,255,255,.65)"/><circle cx="7" cy="7" r="1.1" fill="rgba(0,0,0,.2)"/></pattern></defs>';
+  var sl='M35 74 L25 128 L33 130 L42 86 Z', sr='M85 74 L95 128 L87 130 L78 86 Z';
+  if(p.gamis){
+    var gd='M35 72 Q60 66 85 72 L99 226 L21 226 Z';
+    v+='<path d="'+gd+'" fill="'+p.gamis.c+'"'+st+'/>'+mot(gd,p.gamis);
+    var gc=p.outer?p.outer.c:p.gamis.c; v+='<path d="'+sl+'" fill="'+gc+'"'+st+'/><path d="'+sr+'" fill="'+gc+'"'+st+'/>';
+  } else {
+    if(p.bottom){var bd=p.bottom.pants?'M37 124 L83 124 L85 224 L64 224 L60 150 L56 224 L35 224 Z':'M37 124 L83 124 L97 224 L23 224 Z'; v+='<path d="'+bd+'" fill="'+p.bottom.c+'"'+st+'/>'+mot(bd,p.bottom);}
+    var td='M35 72 Q60 66 85 72 L89 130 L31 130 Z';
+    v+='<path d="'+td+'" fill="'+p.top.c+'"'+st+'/>'+mot(td,p.top);
+    var tc=p.outer?p.outer.c:p.top.c; v+='<path d="'+sl+'" fill="'+tc+'"'+st+'/><path d="'+sr+'" fill="'+tc+'"'+st+'/>';
+  }
+  if(p.outer){var L=p.gamis?200:180; v+='<path d="M35 72 L50 77 L46 '+L+' L27 '+(L-4)+' Z" fill="'+p.outer.c+'"'+st+'/><path d="M85 72 L70 77 L74 '+L+' L93 '+(L-4)+' Z" fill="'+p.outer.c+'"'+st+'/>';}
+  v+='<circle cx="29" cy="132" r="4" fill="'+S+'"/><circle cx="91" cy="132" r="4" fill="'+S+'"/>';
+  var sh=p.shoes?p.shoes.c:'#D9C4BE';
+  v+='<ellipse cx="47" cy="230" rx="10" ry="5" fill="'+sh+'"'+st+'/><ellipse cx="73" cy="230" rx="10" ry="5" fill="'+sh+'"'+st+'/>';
+  var hb='M60 12 C42 12 36 28 37 42 C38 56 42 64 33 76 C44 81 76 81 87 76 C78 64 82 56 83 42 C84 28 78 12 60 12 Z';
+  v+='<path d="'+hb+'" fill="'+p.hijab.c+'"'+st+'/>'+mot(hb,p.hijab);
+  v+='<ellipse cx="60" cy="40" rx="10.5" ry="13" fill="'+S+'"/>';
+  var dr='M47 52 Q60 63 73 52 L84 94 Q60 102 36 94 Z';
+  v+='<path d="'+dr+'" fill="'+p.hijab.c+'"'+st+'/>'+mot(dr,p.hijab);
+  if(p.bag)v+='<path d="M96 129 q7 -12 14 0" fill="none" stroke="'+p.bag.c+'" stroke-width="2.4"/><rect x="92" y="128" width="22" height="19" rx="4" fill="'+p.bag.c+'"'+st+'/>';
+  return v+'</svg>';
+}
+function hx(c){return PAL[c]?PAL[c].h:'#ddd';}
+function isPants(it){return /celana|jeans|kulot|pants|trouser|legging|cargo/i.test(it.name||'');}
+function partOf(it){return it?{c:hx(it.color),m:!!it.motif,pants:isPants(it)}:null;}
+function renderRunway(){
+  var looks=[
+    {cap:'Kerja',p:{hijab:{c:hx('dustypink')},top:{c:hx('putih')},bottom:{c:hx('navy'),pants:true},shoes:{c:hx('hitam')},bag:{c:hx('cokelat')}}},
+    {cap:'Kondangan',p:{hijab:{c:hx('cream')},gamis:{c:hx('wine'),m:true},shoes:{c:hx('cream')},bag:{c:hx('mustard')}}},
+    {cap:"Tema 80's",p:{hijab:{c:hx('fuchsia')},top:{c:hx('birumuda')},bottom:{c:hx('mustard')},outer:{c:hx('putih')},shoes:{c:hx('putih')}}}
+  ];
+  var el=document.getElementById('runway'); if(!el)return;
+  el.innerHTML=looks.map(function(l){return '<figure><div class="arch">'+figSVG(l.p,96)+'</div><figcaption>'+l.cap+'</figcaption></figure>';}).join('');
+}
+
 // ---------- Tabs ----------
 function showTab(name){
   $$('nav.tabs button').forEach(function(b){if(b.dataset.tab===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
@@ -747,17 +818,12 @@ function renderResult(){
   var outerStyle=c.outer?';border-color:'+PAL[c.outer.color].h:'';
   var topCls=c.gamis?'f-gamis':'f-top';
   var top=c.gamis||c.atasan;
-  var fig='<div class="figure" aria-hidden="true">'+piece('f-hijab',c.hijab)+
-    '<span class="sw '+topCls+(c.outer?' f-outer':'')+(top.motif?' motif':'')+'" style="background:'+PAL[top.color].h+outerStyle+'"></span>'+
-    (c.bawahan?piece('f-bottom',c.bawahan):'')+
-    (c.sepatu?'<span class="f-shoes">'+piece('',c.sepatu)+piece('',c.sepatu)+'</span>':'')+
-    (c.tas?'<span class="sw f-bag" style="background:'+PAL[c.tas.color].h+';color:'+PAL[c.tas.color].h+'"></span>':'')+
-  '</div>';
+  var fig='<div class="figure" aria-hidden="true">'+figSVG({hijab:partOf(c.hijab),top:partOf(c.atasan),bottom:partOf(c.bawahan),gamis:partOf(c.gamis),outer:partOf(c.outer),shoes:partOf(c.sepatu),bag:partOf(c.tas)},118)+'</div>';
   var rows=[['hijab',c.hijab],['outer',c.outer],['atasan',c.atasan],['gamis',c.gamis],['bawahan',c.bawahan],['sepatu',c.sepatu],['tas',c.tas]].filter(function(x){return x[1];});
   var sc=state.season&&SEASONS[state.season]?SEASONS[state.season].c:null;
   var list='<ul class="pieces">'+rows.map(function(x){var it=x[1];var fit=sc&&(x[0]==='hijab'||x[0]==='atasan'||x[0]==='gamis')&&sc.indexOf(it.color)>-1;
     return '<li>'+dot(it.color)+'<span><span class="cat">'+CATL[x[0]]+'</span><span class="nm">'+esc(it.name)+' '+colorLabel(it.color).toLowerCase()+'</span>'+(fit?'<span class="tag brass">Cocok untukmu</span>':'')+'</span></li>';}).join('')+'</ul>';
-  r.innerHTML='<div class="ensemble reveal">'+fig+list+'</div>'+
+  r.innerHTML='<h2 class="lookhead">'+(state.look?esc(state.look.name):'Ensemble pilihan Kurasi')+'</h2><div class="ensemble reveal">'+fig+list+'</div>'+
     '<div class="reasons"><b class="small">Kenapa serasi</b><ul>'+c.why.slice(0,4).map(function(w){return '<li>'+esc(w)+'</li>';}).join('')+'</ul></div>'+
     '<div class="row" style="margin-top:14px"><button class="btn" id="btn-wear">Pakai outfit ini</button><button class="btn ghost" id="btn-next">Ganti outfit</button></div>'+
     '<p class="small muted" style="margin:10px 0 0">Pilihan '+(rankIdx+1)+' dari '+ranked.length+(state.season?'':'. Atur personal color di menu Warna agar saran lebih personal.')+'</p>'+
@@ -781,6 +847,9 @@ function renderOutfitPage(){
   var empty=!state.items.length;
   $('#outfit-empty').classList.toggle('hidden',!empty);
   $('#outfit-main').classList.toggle('hidden',empty);
+  $('#outfit-head').classList.toggle('hidden',empty);
+  $('#cover-issue').textContent='Edisi '+d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long'});
+  if(empty&&!$('#runway').innerHTML)renderRunway();
   var sel=$('#lock'), cur=sel.value;
   sel.innerHTML='<option value="">Bebas, Kurasi yang pilih</option>'+CATS.map(function(c){var l=byCat(c.k);if(!l.length)return '';return '<optgroup label="'+c.l+'">'+l.map(function(it){return '<option value="'+it.id+'">'+esc(it.name)+' '+colorLabel(it.color).toLowerCase()+(it.motif?' (motif)':'')+'</option>';}).join('')+'</optgroup>';}).join('');
   if(cur&&state.items.some(function(i){return i.id===cur;}))sel.value=cur;
@@ -796,8 +865,7 @@ function lookFig(lk){
   var acc=lk.colors.filter(function(c){return !isNeutral(c);}), neu=lk.colors.filter(isNeutral);
   var top=acc[0]||lk.colors[0], hij=acc[1]||neu[0]||lk.colors[1]||top, bot=neu.find(function(c){return c!==hij;})||neu[0]||lk.colors[lk.colors.length-1];
   var out=lk.outer?(neu.find(function(c){return c!==bot&&c!==hij;})||neu[0]||'cream'):null;
-  var h=function(c){return PAL[c]?PAL[c].h:'#ddd';};
-  return '<span class="lfig" aria-hidden="true"><i class="fh" style="background:'+h(hij)+'"></i><i class="ft'+(out?' fo':'')+(lk.motif==='wajib'?' motif':'')+'" style="background:'+h(top)+(out?';border-color:'+h(out):'')+'"></i><i class="fb" style="background:'+h(bot)+'"></i></span>';
+  return '<span class="lfig" aria-hidden="true">'+figSVG({hijab:{c:hx(hij)},top:{c:hx(top),m:lk.motif==='wajib'},bottom:{c:hx(bot)},outer:out?{c:hx(out)}:null},46)+'</span>';
 }
 function lookBtn(theme,lk,idx,src){
   var active=state.look&&state.look.theme===theme&&state.look.name===lk.name;
