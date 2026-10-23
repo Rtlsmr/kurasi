@@ -39,6 +39,7 @@ button,input,select{font:inherit;color:inherit}
 .stars span{position:absolute;color:var(--surface);font-size:22px;opacity:.9}
 .shell{position:relative;z-index:1;display:flex;min-height:100vh}
 main{flex:1;width:100%;max-width:520px;margin:0 auto;padding:16px 16px 130px}
+@media (min-width:600px){.toggles{grid-template-columns:repeat(3,minmax(0,1fr))!important}.grid2{grid-template-columns:1fr 1fr!important}}
 h1{font-family:var(--title);font-weight:600;font-size:clamp(30px,8vw,44px);line-height:1.08;margin:0 0 6px}
 h2{font-family:var(--title);font-weight:600;font-size:22px;line-height:1.2;margin:0 0 10px}
 h3{font-family:var(--title);font-size:17px;font-weight:600;margin:0 0 8px}
@@ -126,6 +127,19 @@ input[type=text],input[type=url],select{width:100%;padding:10px 12px;border:2px 
 .dock button[aria-current="page"]{color:var(--ink)}
 .dock button[aria-current="page"] .tile{background:var(--pink);box-shadow:2px 2px 0 var(--outline);transform:translateY(-2px)}
 .brandbox{display:none}
+.logo{cursor:pointer}
+@media (min-width:900px){
+  .dock{position:sticky;top:16px;left:auto;right:auto;bottom:auto;transform:none;width:200px;align-self:flex-start;flex-direction:column;justify-content:flex-start;margin:16px 0 16px 16px;padding:14px 12px;gap:8px}
+  .dock button{flex:none;flex-direction:row;gap:12px;font-size:15px;padding:4px;border-radius:14px}
+  .brandbox{display:block;padding:4px 6px 12px;border-bottom:2px dashed var(--outline);margin-bottom:6px}
+  .brandbox .logo{font-size:30px}
+  .brandbox p{font-size:13px;color:var(--muted);margin:6px 0 0;line-height:1.35}
+  .topbar .logo{visibility:hidden}
+  main{max-width:780px;padding:16px 28px 60px}
+  .runway{max-width:560px;gap:18px}
+  .looks{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))!important}
+  .toast{bottom:28px!important}
+}
 
 /* Cover */
 .cover h1{font-size:clamp(34px,9vw,52px);line-height:1.02;margin:4px 0 12px;max-width:15ch}
@@ -151,7 +165,7 @@ input[type=text],input[type=url],select{width:100%;padding:10px 12px;border:2px 
 .mirror::before{content:"\2726";position:absolute;top:14px;right:18px;color:#FFFFFF;font-size:14px}
 .mirror::after{content:"\2727";position:absolute;top:44px;left:14px;color:#FFFFFF;font-size:11px}
 .mirror svg{height:100%;width:auto;max-width:100%}
-.aiimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;border-radius:inherit;background:#FFFDF9;animation:fadein .5s ease both;z-index:2}
+.aiimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;border-radius:inherit;background:#FFFDF9;animation:fadein .5s ease both;z-index:2}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
 .figcap{text-align:center;font-size:12.5px;color:var(--muted);margin:0 0 14px;min-height:18px}
 .pieces{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -229,7 +243,7 @@ ol.steps li{margin-bottom:8px}
 <div class="stars" aria-hidden="true"><span style="top:8%;left:6%">&#10022;</span><span style="top:22%;right:8%">&#10023;</span><span style="top:48%;left:3%">&#10023;</span><span style="top:64%;right:4%">&#10022;</span><span style="top:86%;left:44%">&#10023;</span></div>
 <div class="shell">
   <nav class="dock" aria-label="Menu utama">
-    <div class="brandbox"><span class="logo">Kurasi<small>&#10047;</small></span><p>Atelier lemarimu, satu ensemble setiap pagi</p></div>
+    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" data-intro>Kurasi<small>&#10047;</small></span><p>Atelier lemarimu, satu ensemble setiap pagi</p></div>
     <button data-tab="outfit" aria-current="page"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg></span>Outfit</button>
     <button data-tab="lemari"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span>Lemari</button>
     <button data-tab="tema"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg></span>Tema</button>
@@ -239,7 +253,7 @@ ol.steps li{margin-bottom:8px}
 
   <main id="main">
     <div class="topbar">
-      <span class="logo" aria-hidden="true">Kurasi<small>&#10047;</small></span>
+      <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" data-intro>Kurasi<small>&#10047;</small></span>
       <label class="tg right" id="theme-wrap"><span class="tl">Mode gelap</span><input type="checkbox" id="theme-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></label>
     </div>
 
@@ -258,9 +272,13 @@ ol.steps li{margin-bottom:8px}
             <li><span><b>Pilih acara atau tema</b><span class="d">Kerja, kondangan, sampai dresscode 80's.</span></span></li>
             <li><span><b>Dapat ensemble</b><span class="d">Padanan lengkap siap pakai dalam hitungan detik.</span></span></li>
           </ol>
-          <div class="row">
+          <div class="row" id="cover-new">
             <button class="btn" id="btn-sample-1">Coba dengan lemari contoh</button>
             <button class="btn butter" data-go="lemari" data-open-form>Isi lemariku</button>
+          </div>
+          <div class="row hidden" id="cover-back">
+            <button class="btn" id="btn-start">Mulai padu padan</button>
+            <button class="btn butter" data-go="lemari">Lihat lemariku</button>
           </div>
         </div>
       </div>
@@ -524,7 +542,8 @@ var state = {
   look: load('look', null), aiThemes: load('aiThemes', []), worker: load('worker', DEFAULT_WORKER) || DEFAULT_WORKER,
   gender: load('gender', 'wanita'), opts: Object.assign({}, DEF_OPTS, load('opts', {})), aiImg: load('aiImg', true) !== false
 };
-var ranked = [], rankIdx = 0;
+var ranked = [], rankIdx = 0, showIntro = false;
+state.introSeen = load('introSeen', false);
 
 // ---------- Helpers ----------
 var $ = function(s,r){return (r||document).querySelector(s);};
@@ -936,15 +955,24 @@ function imgPut(k,v){ IMG_MEM[k]=v;
   }catch(e){} }
 function shrinkImg(b64){ return new Promise(function(res){ var src='data:image/jpeg;base64,'+b64, im=new Image();
   im.onload=function(){ try{
-    var W=im.naturalWidth||1024, H=im.naturalHeight||1024, S=128, c0=document.createElement('canvas'); c0.width=c0.height=S;
-    var x0=c0.getContext('2d'); x0.drawImage(im,0,0,S,S); var d=x0.getImageData(0,0,S,S).data, minx=S,miny=S,maxx=0,maxy=0;
-    for(var y=0;y<S;y++)for(var x=0;x<S;x++){var i=(y*S+x)*4; if(d[i]*0.3+d[i+1]*0.59+d[i+2]*0.11<232){if(x<minx)minx=x;if(x>maxx)maxx=x;if(y<miny)miny=y;if(y>maxy)maxy=y;}}
-    if(maxx<=minx||maxy<=miny){minx=0;miny=0;maxx=S;maxy=S;}
-    var k=W/S, bx0=minx*k, by0=miny*k*(H/W), bx1=(maxx+1)*k, by1=(maxy+1)*k*(H/W);
-    var h=(by1-by0)*1.08, w=Math.max(h*0.8,(bx1-bx0)*1.1); h=Math.max(h,w/0.8);
+    var W=im.naturalWidth||1024, H=im.naturalHeight||1024, S=200, c0=document.createElement('canvas'); c0.width=S; c0.height=Math.round(S*H/W);
+    var SH=c0.height, x0c=c0.getContext('2d'); x0c.drawImage(im,0,0,S,SH); var d=x0c.getImageData(0,0,S,SH).data;
+    function lum(x,y){var i=(y*S+x)*4;return (d[i]+d[i+1]+d[i+2])/3;}
+    var edge=[]; for(var x=0;x<S;x++){edge.push(lum(x,0),lum(x,SH-1));} edge.sort(function(a,b){return a-b;});
+    var bg=edge[edge.length>>1], thrL=Math.min(bg-22,228), col=new Array(S).fill(0), mask=new Uint8Array(S*SH);
+    for(var y=0;y<SH;y++)for(var x2=0;x2<S;x2++){ if(lum(x2,y)<thrL){mask[y*S+x2]=1;col[x2]++;} }
+    var thr=Math.max(2,SH*0.012), runs=[], st=-1, en=-1, gap=0;
+    for(var x3=0;x3<S;x3++){ if(col[x3]>thr){ if(st<0)st=x3; en=x3; gap=0; } else if(st>=0){ if(++gap>4){runs.push([st,en]);st=-1;gap=0;} } }
+    if(st>=0)runs.push([st,en]);
+    var best=null,bs=-1; runs.forEach(function(r){var t=0;for(var i=r[0];i<=r[1];i++)t+=col[i]; if(t>bs){bs=t;best=r;}});
+    if(!best)best=[0,S-1];
+    var y0=-1,y1=-1; for(var y4=0;y4<SH;y4++){var n=0;for(var x4=best[0];x4<=best[1];x4++)n+=mask[y4*S+x4]; if(n>1){if(y0<0)y0=y4;y1=y4;}}
+    if(y0<0){y0=0;y1=SH-1;}
+    var k=W/S, bx0=best[0]*k, bx1=(best[1]+1)*k, by0=y0*k, by1=(y1+1)*k;
+    var ch=(by1-by0)*1.12, cw=Math.max(ch*0.8,(bx1-bx0)*1.15); ch=cw/0.8;
     var cx=(bx0+bx1)/2, cy=(by0+by1)/2, out=document.createElement('canvas'); out.width=400; out.height=500;
     var ctx=out.getContext('2d'); ctx.fillStyle='rgb('+d[0]+','+d[1]+','+d[2]+')'; ctx.fillRect(0,0,400,500);
-    ctx.drawImage(im,cx-w/2,cy-h/2,w,h,0,0,400,500);
+    ctx.drawImage(im,cx-cw/2,cy-ch/2,cw,ch,0,0,400,500);
     res(out.toDataURL('image/jpeg',0.82));
   }catch(e){ res(src); } };
   im.onerror=function(){res(null);}; im.src=src; }); }
@@ -1234,6 +1262,7 @@ function currentOpts(){
   return {lockId:$('#lock').value||null, style:($('input[name=style]:checked')||{}).value||'', opts:state.opts, head:headOn(), look:state.look};
 }
 function kurasi(){
+  if(!state.introSeen||showIntro){ closeIntro(); renderOutfitPage(); }
   var o=currentOpts();
   ranked=generate(o); rankIdx=0;
   var lock=o.lockId?state.items.find(function(i){return i.id===o.lockId;}):null;
@@ -1287,9 +1316,12 @@ function renderOutfitPage(){
   $('#today').textContent=ds; $('#cover-issue').textContent='Edisi '+ds;
   var cats=catsFor(state.gender);
   var empty=!state.items.some(function(i){return cats.some(function(c){return c.k===i.cat;});});
-  $('#outfit-empty').classList.toggle('hidden',!empty);
-  $('#outfit-main').classList.toggle('hidden',empty);
-  if(empty)renderRunway();
+  var cover=empty||!state.introSeen||showIntro;
+  $('#outfit-empty').classList.toggle('hidden',!cover);
+  $('#outfit-main').classList.toggle('hidden',cover);
+  $('#cover-new').classList.toggle('hidden',!empty);
+  $('#cover-back').classList.toggle('hidden',empty);
+  if(cover)renderRunway();
   var sel=$('#lock'), cur=sel.value;
   sel.innerHTML='<option value="">Bebas, Kurasi yang pilih</option>'+cats.map(function(c){var l=byCat(c.k);if(!l.length)return '';return '<optgroup label="'+c.l+'">'+l.map(function(it){return '<option value="'+it.id+'">'+esc(it.name)+' '+colorLabel(it.color).toLowerCase()+(it.motif?' (motif)':'')+'</option>';}).join('')+'</optgroup>';}).join('');
   if(cur&&state.items.some(function(i){return i.id===cur;}))sel.value=cur;
@@ -1298,6 +1330,14 @@ function renderOutfitPage(){
   else lb.classList.add('hidden');
   renderToggles(); syncGender();
 }
+function closeIntro(){ showIntro=false; if(!state.introSeen){state.introSeen=true;save('introSeen',true);} }
+$('#btn-start').addEventListener('click',function(){ closeIntro(); renderOutfitPage(); window.scrollTo(0,0); });
+document.addEventListener('click',function(e){
+  if(e.target.closest('#outfit-empty [data-go]'))closeIntro();
+  if(e.target.closest('#btn-sample-1')){ closeIntro(); renderOutfitPage(); }
+  if(e.target.closest('[data-intro]')){ showIntro=true; showTab('outfit'); }
+});
+document.addEventListener('keydown',function(e){ if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-intro]')){e.preventDefault();showIntro=true;showTab('outfit');} });
 $('#btn-clear-look').addEventListener('click',function(){state.look=null;save('look',null);renderOutfitPage();if(!$('#result').classList.contains('hidden'))kurasi();});
 
 // ---------- Themes ----------
