@@ -8,7 +8,8 @@
 <meta name="theme-color" content="#FFD3E5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2048'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%23B79CF5'/%3E%3Cstop%20offset='1'%20stop-color='%23E98DB8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20x='1.5'%20y='1.5'%20width='45'%20height='45'%20rx='14'%20fill='url(%23g)'/%3E%3Cpath%20d='M14.5%2039V22.5a9.5%209.5%200%200%201%2019%200V39M11%2039h26'%20fill='none'%20stroke='white'%20stroke-width='3.4'%20stroke-linecap='round'/%3E%3Cpath%20d='M21.6%2021.4a2.4%202.4%200%201%201%202.4%202.4v1.4M24%2025.2l-6.6%206.3h13.2z'%20fill='none'%20stroke='white'%20stroke-width='2.4'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 :root{
   --bg:#FFD3E5; --bg2:#FFE7F2; --surface:#FFF9FC; --surface2:#FFEEF6; --ink:#4A1F42; --muted:#87597A; --outline:#5B2A4E;
@@ -520,25 +521,127 @@ button.avatar{cursor:pointer;padding:0}
 @media (min-width:900px){.brandbox .me{display:flex}}
 .pseg{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px}
 .pseg .lbl{margin:0!important}
+/* ===== v8: brand logo, theme panel, beauty ===== */
+:root{--logo1:#B79CF5;--logo2:#E98DB8}
+:root[data-g="pria"]{--logo1:#4F86A3;--logo2:#2C4A66}
+.logo{display:inline-flex!important;align-items:center;gap:10px;text-decoration:none}
+.logo .mark{width:40px;height:40px;flex:none;filter:drop-shadow(0 4px 8px rgba(60,40,110,.22))}
+.logo .wm{display:flex;flex-direction:column;line-height:1}
+.logo .wm b{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:30px;letter-spacing:.01em;color:var(--ink);font-style:normal}
+.logo .wm b i{font-style:normal;color:var(--berry)}
+.logo .wm small{font-family:var(--body);font-size:9.5px;font-weight:800;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin:5px 0 0 2px}
+.cover-logo{margin:0 0 10px}
+.cover-logo .mark{width:46px;height:46px}
+@media (min-width:900px){
+  .brandbox .logo{justify-content:center;flex-direction:column;gap:6px}
+  .brandbox .logo .mark{width:52px;height:52px}
+  .brandbox .logo .wm{align-items:center}
+  .brandbox .logo .wm b{color:var(--side-ink)!important;font-size:28px!important}
+  .brandbox .logo .wm b i{color:var(--side-ink)!important;opacity:.85}
+  .brandbox .logo .wm small{color:var(--side-ink);opacity:.8}
+}
+/* theme panel */
+#look-modal>.win{max-width:900px}
+.lp-head{display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:center}
+.lp-head .lfig{width:104px}
+.mini-closet{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))!important}
+.recs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.rec{display:flex;flex-direction:column;border:1px solid var(--outline);border-radius:18px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-sm)}
+.rimg{position:relative;height:0;padding-top:80%;background:#FFFFFF}
+.rimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.rimg .wait{color:#3B2A5A}
+.rtx{display:flex;flex-direction:column;gap:6px;padding:10px 12px 12px}
+.rtx .cat{font-size:12px;color:var(--muted);font-weight:800}
+.rtx b{font-size:14.5px;line-height:1.3}
+.shops{display:flex;flex-wrap:wrap;gap:6px}
+.shop{font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--outline);color:var(--ink);text-decoration:none}
+.shop:hover{background:var(--t1)}
+/* beauty */
+.btabs{margin:0 0 16px}
+.bchips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.bchip{font-size:13px;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--surface2);border:1px solid var(--outline)}
+.bchip.bad{background:#FFD9DF;color:#8A1F33}.bchip.warn{background:#FFF0C7;color:#7A5700}.bchip.ok{background:#D6F3E4;color:#1E6B45}
+.blist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.bitem{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:18px;background:var(--surface2);border:1px solid var(--outline);border-left:6px solid #9BD8B8}
+.bitem.warn{border-left-color:#F2C14E}.bitem.bad{border-left-color:#E5677F}.bitem.na{border-left-color:var(--outline)}
+.shade{flex:none;width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.9);box-shadow:var(--shadow-sm);display:grid;place-items:center;font-size:18px;background:var(--surface)}
+.shade.sm{display:inline-block;width:14px;height:14px;vertical-align:-2px;border-width:1px}
+.bi{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.bi b{font-weight:800}
+.pbar{display:block;height:6px;border-radius:9px;background:rgba(0,0,0,.07);overflow:hidden}
+.pbar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#9BD8B8,#F2C14E 70%,#E5677F)}
+.bitem .tag.st{background:var(--surface)}
+.bitem.bad .tag.st{background:#FFD9DF;color:#8A1F33}.bitem.warn .tag.st{background:#FFF0C7;color:#7A5700}
+.tag.okt{background:#D6F3E4;color:#1E6B45}
+.acts{display:flex;flex-wrap:wrap;gap:4px}
+.bact{display:flex;flex-direction:column;align-items:flex-end}
+.bgrid{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:700px){.bgrid{grid-template-columns:1fr 1fr}}
+.bf label.lbl{margin-top:10px}
+.bf input[type=date],.bf input[type=number],.bf select{width:100%;padding:10px 12px;border:1px solid var(--outline);border-radius:14px;background:var(--surface2);min-height:46px;font-weight:700}
+.bf input[type=color]{width:56px;height:40px;border:1px solid var(--outline);border-radius:12px;background:var(--surface);padding:3px}
+.rsteps{margin:0;padding-left:22px;display:grid;gap:8px}
+.rsteps li b{display:block}
+.rsteps li .linkbtn{padding:0}
+.issues{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.issues li{padding:10px 12px;border-radius:14px;font-size:14.5px;background:var(--surface2);border-left:5px solid var(--outline)}
+.issues li.bad{border-left-color:#E5677F;background:color-mix(in srgb,#FFD9DF 60%,var(--surface))}
+.issues li.warn{border-left-color:#F2C14E;background:color-mix(in srgb,#FFF0C7 60%,var(--surface))}
+.issues li.info{border-left-color:#7FB3E0}
+.okmsg{color:#1E6B45;font-weight:800}
+:root[data-theme="dark"] .okmsg,:root[data-theme="dark"] .tag.okt{color:#8FE0B5}
+:root[data-theme="dark"] .issues li.bad,:root[data-theme="dark"] .issues li.warn{background:var(--surface2)}
+.beauty-alert{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 14px;border-radius:16px;background:#FFF0C7;color:#5C4200;border:1px solid var(--outline);margin:0 0 16px;font-weight:700}
+/* v8 polish */
+.brandbox .logo .mark rect{stroke:#fff;stroke-width:2.5}
+.brandbox .logo .mark{filter:drop-shadow(0 6px 14px rgba(40,20,90,.35))}
+@media (max-width:899px){
+  .cover-logo{display:none!important}
+  .topbar .logo .mark{width:34px;height:34px}
+  .topbar .logo .wm b{font-size:25px}
+  .topbar .logo .wm small{display:none}
+  .topbar #theme-wrap .tl{white-space:nowrap}
+}
+@media (max-width:420px){.topbar #theme-wrap .tl{display:none}}
+.mini-closet{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+@media (min-width:700px){.mini-closet{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))!important}}
+.mini-closet .cap b{font-size:13px}
+.mini-closet .cap .meta{font-size:11.5px}
+.recs{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+@media (min-width:700px){.recs{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}}
+.rimg .wait{font-size:12.5px;padding:8px;text-align:center}
+.bitem{flex-wrap:wrap}
+.bitem .tag{white-space:nowrap}
+@media (max-width:600px){.bact{flex-basis:100%;flex-direction:row;justify-content:flex-end;gap:18px;padding-top:6px;border-top:1px dashed var(--outline)}}
+.rsteps li .small{display:inline}
+.rsteps li .linkbtn{margin-left:10px;font-size:13px}
+
+.logo .wm small{color:var(--muted)!important}
+.brandbox .logo .wm small{display:none}
+#beauty-alert:empty{display:none}
+#outfit-main>#beauty-alert{grid-column:1 / -1}
+@media (max-width:520px){.btabs span{padding:8px 11px;font-size:14px}}
+.prefs .tg{margin:0 0 10px}
 </style>
 </head>
 <body>
 <div class="stars" aria-hidden="true"><span style="top:8%;left:6%">&#10022;</span><span style="top:22%;right:8%">&#10023;</span><span style="top:48%;left:3%">&#10023;</span><span style="top:64%;right:4%">&#10022;</span><span style="top:86%;left:44%">&#10023;</span></div>
 <div class="shell">
   <nav class="dock" aria-label="Menu utama">
-    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" data-intro>Kurasi<small>&#10047;</small></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Atelier lemarimu, satu ensemble setiap pagi</small></div></div>
+    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, lihat sampul" data-intro><svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="kg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B79CF5" style="stop-color:var(--logo1)"/><stop offset="1" stop-color="#E98DB8" style="stop-color:var(--logo2)"/></linearGradient></defs><rect x="1.5" y="1.5" width="45" height="45" rx="14" fill="url(#kg1)"/><path d="M14.5 39V22.5a9.5 9.5 0 0 1 19 0V39M11 39h26" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21.6 21.4a2.4 2.4 0 1 1 2.4 2.4v1.4M24 25.2l-6.6 6.3h13.2z" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M37.5 7.2l1.15 3 3 1.15-3 1.15-1.15 3-1.15-3-3-1.15 3-1.15z" fill="#fff"/></svg><span class="wm"><b>Kurasi<i>.</i></b><small>atelier lemari</small></span></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Atelier lemarimu, satu ensemble setiap pagi</small></div></div>
     <button data-tab="outfit" aria-current="page"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg></span>Outfit</button>
     <button data-tab="lemari"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span>Lemari</button>
     <button data-tab="tema"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg></span>Tema</button>
     <button data-tab="warna"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.5-1.2-2-1.2-3.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-3.9-4-7-9-7z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg></span>Warna</button>
     <button data-tab="riwayat"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></span>Riwayat</button>
+    <button data-tab="beauty"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="13" width="9" height="8" rx="1.5"/><path d="M9.5 13v-3h5v3M10.5 10V6.2l3-2.2V10"/></svg></span>Beauty</button>
     <button data-tab="profil"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span>Profil</button>
     <div class="side-cta"><span class="crown" aria-hidden="true">&#10022;</span><b>Kurasi di HP lain?</b><small>Pindahkan lemari, riwayat, dan ilustrasimu lewat satu file.</small><button class="btn small" type="button" data-go="profil">Pindahkan</button></div>
   </nav>
 
   <main id="main">
     <div class="topbar">
-      <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" data-intro>Kurasi<small>&#10047;</small></span>
+      <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, lihat sampul" data-intro><svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="kg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B79CF5" style="stop-color:var(--logo1)"/><stop offset="1" stop-color="#E98DB8" style="stop-color:var(--logo2)"/></linearGradient></defs><rect x="1.5" y="1.5" width="45" height="45" rx="14" fill="url(#kg2)"/><path d="M14.5 39V22.5a9.5 9.5 0 0 1 19 0V39M11 39h26" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21.6 21.4a2.4 2.4 0 1 1 2.4 2.4v1.4M24 25.2l-6.6 6.3h13.2z" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M37.5 7.2l1.15 3 3 1.15-3 1.15-1.15 3-1.15-3-3-1.15 3-1.15z" fill="#fff"/></svg><span class="wm"><b>Kurasi<i>.</i></b><small>atelier lemari</small></span></span>
       <div class="right"><button class="avatar" id="top-avatar" type="button" data-go="profil" aria-label="Buka profil"></button>
       <label class="tg right" id="theme-wrap"><span class="tl">Mode gelap</span><input type="checkbox" id="theme-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></label></div>
     </div>
@@ -548,6 +651,7 @@ button.avatar{cursor:pointer;padding:0}
       <div id="outfit-empty" class="win pink cover hidden">
         <div class="bar"><span>Selamat datang di Kurasi</span><span class="deco" aria-hidden="true"><i>&#9825;</i><i>&#9734;</i><i>&#10047;</i></span></div>
         <div class="body">
+          <div class="logo cover-logo" aria-hidden="true"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="kg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B79CF5" style="stop-color:var(--logo1)"/><stop offset="1" stop-color="#E98DB8" style="stop-color:var(--logo2)"/></linearGradient></defs><rect x="1.5" y="1.5" width="45" height="45" rx="14" fill="url(#kg3)"/><path d="M14.5 39V22.5a9.5 9.5 0 0 1 19 0V39M11 39h26" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21.6 21.4a2.4 2.4 0 1 1 2.4 2.4v1.4M24 25.2l-6.6 6.3h13.2z" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M37.5 7.2l1.15 3 3 1.15-3 1.15-1.15 3-1.15-3-3-1.15 3-1.15z" fill="#fff"/></svg><span class="wm"><b>Kurasi<i>.</i></b><small>atelier lemari</small></span></div>
           <p class="issue" id="cover-issue"></p>
           <h1>Bingung mau pakai apa hari ini?</h1>
           <p class="sub">Kurasi memadukan pakaian dan aksesori dari lemarimu sendiri, sesuai acara, dresscode, dan personal color-mu.</p>
@@ -579,6 +683,7 @@ button.avatar{cursor:pointer;padding:0}
           </div>
           <div class="hero-art" id="hero-art" aria-hidden="true"></div>
         </section>
+        <div id="beauty-alert"></div>
         <div class="stats" id="stats"></div>
         <div class="nudge hidden" id="nudge"><span>Lengkapi profil agar saran dan ilustrasinya terasa seperti kamu.</span><button class="btn small butter" type="button" id="nudge-go">Isi profil</button></div>
 
@@ -692,7 +797,7 @@ button.avatar{cursor:pointer;padding:0}
             <button class="btn alt" type="submit" id="ai-btn">Buat look</button>
           </form>
           <p id="ai-status" class="small" role="status" style="margin:10px 0 0"></p>
-          <details id="ai-settings">
+          <details id="ai-settings" class="hidden">
             <summary>Pengaturan AI</summary>
             <p class="small muted">Alamat Worker Cloudflare yang menjalankan AI. Biarkan seperti ini kecuali kamu memakai Worker lain.</p>
             <div class="row">
@@ -700,7 +805,6 @@ button.avatar{cursor:pointer;padding:0}
               <input type="url" id="worker-url" placeholder="https://kurasi-ai.namamu.workers.dev" style="flex:1;min-width:220px">
               <button class="btn ghost" type="button" id="worker-save">Simpan alamat</button>
             </div>
-            <label class="tg" style="margin-top:10px"><input type="checkbox" id="aiimg-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Ilustrasi AI otomatis (memakai kuota AI gratis)</span></label>
           </details>
         </div>
       </div>
@@ -762,6 +866,67 @@ button.avatar{cursor:pointer;padding:0}
       <div class="win sky"><div class="bar"><span>Buku harian outfit</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body" id="history"></div></div>
     </section>
 
+    <!-- BEAUTY -->
+    <section id="tab-beauty" class="hidden" aria-labelledby="h-beauty">
+      <h1 id="h-beauty">Makeup &amp; beauty</h1>
+      <p class="lede">Catat makeup dan skincare yang kamu pakai. Kurasi mengingatkan sebelum kedaluwarsa, memeriksa rutinitas skincare, dan menjaga wishlist dari belanja shade kembar.</p>
+      <div class="seg btabs" role="radiogroup" aria-label="Fitur beauty"><label><input type="radio" name="btab" value="pao" checked><span>Kedaluwarsa</span></label><label><input type="radio" name="btab" value="rutin"><span>Rutinitas skincare</span></label><label><input type="radio" name="btab" value="wish"><span>Wishlist</span></label></div>
+
+      <div data-bpanel="pao">
+        <div class="win pink"><div class="bar"><span>Pelacak kedaluwarsa (PAO)</span><span class="deco" aria-hidden="true"><i>&#9203;</i></span></div><div class="body">
+          <p class="small muted" style="margin-top:0">PAO (period after opening) adalah batas aman setelah kemasan dibuka, ditandai simbol wadah terbuka seperti "12M" di kemasan.</p>
+          <div class="bchips" id="pao-sum"></div>
+          <button class="btn" type="button" id="pao-add">Tambah produk</button>
+          <form id="pao-form" class="bf hidden" autocomplete="off" style="margin-top:16px">
+            <h3 id="pb-title">Produk baru</h3>
+            <div class="bgrid">
+              <div><label class="lbl" for="pb-name">Nama produk</label><input type="text" id="pb-name" maxlength="50" placeholder="Contoh: Lip cream nude"></div>
+              <div><label class="lbl" for="pb-brand">Merek (opsional)</label><input type="text" id="pb-brand" maxlength="40"></div>
+              <div><label class="lbl" for="pb-cat">Kategori</label><select id="pb-cat"></select></div>
+              <div><label class="lbl" for="pb-pao">PAO (bulan)</label><input type="number" id="pb-pao" min="1" max="60"></div>
+              <div><label class="lbl" for="pb-opened">Tanggal dibuka</label><input type="date" id="pb-opened"></div>
+              <div><label class="lbl" for="pb-exp">Tanggal kedaluwarsa di kemasan (opsional)</label><input type="date" id="pb-exp"></div>
+            </div>
+            <p class="note" id="pb-paohint"></p>
+            <div id="pb-shade-wrap"><label class="lbl" for="pb-shade">Shade / warna</label><div class="row" style="gap:12px"><input type="color" id="pb-shade" value="#C98A73"><label class="tg"><input type="checkbox" id="pb-noshade" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Tanpa shade</span></label></div></div>
+            <fieldset id="pb-act-wrap" style="margin-top:12px"><legend>Kandungan aktif (untuk pemeriksa rutinitas)</legend><div class="chips" id="pb-acts"></div></fieldset>
+            <div class="row" style="margin-top:14px"><button class="btn" type="submit">Simpan produk</button><button class="btn ghost" type="button" id="pb-cancel">Batal</button></div>
+          </form>
+          <ul class="blist" id="pao-list" style="margin-top:16px"></ul>
+        </div></div>
+      </div>
+
+      <div data-bpanel="rutin" class="hidden">
+        <div class="win lilac"><div class="bar"><span>Skincare routine checker</span><span class="deco" aria-hidden="true"><i>&#10003;</i></span></div><div class="body">
+          <p class="small muted" id="rt-hint" style="margin-top:0"></p>
+          <div class="bgrid">
+            <div><h3>&#9728;&#65039; Pagi</h3><div id="rt-am"></div></div>
+            <div><h3>&#127769; Malam</h3><div id="rt-pm"></div></div>
+          </div>
+          <h3 style="margin-top:18px">Hasil pemeriksaan</h3>
+          <div id="rt-check"></div>
+        </div></div>
+      </div>
+
+      <div data-bpanel="wish" class="hidden">
+        <div class="win butter"><div class="bar"><span>Wishlist makeup anti-duplikat</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body">
+          <form id="wish-form" class="bf" autocomplete="off">
+            <div class="bgrid">
+              <div><label class="lbl" for="wb-name">Nama produk</label><input type="text" id="wb-name" maxlength="50" placeholder="Contoh: Lipstik matte brick red"></div>
+              <div><label class="lbl" for="wb-brand">Merek (opsional)</label><input type="text" id="wb-brand" maxlength="40"></div>
+              <div><label class="lbl" for="wb-cat">Kategori</label><select id="wb-cat"></select></div>
+              <div><label class="lbl" for="wb-price">Harga (opsional)</label><input type="text" id="wb-price" inputmode="numeric" placeholder="Contoh: 89000"></div>
+            </div>
+            <div id="wb-shade-wrap"><label class="lbl" for="wb-shade">Shade / warna</label><div class="row" style="gap:12px"><input type="color" id="wb-shade" value="#C98A73"><label class="tg"><input type="checkbox" id="wb-noshade" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Tanpa shade</span></label></div></div>
+            <label class="lbl" for="wb-link" style="margin-top:10px">Tautan produk (opsional)</label><input type="url" id="wb-link" placeholder="https://">
+            <div id="wb-dupe" style="margin-top:12px"></div>
+            <button class="btn" type="submit" style="margin-top:12px">Masukkan wishlist</button>
+          </form>
+          <p class="small muted" id="wish-tot" style="margin:16px 0 8px"></p>
+          <ul class="blist" id="wish-list"></ul>
+        </div></div>
+      </div>
+    </section>
     <!-- PROFIL -->
     <section id="tab-profil" class="hidden" aria-labelledby="h-profil">
       <h1 id="h-profil">Profilku</h1>
@@ -774,6 +939,13 @@ button.avatar{cursor:pointer;padding:0}
           <button class="btn" type="submit">Simpan profil</button>
         </div>
       </form>
+      <div class="win lilac prefs">
+        <div class="bar"><span>Preferensi</span><span class="deco" aria-hidden="true"><i>&#9881;</i></span></div>
+        <div class="body">
+          <label class="tg"><input type="checkbox" id="aiimg-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Ilustrasi AI otomatis</span></label>
+          <p class="small muted" style="margin:0">Saat menyala, Kurasi memakai kuota AI gratis untuk menggambar item lemari, model, avatar, dan contoh produk rekomendasi. Matikan bila koneksi lambat; aplikasi tetap jalan dengan sketsa.</p>
+        </div>
+      </div>
       <div class="win mint">
         <div class="bar"><span>Pindahkan lemari</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div>
         <div class="body">
@@ -793,6 +965,7 @@ button.avatar{cursor:pointer;padding:0}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="selbar hidden" id="selbar" role="region" aria-label="Item terpilih"><span id="sel-text"></span><span class="row" style="gap:6px"><button class="linkbtn" type="button" id="sel-clear">Batal</button><button class="btn" type="button" id="sel-go">Padukan</button></span></div>
 <div class="modal hidden" id="board-modal" role="dialog" aria-modal="true" aria-labelledby="board-title"><div class="win butter" id="board-win"></div></div>
+<div class="modal hidden" id="look-modal" role="dialog" aria-modal="true" aria-labelledby="look-title"><div class="win sky" id="look-win"></div></div>
 <div class="modal hidden" id="onb-modal" role="dialog" aria-modal="true" aria-labelledby="onb-title"><form class="win pink" id="onb-form" autocomplete="off"><div class="bar"><span id="onb-title">Kenalan dengan Kurasi</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body"><div id="onb-dots" aria-hidden="true"></div><div id="onb-fields"></div><div class="row" style="justify-content:space-between"><button class="linkbtn" type="button" id="onb-skip">Lewati dulu</button><span class="row" style="gap:8px"><button class="btn ghost" type="button" id="onb-back">Kembali</button><button class="btn" type="submit" id="onb-next">Lanjut</button></span></div></div></form></div>
 
 <script>
@@ -1386,6 +1559,7 @@ function showTab(name){
   if(name==='warna')renderSeason();
   if(name==='riwayat')renderHistory();
   if(name==='profil')renderProfile();
+  if(name==='beauty')renderBeauty();
   renderSelbar();
   window.scrollTo(0,0);
 }
@@ -1745,8 +1919,7 @@ document.addEventListener('click',function(e){
   var theme=b.dataset.theme, idx=+b.dataset.idx, lk;
   if(b.dataset.src==='preset')lk=PRESETS.find(function(t){return t.name===theme;}).looks[idx];
   else lk=state.aiThemes.find(function(t){return t.name===theme;}).looks[idx];
-  state.look=Object.assign({theme:theme},lk); save('look',state.look);
-  showTab('outfit'); kurasi();
+  if(lk)openLookPanel(theme,lk,b.dataset.src);
 });
 document.addEventListener('click',function(e){
   var b=e.target.closest('[data-del-theme]'); if(!b)return;
@@ -2199,7 +2372,7 @@ $('#board-win').addEventListener('change',function(e){
 });
 
 // ---------- Italic for foreign terms ----------
-var FX_LIST=['mix and match','personal color','dress code','dresscode','flat-lay','flat lay','smart casual','color block','power office','earth tone','dusty pink','tote bag','sling bag','flat shoes','outfits','outfit','looks','look','ensemble','blazer','outer','cardigan','scarf','sneakers','loafers','heels','jeans','denim','chino','polo','knit','blouse','sweater','crop','casual','retro','runway','spring','summer','autumn','winter','cream','beige','mocca','navy','wine','terracotta','mustard','olive','peach','sage','lilac','mint','fuchsia','pashmina','file','atelier','online','offline','sporty'];
+var FX_LIST=['period after opening','routine checker','skin barrier','hyaluronic acid','azelaic acid','benzoyl peroxide','setting spray','lip tint','lip cream','lip balm','mix and match','personal color','dress code','dresscode','flat-lay','flat lay','smart casual','color block','power office','earth tone','dusty pink','tote bag','sling bag','flat shoes','outfits','outfit','looks','look','ensemble','blazer','outer','cardigan','scarf','sneakers','loafers','heels','jeans','denim','chino','polo','knit','blouse','sweater','crop','casual','retro','runway','spring','summer','autumn','winter','cream','beige','mocca','navy','wine','terracotta','mustard','olive','peach','sage','lilac','mint','fuchsia','pashmina','file','atelier','online','offline','sporty','makeup','skincare','wishlist','beauty','serum','toner','cleanser','sunscreen','foundation','cushion','concealer','eyeliner','eyeshadow','blush','bronzer','primer','essence','retinoid','retinol','niacinamide','ceramide','salicylic','powder','pomade','shade','checkout'];
 var FX_SRC='(^|[^A-Za-z\\u00C0-\\u024F])('+FX_LIST.map(function(w){return w.replace(/[-]/g,'\\-');}).join('|')+')(?![A-Za-z\\u00C0-\\u024F])';
 var FX_TEST=new RegExp(FX_SRC,'i');
 function fxWrap(n){
@@ -2284,7 +2457,7 @@ function readProfile(box,px){
 }
 // profile tab
 $('#profile-fields').innerHTML=profileHTML('p-');
-$('#profile-form').addEventListener('change',function(){ syncProfileVis($('#profile-form'),'p-'); });
+$('#profile-form').addEventListener('change',function(e){ syncProfileVis($('#profile-form'),'p-'); if(e.target.name==='p-gender')setGender(e.target.value); });
 $('#profile-form').addEventListener('submit',function(e){ e.preventDefault(); readProfile($('#profile-form'),'p-'); state.profile.done=true; save('profile',state.profile); toast('Profil disimpan.'); renderProfile(); });
 function renderProfile(){ fillProfile($('#profile-form'),'p-'); $('#profile-hello').textContent=greet(); renderMoveInfo(); }
 // onboarding (stepper in a modal)
@@ -2300,7 +2473,7 @@ function onbShow(){
   syncProfileVis($('#onb-form'),'o-');
 }
 function openOnboarding(){ fillProfile($('#onb-form'),'o-'); ONB.step=1; onbShow(); openModal('onb-modal'); setTimeout(function(){var n=$('#o-name');if(n)n.focus({preventScroll:true});},200); }
-$('#onb-form').addEventListener('change',function(){ syncProfileVis($('#onb-form'),'o-'); });
+$('#onb-form').addEventListener('change',function(e){ syncProfileVis($('#onb-form'),'o-'); if(e.target.name==='o-gender')setGender(e.target.value); });
 $('#onb-back').addEventListener('click',function(){ var s=onbSteps(); ONB.step=s[Math.max(0,s.indexOf(ONB.step)-1)]; onbShow(); });
 $('#onb-skip').addEventListener('click',function(){ state.profile.done=true; save('profile',state.profile); closeModal('onb-modal'); renderOutfitPage(); });
 $('#onb-form').addEventListener('submit',function(e){ e.preventDefault();
@@ -2313,7 +2486,7 @@ $('#onb-form').addEventListener('submit',function(e){ e.preventDefault();
 function renderMoveInfo(){ $('#move-info').textContent=state.items.length+' item, '+state.history.length+' riwayat, '+state.aiThemes.length+' tema buatan, dan ilustrasinya akan ikut dipindahkan.'; }
 function exportData(){ return idbAll().then(function(imgs){
   var data={}; for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(k&&k.indexOf('kurasi.')===0&&k.indexOf('kurasi.img.')!==0&&k!=='kurasi.imgidx')data[k.slice(7)]=localStorage.getItem(k); }
-  return {app:'kurasi',v:1,at:new Date().toISOString(),data:data,images:imgs||{}};
+  return {app:'kurasi',v:1,at:new Date().toISOString(),data:data,images:(function(o){var r={};Object.keys(o||{}).forEach(function(k){if(k.indexOf('shop.')!==0)r[k]=o[k];});return r;})(imgs)};
 }); }
 function exportFile(){ return exportData().then(function(o){ var d=new Date(), nm='kurasi-lemari'+(state.profile.name?'-'+state.profile.name.toLowerCase().replace(/[^a-z0-9]+/g,''):'')+'-'+d.toISOString().slice(0,10)+'.json';
   var blob=new Blob([JSON.stringify(o)],{type:'application/json'}); var file=null; try{file=new File([blob],nm,{type:'application/json'});}catch(e){} return {blob:blob,file:file,name:nm}; }); }
@@ -2368,18 +2541,228 @@ function renderDash(){
   var per=[0,0,0,0,0,0,0]; state.history.forEach(function(h){ if(h.t>=ws&&h.t<ws+7*864e5)per[Math.floor((h.t-ws)/864e5)]++; }); var mx=Math.max(2,Math.max.apply(null,per));
   var cols=['var(--lilac)','var(--pink)','var(--butter)','var(--mint)','var(--sky)','var(--lilac)','var(--pink)'], dn=['Sen','Sel','Rab','Kam','Jum','Sab','Min'], today=(new Date().getDay()+6)%7;
   $('#dash-week').innerHTML='<div class="bars" role="img" aria-label="Jumlah outfit dipakai per hari minggu ini"><div class="ax"><span>'+mx+'</span><span>'+Math.round(mx/2)+'</span><span>0</span></div>'+per.map(function(v,i){return '<div class="col"><span class="bar-v" style="height:'+Math.max(4,v/mx*100)+'%;background:'+cols[i]+(i===today?';outline:2px solid var(--btn);outline-offset:1px':'')+'" title="'+v+' outfit"></span><small>'+dn[i]+'</small></div>';}).join('')+'</div>'+(per.some(Boolean)?'':'<p class="note" style="margin-top:8px">Belum ada outfit tercatat minggu ini. Ketuk "Pakai outfit ini" setelah memilih.</p>');
+  var ba=BEAUTY?beautyAlert():0; $('#beauty-alert').innerHTML=ba?'<div class="beauty-alert"><span>&#128132; '+ba+' produk makeup / skincare kedaluwarsa atau segera habis.</span><button class="btn small" type="button" data-go="beauty">Cek di Beauty</button></div>':'';
   // terakhir dipakai
   var rec=state.history.slice(0,3);
   $('#dash-recent').innerHTML=rec.length?'<ul class="recent">'+rec.map(function(h){var its=h.items.map(function(x){return byId(x.id)||x;}).slice(0,4);return '<li><span class="minis">'+its.map(function(it){return '<span class="mini">'+(it.cat?itemArt(it):'')+'</span>';}).join('')+'</span><span class="tx"><b>'+new Date(h.t).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'})+'</b>'+(h.look?esc(h.look):h.items.length+' item')+'</span></li>';}).join('')+'</ul><button class="linkbtn" data-go="riwayat" style="margin-top:8px">Lihat semua riwayat</button>':'<p class="muted small" style="margin:0">Belum ada riwayat. Outfit yang kamu pakai akan muncul di sini.</p>';
 }
 
 $('#hero-go').addEventListener('click',function(){ kurasi(); });
+// ---------- v8: theme panel (wardrobe matches + shopping suggestions) ----------
+var LOOKP={theme:null,lk:null,src:null,img:null};
+function lookItems(lk){
+  var cats=catsFor(state.gender).map(function(c){return c.k;});
+  return state.items.filter(function(it){
+    if(cats.indexOf(it.cat)<0)return false;
+    if(it.cat==='hijab'&&!headOn())return false;
+    if(lk.colors.indexOf(it.color)<0)return false;
+    if(lk.motif==='hindari'&&it.motif)return false;
+    return true;
+  }).sort(function(a,b){ var o=['hijab','scarf','outer','atasan','gamis','bawahan','sepatu','tas','aksesoris']; return (lk.motif==='wajib'?(b.motif?1:0)-(a.motif?1:0):0)||o.indexOf(a.cat)-o.indexOf(b.cat); });
+}
+var KW_EN={'kemeja':'button-up shirt','kemeja pria':'men\'s button-up shirt','kaos':'t-shirt','blouse':'blouse','sweater rajut':'knit sweater','rompi':'vest','jaket':'jacket','blazer':'tailored blazer','blazer pria':'men\'s tailored blazer','outer cardigan':'cardigan','gamis':'long-sleeve maxi dress','dress':'midi dress','rok plisket':'pleated maxi skirt','rok':'midi skirt','celana kulot':'wide-leg culottes','celana pendek':'shorts','jeans':'straight jeans','celana chino pria':'men\'s chino trousers','celana bahan':'tailored trousers','hijab segi empat':'square hijab scarf, neatly folded','scarf':'silk neck scarf'};
+function recPieces(lk){
+  var acc=lk.colors.filter(function(c){return !isNeutral(c);}), neu=lk.colors.filter(isNeutral);
+  var main=acc[0]||lk.colors[0], sec=acc[1]||neu[0]||main, base=neu.find(function(c){return c!==main;})||neu[0]||lk.colors[lk.colors.length-1];
+  var t=((lk.name||'')+' '+(lk.desc||'')).toLowerCase(), pria=state.gender==='pria', hij=headOn(), mot=lk.motif==='wajib', list=[];
+  if(!pria&&RX.dress.test(t)) list.push({cat:'gamis',color:main,kw:hij?'gamis':'dress',motif:mot});
+  else {
+    var top=pria?(RX.kaos.test(t)?'kaos':'kemeja pria'):(/kemeja|shirt/.test(t)?'kemeja':RX.kaos.test(t)?'kaos':RX.knit.test(t)?'sweater rajut':'blouse');
+    list.push({cat:'atasan',color:main,kw:top,motif:mot});
+    var bot=pria?(/celana pendek|shorts/.test(t)?'celana pendek':/jeans/.test(t)?'jeans':'celana chino pria'):(/celana pendek|shorts/.test(t)&&!hij?'celana pendek':/jeans/.test(t)?'jeans':RX.skirt.test(t)?(hij?'rok plisket':'rok'):(hij?'rok plisket':'celana kulot'));
+    list.push({cat:'bawahan',color:base,kw:bot,motif:false});
+  }
+  if(hij) list.push({cat:'hijab',color:sec,kw:'hijab segi empat',motif:false});
+  if(lk.outer||RX.outer.test(t)) list.push({cat:'outer',color:neu.find(function(c){return c!==base;})||base,kw:/rompi|vest/.test(t)?'rompi':/jaket|jacket/.test(t)?'jaket':pria?'blazer pria':'blazer',motif:false});
+  return list;
+}
+function recQuery(r){ return r.kw+(r.motif?' motif':'')+' '+colorLabel(r.color).toLowerCase()+(state.gender==='pria'||/pria/.test(r.kw)?'':(headOn()?' muslimah':' wanita')); }
+var SHOPS=[['Shopee','https://shopee.co.id/search?keyword='],['Tokopedia','https://www.tokopedia.com/search?st=product&q='],['Zalora','https://www.zalora.co.id/search?q='],['Lazada','https://www.lazada.co.id/catalog/?q=']];
+function recText(r){ return (EN[r.color]||r.color)+' '+(KW_EN[r.kw]||r.kw)+(r.motif?' with a tasteful printed pattern':''); }
+function recKey(r){ return 'shop.'+hashStr(recText(r)).toString(36); }
+function recCard(r,i){
+  var q=recQuery(r), src=ITEM_IMG[recKey(r)];
+  return '<div class="rec"><div class="rimg" data-rec="'+i+'">'+(src?'<img src="'+src+'" alt="">':'<span class="wait'+(state.aiImg&&state.worker?'':' off')+'"><span class="hanger">&#128087;</span><span>Gambar contoh menyusul</span></span>')+'</div><div class="rtx"><span class="cat">'+CATL[r.cat]+'</span><b>'+esc(q.charAt(0).toUpperCase()+q.slice(1))+'</b><span class="shops">'+SHOPS.map(function(s){return '<a class="shop" href="'+s[1]+encodeURIComponent(q)+'" target="_blank" rel="noopener">'+s[0]+'</a>';}).join('')+'</span></div></div>';
+}
+function openLookPanel(theme,lk,src){
+  LOOKP={theme:theme,lk:lk,src:src}; renderLookPanel(); openModal('look-modal');
+}
+function renderLookPanel(){
+  var theme=LOOKP.theme, lk=LOOKP.lk, src=LOOKP.src, w=$('#look-win');
+  var ti=src==='preset'?PRESETS.findIndex(function(t){return t.name===theme;}):-1, idx=LOOKP.idx||0;
+  var img=ti>-1?'img/look-'+ti+'-'+(PRESETS[ti].looks.indexOf(lk))+'-'+figVariant()+'.webp':(lk.img||'');
+  var its=lookItems(lk), combos=[]; try{ combos=generate({lockId:null,style:'',opts:state.opts,head:headOn(),look:Object.assign({theme:theme},lk)}); }catch(e){}
+  var can=combos.length>0, recs=recPieces(lk).filter(function(r){ return !its.some(function(it){return it.cat===r.cat||(r.cat==='atasan'&&it.cat==='gamis')||(r.cat==='gamis'&&it.cat==='atasan');}); });
+  if(!can&&!recs.length) recs=recPieces(lk);
+  var mot={wajib:'Wajib satu item bermotif',hindari:'Tanpa motif',boleh:'Motif boleh'}[lk.motif]||'';
+  var head='<div class="bar"><span id="look-title">'+esc(theme)+' · '+esc(lk.name)+'</span><button type="button" class="xbtn" id="look-close" aria-label="Tutup">&#10005;</button></div>';
+  var intro='<div class="lp-head"><span class="lfig">'+(img?imgTag(img):'<span class="wait off"><span class="hanger">&#128087;</span></span>')+'</span><div><p style="margin:0 0 8px">'+esc(lk.desc||'')+(mot?' '+mot+'.':'')+'</p><span class="dots">'+lk.colors.map(dot).join('')+'</span><p class="small muted" style="margin:8px 0 0">Warna tema: '+lk.colors.map(colorLabel).join(', ').toLowerCase()+'.</p></div></div>';
+  var have='<h3 style="margin-top:18px">Dari lemarimu <span class="small muted">('+its.length+' item cocok)</span></h3>'+(its.length?'<div class="closet mini-closet">'+its.map(function(it){return '<div class="card"><span class="pick" style="cursor:default"><span class="thumb">'+itemArt(it)+'</span><span class="cap"><b>'+esc(it.name)+'</b><span class="meta">'+dot(it.color)+'<span>'+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></span></span></div>';}).join('')+'</div>':'<p class="muted">Belum ada item di lemarimu yang warnanya masuk tema ini.</p>');
+  var act=can?'<div class="row" style="margin-top:14px"><button class="btn" id="look-go">Padukan jadi ensemble</button><span class="small muted">'+combos.length+' kombinasi dari lemarimu</span></div>':'<div class="reasons" style="margin-top:14px">Item yang cocok belum cukup untuk satu ensemble lengkap.</div>';
+  var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Tautan membuka hasil pencarian di toko online; cek harga, ukuran, dan ulasan di sana.</p>':'';
+  w.innerHTML=head+'<div class="body">'+intro+have+act+rec+'</div>';
+  $('#look-close').onclick=function(){closeModal('look-modal');};
+  var g=$('#look-go'); if(g)g.onclick=function(){ state.look=Object.assign({theme:theme},lk); save('look',state.look); closeModal('look-modal'); showIntro=false; showTab('outfit'); kurasi(); };
+  LOOKP.recs=recs; fillRecImages(recs);
+}
+var REC_BUSY={};
+function fillRecImages(recs){
+  if(!state.aiImg||!state.worker)return;
+  var i=0;
+  (function next(){
+    if(i>=recs.length)return; var r=recs[i], k=recKey(r), n=i; i++;
+    if(ITEM_IMG[k]||REC_BUSY[k])return next();
+    REC_BUSY[k]=1;
+    aiPost({type:'item',text:recText(r)},50000).then(function(j){return j.image?shrinkItem(j.image):null;}).then(function(u){
+      delete REC_BUSY[k]; if(u){ ITEM_IMG[k]=u; idbPut(k,u); var el=$('#look-win [data-rec="'+n+'"]'); if(el&&LOOKP.recs===recs)el.innerHTML='<img src="'+u+'" alt="">'; }
+      next();
+    },function(e){ delete REC_BUSY[k]; var el=$('#look-win [data-rec="'+n+'"] .wait'); if(el){el.classList.add('off');el.lastChild.textContent=e&&e.quota?'Kuota AI habis, coba lagi besok':'Gambar belum tersedia';} if(!(e&&e.quota))next(); });
+  })();
+}
+$('#look-modal').addEventListener('click',function(e){ if(e.target.id==='look-modal')closeModal('look-modal'); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!$('#look-modal').classList.contains('hidden'))closeModal('look-modal'); });
+
+// ---------- v8: Makeup & Beauty ----------
+var BCATS=[
+  {k:'maskara',l:'Maskara',m:3,g:'eye',t:'makeup'},{k:'eyeliner',l:'Eyeliner',m:6,g:'eye',t:'makeup'},{k:'eyeshadow',l:'Eyeshadow',m:24,g:'eye',t:'makeup'},{k:'alis',l:'Pensil / pomade alis',m:24,g:'eye',t:'makeup'},
+  {k:'foundation',l:'Foundation',m:12,g:'base',t:'makeup'},{k:'cushion',l:'Cushion',m:6,g:'base',t:'makeup'},{k:'concealer',l:'Concealer',m:12,g:'base',t:'makeup'},{k:'bedak',l:'Bedak / powder',m:24,g:'base',t:'makeup'},{k:'primer',l:'Primer',m:12,g:'base',t:'makeup'},
+  {k:'blush',l:'Blush / bronzer',m:24,g:'cheek',t:'makeup'},{k:'lipstik',l:'Lipstik',m:18,g:'lip',t:'makeup'},{k:'liptint',l:'Lip tint / lip cream',m:12,g:'lip',t:'makeup'},{k:'lipbalm',l:'Lip balm',m:12,g:'lip',t:'makeup'},
+  {k:'settingspray',l:'Setting spray',m:12,g:'base',t:'makeup'},{k:'parfum',l:'Parfum',m:36,g:'parfum',t:'makeup'},
+  {k:'cleanser',l:'Pembersih (cleanser)',m:12,s:1,t:'skin'},{k:'toner',l:'Toner',m:12,s:2,t:'skin'},{k:'essence',l:'Essence',m:12,s:3,t:'skin'},{k:'exfoliant',l:'Eksfolian AHA / BHA',m:12,s:4,t:'skin',a:['aha']},
+  {k:'serum',l:'Serum',m:6,s:5,t:'skin'},{k:'retinol',l:'Retinol / retinoid',m:6,s:5,t:'skin',a:['retinol']},{k:'krimmata',l:'Krim mata',m:6,s:6,t:'skin'},{k:'pelembap',l:'Pelembap',m:12,s:7,t:'skin'},
+  {k:'sunscreen',l:'Sunscreen',m:12,s:8,t:'skin',a:['spf']},{k:'masker',l:'Masker',m:12,s:9,t:'skin'}
+];
+var BC={}; BCATS.forEach(function(c){BC[c.k]=c;});
+var ACTIVES=[{k:'retinol',l:'Retinol'},{k:'aha',l:'AHA'},{k:'bha',l:'BHA / salicylic'},{k:'vitc',l:'Vitamin C'},{k:'niacinamide',l:'Niacinamide'},{k:'bpo',l:'Benzoyl peroxide'},{k:'azelaic',l:'Azelaic acid'},{k:'ha',l:'Hyaluronic acid'},{k:'ceramide',l:'Ceramide'},{k:'spf',l:'SPF'}];
+var AL={}; ACTIVES.forEach(function(a){AL[a.k]=a.l;});
+var BEAUTY=Object.assign({items:[],am:[],pm:[],wish:[]},load('beauty',{}));
+function saveBeauty(){ save('beauty',BEAUTY); }
+var BTAB='pao', BEDIT=null;
+function dayMs(){return 864e5;}
+function parseD(s){ if(!s)return null; var p=s.split('-'); if(p.length!==3)return null; return new Date(+p[0],+p[1]-1,+p[2]).getTime(); }
+function fmtD(t){ return new Date(t).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'}); }
+function todayStr(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function bExpiry(p){ var o=parseD(p.opened), e=null; if(o){ var d=new Date(o); d.setMonth(d.getMonth()+(+p.pao||BC[p.cat].m)); e=d.getTime(); } var x=parseD(p.exp); if(x&&(!e||x<e))e=x; return e; }
+function bStatus(p){ var e=bExpiry(p); if(!e)return {k:'na',l:'Belum dibuka',d:null}; var d=Math.ceil((e-Date.now())/dayMs()); return d<0?{k:'bad',l:'Kedaluwarsa '+(-d)+' hari lalu',d:d}:d<=30?{k:'warn',l:'Habis dalam '+d+' hari',d:d}:{k:'ok',l:'Aman, '+(d>60?Math.round(d/30)+' bulan lagi':d+' hari lagi'),d:d}; }
+function bActives(p){ var a=(p.actives||[]).slice(); (BC[p.cat].a||[]).forEach(function(x){if(a.indexOf(x)<0)a.push(x);}); return a; }
+function hexLab(h){ h=(h||'#000000').replace('#',''); return rgb2lab(parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)); }
+function dE(a,b){ var x=hexLab(a),y=hexLab(b); return Math.sqrt(Math.pow(x[0]-y[0],2)+Math.pow(x[1]-y[1],2)+Math.pow(x[2]-y[2],2)); }
+function bnorm(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+function dupesFor(w,skipId){
+  var out=[], gw=(BC[w.cat]||{}).g;
+  function cmp(p,src){ if(p.id===skipId)return; var same=p.cat===w.cat, grp=gw&&(BC[p.cat]||{}).g===gw, why=null;
+    if(bnorm(p.name)&&bnorm(p.name)===bnorm(w.name)&&bnorm(p.brand)===bnorm(w.brand))why='nama dan merek sama';
+    else if((same||grp)&&w.shade&&p.shade&&dE(w.shade,p.shade)<12)why='shade hampir sama (selisih warna '+Math.round(dE(w.shade,p.shade))+')';
+    else if(same&&!w.shade&&!p.shade&&bnorm(p.brand)&&bnorm(p.brand)===bnorm(w.brand))why='kategori dan merek sama';
+    if(why)out.push({p:p,src:src,why:why}); }
+  BEAUTY.items.forEach(function(p){cmp(p,'punya');}); BEAUTY.wish.forEach(function(p){cmp(p,'wishlist');});
+  return out;
+}
+function catOptions(filter,sel){ return BCATS.filter(function(c){return !filter||c.t===filter;}).map(function(c){return '<option value="'+c.k+'"'+(c.k===sel?' selected':'')+'>'+c.l+'</option>';}).join(''); }
+function renderBeauty(){
+  $$('#tab-beauty .btabs input').forEach(function(r){r.checked=r.value===BTAB;});
+  $$('#tab-beauty [data-bpanel]').forEach(function(p){p.classList.toggle('hidden',p.dataset.bpanel!==BTAB);});
+  if(BTAB==='pao')renderPAO(); else if(BTAB==='rutin')renderRoutine(); else renderWish();
+}
+$('#tab-beauty').addEventListener('change',function(e){ if(e.target.name==='btab'){BTAB=e.target.value;renderBeauty();} });
+// --- PAO ---
+function renderPAO(){
+  var list=BEAUTY.items.slice().sort(function(a,b){ var x=bStatus(a).d, y=bStatus(b).d; return (x==null?1e9:x)-(y==null?1e9:y); });
+  var n={ok:0,warn:0,bad:0,na:0}; list.forEach(function(p){n[bStatus(p).k]++;});
+  $('#pao-sum').innerHTML='<span class="bchip bad">'+n.bad+' kedaluwarsa</span><span class="bchip warn">'+n.warn+' segera habis</span><span class="bchip ok">'+n.ok+' aman</span>'+(n.na?'<span class="bchip">'+n.na+' belum dibuka</span>':'');
+  $('#pao-list').innerHTML=list.length?list.map(function(p){ var st=bStatus(p), e=bExpiry(p), o=parseD(p.opened), pct=o&&e?Math.min(100,Math.max(0,(Date.now()-o)/(e-o)*100)):0;
+    return '<li class="bitem '+st.k+'">'+(p.shade?'<span class="shade" style="background:'+p.shade+'"></span>':'<span class="shade ic">'+(BC[p.cat].t==='skin'?'&#129524;':'&#128132;')+'</span>')+'<div class="bi"><b>'+esc(p.name)+'</b><span class="muted small">'+esc(p.brand||'')+(p.brand?' · ':'')+BC[p.cat].l+' · PAO '+(p.pao||BC[p.cat].m)+'M</span><span class="pbar"><i style="width:'+pct.toFixed(0)+'%"></i></span><span class="small"><span class="tag st">'+st.l+'</span>'+(e?' sampai '+fmtD(e):'')+'</span>'+(bActives(p).length?'<span class="acts small">'+bActives(p).map(function(a){return '<span class="tag">'+AL[a]+'</span>';}).join(' ')+'</span>':'')+'</div><div class="bact"><button class="linkbtn" data-bedit="'+p.id+'">Ubah</button><button class="linkbtn danger" data-bdel="'+p.id+'">Habis / buang</button></div></li>'; }).join(''):'<li class="empty muted">Belum ada produk. Tambahkan makeup atau skincare yang sedang dipakai, lalu Kurasi mengingatkan sebelum kedaluwarsa.</li>';
+}
+function paoFormSync(){ var c=BC[$('#pb-cat').value]; $('#pb-pao').placeholder=c.m; if(!BEDIT||$('#pb-cat').dataset.prev!==c.k){ $('#pb-pao').value=c.m; } $('#pb-cat').dataset.prev=c.k;
+  $('#pb-shade-wrap').classList.toggle('hidden',c.t!=='makeup'||c.k==='parfum'); $('#pb-act-wrap').classList.toggle('hidden',c.t!=='skin');
+  $('#pb-paohint').textContent='Umumnya '+c.l.toLowerCase()+' aman dipakai '+c.m+' bulan setelah dibuka (lihat simbol wadah terbuka "'+c.m+'M" di kemasan).'; }
+$('#pb-cat').innerHTML='<optgroup label="Makeup">'+catOptions('makeup')+'</optgroup><optgroup label="Skincare">'+catOptions('skin')+'</optgroup>';
+$('#pb-acts').innerHTML=ACTIVES.map(function(a){return '<label class="chip"><input type="checkbox" name="pb-act" value="'+a.k+'"><span>'+a.l+'</span></label>';}).join('');
+$('#pb-cat').addEventListener('change',paoFormSync);
+function openPAO(p){ BEDIT=p?p.id:null; var f=$('#pao-form'); f.classList.remove('hidden'); $('#pb-title').textContent=p?'Ubah produk':'Produk baru';
+  $('#pb-name').value=p?p.name:''; $('#pb-brand').value=p?p.brand||'':''; $('#pb-cat').value=p?p.cat:'foundation'; $('#pb-cat').dataset.prev=''; $('#pb-opened').value=p?p.opened||'':todayStr(); $('#pb-exp').value=p?p.exp||'':''; $('#pb-shade').value=p&&p.shade?p.shade:'#C98A73'; $('#pb-noshade').checked=p?!p.shade:false;
+  $$('input[name=pb-act]').forEach(function(c){c.checked=!!(p&&p.actives&&p.actives.indexOf(c.value)>-1);}); paoFormSync(); if(p)$('#pb-pao').value=p.pao||BC[p.cat].m; f.scrollIntoView({behavior:'smooth',block:'start'}); }
+$('#pao-add').addEventListener('click',function(){openPAO(null);});
+$('#pb-cancel').addEventListener('click',function(){$('#pao-form').classList.add('hidden');});
+$('#pao-form').addEventListener('submit',function(e){ e.preventDefault(); var name=$('#pb-name').value.trim(); if(!name){$('#pb-name').focus();toast('Isi nama produk dulu.');return;}
+  var c=BC[$('#pb-cat').value], o={name:name,brand:$('#pb-brand').value.trim(),cat:c.k,opened:$('#pb-opened').value,exp:$('#pb-exp').value,pao:Math.max(1,Math.min(60,parseInt($('#pb-pao').value,10)||c.m)),shade:(c.t==='makeup'&&c.k!=='parfum'&&!$('#pb-noshade').checked)?$('#pb-shade').value:'',actives:c.t==='skin'?$$('input[name=pb-act]:checked').map(function(x){return x.value;}):[]};
+  if(BEDIT){ var p=BEAUTY.items.find(function(x){return x.id===BEDIT;}); Object.assign(p,o); } else { o.id=uid(); BEAUTY.items.push(o); }
+  saveBeauty(); $('#pao-form').classList.add('hidden'); toast(BEDIT?'Produk diperbarui.':'Produk ditambahkan.'); renderPAO(); });
+$('#pao-list').addEventListener('click',function(e){ var b=e.target.closest('[data-bedit]'); if(b){openPAO(BEAUTY.items.find(function(x){return x.id===b.dataset.bedit;}));return;}
+  var d=e.target.closest('[data-bdel]'); if(d){ var p=BEAUTY.items.find(function(x){return x.id===d.dataset.bdel;}); if(p&&confirm('Hapus '+p.name+' dari daftar?')){ BEAUTY.items=BEAUTY.items.filter(function(x){return x.id!==p.id;}); BEAUTY.am=BEAUTY.am.filter(function(x){return x!==p.id;}); BEAUTY.pm=BEAUTY.pm.filter(function(x){return x!==p.id;}); saveBeauty(); renderPAO(); } } });
+// --- Routine checker ---
+function skinItems(){ return BEAUTY.items.filter(function(p){return BC[p.cat].t==='skin';}); }
+function routineIssues(){
+  var out=[], R={am:BEAUTY.am.map(byB).filter(Boolean), pm:BEAUTY.pm.map(byB).filter(Boolean)};
+  function has(list,a){ return list.filter(function(p){return bActives(p).indexOf(a)>-1;}); }
+  function nm(l){ return l.map(function(p){return p.name;}).join(', '); }
+  ['am','pm'].forEach(function(k){ var L=R[k], lab=k==='am'?'pagi':'malam';
+    var ret=has(L,'retinol'), ex=has(L,'aha').concat(has(L,'bha').filter(function(p){return has(L,'aha').indexOf(p)<0;})), vc=has(L,'vitc'), bpo=has(L,'bpo');
+    if(ret.length&&ex.length) out.push({lv:'bad',t:'Retinol ('+nm(ret)+') dan AHA/BHA ('+nm(ex)+') di rutinitas '+lab+' yang sama berisiko iritasi dan kulit mengelupas. Pakai bergantian di malam yang berbeda.'});
+    if(ret.length&&bpo.length) out.push({lv:'bad',t:'Retinol dan benzoyl peroxide di rutinitas '+lab+' bisa saling melemahkan dan memicu iritasi. Pisahkan pagi dan malam.'});
+    if(vc.length&&ex.length) out.push({lv:'warn',t:'Vitamin C dan AHA/BHA bersamaan di rutinitas '+lab+' bisa terasa perih. Lebih aman vitamin C pagi, AHA/BHA malam.'});
+    if(vc.length&&bpo.length) out.push({lv:'warn',t:'Benzoyl peroxide dapat mengoksidasi vitamin C sehingga kurang efektif. Pakai di waktu berbeda.'});
+    var act=L.reduce(function(s,p){return s+bActives(p).filter(function(a){return ['retinol','aha','bha','vitc','bpo','azelaic'].indexOf(a)>-1;}).length;},0);
+    if(act>=3) out.push({lv:'warn',t:'Rutinitas '+lab+' memuat '+act+' bahan aktif kuat sekaligus. Kurangi agar skin barrier tidak rusak.'});
+    L.forEach(function(p){ if(bStatus(p).k==='bad')out.push({lv:'bad',t:p.name+' sudah kedaluwarsa. Sebaiknya diganti.'}); });
+  });
+  var amRet=has(R.am,'retinol'); if(amRet.length) out.push({lv:'warn',t:'Retinol ('+nm(amRet)+') sebaiknya dipakai malam karena mudah terurai cahaya dan membuat kulit lebih sensitif matahari.'});
+  if(R.am.length&&!has(R.am,'spf').length) out.push({lv:(has(R.pm,'retinol').length||has(R.pm,'aha').length||has(R.pm,'bha').length)?'bad':'warn',t:'Rutinitas pagi belum ada sunscreen'+((has(R.pm,'retinol').length||has(R.pm,'aha').length||has(R.pm,'bha').length)?', padahal malamnya memakai retinol/AHA/BHA yang membuat kulit lebih peka matahari':'')+'.'});
+  if(has(R.pm,'spf').length) out.push({lv:'info',t:'Sunscreen tidak perlu dipakai di malam hari.'});
+  if(R.pm.length&&!R.pm.some(function(p){return p.cat==='cleanser';})) out.push({lv:'info',t:'Malam hari sebaiknya diawali pembersih untuk mengangkat sunscreen dan makeup.'});
+  return out;
+}
+function byB(id){ return BEAUTY.items.find(function(p){return p.id===id;}); }
+function sortStep(ids){ return ids.slice().sort(function(a,b){ var x=byB(a),y=byB(b); return ((x?BC[x.cat].s:99)||99)-((y?BC[y.cat].s:99)||99); }); }
+function renderRoutine(){
+  var sk=skinItems();
+  ['am','pm'].forEach(function(k){
+    BEAUTY[k]=BEAUTY[k].filter(byB);
+    var ids=sortStep(BEAUTY[k]), wrong=ids.join()!==BEAUTY[k].join();
+    $('#rt-'+k).innerHTML=(ids.length?'<ol class="rsteps">'+ids.map(function(id){var p=byB(id);return '<li><b>'+esc(p.name)+'</b><span class="small muted">'+BC[p.cat].l+(bActives(p).length?' · '+bActives(p).map(function(a){return AL[a];}).join(', '):'')+'</span><button class="linkbtn danger" data-rrm="'+k+':'+id+'" aria-label="Keluarkan '+esc(p.name)+'">Keluarkan</button></li>';}).join('')+'</ol>'+(wrong?'<p class="note">Urutan di atas sudah disusun ulang dari tekstur paling ringan ke paling berat.</p>':''):'<p class="muted small">Belum ada produk.</p>')+
+      '<div class="row" style="gap:8px;margin-top:8px"><select id="rt-sel-'+k+'" aria-label="Pilih produk">'+(sk.length?sk.filter(function(p){return BEAUTY[k].indexOf(p.id)<0;}).map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+' ('+BC[p.cat].l+')</option>';}).join(''):'')+'</select><button class="btn small" type="button" data-radd="'+k+'"'+(sk.length?'':' disabled')+'>Tambah</button></div>';
+    if(sk.length&&!sk.filter(function(p){return BEAUTY[k].indexOf(p.id)<0;}).length){ var s=$('#rt-sel-'+k); s.innerHTML='<option value="">Semua produk sudah masuk</option>'; s.disabled=true; }
+  });
+  if(!sk.length) $('#rt-hint').innerHTML='Tambahkan produk skincare dulu di tab <b>Kedaluwarsa</b> (pilih kategori skincare dan kandungan aktifnya), lalu susun rutinitasnya di sini.'; else $('#rt-hint').textContent='Pilih produk untuk rutinitas pagi dan malam. Kurasi menyusun urutannya dan memeriksa kombinasi bahan aktif.';
+  BEAUTY.am=sortStep(BEAUTY.am); BEAUTY.pm=sortStep(BEAUTY.pm); saveBeauty();
+  var is=routineIssues();
+  $('#rt-check').innerHTML=(!BEAUTY.am.length&&!BEAUTY.pm.length)?'<p class="muted">Hasil pemeriksaan muncul setelah kamu menyusun rutinitas.</p>':(is.length?'<ul class="issues">'+is.map(function(x){return '<li class="'+x.lv+'">'+esc(x.t)+'</li>';}).join('')+'</ul>':'<p class="okmsg">&#10003; Rutinitasmu aman: urutan tepat dan tidak ada bahan aktif yang bertabrakan.</p>')+'<p class="note">Panduan umum, bukan saran medis. Jika kulit iritasi, hentikan pemakaian dan konsultasikan ke dokter kulit.</p>';
+}
+$('#tab-beauty').addEventListener('click',function(e){
+  var a=e.target.closest('[data-radd]'); if(a){ var k=a.dataset.radd, v=$('#rt-sel-'+k).value; if(v&&BEAUTY[k].indexOf(v)<0){BEAUTY[k].push(v);saveBeauty();renderRoutine();} return; }
+  var r=e.target.closest('[data-rrm]'); if(r){ var pr=r.dataset.rrm.split(':'); BEAUTY[pr[0]]=BEAUTY[pr[0]].filter(function(x){return x!==pr[1];}); saveBeauty(); renderRoutine(); }
+});
+// --- Wishlist anti-duplicate ---
+$('#wb-cat').innerHTML=catOptions('makeup')+'<optgroup label="Skincare">'+catOptions('skin')+'</optgroup>';
+function wishForm(){ return {name:$('#wb-name').value.trim(),brand:$('#wb-brand').value.trim(),cat:$('#wb-cat').value,shade:$('#wb-noshade').checked?'':$('#wb-shade').value,price:parseInt(String($('#wb-price').value).replace(/\D/g,''),10)||0,link:$('#wb-link').value.trim()}; }
+function wishCheck(){ var w=wishForm(), c=BC[w.cat]; $('#wb-shade-wrap').classList.toggle('hidden',c.t!=='makeup'||c.k==='parfum'); if(c.t!=='makeup')w.shade='';
+  var d=(w.name||w.shade)?dupesFor(w,null):[];
+  $('#wb-dupe').innerHTML=d.length?'<ul class="issues"><li class="warn"><b>Hati-hati, mungkin duplikat:</b> '+d.slice(0,3).map(function(x){return esc(x.p.name)+(x.p.brand?' ('+esc(x.p.brand)+')':'')+' di '+(x.src==='punya'?'koleksimu':'wishlist')+', '+x.why+(x.p.shade?' <span class="shade sm" style="background:'+x.p.shade+'"></span>':'');}).join('; ')+'.</li></ul>':(w.name?'<p class="okmsg small">&#10003; Belum ada yang mirip di koleksi dan wishlist-mu.</p>':''); }
+['wb-name','wb-brand','wb-cat','wb-shade','wb-noshade'].forEach(function(id){ $('#'+id).addEventListener('input',wishCheck); $('#'+id).addEventListener('change',wishCheck); });
+$('#wish-form').addEventListener('submit',function(e){ e.preventDefault(); var w=wishForm(); if(!w.name){toast('Isi nama produk dulu.');$('#wb-name').focus();return;} if(BC[w.cat].t!=='makeup')w.shade=''; if(w.link&&!/^https?:\/\//.test(w.link))w.link='https://'+w.link; w.id=uid(); BEAUTY.wish.push(w); saveBeauty(); $('#wish-form').reset(); $('#wb-shade').value='#C98A73'; wishCheck(); renderWish(); toast('Masuk wishlist.'); });
+function rupiah(n){ return 'Rp'+n.toLocaleString('id-ID'); }
+function renderWish(){
+  var tot=BEAUTY.wish.reduce(function(s,w){return s+(w.price||0);},0);
+  $('#wish-tot').textContent=BEAUTY.wish.length?BEAUTY.wish.length+' produk'+(tot?' · total '+rupiah(tot):''):'';
+  $('#wish-list').innerHTML=BEAUTY.wish.length?BEAUTY.wish.map(function(w){ var d=dupesFor(w,w.id);
+    return '<li class="bitem'+(d.length?' warn':'')+'">'+(w.shade?'<span class="shade" style="background:'+w.shade+'"></span>':'<span class="shade ic">&#128132;</span>')+'<div class="bi"><b>'+esc(w.name)+'</b><span class="muted small">'+esc(w.brand||'')+(w.brand?' · ':'')+BC[w.cat].l+(w.price?' · '+rupiah(w.price):'')+'</span>'+(d.length?'<span class="small"><span class="tag st">Mirip '+esc(d[0].p.name)+' ('+(d[0].src==='punya'?'sudah punya':'di wishlist')+')</span></span>':'<span class="small"><span class="tag okt">Tidak ada duplikat</span></span>')+(w.link?'<a class="pin small" href="'+esc(w.link)+'" target="_blank" rel="noopener">Buka tautan produk</a>':'')+'</div><div class="bact"><button class="linkbtn" data-wbuy="'+w.id+'">Sudah dibeli</button><button class="linkbtn danger" data-wdel="'+w.id+'">Hapus</button></div></li>'; }).join(''):'<li class="empty muted">Wishlist masih kosong. Sebelum checkout, catat di sini supaya tidak membeli shade yang sudah kamu punya.</li>';
+}
+$('#wish-list').addEventListener('click',function(e){
+  var b=e.target.closest('[data-wbuy]'); if(b){ var w=BEAUTY.wish.find(function(x){return x.id===b.dataset.wbuy;}); if(!w)return; BEAUTY.wish=BEAUTY.wish.filter(function(x){return x.id!==w.id;}); BEAUTY.items.push({id:uid(),name:w.name,brand:w.brand,cat:w.cat,shade:w.shade,opened:'',exp:'',pao:BC[w.cat].m,actives:[]}); saveBeauty(); renderWish(); toast('Dipindah ke koleksi. Isi tanggal dibuka saat mulai dipakai.'); return; }
+  var d=e.target.closest('[data-wdel]'); if(d){ BEAUTY.wish=BEAUTY.wish.filter(function(x){return x.id!==d.dataset.wdel;}); saveBeauty(); renderWish(); }
+});
+function beautyAlert(){ var n=BEAUTY.items.filter(function(p){var k=bStatus(p).k;return k==='bad'||k==='warn';}).length; return n; }
+
+wishCheck();
+
+if(/[?&]dev\b/.test(location.search))$('#ai-settings').classList.remove('hidden');
+
 // ---------- Init ----------
 applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
 renderOutfitPage();
 fxScan(document.body); FX_OBS.observe(document.body,{childList:true,subtree:true,characterData:true});
-idbAll().then(function(all){ Object.keys(all||{}).forEach(function(k){ if(k.indexOf('it.')===0)ITEM_IMG[k]=all[k]; }); IDB_READY=true; if(!$('#tab-lemari').classList.contains('hidden'))renderWardrobe(); if(!$('#tab-outfit').classList.contains('hidden'))renderDash(); setTimeout(pumpIll,1500); });
+idbAll().then(function(all){ Object.keys(all||{}).forEach(function(k){ if(k.indexOf('it.')===0||k.indexOf('shop.')===0)ITEM_IMG[k]=all[k]; }); IDB_READY=true; if(!$('#tab-lemari').classList.contains('hidden'))renderWardrobe(); if(!$('#tab-outfit').classList.contains('hidden'))renderDash(); setTimeout(pumpIll,1500); });
 loadAvatar();
 setInterval(function(){ var h=$('#h-outfit'); if(h)h.textContent=greet()+' '+greetIcon(); },60000);
 })();
