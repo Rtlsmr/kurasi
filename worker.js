@@ -1,11 +1,16 @@
-// Kurasi AI Worker v5
-// - Tema: 3 look per tema (Llama 3.3 70B fast + JSON mode, jauh lebih cepat).
-// - Gambar: ilustrasi fashion dari FLUX.1 schnell.
+// Kurasi AI Worker v6
+// - Tema: 3 look per tema (Llama 3.3 70B fast + JSON mode).
+// - Gambar model: ilustrasi fashion dari FLUX.1 schnell.
+// - Foto item: dikenali Llama 4 Scout (kategori, nama, warna, motif),
+//   lalu digambar ulang jadi ilustrasi flat-lay oleh FLUX.2 klein. Foto tidak disimpan.
 // Binding Workers AI dengan nama variabel: AI.
 
 const TEXT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 const BACKUP_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast';
 const IMAGE_MODEL = '@cf/black-forest-labs/flux-1-schnell';
+const ITEM_MODEL = '@cf/black-forest-labs/flux-2-klein-4b';
+const VISION_MODEL = '@cf/meta/llama-4-scout-17b-16e-instruct';
+const CATS = ['hijab', 'scarf', 'atasan', 'bawahan', 'gamis', 'outer', 'sepatu', 'tas', 'aksesoris'];
 
 const COLORS = [
 'putih', 'cream', 'beige', 'mocca', 'cokelat', 'abumuda', 'abutua', 'hitam', 'navy',
@@ -130,6 +135,88 @@ if (res && res.choices && res.choices[0]) return res.choices[0].message?.content
 return JSON.stringify(res);
 }
 
+const ITEM_STYLE = 'Fashion flat-lay illustration, the garment laid flat and centered, front view, hand-drawn with alcohol markers and watercolor, fine ink outlines, soft fabric shading and folds, plain warm white paper background, single item only, no person, no mannequin, no hanger, no hands, no text.';
+
+function dataUrlBytes(u) {
+const m = /^data:image\/(png|jpe?g|webp);base64,(.+)$/i.exec(String(u || ''));
+if (!m || m[2].length > 900000) return null;
+const bin = atob(m[2]);
+const bytes = new Uint8Array(bin.length);
+for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+return { bytes, type: 'image/' + m[1].toLowerCase().replace('jpg', 'jpeg') };
+}
+
+async function itemImage(env, b) {
+const form = new FormData();
+const img = b.photo ? dataUrlBytes(b.photo) : null;
+const what = String(b.text || '').trim().slice(0, 300);
+let prompt;
+if (img) {
+form.append('input_image_0', new Blob([img.bytes], { type: img.type }), 'item.' + img.type.split('/')[1]);
+prompt = 'Redraw the clothing item from image 0' + (what ? ' (' + what + ')' : '') + ' as a fashion illustration. Keep exactly the same garment type, cut, length, color and pattern. ' + ITEM_STYLE;
+} else {
+if (!what) return null;
+prompt = 'A ' + what + '. ' + ITEM_STYLE;
+}
+form.append('prompt', prompt);
+form.append('width', '512');
+form.append('height', '512');
+const fr = new Response(form);
+const out = await env.AI.run(ITEM_MODEL, { multipart: { body: fr.body, contentType: fr.headers.get('content-type') } });
+return out && out.image ? out.image : null;
+}
+
+const ITEM_SCHEMA = {
+type: 'object',
+properties: {
+cat: { type: 'string' },
+name: { type: 'string' },
+color: { type: 'string' },
+motif: { type: 'boolean' },
+en: { type: 'string' }
+},
+required: ['cat', 'name', 'color', 'motif', 'en']
+};
+
+const ITEM_RULES = 'Kamu membantu mencatat isi lemari pakaian. Lihat foto, kenali SATU item pakaian atau aksesori utama di foto, lalu balas HANYA JSON: {"cat":"...","name":"...","color":"...","motif":false,"en":"..."}\n- cat: salah satu dari ' + CATS.join(', ') + '. hijab = kerudung/jilbab/pashmina; scarf = syal leher; atasan = kemeja, kaos, blouse, sweater, tunik; bawahan = celana, rok, kulot, jeans; gamis = gamis, dress, terusan; outer = jaket, blazer, cardigan, coat; aksesoris = jam, gelang, kalung, kacamata, topi, ikat pinggang.\n- name: nama singkat bahasa Indonesia tanpa warna, maksimal 3 kata, sebut bahan atau model jika jelas. Contoh: Jaket kulit, Kaos, Jeans, Rok plisket, Sandal hak.\n- color: warna dominan, HANYA dari daftar: ' + COLORS.join(', ') + '.\n- motif: true jika bermotif (bunga, garis, kotak, batik, polkadot), false jika polos.\n- en: deskripsi singkat bahasa Inggris untuk ilustrator, sertakan warna, bahan, potongan, panjang. Contoh: black leather biker jacket with silver zips.';
+
+async function classify(env, photo) {
+const messages = [
+{ role: 'system', content: ITEM_RULES },
+{ role: 'user', content: [{ type: 'text', text: 'Kenali item di foto ini.' }, { type: 'image_url', image_url: { url: photo } }] },
+];
+const tries = [
+{ messages, max_tokens: 200, temperature: 0.2, response_format: { type: 'json_schema', json_schema: ITEM_SCHEMA } },
+{ messages, max_tokens: 200, temperature: 0.2 },
+];
+let last = '';
+for (const t of tries) {
+try {
+const res = await env.AI.run(VISION_MODEL, t);
+last = textOf(res);
+let j = null;
+try { j = JSON.parse(last); } catch (e) {
+const s = last.indexOf('{'), e2 = last.lastIndexOf('}');
+if (s > -1 && e2 > s) { try { j = JSON.parse(last.slice(s, e2 + 1)); } catch (e3) {} }
+}
+if (j && j.cat) {
+const cat = String(j.cat).toLowerCase().trim();
+return {
+cat: CATS.includes(cat) ? cat : null,
+name: String(j.name || '').replace(/\s+/g, ' ').trim().slice(0, 40),
+color: toPalette(j.color || ''),
+motif: !!j.motif,
+en: String(j.en || '').slice(0, 200),
+};
+}
+} catch (e) {
+last = String(e && e.message || e);
+if (/limit|quota|4006|neuron/i.test(last)) throw e;
+}
+}
+return { error: 'tidak terbaca', raw: last.slice(0, 500) };
+}
+
 async function makeLooks(env, who, theme) {
 const messages = [
 { role: 'system', content: PERSONA[who] + "\n\n" + RULES },
@@ -158,7 +245,7 @@ return { looks: [], raw: last.slice(0, 2000) };
 export default {
 async fetch(request, env) {
 if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
-if (request.method === 'GET') return json({ ok: true, app: 'Kurasi AI', text: TEXT_MODEL, image: IMAGE_MODEL });
+if (request.method === 'GET') return json({ ok: true, app: 'Kurasi AI', v: 6, text: TEXT_MODEL, image: IMAGE_MODEL, item: ITEM_MODEL, vision: VISION_MODEL });
 if (request.method !== 'POST') return json({ error: 'Gunakan POST' }, 405);
 if (!env.AI) return json({ error: 'Binding Workers AI dengan nama AI belum dipasang' }, 500);
 
@@ -172,6 +259,19 @@ if (!prompt) return json({ error: 'Prompt gambar kosong' }, 400);
 const out = await env.AI.run(IMAGE_MODEL, { prompt, steps: 4 });
 if (!out || !out.image) return json({ error: 'Gambar belum bisa dibuat' }, 502);
 return json({ image: out.image });
+}
+
+if (b.type === 'item') {
+const image = await itemImage(env, b);
+if (!image) return json({ error: 'Ilustrasi item belum bisa dibuat' }, 502);
+return json({ image });
+}
+
+if (b.type === 'classify') {
+if (!dataUrlBytes(b.photo)) return json({ error: 'Foto tidak terbaca' }, 400);
+const r = await classify(env, b.photo);
+if (r.error && !b.debug) return json({ error: 'Item di foto belum bisa dikenali' }, 502);
+return json(r);
 }
 
 const theme = String(b.theme || '').trim().slice(0, 60);
