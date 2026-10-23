@@ -62,12 +62,35 @@ function extractJson(text) {
   return null;
 }
 
+const ALIAS = {
+  white: 'putih', offwhite: 'cream', krem: 'cream', ivory: 'cream', gading: 'cream', nude: 'beige', khaki: 'beige', camel: 'mocca',
+  coklat: 'cokelat', brown: 'cokelat', chocolate: 'cokelat', coffee: 'mocca', mocha: 'mocca', taupe: 'mocca',
+  abu: 'abumuda', abuabu: 'abumuda', grey: 'abumuda', gray: 'abumuda', lightgrey: 'abumuda', darkgrey: 'abutua', charcoal: 'abutua',
+  black: 'hitam', navyblue: 'navy', birutua: 'navy', darkblue: 'navy',
+  maroon: 'wine', burgundy: 'wine', marun: 'wine', red: 'merah', crimson: 'merah', scarlet: 'merah',
+  orange: 'terracotta', oranye: 'terracotta', jingga: 'terracotta', rust: 'terracotta', bata: 'terracotta', coral: 'peach', salmon: 'peach',
+  yellow: 'mustard', kuning: 'mustard', gold: 'mustard', emas: 'mustard',
+  green: 'sage', hijau: 'sage', hijaumuda: 'sage', hijautua: 'olive', army: 'olive', khakigreen: 'olive', emerald: 'olive',
+  tosca: 'mint', toska: 'mint', teal: 'mint', turquoise: 'mint', aqua: 'mint', tosa: 'mint',
+  blue: 'birumuda', biru: 'birumuda', skyblue: 'birumuda', babyblue: 'birumuda', lightblue: 'birumuda',
+  pink: 'dustypink', merahmuda: 'dustypink', rose: 'dustypink', blush: 'dustypink', dustyrose: 'dustypink',
+  purple: 'lilac', ungu: 'lilac', lavender: 'lilac', lavendel: 'lilac', violet: 'lilac',
+  magenta: 'fuchsia', hotpink: 'fuchsia', fuschia: 'fuchsia', pinkterang: 'fuchsia',
+};
+
+function toPalette(c) {
+  const k = String(c).toLowerCase().replace(/[^a-z]/g, '');
+  if (COLORS.includes(k)) return k;
+  if (ALIAS[k]) return ALIAS[k];
+  for (const key of Object.keys(ALIAS)) if (k.includes(key)) return ALIAS[key];
+  for (const p of COLORS) if (k.includes(p)) return p;
+  return null;
+}
+
 function clean(data) {
   const looks = Array.isArray(data && data.looks) ? data.looks : [];
   return looks.map((l) => {
-    const colors = [...new Set((l.colors || [])
-      .map((c) => String(c).toLowerCase().replace(/[\s_-]/g, ''))
-      .filter((c) => COLORS.includes(c)))];
+    const colors = [...new Set((l.colors || []).map(toPalette).filter(Boolean))];
     return {
       name: String(l.name || 'Look').slice(0, 40),
       desc: String(l.desc || '').slice(0, 160),
@@ -86,8 +109,8 @@ export default {
     if (request.method !== 'POST') return json({ error: 'Gunakan POST' }, 405);
     if (!env.AI) return json({ error: 'Binding Workers AI dengan nama AI belum dipasang' }, 500);
 
-    let theme = '';
-    try { theme = String((await request.json()).theme || '').trim().slice(0, 60); } catch (e) {}
+    let theme = '', debug = false;
+    try { const b = await request.json(); theme = String(b.theme || '').trim().slice(0, 60); debug = !!b.debug; } catch (e) {}
     if (!theme) return json({ error: 'Nama tema kosong' }, 400);
 
     try {
@@ -96,7 +119,7 @@ export default {
           { role: 'system', content: SYSTEM },
           { role: 'user', content: `Tema: ${theme}` },
         ],
-        max_tokens: 1500,
+        max_tokens: 2500,
         temperature: 0.6,
       });
       let text = '';
@@ -107,6 +130,7 @@ export default {
       else text = JSON.stringify(res);
 
       const looks = clean(extractJson(text));
+      if (debug) return json({ theme, looks, raw: (text || JSON.stringify(res)).slice(0, 3000), keys: res && typeof res === 'object' ? Object.keys(res) : typeof res });
       if (!looks.length) return json({ error: 'AI tidak memberi look yang bisa dipakai' }, 502);
       return json({ theme, looks });
     } catch (e) {
