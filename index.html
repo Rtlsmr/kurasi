@@ -370,7 +370,7 @@ ol.steps li{margin-bottom:8px}
 (function(){
 'use strict';
 // ---------- Config ----------
-var DEFAULT_WORKER = '';
+var DEFAULT_WORKER = 'https://kurasi-ai.adhesratulasmar.workers.dev';
 var REST_DAYS = 7;
 
 // ---------- Palette ----------
@@ -820,7 +820,8 @@ $('#ai-form').addEventListener('submit',function(e){
     $('#ai-theme').value=''; renderThemes(); $('#my-themes').scrollIntoView({behavior:'smooth'});
   })
   .catch(function(err){
-    st.innerHTML='<span style="color:var(--danger)">Look belum bisa dibuat: '+esc(err.name==='AbortError'?'AI terlalu lama menjawab':err.message)+'. Coba lagi sebentar lagi, atau pakai tema siap pakai.</span>';
+    var why=err.name==='AbortError'?'AI terlalu lama menjawab':(/Failed to fetch|NetworkError|Load failed/i.test(err.message)?'perangkat ini tidak bisa terhubung ke server AI. Jaringan kantor kadang memblokirnya, coba pakai data seluler':err.message);
+    st.innerHTML='<span style="color:var(--danger)">Look belum bisa dibuat: '+esc(why)+'. Tema siap pakai tetap bisa dipakai.</span>';
   })
   .then(function(){clearTimeout(to);btn.disabled=false;});
 });
