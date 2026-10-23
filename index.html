@@ -556,6 +556,8 @@ button.avatar{cursor:pointer;padding:0}
 .shops{display:flex;flex-wrap:wrap;gap:6px}
 .shop{font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--outline);color:var(--ink);text-decoration:none}
 .shop:hover{background:var(--t1)}
+.shl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.shop.br{background:var(--surface);font-weight:700}
 /* beauty */
 .btabs{margin:0 0 16px}
 .bchips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
@@ -2578,11 +2580,22 @@ function recPieces(lk){
 }
 function recQuery(r){ return r.kw+(r.motif?' motif':'')+' '+colorLabel(r.color).toLowerCase()+(state.gender==='pria'||/pria/.test(r.kw)?'':(headOn()?' muslimah':' wanita')); }
 var SHOPS=[['Shopee','https://shopee.co.id/search?keyword='],['Tokopedia','https://www.tokopedia.com/search?st=product&q='],['Zalora','https://www.zalora.co.id/search?q='],['Lazada','https://www.lazada.co.id/catalog/?q=']];
+var BQ={'kemeja':'shirt','kemeja pria':'shirt','kaos':'t-shirt','blouse':'blouse','sweater rajut':'knit sweater','rompi':'vest','jaket':'jacket','blazer':'blazer','blazer pria':'blazer','outer cardigan':'cardigan','gamis':'maxi dress','dress':'midi dress','rok plisket':'pleated skirt','rok':'midi skirt','celana kulot':'culottes','celana pendek':'shorts','jeans':'jeans','celana chino pria':'chino trousers','celana bahan':'trousers','hijab segi empat':'scarf','scarf':'scarf'};
+function gsite(site){ return function(q){ return 'https://www.google.com/search?q='+encodeURIComponent('site:'+site+' '+q); }; }
+var BRANDS=[
+  {n:'Zara',u:function(q){return 'https://www.zara.com/id/en/search?searchTerm='+encodeURIComponent(q);}},
+  {n:'H&M',u:gsite('hm.com')},
+  {n:'This is April',w:1,u:function(q){return 'https://thisisapril.com/search?q='+encodeURIComponent(q);}},
+  {n:'Uniqlo',u:function(q){return 'https://www.uniqlo.com/id/id/search?q='+encodeURIComponent(q);}},
+  {n:'Stradivarius',w:1,u:gsite('stradivarius.com')},
+  {n:'Pull&Bear',u:gsite('pullandbear.com')}
+];
+function brandQuery(r){ return (state.gender==='pria'?'men ':'')+(EN[r.color]||r.color)+' '+(BQ[r.kw]||r.kw); }
 function recText(r){ return (EN[r.color]||r.color)+' '+(KW_EN[r.kw]||r.kw)+(r.motif?' with a tasteful printed pattern':''); }
 function recKey(r){ return 'shop.'+hashStr(recText(r)).toString(36); }
 function recCard(r,i){
   var q=recQuery(r), src=ITEM_IMG[recKey(r)];
-  return '<div class="rec"><div class="rimg" data-rec="'+i+'">'+(src?'<img src="'+src+'" alt="">':'<span class="wait'+(state.aiImg&&state.worker?'':' off')+'"><span class="hanger">&#128087;</span><span>Gambar contoh menyusul</span></span>')+'</div><div class="rtx"><span class="cat">'+CATL[r.cat]+'</span><b>'+esc(q.charAt(0).toUpperCase()+q.slice(1))+'</b><span class="shops">'+SHOPS.map(function(s){return '<a class="shop" href="'+s[1]+encodeURIComponent(q)+'" target="_blank" rel="noopener">'+s[0]+'</a>';}).join('')+'</span></div></div>';
+  return '<div class="rec"><div class="rimg" data-rec="'+i+'">'+(src?'<img src="'+src+'" alt="">':'<span class="wait'+(state.aiImg&&state.worker?'':' off')+'"><span class="hanger">&#128087;</span><span>Gambar contoh menyusul</span></span>')+'</div><div class="rtx"><span class="cat">'+CATL[r.cat]+'</span><b>'+esc(q.charAt(0).toUpperCase()+q.slice(1))+'</b><span class="shl">Marketplace</span><span class="shops">'+SHOPS.map(function(s){return '<a class="shop" href="'+s[1]+encodeURIComponent(q)+'" target="_blank" rel="noopener">'+s[0]+'</a>';}).join('')+'</span><span class="shl">Brand</span><span class="shops">'+BRANDS.filter(function(b){return !(b.w&&state.gender==='pria');}).map(function(b){return '<a class="shop br" href="'+esc(b.u(brandQuery(r)))+'" target="_blank" rel="noopener" data-nofx>'+esc(b.n)+'</a>';}).join('')+'</span></div></div>';
 }
 function openLookPanel(theme,lk,src){
   LOOKP={theme:theme,lk:lk,src:src}; renderLookPanel(); openModal('look-modal');
@@ -2599,7 +2612,7 @@ function renderLookPanel(){
   var intro='<div class="lp-head"><span class="lfig">'+(img?imgTag(img):'<span class="wait off"><span class="hanger">&#128087;</span></span>')+'</span><div><p style="margin:0 0 8px">'+esc(lk.desc||'')+(mot?' '+mot+'.':'')+'</p><span class="dots">'+lk.colors.map(dot).join('')+'</span><p class="small muted" style="margin:8px 0 0">Warna tema: '+lk.colors.map(colorLabel).join(', ').toLowerCase()+'.</p></div></div>';
   var have='<h3 style="margin-top:18px">Dari lemarimu <span class="small muted">('+its.length+' item cocok)</span></h3>'+(its.length?'<div class="closet mini-closet">'+its.map(function(it){return '<div class="card"><span class="pick" style="cursor:default"><span class="thumb">'+itemArt(it)+'</span><span class="cap"><b>'+esc(it.name)+'</b><span class="meta">'+dot(it.color)+'<span>'+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></span></span></div>';}).join('')+'</div>':'<p class="muted">Belum ada item di lemarimu yang warnanya masuk tema ini.</p>');
   var act=can?'<div class="row" style="margin-top:14px"><button class="btn" id="look-go">Padukan jadi ensemble</button><span class="small muted">'+combos.length+' kombinasi dari lemarimu</span></div>':'<div class="reasons" style="margin-top:14px">Item yang cocok belum cukup untuk satu ensemble lengkap.</div>';
-  var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Tautan membuka hasil pencarian di toko online; cek harga, ukuran, dan ulasan di sana.</p>':'';
+  var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Tautan membuka hasil pencarian di marketplace atau situs resmi brand (H&amp;M, Stradivarius, dan Pull&amp;Bear lewat pencarian Google di situs resminya); cek ketersediaan, harga, dan ukuran di sana.</p>':'';
   w.innerHTML=head+'<div class="body">'+intro+have+act+rec+'</div>';
   $('#look-close').onclick=function(){closeModal('look-modal');};
   var g=$('#look-go'); if(g)g.onclick=function(){ state.look=Object.assign({theme:theme},lk); save('look',state.look); closeModal('look-modal'); showIntro=false; showTab('outfit'); kurasi(); };
