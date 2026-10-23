@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kurasi</title>
+<meta name="description" content="Kurasi: atelier lemarimu, satu ensemble setiap pagi. Padu padan baju dan hijab dari lemari sendiri.">
+<meta name="theme-color" content="#EEF0EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEF0EE; --surface:#FFFFFF; --ink:#1E2B2F; --muted:#5B686B; --line:#D3D9D7;
+  --brass:#9A6B22; --brass-soft:#F1E6CF; --danger:#A3342B; --ok:#2F6B4F;
+  --shadow:0 1px 2px rgba(30,43,47,.08);
+  --radius-s:6px; --radius-m:12px;
+  --display:'Bodoni Moda', 'Didot', Georgia, serif;
+  --body:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141B1D; --surface:#1C2528; --ink:#E6EBE9; --muted:#9AA7A9; --line:#2F3B3E;
+    --brass:#D9A954; --brass-soft:#3A3122; --danger:#E0766C; --ok:#7CC4A0; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141B1D; --surface:#1C2528; --ink:#E6EBE9; --muted:#9AA7A9; --line:#2F3B3E;
+  --brass:#D9A954; --brass-soft:#3A3122; --danger:#E0766C; --ok:#7CC4A0; --shadow:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.shell{display:flex;min-height:100vh}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs button{flex:1;border:0;background:none;padding:10px 2px 12px;font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+nav.tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6}
+nav.tabs button[aria-current="page"]{color:var(--ink)}
+nav.tabs button[aria-current="page"] .tick{background:var(--brass)}
+.tick{width:18px;height:2px;border-radius:2px;background:transparent}
+.brand{display:none}
+.brand-sub{display:none}
+main{flex:1;width:100%;max-width:760px;margin:0 auto;padding:20px 16px 110px}
+@media (min-width:900px){
+  nav.tabs{position:sticky;top:0;height:100vh;width:220px;flex-direction:column;border-top:0;border-right:1px solid var(--line);padding:28px 16px;gap:4px;bottom:auto}
+  nav.tabs button{flex:none;flex-direction:row;justify-content:flex-start;gap:12px;font-size:15px;padding:10px 12px;border-radius:var(--radius-s)}
+  nav.tabs button[aria-current="page"]{background:var(--paper)}
+  .tick{display:none}
+  .brand{display:block;font-family:var(--display);font-size:30px;font-weight:600;padding:0 12px 4px}
+  .brand-sub{display:block;color:var(--muted);font-size:13px;padding:0 12px 22px;line-height:1.35}
+  main{padding:40px 32px 60px}
+}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(34px,8vw,48px);line-height:1.05;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-family:var(--display);font-weight:600;font-size:24px;line-height:1.2;margin:0 0 10px}
+h3{font-size:16px;font-weight:600;margin:0 0 6px}
+.lede{color:var(--muted);margin:0 0 22px;max-width:60ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);padding:18px;margin-bottom:16px;box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:999px;font-weight:600;cursor:pointer;min-height:44px}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.quiet{border-color:var(--line);background:transparent;color:var(--ink);font-weight:500}
+.btn.danger{border-color:var(--danger);background:transparent;color:var(--danger)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.linkbtn{border:0;background:none;padding:6px 4px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:14px}
+.linkbtn.danger{color:var(--danger)}
+fieldset{border:0;padding:0;margin:0 0 16px}
+legend,label.lbl{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+input[type=text],input[type=url],select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:var(--radius-s);background:var(--paper);min-height:44px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;background:var(--surface);min-height:38px}
+.chip input:checked + span{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.chip input:focus-visible + span{outline:2px solid var(--brass);outline-offset:2px}
+.palette{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px}
+.pal{position:relative}
+.pal input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.pal span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11.5px;text-align:center;line-height:1.2;padding:6px 2px;border-radius:var(--radius-s);border:1px solid transparent}
+.pal i{display:block;width:36px;height:36px;border-radius:50%;border:1px solid rgba(0,0,0,.14)}
+.pal input:checked + span{border-color:var(--ink);background:var(--paper)}
+.pal input:focus-visible + span{outline:2px solid var(--brass)}
+.switch{display:flex;align-items:center;gap:10px;font-size:15px;cursor:pointer;min-height:40px}
+.switch input{width:20px;height:20px;accent-color:var(--ink)}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.16);vertical-align:-2px;flex:none}
+.tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.brass{border-color:transparent;background:var(--brass-soft);color:var(--brass);font-weight:600}
+.tag.rest{border-color:transparent;background:var(--paper)}
+/* Ensemble figure: the memorable piece */
+.ensemble{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}
+@media (max-width:420px){.ensemble{grid-template-columns:118px 1fr;gap:14px}}
+.figure{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 0}
+.figure .sw{border:1px solid rgba(0,0,0,.14);position:relative}
+.motif::after{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(135deg,rgba(255,255,255,.38) 0 3px,transparent 3px 9px),repeating-linear-gradient(45deg,rgba(0,0,0,.10) 0 2px,transparent 2px 11px);clip-path:inherit}
+.f-hijab{width:78px;height:86px;border-radius:50% 50% 42% 42%/58% 58% 42% 42%}
+.f-top{width:118px;height:86px;border-radius:22px 22px 6px 6px}
+.figure .f-outer{border-left-width:16px;border-right-width:16px}
+.f-bottom{width:96px;height:118px;border-radius:4px 4px 12px 12px;clip-path:polygon(6% 0,94% 0,100% 100%,0 100%)}
+.f-gamis{width:118px;height:206px;border-radius:22px 22px 10px 10px;clip-path:polygon(14% 0,86% 0,100% 100%,0 100%)}
+.f-gamis.f-outer{clip-path:none}
+.f-shoes{display:flex;gap:10px}
+.f-shoes .sw{width:40px;height:18px;border-radius:12px 12px 6px 6px}
+.f-bag{position:absolute;right:-6px;bottom:40px;width:34px;height:30px;border-radius:6px 6px 8px 8px}
+.f-bag::before{content:"";position:absolute;left:7px;right:7px;top:-11px;height:12px;border:2px solid currentColor;border-bottom:0;border-radius:10px 10px 0 0;color:inherit}
+@media (max-width:420px){
+  .f-hijab{width:64px;height:72px}.f-top{width:98px;height:74px}.f-bottom{width:80px;height:100px}.f-gamis{width:98px;height:176px}.f-shoes .sw{width:32px}
+}
+.pieces{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pieces li{display:flex;gap:10px;align-items:flex-start}
+.pieces .cat{font-size:13px;color:var(--muted);display:block}
+.pieces .nm{font-weight:600;display:block}
+.reasons{margin:14px 0 0;padding:12px 14px;border-radius:var(--radius-s);background:var(--paper);font-size:14.5px}
+.reasons ul{margin:0;padding-left:18px}
+.lookbar{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px dashed var(--brass);background:var(--brass-soft);border-radius:var(--radius-s);padding:10px 12px;margin-bottom:14px;font-size:14.5px}
+.date{font-family:var(--display);font-style:italic;color:var(--muted);font-size:18px;margin:0 0 18px}
+.tape{height:10px;margin:2px 0 22px;background:linear-gradient(var(--brass),var(--brass)) bottom/100% 1px no-repeat,repeating-linear-gradient(90deg,var(--brass) 0 1px,transparent 1px 10px) bottom/100% 6px no-repeat,repeating-linear-gradient(90deg,var(--brass) 0 1px,transparent 1px 50px) bottom/100% 10px no-repeat}
+/* wardrobe list */
+.group{margin-bottom:18px}
+.group h3{display:flex;justify-content:space-between;align-items:baseline}
+.items{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.items li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.items .sw{width:34px;height:34px;border-radius:8px;border:1px solid rgba(0,0,0,.14);position:relative;flex:none;overflow:hidden}
+.items .info{flex:1;min-width:0}
+.items .info b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.items .meta{font-size:13px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.items .acts{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end}
+.empty{text-align:center;padding:30px 18px}
+.empty p{max-width:42ch;margin:0 auto 16px}
+/* themes */
+.theme{border-top:1px solid var(--line);padding:16px 0}
+.theme:first-of-type{border-top:0;padding-top:4px}
+.looks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px}
+.look{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:var(--radius-s);padding:12px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-height:44px}
+.look:hover{border-color:var(--ink)}
+.look[aria-pressed="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
+.look b{font-size:15px}
+.look .dots{display:flex;gap:4px;flex-wrap:wrap}
+.look .d{font-size:13.5px;color:var(--muted);line-height:1.4}
+details{border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
+summary{cursor:pointer;font-weight:600;font-size:14.5px;padding:4px 0}
+/* quiz */
+.q{margin-bottom:16px}
+.result{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.season-name{font-family:var(--display);font-size:32px;font-weight:600;line-height:1}
+.swatches{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.swatches .dot{width:26px;height:26px}
+ol.steps{padding-left:20px;margin:0}
+ol.steps li{margin-bottom:8px}
+/* history */
+.hist{list-style:none;margin:0;padding:0}
+.hist li{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.hist .mini{display:flex;gap:3px;flex:none}
+.hist .mini .dot{width:20px;height:20px;border-radius:5px}
+.hist .info{flex:1;min-width:0;font-size:14.5px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:999px;font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:20;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (min-width:900px){.toast{bottom:32px}}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .8s linear infinite;vertical-align:-3px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.reveal{animation:rv .45s ease-out both}
+@keyframes rv{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.hidden{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.grid2{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:600px){.grid2{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="tabs" aria-label="Menu utama">
+    <span class="brand">Kurasi</span>
+    <span class="brand-sub">Atelier lemarimu, satu ensemble setiap pagi</span>
+    <button data-tab="outfit" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg>Outfit<span class="tick"></span></button>
+    <button data-tab="lemari"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg>Lemari<span class="tick"></span></button>
+    <button data-tab="tema"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg>Tema<span class="tick"></span></button>
+    <button data-tab="warna"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17"/></svg>Warna<span class="tick"></span></button>
+    <button data-tab="riwayat"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>Riwayat<span class="tick"></span></button>
+  </nav>
+
+  <main id="main">
+    <!-- OUTFIT -->
+    <section id="tab-outfit" aria-labelledby="h-outfit">
+      <h1 id="h-outfit">Ensemble hari ini</h1>
+      <p class="date" id="today"></p>
+      <div class="tape" aria-hidden="true"></div>
+
+      <div id="outfit-empty" class="panel empty hidden">
+        <h2>Lemarimu masih kosong</h2>
+        <p class="muted">Kurasi memadukan outfit dari baju dan hijab yang kamu punya. Tambahkan isi lemarimu dulu, atau coba pakai lemari contoh.</p>
+        <div class="row" style="justify-content:center">
+          <button class="btn" data-go="lemari" data-open-form>Tambah item pertama</button>
+          <button class="btn ghost" id="btn-sample-1">Coba lemari contoh</button>
+        </div>
+      </div>
+
+      <div id="outfit-main">
+        <div id="lookbar" class="lookbar hidden">
+          <span id="lookbar-text"></span>
+          <button class="linkbtn" id="btn-clear-look">Lepas tema</button>
+        </div>
+
+        <div class="panel">
+          <div class="grid2">
+            <div>
+              <label class="lbl" for="lock">Mulai dari item</label>
+              <select id="lock"></select>
+            </div>
+            <fieldset style="margin:0">
+              <legend>Acara hari ini</legend>
+              <div class="chips" id="style-chips">
+                <label class="chip"><input type="radio" name="style" value="" checked><span>Bebas</span></label>
+                <label class="chip"><input type="radio" name="style" value="kerja"><span>Kerja</span></label>
+                <label class="chip"><input type="radio" name="style" value="santai"><span>Santai</span></label>
+                <label class="chip"><input type="radio" name="style" value="formal"><span>Formal/acara</span></label>
+              </div>
+            </fieldset>
+          </div>
+          <div class="row" style="margin-top:10px;gap:4px 20px">
+            <label class="switch"><input type="checkbox" id="opt-outer"> Sertakan outer</label>
+            <label class="switch"><input type="checkbox" id="opt-acc"> Sertakan sepatu &amp; tas</label>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <button class="btn" id="btn-kurasi">Kurasi outfit</button>
+          </div>
+        </div>
+
+        <div id="result" class="panel hidden" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- LEMARI -->
+    <section id="tab-lemari" class="hidden" aria-labelledby="h-lemari">
+      <h1 id="h-lemari">Atelier lemarimu</h1>
+      <p class="lede" id="lemari-count">Semua baju, hijab, dan aksesori yang bisa dipadukan.</p>
+
+      <div class="row" style="margin-bottom:16px">
+        <button class="btn" id="btn-add">Tambah item</button>
+        <button class="btn ghost" id="btn-sample-2">Isi lemari contoh</button>
+      </div>
+
+      <form id="item-form" class="panel hidden" autocomplete="off">
+        <h2 id="form-title">Item baru</h2>
+        <input type="hidden" id="f-id">
+        <fieldset>
+          <legend>Kategori</legend>
+          <div class="chips" id="f-cats"></div>
+        </fieldset>
+        <div style="margin-bottom:16px">
+          <label class="lbl" for="f-name">Nama item</label>
+          <input type="text" id="f-name" placeholder="Contoh: kemeja linen, pashmina, kulot" maxlength="40" required>
+        </div>
+        <fieldset>
+          <legend>Warna</legend>
+          <div class="palette" id="f-colors"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Motif</legend>
+          <label class="switch"><input type="checkbox" id="f-motif"> Bermotif (bunga, garis, kotak, batik)</label>
+        </fieldset>
+        <fieldset>
+          <legend>Cocok dipakai untuk</legend>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="f-style" value="kerja" checked><span>Kerja</span></label>
+            <label class="chip"><input type="checkbox" name="f-style" value="santai" checked><span>Santai</span></label>
+            <label class="chip"><input type="checkbox" name="f-style" value="formal" checked><span>Formal/acara</span></label>
+          </div>
+        </fieldset>
+        <p id="form-error" class="small" style="color:var(--danger)" role="alert"></p>
+        <div class="row">
+          <button class="btn" type="submit" id="f-save">Simpan item</button>
+          <button class="btn quiet" type="button" id="f-cancel">Batal</button>
+        </div>
+      </form>
+
+      <div id="wardrobe"></div>
+      <p class="small muted" id="wardrobe-foot"></p>
+    </section>
+
+    <!-- TEMA -->
+    <section id="tab-tema" class="hidden" aria-labelledby="h-tema">
+      <h1 id="h-tema">Tema &amp; look</h1>
+      <p class="lede">Ada dresscode atau ingin nuansa tertentu? Pilih tema, pilih look-nya, lalu Kurasi memadukan isi lemarimu agar sesuai.</p>
+
+      <div class="panel">
+        <h2>Tema lain</h2>
+        <p class="muted small" style="margin-top:-4px">Ketik tema apa pun, AI akan menyusun 3 pilihan look dari warna yang ada di palet.</p>
+        <form id="ai-form" class="row" style="align-items:stretch">
+          <label class="sr" for="ai-theme">Nama tema</label>
+          <input type="text" id="ai-theme" placeholder="Contoh: Hawaiian, Bollywood, ulang tahun kantor" maxlength="60" style="flex:1;min-width:200px">
+          <button class="btn" type="submit" id="ai-btn">Buat look</button>
+        </form>
+        <p id="ai-status" class="small" role="status" style="margin:10px 0 0"></p>
+        <details id="ai-settings">
+          <summary>Pengaturan AI</summary>
+          <p class="small muted">Alamat Worker Cloudflare yang menjalankan AI. Biarkan seperti ini kecuali kamu memakai Worker lain.</p>
+          <div class="row">
+            <label class="sr" for="worker-url">Alamat Worker</label>
+            <input type="url" id="worker-url" placeholder="https://kurasi-ai.namamu.workers.dev" style="flex:1;min-width:220px">
+            <button class="btn quiet" type="button" id="worker-save">Simpan alamat</button>
+          </div>
+        </details>
+      </div>
+
+      <div id="my-themes"></div>
+      <div class="panel" id="preset-themes"></div>
+    </section>
+
+    <!-- WARNA -->
+    <section id="tab-warna" class="hidden" aria-labelledby="h-warna">
+      <h1 id="h-warna">Rona: personal color-mu</h1>
+      <p class="lede">Warna yang selaras dengan kulitmu membuat wajah terlihat segar. Hijab paling berpengaruh karena paling dekat dengan wajah.</p>
+
+      <div class="panel" id="season-card"></div>
+
+      <form class="panel" id="quiz">
+        <h2>Kuis singkat</h2>
+        <p class="small muted" style="margin-top:-4px">Lakukan di dekat jendela dengan cahaya alami, tanpa makeup.</p>
+        <fieldset class="q"><legend>Warna urat nadi di pergelangan tangan bagian dalam</legend><div class="chips">
+          <label class="chip"><input type="radio" name="q1" value="w" required><span>Hijau/zaitun</span></label>
+          <label class="chip"><input type="radio" name="q1" value="c"><span>Biru/ungu</span></label>
+          <label class="chip"><input type="radio" name="q1" value="n"><span>Campuran</span></label></div></fieldset>
+        <fieldset class="q"><legend>Perhiasan yang membuat kulit lebih cerah</legend><div class="chips">
+          <label class="chip"><input type="radio" name="q2" value="w" required><span>Emas</span></label>
+          <label class="chip"><input type="radio" name="q2" value="c"><span>Perak</span></label>
+          <label class="chip"><input type="radio" name="q2" value="n"><span>Sama saja</span></label></div></fieldset>
+        <fieldset class="q"><legend>Kain di bawah wajah: mana yang membuat wajah lebih segar?</legend><div class="chips">
+          <label class="chip"><input type="radio" name="q3" value="c" required><span>Putih bersih</span></label>
+          <label class="chip"><input type="radio" name="q3" value="w"><span>Cream/off-white</span></label>
+          <label class="chip"><input type="radio" name="q3" value="n"><span>Sama saja</span></label></div></fieldset>
+        <fieldset class="q"><legend>Kontras alis dan mata dengan kulit</legend><div class="chips">
+          <label class="chip"><input type="radio" name="q4" value="h" required><span>Sangat kontras</span></label>
+          <label class="chip"><input type="radio" name="q4" value="m"><span>Sedang</span></label>
+          <label class="chip"><input type="radio" name="q4" value="l"><span>Lembut/menyatu</span></label></div></fieldset>
+        <button class="btn" type="submit">Lihat hasil</button>
+      </form>
+
+      <div class="panel">
+        <h2>Pilih sendiri</h2>
+        <p class="small muted" style="margin-top:-4px">Sudah tahu tipemu dari analisis langsung? Pilih di sini.</p>
+        <div class="chips" id="season-chips"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Tes tempel hijab</h2>
+        <p class="small muted" style="margin-top:-4px">Cara paling jujur kalau hasil kuis belum tegas. Tempelkan hijab bergantian di bawah wajah, dekat jendela.</p>
+        <ol class="steps">
+          <li>Bandingkan mustard atau terracotta dengan fuchsia atau pink terang. Kalau yang pertama lebih segar, kulitmu cenderung hangat.</li>
+          <li>Bandingkan mocca atau cokelat susu dengan abu-abu. Mocca lebih segar berarti hangat, abu-abu lebih segar berarti dingin.</li>
+          <li>Bandingkan putih bersih dengan cream. Ini penentu terakhir antara dingin dan hangat.</li>
+          <li>Hasil hangat dan warna lembut lebih cocok berarti Autumn, hangat dan warna cerah berarti Spring. Dingin dan lembut berarti Summer, dingin dan tegas berarti Winter.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- RIWAYAT -->
+    <section id="tab-riwayat" class="hidden" aria-labelledby="h-riwayat">
+      <h1 id="h-riwayat">Riwayat ensemble</h1>
+      <p class="lede">Item yang sudah dipakai beristirahat 7 hari, jadi Kurasi tidak menyarankannya dulu.</p>
+      <div class="panel" id="history"></div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+// ---------- Config ----------
+var DEFAULT_WORKER = '';
+var REST_DAYS = 7;
+
+// ---------- Palette ----------
+var PALETTE = [
+  {k:'putih',l:'Putih',h:'#FFFFFF',n:1},
+  {k:'cream',l:'Cream',h:'#F1E8D6',n:1},
+  {k:'beige',l:'Beige',h:'#D9C3A0',n:1},
+  {k:'mocca',l:'Mocca',h:'#A27F63',n:1},
+  {k:'cokelat',l:'Cokelat',h:'#6B4A33',n:1},
+  {k:'abumuda',l:'Abu muda',h:'#C9CCCF',n:1},
+  {k:'abutua',l:'Abu tua',h:'#5D6166',n:1},
+  {k:'hitam',l:'Hitam',h:'#1B1B1D',n:1},
+  {k:'navy',l:'Navy',h:'#1F2E55',n:1},
+  {k:'wine',l:'Wine',h:'#6E1F33'},
+  {k:'merah',l:'Merah',h:'#C0272D'},
+  {k:'terracotta',l:'Terracotta',h:'#C2603F'},
+  {k:'mustard',l:'Mustard',h:'#D2A12B'},
+  {k:'olive',l:'Olive',h:'#6F7340'},
+  {k:'peach',l:'Peach',h:'#F2B49B'},
+  {k:'birumuda',l:'Biru muda',h:'#A9C8E6'},
+  {k:'sage',l:'Sage',h:'#9DAF93'},
+  {k:'dustypink',l:'Dusty pink',h:'#D7A1A6'},
+  {k:'lilac',l:'Lilac',h:'#B9A6D3'},
+  {k:'mint',l:'Mint',h:'#A8DCC7'},
+  {k:'fuchsia',l:'Fuchsia',h:'#D1307A'}
+];
+var PAL = {}; PALETTE.forEach(function(p){PAL[p.k]=p;});
+var HARM_RAW = {
+  wine:['dustypink','sage','mustard','olive','peach'],
+  terracotta:['sage','olive','mustard','birumuda','peach'],
+  mustard:['wine','olive','terracotta','birumuda'],
+  olive:['mustard','terracotta','wine','peach'],
+  peach:['sage','mint','birumuda','olive','terracotta','wine'],
+  birumuda:['dustypink','lilac','mustard','peach','terracotta'],
+  sage:['dustypink','wine','terracotta','peach','lilac'],
+  dustypink:['sage','wine','lilac','birumuda'],
+  lilac:['mint','dustypink','birumuda','sage'],
+  mint:['lilac','peach','fuchsia'],
+  fuchsia:['mint','birumuda'],
+  merah:[]
+};
+var HARM = {};
+Object.keys(HARM_RAW).forEach(function(a){HARM[a]=HARM[a]||{};HARM_RAW[a].forEach(function(b){HARM[a][b]=1;HARM[b]=HARM[b]||{};HARM[b][a]=1;});});
+function harm(a,b){return a===b||(HARM[a]&&HARM[a][b]);}
+function isNeutral(c){return !!(PAL[c]&&PAL[c].n);}
+
+var SEASONS = {
+  spring:{l:'Spring',d:'Hangat dan cerah. Warna segar seperti peach, mustard, dan mint membuat wajahmu bersinar.',c:['cream','beige','peach','mustard','mint','birumuda','terracotta','merah']},
+  summer:{l:'Summer',d:'Dingin dan lembut. Warna kalem seperti dusty pink, lilac, dan abu-abu membuat wajahmu terlihat halus.',c:['putih','abumuda','abutua','dustypink','lilac','birumuda','navy','sage','mint']},
+  autumn:{l:'Autumn',d:'Hangat dan lembut. Warna bumi seperti mocca, wine, olive, dan terracotta membuat wajahmu hangat.',c:['cream','beige','mocca','cokelat','wine','terracotta','mustard','olive','sage','peach']},
+  winter:{l:'Winter',d:'Dingin dan tegas. Warna kontras seperti hitam, putih, navy, dan fuchsia membuat wajahmu tajam.',c:['putih','hitam','navy','abutua','fuchsia','wine','merah','birumuda']}
+};
+
+var CATS = [
+  {k:'hijab',l:'Hijab'},{k:'atasan',l:'Atasan'},{k:'bawahan',l:'Bawahan'},{k:'gamis',l:'Gamis/dress'},
+  {k:'outer',l:'Outer'},{k:'sepatu',l:'Sepatu'},{k:'tas',l:'Tas'}
+];
+var CATL = {}; CATS.forEach(function(c){CATL[c.k]=c.l;});
+var STYLEL = {kerja:'Kerja',santai:'Santai',formal:'Formal/acara'};
+
+var PRESETS = [
+  {name:"80's",looks:[
+    {name:'Power office',desc:'Outer berbahu tegas dengan warna berani, bawahan polos.',colors:['wine','merah','navy','hitam','putih','fuchsia'],motif:'hindari',outer:true},
+    {name:'Color block',desc:'Dua sampai tiga warna terang yang sengaja bertabrakan.',colors:['fuchsia','birumuda','mustard','mint','merah','terracotta','navy'],motif:'hindari',maxAccent:3},
+    {name:'Retro kasual',desc:'Motif garis atau geometris dengan warna pastel cerah.',colors:['peach','mint','lilac','birumuda','mustard','putih'],motif:'wajib'}
+  ]},
+  {name:'Monokrom',looks:[
+    {name:'Hitam putih klasik',desc:'Kontras tegas hitam dan putih, rapi untuk kerja.',colors:['hitam','putih'],motif:'boleh'},
+    {name:'Abu bertingkat',desc:'Gradasi abu muda ke abu tua, kalem dan modern.',colors:['abumuda','abutua','putih','hitam'],motif:'hindari'},
+    {name:'Netral senada',desc:'Cream, beige, dan putih dalam satu nada lembut.',colors:['cream','beige','putih'],motif:'hindari'}
+  ]},
+  {name:'Pastel',looks:[
+    {name:'Pastel lembut',desc:'Dusty pink, lilac, dan mint dengan dasar putih.',colors:['dustypink','lilac','mint','birumuda','putih','cream'],motif:'boleh'},
+    {name:'Pastel senada',desc:'Satu warna pastel dipadukan nuansa cream.',colors:['dustypink','cream','beige','putih'],motif:'hindari'},
+    {name:'Pastel segar',desc:'Mint, peach, dan biru muda untuk suasana ceria.',colors:['mint','peach','birumuda','putih'],motif:'boleh'}
+  ]},
+  {name:'Earth tone',looks:[
+    {name:'Kopi susu',desc:'Mocca, cream, dan cokelat yang hangat.',colors:['mocca','cream','beige','cokelat','putih'],motif:'boleh'},
+    {name:'Hutan',desc:'Olive dan sage dengan dasar cokelat atau cream.',colors:['olive','sage','cokelat','cream','beige'],motif:'boleh'},
+    {name:'Senja',desc:'Terracotta dan mustard dengan dasar netral hangat.',colors:['terracotta','mustard','cokelat','cream','beige'],motif:'boleh'}
+  ]},
+  {name:'Etnik/batik',looks:[
+    {name:'Batik formal',desc:'Satu item batik dengan warna gelap yang anggun.',colors:['cokelat','mocca','hitam','cream','navy','wine'],motif:'wajib'},
+    {name:'Tenun ceria',desc:'Motif etnik bernuansa terracotta dan mustard.',colors:['terracotta','mustard','olive','cream','beige'],motif:'wajib'},
+    {name:'Batik modern',desc:'Motif biru putih yang segar dan bersih.',colors:['navy','putih','birumuda','abumuda'],motif:'wajib'}
+  ]},
+  {name:'Merah putih',looks:[
+    {name:'Merah putih klasik',desc:'Merah dan putih seperti bendera, tegas dan meriah.',colors:['merah','putih'],motif:'boleh'},
+    {name:'Aksen merah',desc:'Dasar netral dengan satu item merah sebagai sorotan.',colors:['merah','putih','cream','hitam','abumuda'],motif:'hindari'},
+    {name:'Merah lembut',desc:'Wine dan cream untuk nuansa merah putih yang kalem.',colors:['wine','cream','putih','beige'],motif:'boleh'}
+  ]}
+];
+
+// ---------- Storage ----------
+function load(key, def){try{var v=localStorage.getItem('kurasi.'+key);return v?JSON.parse(v):def;}catch(e){return def;}}
+function save(key, val){try{localStorage.setItem('kurasi.'+key, JSON.stringify(val));}catch(e){}}
+var state = {
+  items: load('items', []),
+  history: load('history', []),
+  season: load('season', null),
+  look: load('look', null),
+  aiThemes: load('aiThemes', []),
+  worker: load('worker', DEFAULT_WORKER) || DEFAULT_WORKER
+};
+var ranked = [], rankIdx = 0;
+
+// ---------- Helpers ----------
+var $ = function(s,r){return (r||document).querySelector(s);};
+var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function daysSince(ts){return ts?(Date.now()-ts)/86400000:Infinity;}
+function restLeft(it){var d=daysSince(it.lastWorn);return d<REST_DAYS?Math.ceil(REST_DAYS-d):0;}
+function colorLabel(c){return PAL[c]?PAL[c].l:c;}
+function dot(c){return '<i class="dot" style="background:'+(PAL[c]?PAL[c].h:'#ccc')+'" aria-hidden="true"></i>';}
+var toastTimer;
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show');},2800);}
+function byCat(cat){return state.items.filter(function(i){return i.cat===cat;});}
+
+// ---------- Tabs ----------
+function showTab(name){
+  $$('nav.tabs button').forEach(function(b){if(b.dataset.tab===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+  $$('main > section').forEach(function(s){s.classList.toggle('hidden', s.id!=='tab-'+name);});
+  if(name==='outfit')renderOutfitPage();
+  if(name==='lemari')renderWardrobe();
+  if(name==='tema')renderThemes();
+  if(name==='warna')renderSeason();
+  if(name==='riwayat')renderHistory();
+  window.scrollTo(0,0);
+}
+$$('nav.tabs button').forEach(function(b){b.addEventListener('click',function(){showTab(b.dataset.tab);});});
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-go]'); if(!g)return;
+  showTab(g.dataset.go);
+  if(g.hasAttribute('data-open-form'))openForm();
+});
+
+// ---------- Sample wardrobe ----------
+var SAMPLE = [
+  ['hijab','Pashmina','cream',0],['hijab','Segi empat','dustypink',0],['hijab','Pashmina','mocca',0],['hijab','Segi empat','hitam',0],
+  ['hijab','Voal','sage',0],['hijab','Segi empat motif','navy',1],['hijab','Pashmina','abumuda',0],['hijab','Instan','wine',0],
+  ['atasan','Blouse','wine',0],['atasan','Kemeja','putih',0],['atasan','Tunik','sage',0],['atasan','Blouse bunga','cream',1],
+  ['atasan','Kemeja garis','birumuda',1],['atasan','Knit','mustard',0],['atasan','Kemeja','navy',0],
+  ['bawahan','Kulot','hitam',0],['bawahan','Rok plisket','cream',0],['bawahan','Celana bahan','abutua',0],['bawahan','Jeans','navy',0],['bawahan','Rok','mocca',0],
+  ['gamis','Gamis','mocca',0],['gamis','Dress batik','cokelat',1],['gamis','Gamis','dustypink',0],
+  ['outer','Cardigan','abumuda',0],['outer','Blazer','navy',0],['outer','Outer','cream',0],
+  ['sepatu','Flat shoes','hitam',0],['sepatu','Sneakers','putih',0],['sepatu','Loafers','cokelat',0],
+  ['tas','Tote bag','cokelat',0],['tas','Sling bag','hitam',0]
+];
+function fillSample(){
+  if(state.items.length && !confirm('Lemari contoh akan ditambahkan ke isi lemarimu. Lanjutkan?'))return;
+  SAMPLE.forEach(function(s){state.items.push({id:uid(),cat:s[0],name:s[1],color:s[2],motif:!!s[3],styles:['kerja','santai','formal'],lastWorn:null});});
+  save('items',state.items);
+  toast('Lemari contoh ditambahkan: '+SAMPLE.length+' item.');
+  renderWardrobe(); renderOutfitPage();
+}
+$('#btn-sample-1').addEventListener('click',function(){fillSample();renderOutfitPage();});
+$('#btn-sample-2').addEventListener('click',fillSample);
+
+// ---------- Wardrobe form ----------
+(function buildForm(){
+  $('#f-cats').innerHTML = CATS.map(function(c,i){return '<label class="chip"><input type="radio" name="f-cat" value="'+c.k+'"'+(i===0?' checked':'')+'><span>'+c.l+'</span></label>';}).join('');
+  $('#f-colors').innerHTML = PALETTE.map(function(p){return '<label class="pal"><input type="radio" name="f-color" value="'+p.k+'"><span><i style="background:'+p.h+'"></i>'+p.l+'</span></label>';}).join('');
+})();
+function openForm(item){
+  var f=$('#item-form'); f.classList.remove('hidden'); $('#form-error').textContent='';
+  $('#form-title').textContent = item?'Ubah item':'Item baru';
+  $('#f-save').textContent = item?'Simpan perubahan':'Simpan item';
+  $('#f-id').value = item?item.id:'';
+  $('#f-name').value = item?item.name:'';
+  $$('input[name=f-cat]').forEach(function(r){r.checked = item?r.value===item.cat:r.value==='hijab';});
+  $$('input[name=f-color]').forEach(function(r){r.checked = item?r.value===item.color:false;});
+  $('#f-motif').checked = item?!!item.motif:false;
+  $$('input[name=f-style]').forEach(function(c){c.checked = item?item.styles.indexOf(c.value)>-1:true;});
+  f.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(function(){$('#f-name').focus({preventScroll:true});},250);
+}
+$('#btn-add').addEventListener('click',function(){openForm();});
+$('#f-cancel').addEventListener('click',function(){$('#item-form').classList.add('hidden');});
+$('#item-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var name=$('#f-name').value.trim();
+  var cat=($('input[name=f-cat]:checked')||{}).value;
+  var color=($('input[name=f-color]:checked')||{}).value;
+  var styles=$$('input[name=f-style]:checked').map(function(c){return c.value;});
+  if(!name){$('#form-error').textContent='Isi nama item dulu, misalnya "pashmina" atau "kulot".';$('#f-name').focus();return;}
+  if(!color){$('#form-error').textContent='Pilih warna item dari palet.';return;}
+  if(!styles.length)styles=['kerja','santai','formal'];
+  var id=$('#f-id').value;
+  if(id){
+    var it=state.items.find(function(i){return i.id===id;});
+    if(it){it.name=name;it.cat=cat;it.color=color;it.motif=$('#f-motif').checked;it.styles=styles;}
+    toast('Perubahan disimpan.');
+    $('#item-form').classList.add('hidden');
+  } else {
+    state.items.push({id:uid(),cat:cat,name:name,color:color,motif:$('#f-motif').checked,styles:styles,lastWorn:null});
+    toast(CATL[cat]+' '+name.toLowerCase()+' '+colorLabel(color).toLowerCase()+' disimpan.');
+    $('#f-name').value=''; $$('input[name=f-color]').forEach(function(r){r.checked=false;}); $('#f-motif').checked=false; $('#f-name').focus();
+  }
+  save('items',state.items);
+  renderWardrobe();
+});
+
+function itemSw(it){return '<span class="sw'+(it.motif?' motif':'')+'" style="background:'+PAL[it.color].h+'" aria-hidden="true"></span>';}
+function renderWardrobe(){
+  var n=state.items.length;
+  $('#lemari-count').textContent = n? n+' item di lemarimu. Ketuk "Padukan" untuk mendapat outfit dari item itu.' : 'Mulai dengan 10-20 item yang paling sering kamu pakai. Tidak perlu semuanya sekaligus.';
+  $('#btn-sample-2').classList.toggle('hidden', n>0);
+  var w=$('#wardrobe');
+  if(!n){w.innerHTML='<div class="panel empty"><h2>Belum ada item</h2><p class="muted">Tambahkan hijab, atasan, dan bawahan dulu supaya Kurasi bisa mulai memadukan.</p></div>';$('#wardrobe-foot').innerHTML='';return;}
+  w.innerHTML = CATS.map(function(c){
+    var list=byCat(c.k); if(!list.length)return '';
+    return '<div class="group"><h3>'+c.l+' <span class="small muted">'+list.length+'</span></h3><ul class="items">'+list.map(function(it){
+      var r=restLeft(it);
+      return '<li>'+itemSw(it)+'<div class="info"><b>'+esc(it.name)+'</b><span class="meta">'+colorLabel(it.color)+(it.motif?' <span class="tag">Bermotif</span>':'')+(r?' <span class="tag rest">Istirahat '+r+' hari lagi</span>':'')+'</span></div>'+
+      '<div class="acts"><button class="linkbtn" data-act="pair" data-id="'+it.id+'">Padukan</button><button class="linkbtn" data-act="edit" data-id="'+it.id+'">Ubah</button><button class="linkbtn danger" data-act="del" data-id="'+it.id+'">Hapus</button></div></li>';
+    }).join('')+'</ul></div>';
+  }).join('');
+  $('#wardrobe-foot').innerHTML='<button class="linkbtn danger" id="btn-clear-all">Kosongkan lemari</button>';
+}
+$('#wardrobe').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-act]'); if(!b)return;
+  var it=state.items.find(function(i){return i.id===b.dataset.id;}); if(!it)return;
+  if(b.dataset.act==='edit')openForm(it);
+  if(b.dataset.act==='del'){if(confirm('Hapus '+it.name+' '+colorLabel(it.color).toLowerCase()+' dari lemari?')){state.items=state.items.filter(function(i){return i.id!==it.id;});save('items',state.items);renderWardrobe();toast('Item dihapus.');}}
+  if(b.dataset.act==='pair'){showTab('outfit');$('#lock').value=it.id;kurasi();}
+});
+$('#wardrobe-foot').addEventListener('click',function(e){
+  if(e.target.id!=='btn-clear-all')return;
+  if(confirm('Semua item di lemari akan dihapus. Lanjutkan?')){state.items=[];save('items',state.items);renderWardrobe();toast('Lemari dikosongkan.');}
+});
+
+// ---------- Outfit engine ----------
+function styleOk(it,style){return !style||!it.styles||!it.styles.length||it.styles.indexOf(style)>-1;}
+function scoreMain(combo,o){
+  var pieces=[combo.hijab,combo.atasan,combo.bawahan,combo.gamis].filter(Boolean);
+  var colors=pieces.map(function(p){return p.color;});
+  var accents=colors.filter(function(c){return !isNeutral(c);}).filter(function(c,i,a){return a.indexOf(c)===i;});
+  var motifs=pieces.filter(function(p){return p.motif;}).length;
+  var s=0, why=[];
+  var look=o.look;
+  if(look){
+    var maxA=look.maxAccent||2;
+    if(accents.length>maxA)return null;
+    if(look.motif==='hindari'&&motifs>0)return null;
+    if(look.motif!=='bebas'&&motifs>1)return null;
+    var inLook=0;
+    pieces.forEach(function(p){ if(look.colors.indexOf(p.color)>-1){s+=3;inLook++;} else if(isNeutral(p.color)){s-=1;} else {s-=6;} });
+    if(look.motif==='wajib'){ if(motifs){s+=4;} else {s-=6;} }
+    var lookAcc=look.colors.filter(function(c){return !isNeutral(c);});
+    if(lookAcc.length&&accents.some(function(c){return lookAcc.indexOf(c)>-1;}))s+=3;
+    if(inLook===pieces.length)why.push('Semua warna sesuai look '+look.name+'.');
+    else if(inLook)why.push(inLook+' dari '+pieces.length+' item sesuai warna look '+look.name+'.');
+    if(look.motif==='wajib'&&!motifs)why.push('Look ini butuh satu item bermotif, tapi belum ada yang cocok di lemari.');
+  } else {
+    if(accents.length>2)return null;
+    if(motifs>1)return null;
+    if(accents.length===2){ if(!harm(accents[0],accents[1]))return null; s+=2; why.push(colorLabel(accents[0])+' dan '+colorLabel(accents[1]).toLowerCase()+' saling melengkapi.'); }
+    else if(accents.length===1){ s+=3; why.push(colorLabel(accents[0])+' jadi sorotan, sisanya netral agar tidak ramai.'); }
+    else { s+=1; why.push('Semua netral, aman dan rapi.'); }
+  }
+  if(motifs===1)why.push('Satu item bermotif dipadukan dengan yang polos.');
+  var others=pieces.filter(function(p){return p!==combo.hijab;});
+  if(others.some(function(p){return p.color===combo.hijab.color;})){s+=1;why.push('Hijab senada dengan '+(others.find(function(p){return p.color===combo.hijab.color;}).cat==='bawahan'?'bawahan':'atasan')+'.');}
+  if(state.season&&SEASONS[state.season]){
+    var sc=SEASONS[state.season].c, top=combo.atasan||combo.gamis;
+    if(sc.indexOf(combo.hijab.color)>-1){s+=3;why.push('Hijab '+colorLabel(combo.hijab.color).toLowerCase()+' cocok untuk personal color '+SEASONS[state.season].l+'.');}
+    else if(!isNeutral(combo.hijab.color))s-=1;
+    if(sc.indexOf(top.color)>-1)s+=2;
+  }
+  pieces.forEach(function(p){ if(!styleOk(p,o.style))s-=3; if(restLeft(p)){s-=8;} });
+  var rested=pieces.filter(restLeft);
+  if(rested.length)why.push('Catatan: '+rested.map(function(p){return p.name.toLowerCase()+' '+colorLabel(p.color).toLowerCase();}).join(', ')+' baru dipakai minggu ini.');
+  s+=Math.random()*0.8;
+  return {s:s,why:why};
+}
+function pickExtra(cat,combo,o,lockItem){
+  if(lockItem&&lockItem.cat===cat)return lockItem;
+  var list=byCat(cat); if(!list.length)return null;
+  var cols=[combo.hijab,combo.atasan,combo.bawahan,combo.gamis].filter(Boolean).map(function(p){return p.color;});
+  var acc=cols.filter(function(c){return !isNeutral(c);});
+  var best=null,bs=-1e9;
+  list.forEach(function(it){
+    var s=0;
+    if(isNeutral(it.color))s+=2;
+    if(cols.indexOf(it.color)>-1)s+=1;
+    if(acc.some(function(a){return harm(a,it.color);}))s+=1;
+    if(!isNeutral(it.color)&&!acc.some(function(a){return harm(a,it.color);}))s-=3;
+    if(o.look){ if(o.look.colors.indexOf(it.color)>-1)s+=3; else if(!isNeutral(it.color))s-=4; if(o.look.motif==='hindari'&&it.motif)s-=5; }
+    if(it.motif&&cols.length&&[combo.hijab,combo.atasan,combo.bawahan,combo.gamis].some(function(p){return p&&p.motif;}))s-=4;
+    if(!styleOk(it,o.style))s-=3;
+    if(cat==='outer'&&restLeft(it))s-=2;
+    s+=Math.random()*0.6;
+    if(s>bs){bs=s;best=it;}
+  });
+  return best;
+}
+function generate(o){
+  var hijabs=byCat('hijab'), tops=byCat('atasan'), bottoms=byCat('bawahan'), gamis=byCat('gamis');
+  var lock=o.lockId?state.items.find(function(i){return i.id===o.lockId;}):null;
+  var main=['hijab','atasan','bawahan','gamis'];
+  var combos=[];
+  hijabs.forEach(function(h){
+    tops.forEach(function(a){bottoms.forEach(function(b){combos.push({hijab:h,atasan:a,bawahan:b});});});
+    gamis.forEach(function(g){combos.push({hijab:h,gamis:g});});
+  });
+  if(lock&&main.indexOf(lock.cat)>-1)combos=combos.filter(function(c){return c[lock.cat]===lock;});
+  var out=[];
+  combos.forEach(function(c){
+    var r=scoreMain(c,o); if(!r)return;
+    var withOuter=o.outer||(o.look&&o.look.outer)||(lock&&lock.cat==='outer');
+    if(withOuter){c.outer=pickExtra('outer',c,o,lock);}
+    if(o.acc||(lock&&(lock.cat==='sepatu'||lock.cat==='tas'))){c.sepatu=(o.acc||lock.cat==='sepatu')?pickExtra('sepatu',c,o,lock):null;c.tas=(o.acc||lock.cat==='tas')?pickExtra('tas',c,o,lock):null;}
+    c.score=r.s; c.why=r.why; out.push(c);
+  });
+  out.sort(function(a,b){return b.score-a.score;});
+  // remove near-duplicates in consecutive order: prefer variety
+  var seen={}, varied=[], rest=[];
+  out.forEach(function(c){var k=c.hijab.id+'|'+(c.atasan||c.gamis).id;if(!seen[k]){seen[k]=1;varied.push(c);}else rest.push(c);});
+  return varied.concat(rest).slice(0,60);
+}
+function missingMsg(lock){
+  var h=byCat('hijab').length, a=byCat('atasan').length, b=byCat('bawahan').length, g=byCat('gamis').length;
+  if(!h)return 'Belum ada hijab di lemari. Tambahkan minimal satu hijab.';
+  if(!g&&(!a||!b))return 'Tambahkan minimal satu atasan dan satu bawahan, atau satu gamis/dress.';
+  if(state.look)return 'Belum ada kombinasi yang cocok dengan look '+state.look.name+'. Coba look lain, atau tambahkan item berwarna '+state.look.colors.slice(0,3).map(colorLabel).join(', ').toLowerCase()+'.';
+  if(lock)return 'Belum ada padanan yang serasi untuk '+lock.name.toLowerCase()+' '+colorLabel(lock.color).toLowerCase()+'. Coba tambahkan hijab atau bawahan berwarna netral seperti cream, hitam, atau abu.';
+  return 'Belum ada kombinasi yang serasi. Tambahkan beberapa item berwarna netral seperti cream, hitam, atau abu.';
+}
+function currentOpts(){
+  return {lockId:$('#lock').value||null, style:($('input[name=style]:checked')||{}).value||'', outer:$('#opt-outer').checked, acc:$('#opt-acc').checked, look:state.look};
+}
+function kurasi(){
+  var o=currentOpts();
+  ranked=generate(o); rankIdx=0;
+  var lock=o.lockId?state.items.find(function(i){return i.id===o.lockId;}):null;
+  if(!ranked.length){ $('#result').classList.remove('hidden'); $('#result').innerHTML='<h2>Belum ketemu padanannya</h2><p class="muted">'+esc(missingMsg(lock))+'</p><button class="btn ghost" data-go="lemari">Buka lemari</button>'; return; }
+  renderResult();
+}
+$('#btn-kurasi').addEventListener('click',kurasi);
+
+function piece(cls,it){ if(!it)return ''; return '<span class="sw '+cls+(it.motif?' motif':'')+'" style="background:'+PAL[it.color].h+'" title="'+esc(it.name)+'"></span>'; }
+function renderResult(){
+  var c=ranked[rankIdx], r=$('#result'); r.classList.remove('hidden');
+  var outerStyle=c.outer?';border-color:'+PAL[c.outer.color].h:'';
+  var topCls=c.gamis?'f-gamis':'f-top';
+  var top=c.gamis||c.atasan;
+  var fig='<div class="figure" aria-hidden="true">'+piece('f-hijab',c.hijab)+
+    '<span class="sw '+topCls+(c.outer?' f-outer':'')+(top.motif?' motif':'')+'" style="background:'+PAL[top.color].h+outerStyle+'"></span>'+
+    (c.bawahan?piece('f-bottom',c.bawahan):'')+
+    (c.sepatu?'<span class="f-shoes">'+piece('',c.sepatu)+piece('',c.sepatu)+'</span>':'')+
+    (c.tas?'<span class="sw f-bag" style="background:'+PAL[c.tas.color].h+';color:'+PAL[c.tas.color].h+'"></span>':'')+
+  '</div>';
+  var rows=[['hijab',c.hijab],['outer',c.outer],['atasan',c.atasan],['gamis',c.gamis],['bawahan',c.bawahan],['sepatu',c.sepatu],['tas',c.tas]].filter(function(x){return x[1];});
+  var sc=state.season&&SEASONS[state.season]?SEASONS[state.season].c:null;
+  var list='<ul class="pieces">'+rows.map(function(x){var it=x[1];var fit=sc&&(x[0]==='hijab'||x[0]==='atasan'||x[0]==='gamis')&&sc.indexOf(it.color)>-1;
+    return '<li>'+dot(it.color)+'<span><span class="cat">'+CATL[x[0]]+'</span><span class="nm">'+esc(it.name)+' '+colorLabel(it.color).toLowerCase()+'</span>'+(fit?'<span class="tag brass">Cocok untukmu</span>':'')+'</span></li>';}).join('')+'</ul>';
+  r.innerHTML='<div class="ensemble reveal">'+fig+list+'</div>'+
+    '<div class="reasons"><b class="small">Kenapa serasi</b><ul>'+c.why.slice(0,4).map(function(w){return '<li>'+esc(w)+'</li>';}).join('')+'</ul></div>'+
+    '<div class="row" style="margin-top:14px"><button class="btn" id="btn-wear">Pakai outfit ini</button><button class="btn ghost" id="btn-next">Ganti outfit</button></div>'+
+    '<p class="small muted" style="margin:10px 0 0">Pilihan '+(rankIdx+1)+' dari '+ranked.length+(state.season?'':'. Atur personal color di menu Warna agar saran lebih personal.')+'</p>';
+  $('#btn-next').addEventListener('click',function(){ rankIdx++; if(rankIdx>=ranked.length){rankIdx=0;toast('Sudah semua kombinasi, kembali ke pilihan pertama.');} renderResult(); });
+  $('#btn-wear').addEventListener('click',function(){ wear(c); });
+}
+function wear(c){
+  var now=Date.now();
+  var its=[c.hijab,c.outer,c.atasan,c.gamis,c.bawahan,c.sepatu,c.tas].filter(Boolean);
+  its.forEach(function(it){ if(it.cat!=='sepatu'&&it.cat!=='tas')it.lastWorn=now; });
+  state.history.unshift({id:uid(),t:now,look:state.look?state.look.name:null,items:its.map(function(it){return {id:it.id,cat:it.cat,name:it.name,color:it.color};})});
+  save('items',state.items); save('history',state.history);
+  toast('Outfit dicatat. Item ini istirahat '+REST_DAYS+' hari.');
+  $('#btn-wear').disabled=true; $('#btn-wear').textContent='Sudah dicatat';
+}
+
+function renderOutfitPage(){
+  var d=new Date();
+  $('#today').textContent=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long'});
+  var empty=!state.items.length;
+  $('#outfit-empty').classList.toggle('hidden',!empty);
+  $('#outfit-main').classList.toggle('hidden',empty);
+  var sel=$('#lock'), cur=sel.value;
+  sel.innerHTML='<option value="">Bebas, Kurasi yang pilih</option>'+CATS.map(function(c){var l=byCat(c.k);if(!l.length)return '';return '<optgroup label="'+c.l+'">'+l.map(function(it){return '<option value="'+it.id+'">'+esc(it.name)+' '+colorLabel(it.color).toLowerCase()+(it.motif?' (motif)':'')+'</option>';}).join('')+'</optgroup>';}).join('');
+  if(cur&&state.items.some(function(i){return i.id===cur;}))sel.value=cur;
+  var lb=$('#lookbar');
+  if(state.look){lb.classList.remove('hidden');$('#lookbar-text').innerHTML='Mengikuti tema <b>'+esc(state.look.theme)+'</b>, look <b>'+esc(state.look.name)+'</b>';}
+  else lb.classList.add('hidden');
+}
+$('#btn-clear-look').addEventListener('click',function(){state.look=null;save('look',null);renderOutfitPage();if(!$('#result').classList.contains('hidden'))kurasi();});
+
+// ---------- Themes ----------
+function lookBtn(theme,lk,idx,src){
+  var active=state.look&&state.look.theme===theme&&state.look.name===lk.name;
+  var mot={wajib:'Wajib satu item bermotif',hindari:'Tanpa motif',boleh:'Motif boleh'}[lk.motif]||'';
+  return '<button class="look" type="button" data-src="'+src+'" data-theme="'+esc(theme)+'" data-idx="'+idx+'" aria-pressed="'+(active?'true':'false')+'"><b>'+esc(lk.name)+'</b><span class="dots">'+lk.colors.map(dot).join('')+'</span><span class="d">'+esc(lk.desc)+(mot?' '+mot+'.':'')+'</span></button>';
+}
+function renderThemes(){
+  $('#preset-themes').innerHTML='<h2>Tema siap pakai</h2>'+PRESETS.map(function(t){return '<div class="theme"><h3>'+esc(t.name)+'</h3><div class="looks">'+t.looks.map(function(lk,i){return lookBtn(t.name,lk,i,'preset');}).join('')+'</div></div>';}).join('');
+  var mt=$('#my-themes');
+  if(state.aiThemes.length){
+    mt.innerHTML='<div class="panel"><h2>Tema buatanmu</h2>'+state.aiThemes.map(function(t,ti){return '<div class="theme"><h3 style="display:flex;justify-content:space-between;gap:8px">'+esc(t.name)+' <button class="linkbtn danger" data-del-theme="'+ti+'">Hapus</button></h3><div class="looks">'+t.looks.map(function(lk,i){return lookBtn(t.name,lk,i,'ai');}).join('')+'</div></div>';}).join('')+'</div>';
+  } else mt.innerHTML='';
+  $('#worker-url').value=state.worker||'';
+  if(!state.worker){$('#ai-status').innerHTML='<span class="muted">Fitur AI belum disambungkan. Tema siap pakai tetap bisa dipakai.</span>';}
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.look'); if(!b)return;
+  var theme=b.dataset.theme, idx=+b.dataset.idx, lk;
+  if(b.dataset.src==='preset')lk=PRESETS.find(function(t){return t.name===theme;}).looks[idx];
+  else lk=state.aiThemes.find(function(t){return t.name===theme;}).looks[idx];
+  state.look=Object.assign({theme:theme},lk); save('look',state.look);
+  showTab('outfit'); kurasi();
+});
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-del-theme]'); if(!b)return;
+  var t=state.aiThemes[+b.dataset.delTheme]; if(!t)return;
+  if(confirm('Hapus tema '+t.name+'?')){state.aiThemes.splice(+b.dataset.delTheme,1);save('aiThemes',state.aiThemes);renderThemes();}
+});
+$('#worker-save').addEventListener('click',function(){
+  var v=$('#worker-url').value.trim().replace(/\/+$/,'');
+  if(v&&!/^https:\/\//.test(v)){toast('Alamat harus diawali https://');return;}
+  state.worker=v; save('worker',v); toast(v?'Alamat AI disimpan.':'Alamat AI dihapus.'); renderThemes(); $('#ai-status').textContent='';
+});
+function sanitizeLooks(data){
+  var looks=(data&&data.looks)||[];
+  return looks.map(function(l){
+    var colors=(l.colors||[]).map(function(c){return String(c).toLowerCase().replace(/[\s_-]/g,'');}).filter(function(c){return PAL[c];}).filter(function(c,i,a){return a.indexOf(c)===i;});
+    var motif=['boleh','hindari','wajib'].indexOf(l.motif)>-1?l.motif:'boleh';
+    return {name:String(l.name||'Look').slice(0,40),desc:String(l.desc||'').slice(0,160),colors:colors,motif:motif,outer:!!l.outer,maxAccent:Math.min(Math.max(parseInt(l.maxAccent,10)||2,1),3)};
+  }).filter(function(l){return l.colors.length>=2;}).slice(0,3);
+}
+$('#ai-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var theme=$('#ai-theme').value.trim(), st=$('#ai-status'), btn=$('#ai-btn');
+  if(!theme){st.textContent='Ketik nama tema dulu, misalnya "Hawaiian".';return;}
+  var cached=state.aiThemes.find(function(t){return t.name.toLowerCase()===theme.toLowerCase();});
+  if(cached){st.textContent='Tema '+cached.name+' sudah ada di "Tema buatanmu".';$('#my-themes').scrollIntoView({behavior:'smooth'});return;}
+  if(!state.worker){st.innerHTML='Fitur AI belum disambungkan. Isi alamat Worker di Pengaturan AI, atau pakai tema siap pakai.';$('#ai-settings').open=true;return;}
+  btn.disabled=true; st.innerHTML='<span class="spin" aria-hidden="true"></span> Menyusun look untuk '+esc(theme)+'…';
+  var ctrl=('AbortController' in window)?new AbortController():null; var to=setTimeout(function(){if(ctrl)ctrl.abort();},45000);
+  fetch(state.worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:theme}),signal:ctrl?ctrl.signal:undefined})
+  .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j&&j.error||('HTTP '+r.status));return j;});})
+  .then(function(data){
+    var looks=sanitizeLooks(data);
+    if(!looks.length)throw new Error('AI tidak memberi look yang bisa dipakai');
+    state.aiThemes.unshift({name:theme,looks:looks}); save('aiThemes',state.aiThemes);
+    st.textContent=looks.length+' look untuk '+theme+' siap. Pilih salah satu di bawah.';
+    $('#ai-theme').value=''; renderThemes(); $('#my-themes').scrollIntoView({behavior:'smooth'});
+  })
+  .catch(function(err){
+    st.innerHTML='<span style="color:var(--danger)">Look belum bisa dibuat: '+esc(err.name==='AbortError'?'AI terlalu lama menjawab':err.message)+'. Coba lagi sebentar lagi, atau pakai tema siap pakai.</span>';
+  })
+  .then(function(){clearTimeout(to);btn.disabled=false;});
+});
+
+// ---------- Personal color ----------
+$('#season-chips').innerHTML=Object.keys(SEASONS).map(function(k){return '<label class="chip"><input type="radio" name="season" value="'+k+'"><span>'+SEASONS[k].l+'</span></label>';}).join('')+'<label class="chip"><input type="radio" name="season" value=""><span>Belum yakin</span></label>';
+$('#season-chips').addEventListener('change',function(e){ setSeason(e.target.value||null,'manual'); });
+function setSeason(k,src,conf){
+  state.season=k; save('season',k);
+  state.seasonInfo={src:src,conf:conf||null}; save('seasonInfo',state.seasonInfo);
+  renderSeason();
+  toast(k?'Personal color diatur: '+SEASONS[k].l+'.':'Personal color dikosongkan. Saran tetap jalan tanpa personal color.');
+}
+state.seasonInfo=load('seasonInfo',null);
+function renderSeason(){
+  var c=$('#season-card'), k=state.season;
+  $$('input[name=season]').forEach(function(r){r.checked=(r.value===(k||''));});
+  if(!k){
+    var lean=state.seasonInfo&&state.seasonInfo.lean;
+    c.innerHTML='<h2>Belum ada personal color</h2><p class="muted" style="margin:0">'+(lean?'Hasil kuis belum tegas, condong ke '+SEASONS[lean].l+'. Coba tes tempel hijab di bawah, lalu pilih sendiri.':'Isi kuis singkat atau pilih sendiri. Tanpa personal color, Kurasi tetap memadukan berdasarkan warna.')+'</p>';
+    return;
+  }
+  var s=SEASONS[k], info=state.seasonInfo||{};
+  c.innerHTML='<div class="result"><div style="flex:1;min-width:220px"><p class="small muted" style="margin:0 0 6px">'+(info.src==='kuis'?'Hasil kuis'+(info.conf?', '+info.conf:''):'Pilihanmu')+'</p><div class="season-name">'+s.l+'</div><p style="margin:10px 0 0">'+s.d+'</p><div class="swatches">'+s.c.map(function(x){return '<span title="'+colorLabel(x)+'">'+dot(x)+'</span>';}).join('')+'</div><p class="small muted" style="margin:8px 0 0">Hijab dengan warna ini diberi tanda "Cocok untukmu" saat Kurasi memadukan outfit.</p></div></div>';
+}
+$('#quiz').addEventListener('submit',function(e){
+  e.preventDefault();
+  var v=function(n){return ($('input[name='+n+']:checked')||{}).value;};
+  var a=[v('q1'),v('q2'),v('q3')], ct=v('q4');
+  var score=a.reduce(function(s,x){return s+(x==='w'?1:x==='c'?-1:0);},0);
+  var k,lean;
+  if(score>0)k=ct==='h'?'spring':'autumn';
+  else if(score<0)k=ct==='h'?'winter':'summer';
+  else {lean=ct==='h'?'winter':'autumn';}
+  var mag=Math.abs(score);
+  if(!k||mag<1){state.season=null;save('season',null);state.seasonInfo={src:'kuis',lean:lean};save('seasonInfo',state.seasonInfo);renderSeason();toast('Hasil kuis belum tegas. Coba tes tempel hijab.');$('#season-card').scrollIntoView({behavior:'smooth'});return;}
+  var conf=mag>=2?'cukup yakin':'condong, belum tegas';
+  state.season=k; save('season',k); state.seasonInfo={src:'kuis',conf:conf}; save('seasonInfo',state.seasonInfo);
+  renderSeason(); toast('Hasil kuis: '+SEASONS[k].l+' ('+conf+').');
+  $('#season-card').scrollIntoView({behavior:'smooth'});
+});
+
+// ---------- History ----------
+function recomputeWorn(){
+  state.items.forEach(function(it){it.lastWorn=null;});
+  state.history.forEach(function(h){h.items.forEach(function(x){var it=state.items.find(function(i){return i.id===x.id;});if(it&&it.cat!=='sepatu'&&it.cat!=='tas'&&(!it.lastWorn||h.t>it.lastWorn))it.lastWorn=h.t;});});
+  save('items',state.items);
+}
+function renderHistory(){
+  var el=$('#history');
+  if(!state.history.length){el.innerHTML='<div class="empty"><h2>Belum ada riwayat</h2><p class="muted">Setelah memilih outfit, ketuk "Pakai outfit ini" agar tercatat di sini.</p><button class="btn ghost" data-go="outfit">Kurasi outfit</button></div>';return;}
+  el.innerHTML='<ul class="hist">'+state.history.map(function(h){
+    var d=new Date(h.t);
+    return '<li><span class="mini">'+h.items.map(function(x){return dot(x.color);}).join('')+'</span><span class="info"><b>'+d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'})+'</b>'+(h.look?' <span class="tag brass">'+esc(h.look)+'</span>':'')+'<br><span class="muted">'+h.items.map(function(x){return esc(x.name)+' '+colorLabel(x.color).toLowerCase();}).join(', ')+'</span></span><button class="linkbtn danger" data-del-hist="'+h.id+'">Hapus</button></li>';
+  }).join('')+'</ul>';
+}
+$('#history').addEventListener('click',function(e){
+  var b=e.target.closest('[data-del-hist]'); if(!b)return;
+  state.history=state.history.filter(function(h){return h.id!==b.dataset.delHist;});
+  save('history',state.history); recomputeWorn(); renderHistory(); toast('Riwayat dihapus, item kembali bisa disarankan.');
+});
+
+// ---------- Init ----------
+renderOutfitPage();
+})();
+</script>
+</body>
+</html>
