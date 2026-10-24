@@ -1873,6 +1873,58 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   #outfit-empty .cover-full{width:100px!important;padding:6px 10px!important}
 }
 
+
+/* v32 — corrective desktop layout: stable navigation, aligned controls, balanced theme */
+@media (min-width:900px){
+  .shell{display:block!important;position:relative!important;min-height:100vh}
+  .dock{
+    position:sticky!important;top:12px!important;left:auto!important;right:auto!important;
+    transform:none!important;width:calc(100% - 64px)!important;max-width:1440px!important;
+    min-height:80px!important;box-sizing:border-box!important;
+    display:flex!important;flex-direction:row!important;align-items:center!important;
+    justify-content:flex-start!important;gap:8px!important;
+    margin:12px auto 26px!important;padding:10px 310px 10px 18px!important;
+    border-radius:9px!important;z-index:50!important;
+  }
+  .dock .brandbox{
+    display:block!important;flex:0 0 auto!important;min-width:220px!important;
+    padding:4px 18px 4px 4px!important;margin:0 8px 0 0!important;
+    border-bottom:0!important;border-right:1px solid rgba(116,65,78,.22)!important;
+  }
+  .dock .brandbox .logo{display:flex!important;align-items:center!important;gap:10px!important}
+  .dock .brandbox .logo .mark{width:42px!important;height:42px!important}
+  .dock .brandbox .logo .wm{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important}
+  .dock .brandbox .logo .wm b{font-size:23px!important;letter-spacing:.16em!important}
+  .dock .brandbox .logo .wm small{display:block!important;width:100%!important;margin:4px 0 0!important;text-align:center!important;line-height:1.35!important;letter-spacing:.1em!important;font-size:7px!important}
+  .dock .brandbox .me{display:none!important}
+  .dock>button{flex:0 0 auto!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:7px!important;padding:9px 8px!important;font-size:13px!important;white-space:nowrap!important}
+  .dock .tile{width:24px!important;height:24px!important;border-width:1px!important;border-radius:7px!important}
+  .dock .tile svg{width:16px!important;height:16px!important}
+  .topbar{
+    position:absolute!important;top:32px!important;right:max(42px,calc((100vw - 1440px)/2 + 28px))!important;
+    left:auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;margin:0!important;padding:0!important;gap:10px!important;
+    z-index:100!important;pointer-events:auto!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{display:flex!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important}
+  .topbar .top-search{width:38px!important;height:38px!important}
+  .topbar .avatar{width:40px!important;height:40px!important}
+  main{max-width:1440px!important;width:calc(100% - 64px)!important;margin:0 auto!important;padding:0 0 80px!important;box-sizing:border-box!important}
+  #outfit-empty .cover-full{width:112px!important;height:auto!important;padding:8px 12px!important;box-sizing:border-box!important;object-fit:contain!important}
+}
+@media (min-width:900px) and (max-width:1150px){
+  .dock{padding-right:255px!important;width:calc(100% - 32px)!important;gap:3px!important}
+  .dock .brandbox{min-width:190px!important;padding-right:10px!important;margin-right:2px!important}
+  .dock .brandbox .logo .wm small{font-size:6px!important;letter-spacing:.06em!important}
+  .dock>button{padding:8px 4px!important;font-size:11.5px!important;gap:4px!important}
+  .topbar{right:20px!important;top:32px!important;gap:6px!important}
+  .topbar .right{gap:6px!important}
+  .topbar .tg .tl{font-size:11px!important}
+  main{width:calc(100% - 32px)!important}
+}
+
 </style>
 </head>
 <body>
