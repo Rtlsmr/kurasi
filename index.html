@@ -1979,6 +1979,30 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   .topbar{top:52px!important;right:20px!important}
 }
 
+
+/* v35 — single authoritative desktop header rule; overrides earlier conflicting patches */
+@media (min-width:900px){
+  .shell{position:relative!important}
+  .dock{position:relative!important;top:auto!important;bottom:auto!important;transform:none!important;z-index:2!important}
+  .topbar{
+    position:absolute!important;top:72px!important;right:clamp(24px,4.5vw,72px)!important;
+    left:auto!important;bottom:auto!important;transform:translateY(-50%)!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;height:40px!important;
+    margin:0!important;padding:0!important;gap:10px!important;z-index:20!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{display:flex!important;align-items:center!important;justify-content:center!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important}
+  .topbar .top-search{width:38px!important;height:38px!important}
+  .topbar .avatar{width:40px!important;height:40px!important}
+}
+@media (min-width:900px) and (max-width:1150px){
+  .topbar{top:72px!important;right:18px!important;gap:6px!important}
+  .topbar .right{gap:6px!important}
+  .topbar .tg .tl{font-size:11px!important}
+}
+
 </style>
 </head>
 <body>
