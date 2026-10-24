@@ -2117,10 +2117,13 @@ html:root .qsearch .qbox input[type=search],html:root .qsearch .qbox input[type=
 .shop.chk{position:relative;opacity:.55;pointer-events:none}
 .shop.chk::after{content:"";display:inline-block;width:9px;height:9px;margin-left:6px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-1px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.shop.live{border-color:color-mix(in srgb,#3F7D58 45%,transparent)!important}
-.shop.live::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#3F7D58;vertical-align:1px}
-:root[data-theme="dark"] .shop.live::before{background:#8CC9A2}
-.shop.off{opacity:.45;cursor:not-allowed;text-decoration:line-through;text-decoration-thickness:1px;background:transparent!important}
+/* v42 — clickable store buttons look raised; stores without a matching product look flat and inactive */
+a.shop{box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 1px 2px rgba(40,25,30,.14),0 4px 10px rgba(40,25,30,.11);transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease}
+a.shop:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.55) inset,0 2px 4px rgba(40,25,30,.12),0 6px 14px rgba(40,25,30,.12)}
+a.shop:active{transform:translateY(0);box-shadow:0 1px 2px rgba(40,25,30,.14)}
+:root[data-theme="dark"] a.shop{box-shadow:0 1px 0 rgba(255,255,255,.07) inset,0 1px 2px rgba(0,0,0,.45),0 4px 10px rgba(0,0,0,.35)}
+:root[data-theme="dark"] a.shop:hover{box-shadow:0 1px 0 rgba(255,255,255,.09) inset,0 2px 4px rgba(0,0,0,.5),0 8px 18px rgba(0,0,0,.4)}
+.shop.off{opacity:.38;cursor:default;pointer-events:none;user-select:none;box-shadow:none!important;background:transparent!important;border-style:solid;filter:saturate(0)}
 
 </style>
 </head>
@@ -4131,7 +4134,7 @@ function renderLookPanel(){
   var intro='<div class="lp-head"><span class="lfig">'+(img?imgTag(img):'<span class="wait off"><span class="hanger">'+FORM_ICO+'</span></span>')+'</span><div><p style="margin:0 0 8px">'+esc(lk.desc||'')+(mot?' '+mot+'.':'')+'</p><span class="dots">'+lk.colors.map(dot).join('')+'</span><p class="small muted" style="margin:8px 0 0">Warna tema: '+lk.colors.map(colorLabel).join(', ').toLowerCase()+'.</p></div></div>';
   var have='<h3 style="margin-top:18px">Dari lemarimu <span class="small muted">('+its.length+' item cocok)</span></h3>'+(its.length?'<div class="closet mini-closet">'+its.map(function(it){return '<div class="card"><span class="pick" style="cursor:default"><span class="thumb">'+itemArt(it)+'</span><span class="cap"><b>'+esc(it.name)+'</b><span class="meta">'+dot(it.color)+'<span>'+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></span></span></div>';}).join('')+'</div>':'<p class="muted">Belum ada item di lemarimu yang warnanya masuk tema ini.</p>');
   var act=can?'<div class="row" style="margin-top:14px"><button class="btn" id="look-go">Padukan jadi ensemble</button><span class="small muted">'+combos.length+' kombinasi dari lemarimu</span></div>':'<div class="reasons" style="margin-top:14px">Item yang cocok belum cukup untuk satu ensemble lengkap.</div>';
-  var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Lazada, Zara, Uniqlo, dan This is April dicek otomatis: tombol bertitik hijau langsung membuka halaman produk teratas yang tersedia, tombol abu-abu berarti belum ada produk yang cocok. Shopee, Tokopedia, Zalora (termasuk H&amp;M), Stradivarius, dan Pull&amp;Bear tidak bisa dicek otomatis, jadi membuka hasil pencarian di situsnya.</p>':'';
+  var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Lazada, Zara, Uniqlo, dan This is April dicek otomatis: tombol yang aktif langsung membuka halaman produk teratas yang tersedia, tombol yang redup berarti belum ada produk yang cocok. Shopee, Tokopedia, Zalora (termasuk H&amp;M), Stradivarius, dan Pull&amp;Bear tidak bisa dicek otomatis, jadi membuka hasil pencarian di situsnya.</p>':'';
   w.innerHTML=head+'<div class="body">'+intro+have+act+rec+'</div>';
   $('#look-close').onclick=function(){closeModal('look-modal');};
   var g=$('#look-go'); if(g)g.onclick=function(){ var from=($('#tab-tema')&&!$('#tab-tema').classList.contains('hidden'))?'tema':'outfit'; state.look=Object.assign({theme:theme},lk); save('look',state.look); closeModal('look-modal'); showIntro=false; showTab('outfit'); ENS_FROM=from; kurasi(); };
