@@ -274,6 +274,8 @@ if (r.error && !b.debug) return json({ error: 'Item di foto belum bisa dikenali'
 return json(r);
 }
 
+if (b.type === 'shade') { const q = String(b.q || '').trim().slice(0, 160); if (!q) return json({ error: 'Nama shade kosong' }, 400); const res = await env.AI.run(TEXT_MODEL, { messages: [{ role: 'system', content: 'You are a professional makeup artist with deep knowledge of cosmetic brands sold in Indonesia. Given a brand, product and shade name, return the approximate swatch color of that exact shade as a hex code. If you do not know the exact shade, estimate it from the shade name and product type and lower "sure". Answer only JSON: {"hex":"#RRGGBB","name":"short color description in Indonesian","sure":0.0-1.0}.' }, { role: 'user', content: q }], max_tokens: 80, temperature: 0.1, response_format: { type: 'json_schema', json_schema: { type: 'object', properties: { hex: { type: 'string' }, name: { type: 'string' }, sure: { type: 'number' } }, required: ['hex'] } } }); const t = textOf(res); const m = t.match(/#[0-9a-fA-F]{6}/); if (!m) return json({ error: 'Warna shade belum ketemu' }, 502); let j = {}; try { j = JSON.parse(t); } catch (e) {} return json({ hex: m[0].toUpperCase(), name: String(j.name || '').slice(0, 30), sure: +j.sure || 0 }); }
+
 const theme = String(b.theme || '').trim().slice(0, 60);
 if (!theme) return json({ error: 'Nama tema kosong' }, 400);
 const who = b.gender === 'pria' ? 'pria' : (b.hijab === false ? 'wanita' : 'hijab');
@@ -283,8 +285,8 @@ if (!r.looks.length) return json({ error: 'AI tidak memberi look yang bisa dipak
 return json({ theme, who, looks: r.looks });
 } catch (e) {
 const msg = String(e && e.message || e);
-if (/limit|quota|4006|neuron/i.test(msg)) return json({ error: 'Jatah AI gratis hari ini habis' }, 429);
-return json({ error: 'AI sedang tidak bisa dihubungi' }, 502);
+if (/limit|quota|4006|neuron/i.test(msg)) return json({ error: 'Jatah AI gratis hari ini habis', raw: b.debug ? msg.slice(0, 300) : undefined }, 429);
+return json({ error: 'AI sedang tidak bisa dihubungi', raw: b.debug ? msg.slice(0, 300) : undefined }, 502);
 }
 },
 };
