@@ -1621,6 +1621,47 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   :root:not([data-theme="dark"]) *, :root:not([data-theme="dark"]) *::before,:root:not([data-theme="dark"]) *::after{transition:none!important;animation:none!important}
 }
 
+
+/* v25 — desktop editorial refinement; presentation-only */
+@media (min-width:900px){
+  main{max-width:1380px!important;padding:26px clamp(30px,4.5vw,72px) 88px!important}
+  .topbar{max-width:1380px;margin:0 auto 28px!important;padding:12px 18px!important;gap:24px}
+  .topbar .logo{flex-shrink:0}
+  .topbar .right{gap:10px}
+  #outfit-empty.cover{border-radius:8px!important;overflow:hidden}
+  #outfit-empty.cover>.bar{display:none}
+  #outfit-empty.cover>.body{
+    display:grid!important;grid-template-columns:minmax(310px,.78fr) minmax(0,1.22fr);
+    grid-template-rows:auto auto auto auto auto 1fr;column-gap:clamp(34px,4vw,64px);
+    align-items:start;padding:clamp(28px,3vw,44px)!important
+  }
+  #outfit-empty .body>*{grid-column:1;min-width:0}
+  #outfit-empty .cover-logo{margin:0 0 14px!important}
+  #outfit-empty .cover-full{width:82px!important;border-radius:6px!important;box-shadow:none!important}
+  #outfit-empty .issue{font:600 10px/1.5 var(--body)!important;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px!important}
+  #outfit-empty h1{font-size:clamp(44px,4.2vw,64px)!important;line-height:.98!important;max-width:8.5ch!important;margin:0 0 18px!important;letter-spacing:-.035em}
+  #outfit-empty .sub{max-width:38ch;font-size:16px;line-height:1.8;margin-bottom:18px}
+  #outfit-empty .who{margin:16px 0 20px}
+  #outfit-empty .runway{grid-column:2!important;grid-row:1 / -1!important;align-self:center;width:100%;max-width:none;margin:0!important;gap:clamp(12px,1.8vw,24px)}
+  #outfit-empty .runway figure{min-width:0}
+  #outfit-empty .arch{border:1px solid rgba(116,65,78,.18)!important;background:linear-gradient(180deg,#F1E6DC,#E9D9CE)!important;border-radius:100px 100px 5px 5px!important}
+  #outfit-empty .runway figcaption{font:600 10px/1.4 var(--body)!important;letter-spacing:.16em;color:#806C62;margin-top:12px}
+  #outfit-empty .how{gap:14px;margin:4px 0 22px}
+  #outfit-empty .how li{grid-template-columns:36px minmax(0,1fr);gap:12px}
+  #outfit-empty .how li:before{width:34px;height:34px;border:1px solid rgba(116,65,78,.28);border-radius:50%;background:#FBF7F2;color:#74414E;font-size:15px}
+  #outfit-empty .how b{font-family:var(--body)!important;font-size:13px;font-weight:600;letter-spacing:.01em;margin-bottom:3px}
+  #outfit-empty .how .d{font-size:14px;line-height:1.65}
+  #outfit-empty #cover-new,#outfit-empty #cover-back{gap:10px;align-items:center}
+}
+@media (min-width:900px) and (max-width:1100px){
+  #outfit-empty.cover>.body{grid-template-columns:minmax(270px,.82fr) minmax(0,1.18fr);column-gap:28px}
+  #outfit-empty h1{font-size:44px!important}
+  #outfit-empty .sub{font-size:15px}
+}
+@media (max-width:899px){
+  #outfit-empty .cover-full{width:100px;border-radius:8px;box-shadow:none}
+}
+
 </style>
 </head>
 <body>
