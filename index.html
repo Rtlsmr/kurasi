@@ -1622,43 +1622,386 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
 }
 
 
-/* v25 — consolidated layout rules; replaces conflicting desktop patches */
+/* v25 — desktop editorial refinement; presentation-only */
 @media (min-width:900px){
-.shell{display:block!important;position:relative!important;min-height:100vh}
-.dock{position:relative!important;inset:auto!important;transform:none!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:6px!important;width:calc(100% - 64px)!important;max-width:1380px!important;min-height:76px;box-sizing:border-box!important;margin:16px auto 28px!important;padding:10px 330px 10px 18px!important;border-radius:8px!important;overflow:visible!important}
-.dock .brandbox{display:flex!important;flex:0 0 auto!important;align-items:center!important;margin:0 8px 0 0!important;padding:0 18px 0 0!important;border:0!important;border-right:1px solid var(--outline)!important;min-width:0!important}
-.dock .brandbox .logo{display:flex!important;flex-direction:row!important;align-items:center!important;gap:10px!important;white-space:nowrap!important}
-.dock .brandbox .logo .mark{width:42px!important;height:42px!important;object-fit:contain!important}
-.dock .brandbox .logo .wm{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important}
-.dock .brandbox .logo .wm b{font-size:23px!important;line-height:1.05!important;letter-spacing:.16em!important}
-.dock .brandbox .logo .wm small{display:block!important;width:100%!important;margin-top:4px!important;font-size:7px!important;line-height:1.4!important;letter-spacing:.1em!important;text-align:center!important;white-space:normal!important}
-.dock .brandbox .me{display:none!important}
-.dock>button{display:flex!important;flex:0 1 auto!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:6px!important;min-width:0!important;white-space:nowrap!important;padding:10px 8px!important;border-radius:4px!important;font-size:13px!important}
-.dock>button .tile{width:24px!important;height:24px!important;flex:0 0 24px!important}.dock>button .tile svg{width:17px!important;height:17px!important}
-.topbar{position:absolute!important;top:54px!important;right:clamp(48px,5vw,78px)!important;left:auto!important;bottom:auto!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;width:auto!important;max-width:none!important;height:42px!important;margin:0!important;padding:0!important;gap:10px!important;border:0!important;z-index:30!important}
-.topbar>.logo{display:none!important}.topbar .right{display:flex!important;flex-direction:row!important;align-items:center!important;gap:10px!important;white-space:nowrap!important}
-.topbar .top-search,.topbar .avatar,.topbar .tg{display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important;visibility:visible!important;opacity:1!important}
-.topbar .top-search{width:38px!important;height:38px!important}.topbar .avatar{width:40px!important;height:40px!important}
-main{width:calc(100% - 64px)!important;max-width:1380px!important;margin:0 auto!important;padding:0 0 88px!important}
-#outfit-empty.cover{border-radius:8px!important;overflow:hidden}#outfit-empty.cover>.bar{display:none}
-#outfit-empty.cover>.body{display:grid!important;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important;grid-template-rows:auto auto auto auto auto 1fr;column-gap:clamp(36px,4vw,64px)!important;align-items:start;padding:clamp(28px,3vw,44px)!important}
-#outfit-empty .body>*{grid-column:1;min-width:0}#outfit-empty .cover-logo{margin:0 0 14px!important}
-#outfit-empty .cover-full{display:block!important;width:88px!important;height:auto!important;box-sizing:content-box!important;padding:7px 10px!important;border-radius:7px!important;object-fit:contain!important;box-shadow:none!important;background:#F5E9E0!important}
-#outfit-empty .issue{font:600 10px/1.5 var(--body)!important;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px!important}
-#outfit-empty h1{font-size:clamp(46px,3.7vw,60px)!important;line-height:1.02!important;max-width:16ch!important;letter-spacing:-.03em!important;margin:0 0 16px!important;text-wrap:balance}
-#outfit-empty .sub{max-width:48ch!important;font-size:15.5px!important;line-height:1.75!important;margin-bottom:18px!important}#outfit-empty .who{margin:16px 0 20px}
-#outfit-empty .runway{grid-column:2!important;grid-row:1 / -1!important;align-self:center!important;width:100%;max-width:none;margin:0!important;gap:clamp(12px,1.8vw,24px)}#outfit-empty .runway figure{min-width:0}
-#outfit-empty .arch{border:1px solid rgba(116,65,78,.18)!important;background:linear-gradient(180deg,#F1E6DC,#E9D9CE)!important;border-radius:100px 100px 5px 5px!important}
-#outfit-empty .runway figcaption{font:600 10px/1.4 var(--body)!important;letter-spacing:.16em;color:#806C62;margin-top:12px}
-#outfit-empty .how{gap:14px;margin:4px 0 22px}#outfit-empty .how li{grid-template-columns:36px minmax(0,1fr);gap:12px}#outfit-empty .how li:before{width:34px;height:34px;border:1px solid rgba(116,65,78,.28);border-radius:50%;background:#FBF7F2;color:#74414E;font-size:15px}#outfit-empty .how b{font-family:var(--body)!important;font-size:13px;font-weight:600;letter-spacing:.01em;margin-bottom:3px}#outfit-empty .how .d{max-width:38ch!important;font-size:14px;line-height:1.65}
+  main{max-width:1380px!important;padding:26px clamp(30px,4.5vw,72px) 88px!important}
+  .topbar{max-width:1380px;margin:0 auto 28px!important;padding:12px 18px!important;gap:24px}
+  .topbar .logo{flex-shrink:0}
+  .topbar .right{gap:10px}
+  #outfit-empty.cover{border-radius:8px!important;overflow:hidden}
+  #outfit-empty.cover>.bar{display:none}
+  #outfit-empty.cover>.body{
+    display:grid!important;grid-template-columns:minmax(310px,.78fr) minmax(0,1.22fr);
+    grid-template-rows:auto auto auto auto auto 1fr;column-gap:clamp(34px,4vw,64px);
+    align-items:start;padding:clamp(28px,3vw,44px)!important
+  }
+  #outfit-empty .body>*{grid-column:1;min-width:0}
+  #outfit-empty .cover-logo{margin:0 0 14px!important}
+  #outfit-empty .cover-full{width:82px!important;border-radius:6px!important;box-shadow:none!important}
+  #outfit-empty .issue{font:600 10px/1.5 var(--body)!important;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px!important}
+  #outfit-empty h1{font-size:clamp(44px,4.2vw,64px)!important;line-height:.98!important;max-width:8.5ch!important;margin:0 0 18px!important;letter-spacing:-.035em}
+  #outfit-empty .sub{max-width:38ch;font-size:16px;line-height:1.8;margin-bottom:18px}
+  #outfit-empty .who{margin:16px 0 20px}
+  #outfit-empty .runway{grid-column:2!important;grid-row:1 / -1!important;align-self:center;width:100%;max-width:none;margin:0!important;gap:clamp(12px,1.8vw,24px)}
+  #outfit-empty .runway figure{min-width:0}
+  #outfit-empty .arch{border:1px solid rgba(116,65,78,.18)!important;background:linear-gradient(180deg,#F1E6DC,#E9D9CE)!important;border-radius:100px 100px 5px 5px!important}
+  #outfit-empty .runway figcaption{font:600 10px/1.4 var(--body)!important;letter-spacing:.16em;color:#806C62;margin-top:12px}
+  #outfit-empty .how{gap:14px;margin:4px 0 22px}
+  #outfit-empty .how li{grid-template-columns:36px minmax(0,1fr);gap:12px}
+  #outfit-empty .how li:before{width:34px;height:34px;border:1px solid rgba(116,65,78,.28);border-radius:50%;background:#FBF7F2;color:#74414E;font-size:15px}
+  #outfit-empty .how b{font-family:var(--body)!important;font-size:13px;font-weight:600;letter-spacing:.01em;margin-bottom:3px}
+  #outfit-empty .how .d{font-size:14px;line-height:1.65}
+  #outfit-empty #cover-new,#outfit-empty #cover-back{gap:10px;align-items:center}
+}
+@media (min-width:900px) and (max-width:1100px){
+  #outfit-empty.cover>.body{grid-template-columns:minmax(270px,.82fr) minmax(0,1.18fr);column-gap:28px}
+  #outfit-empty h1{font-size:44px!important}
+  #outfit-empty .sub{font-size:15px}
+}
+@media (max-width:899px){
+  #outfit-empty .cover-full{width:100px;border-radius:8px;box-shadow:none}
+}
+
+
+/* v26 — balance the desktop cover typography and visual weight */
+@media (min-width:900px){
+  #outfit-empty.cover>.body{
+    grid-template-columns:minmax(390px,.9fr) minmax(0,1.1fr)!important;
+    column-gap:clamp(38px,4vw,64px)!important;
+    padding:clamp(30px,3.2vw,48px)!important;
+  }
+  #outfit-empty .cover-full{width:68px!important}
+  #outfit-empty .cover-logo{margin-bottom:10px!important}
+  #outfit-empty .issue{margin-bottom:12px!important}
+  #outfit-empty h1{
+    font-size:clamp(46px,3.8vw,60px)!important;
+    line-height:1.01!important;
+    max-width:11ch!important;
+    letter-spacing:-.025em!important;
+    margin-bottom:16px!important;
+  }
+  #outfit-empty .sub{max-width:42ch!important;font-size:15.5px!important;line-height:1.75!important}
+  #outfit-empty .runway{align-self:center!important;max-width:760px!important}
+  #outfit-empty .arch{aspect-ratio:3/5!important}
+}
+@media (min-width:900px) and (max-width:1100px){
+  #outfit-empty.cover>.body{grid-template-columns:minmax(330px,.9fr) minmax(0,1.1fr)!important}
+  #outfit-empty h1{font-size:46px!important;max-width:10ch!important}
+}
+
+
+/* v27 — fix desktop navigation alignment and cover line breaks */
+@media (min-width:900px){
+  .shell{display:block!important;min-height:100vh}
+  .dock{
+    position:relative!important;inset:auto!important;transform:none!important;
+    width:calc(100% - 64px)!important;max-width:1380px!important;
+    min-height:76px;flex-direction:row!important;align-items:center!important;
+    justify-content:flex-start!important;gap:8px!important;
+    margin:16px auto 0!important;padding:10px 18px!important;
+    border-radius:8px!important;box-shadow:0 8px 26px rgba(64,43,35,.045)!important;
+  }
+  .dock .brandbox{display:flex!important;align-items:center!important;gap:12px;
+    flex:0 0 auto;border:0!important;border-right:1px solid rgba(116,65,78,.2)!important;
+    padding:0 20px 0 0!important;margin:0 8px 0 0!important}
+  .dock .brandbox .logo{display:flex;align-items:center;gap:10px}
+  .dock .brandbox .logo .mark{width:42px!important;height:42px!important;border-radius:8px!important}
+  .dock .brandbox .logo .wm{align-items:flex-start!important}
+  .dock .brandbox .logo .wm b{font-size:23px!important;letter-spacing:.16em}
+  .dock .brandbox .logo .wm small{font-size:8px!important;letter-spacing:.12em}
+  .dock>button{flex:0 1 auto!important;flex-direction:row!important;align-items:center!important;
+    justify-content:center!important;gap:7px!important;padding:10px 9px!important;
+    font-size:13px!important;white-space:nowrap;border-radius:5px!important}
+  .dock .tile{width:24px!important;height:24px!important}
+  .dock .tile svg{width:17px!important;height:17px!important}
+  main{max-width:1380px!important;margin:0 auto!important;padding:26px 0 88px!important}
+  .topbar{position:absolute!important;top:26px;right:clamp(40px,5vw,90px);z-index:25;
+    margin:0!important;padding:0!important;gap:10px!important}
+  .topbar .logo{display:none!important}
+  #outfit-empty.cover>.body{
+    grid-template-columns:minmax(0,1fr) minmax(0,1.12fr)!important;
+    column-gap:clamp(38px,4vw,64px)!important;
+  }
+  #outfit-empty h1{
+    max-width:16ch!important;font-size:clamp(46px,3.7vw,58px)!important;
+    line-height:1.02!important;letter-spacing:-.025em!important;
+    text-wrap:balance;
+  }
+  #outfit-empty .sub{max-width:52ch!important;font-size:15.5px!important;line-height:1.75!important}
+}
+@media (min-width:900px) and (max-width:1100px){
+  .dock{width:calc(100% - 32px)!important;padding:8px 10px!important;gap:3px!important}
+  .dock .brandbox{padding-right:10px!important;margin-right:2px!important}
+  .dock .brandbox .logo .wm small{display:none}
+  .dock>button{gap:4px!important;padding:8px 5px!important;font-size:12px!important}
+  .topbar{right:24px!important}
+  main{width:calc(100% - 40px)!important}
+  #outfit-empty h1{font-size:46px!important;max-width:14ch!important}
+}
+
+
+/* v28 — restore desktop utility controls and balance instructional copy */
+@media (min-width:900px){
+  .topbar{
+    display:flex!important;position:fixed!important;
+    top:106px!important;right:clamp(24px,4vw,64px)!important;left:auto!important;
+    width:auto!important;max-width:none!important;z-index:1000!important;
+    align-items:center!important;justify-content:flex-end!important;
+    gap:10px!important;margin:0!important;padding:0!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{visibility:visible!important;opacity:1!important}
+  .topbar .top-search,.topbar .avatar{flex:0 0 auto!important}
+  #outfit-empty .how .d{
+    max-width:39ch!important;line-height:1.65!important;
+    text-wrap:pretty;
+  }
+}
+@media (min-width:900px) and (max-width:1100px){
+  .topbar{top:106px!important;right:18px!important}
+  .topbar .tg .tl{font-size:12px!important}
+  #outfit-empty .how .d{max-width:33ch!important}
+}
+
+
+/* v29 — align desktop utility controls with navigation and refine brand lockup */
+@media (min-width:900px){
+  .dock{
+    position:sticky!important;top:16px!important;z-index:900!important;
+  }
+  .topbar{
+    position:fixed!important;top:32px!important;right:clamp(28px,4.5vw,72px)!important;
+    z-index:1001!important;display:flex!important;align-items:center!important;
+    justify-content:flex-end!important;width:auto!important;margin:0!important;
+    padding:0!important;gap:10px!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{
+    visibility:visible!important;opacity:1!important;flex:0 0 auto!important;
+  }
+  .brandbox .logo .wm{align-items:center!important;text-align:center!important}
+  .brandbox .logo .wm small{
+    display:block!important;width:100%!important;text-align:center!important;
+    letter-spacing:.12em!important;line-height:1.45!important;margin:5px 0 0!important;
+    white-space:normal!important;
+  }
+  #outfit-empty .cover-logo{display:flex!important;justify-content:flex-start!important}
+  #outfit-empty .cover-full{
+    box-sizing:border-box!important;padding:6px 9px!important;
+    background:#F5E9E0!important;border-radius:8px!important;
+    width:82px!important;height:auto!important;object-fit:contain!important;
+  }
+}
+@media (min-width:900px) and (max-width:1100px){
+  .topbar{right:18px!important;top:32px!important}
+  .topbar .tg .tl{font-size:12px!important}
+  .dock{padding-right:200px!important}
+  .brandbox .logo .wm small{letter-spacing:.08em!important;font-size:7px!important}
+}
+
+
+/* v30 — keep desktop controls in the navigation row and let all header elements scroll */
+@media (min-width:900px){
+  .dock{position:relative!important;top:auto!important}
+  .topbar{
+    position:absolute!important;top:28px!important;
+    right:clamp(32px,4.5vw,72px)!important;left:auto!important;
+    z-index:1001!important;display:flex!important;align-items:center!important;
+    justify-content:flex-end!important;width:auto!important;max-width:none!important;
+    margin:0!important;padding:0!important;gap:10px!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{
+    display:flex!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important;
+  }
+  .dock{padding-right:clamp(240px,24vw,330px)!important}
+  .brandbox .logo .wm{align-items:center!important;text-align:center!important}
+  .brandbox .logo .wm small{
+    width:100%!important;text-align:center!important;
+    letter-spacing:.12em!important;line-height:1.45!important;
+    margin:5px 0 0!important;white-space:normal!important;
+  }
+  #outfit-empty .cover-logo{display:flex!important;justify-content:flex-start!important}
+  #outfit-empty .cover-full{
+    box-sizing:border-box!important;padding:8px 14px!important;
+    background:#F5E9E0!important;border-radius:8px!important;
+    width:88px!important;height:auto!important;object-fit:contain!important;
+  }
+}
+@media (min-width:900px) and (max-width:1100px){
+  .topbar{right:18px!important;top:28px!important}
+  .topbar .tg .tl{font-size:12px!important}
+  .dock{padding-right:220px!important}
+  .brandbox .logo .wm small{letter-spacing:.08em!important;font-size:7px!important}
+}
+
+
+/* v31 — precise desktop header alignment and restore hero-logo scale */
+@media (min-width:900px){
+  .shell{position:relative!important}
+  .dock{
+    position:relative!important;top:auto!important;
+    padding-right:270px!important;
+  }
+  .topbar{
+    position:absolute!important;top:34px!important;
+    right:clamp(46px,5vw,78px)!important;left:auto!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;margin:0!important;padding:0!important;
+    gap:10px!important;z-index:1001!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{
+    display:flex!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important;
+  }
+  .topbar .top-search{width:38px!important;height:38px!important}
+  .topbar .avatar{width:40px!important;height:40px!important}
+  #outfit-empty .cover-full{
+    width:108px!important;height:auto!important;box-sizing:border-box!important;
+    padding:7px 12px!important;object-fit:contain!important;
+    background:#F5E9E0!important;border-radius:8px!important;
+  }
+}
+@media (min-width:900px) and (max-width:1100px){
+  .dock{padding-right:250px!important}
+  .topbar{right:38px!important;top:34px!important}
+  .topbar .tg .tl{font-size:12px!important}
+  #outfit-empty .cover-full{width:100px!important;padding:6px 10px!important}
+}
+
+
+/* v32 — corrective desktop layout: stable navigation, aligned controls, balanced theme */
+@media (min-width:900px){
+  .shell{display:block!important;position:relative!important;min-height:100vh}
+  .dock{
+    position:sticky!important;top:12px!important;left:auto!important;right:auto!important;
+    transform:none!important;width:calc(100% - 64px)!important;max-width:1440px!important;
+    min-height:80px!important;box-sizing:border-box!important;
+    display:flex!important;flex-direction:row!important;align-items:center!important;
+    justify-content:flex-start!important;gap:8px!important;
+    margin:12px auto 26px!important;padding:10px 310px 10px 18px!important;
+    border-radius:9px!important;z-index:50!important;
+  }
+  .dock .brandbox{
+    display:block!important;flex:0 0 auto!important;min-width:220px!important;
+    padding:4px 18px 4px 4px!important;margin:0 8px 0 0!important;
+    border-bottom:0!important;border-right:1px solid rgba(116,65,78,.22)!important;
+  }
+  .dock .brandbox .logo{display:flex!important;align-items:center!important;gap:10px!important}
+  .dock .brandbox .logo .mark{width:42px!important;height:42px!important}
+  .dock .brandbox .logo .wm{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important}
+  .dock .brandbox .logo .wm b{font-size:23px!important;letter-spacing:.16em!important}
+  .dock .brandbox .logo .wm small{display:block!important;width:100%!important;margin:4px 0 0!important;text-align:center!important;line-height:1.35!important;letter-spacing:.1em!important;font-size:7px!important}
+  .dock .brandbox .me{display:none!important}
+  .dock>button{flex:0 0 auto!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:7px!important;padding:9px 8px!important;font-size:13px!important;white-space:nowrap!important}
+  .dock .tile{width:24px!important;height:24px!important;border-width:1px!important;border-radius:7px!important}
+  .dock .tile svg{width:16px!important;height:16px!important}
+  .topbar{
+    position:absolute!important;top:32px!important;right:max(42px,calc((100vw - 1440px)/2 + 28px))!important;
+    left:auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;margin:0!important;padding:0!important;gap:10px!important;
+    z-index:100!important;pointer-events:auto!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{display:flex!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important}
+  .topbar .top-search{width:38px!important;height:38px!important}
+  .topbar .avatar{width:40px!important;height:40px!important}
+  main{max-width:1440px!important;width:calc(100% - 64px)!important;margin:0 auto!important;padding:0 0 80px!important;box-sizing:border-box!important}
+  #outfit-empty .cover-full{width:112px!important;height:auto!important;padding:8px 12px!important;box-sizing:border-box!important;object-fit:contain!important}
 }
 @media (min-width:900px) and (max-width:1150px){
-.dock{width:calc(100% - 32px)!important;padding:8px 270px 8px 10px!important;gap:2px!important}.dock .brandbox{padding-right:10px!important;margin-right:2px!important}.dock .brandbox .logo .wm small{display:none!important}.dock>button{gap:4px!important;padding:8px 5px!important;font-size:12px!important}
-.topbar{right:18px!important;gap:6px!important}.topbar .right{gap:6px!important}.topbar .tg .tl{font-size:11px!important}main{width:calc(100% - 32px)!important}#outfit-empty h1{font-size:46px!important;max-width:16ch!important}#outfit-empty .sub{max-width:40ch!important}
+  .dock{padding-right:255px!important;width:calc(100% - 32px)!important;gap:3px!important}
+  .dock .brandbox{min-width:190px!important;padding-right:10px!important;margin-right:2px!important}
+  .dock .brandbox .logo .wm small{font-size:6px!important;letter-spacing:.06em!important}
+  .dock>button{padding:8px 4px!important;font-size:11.5px!important;gap:4px!important}
+  .topbar{right:20px!important;top:32px!important;gap:6px!important}
+  .topbar .right{gap:6px!important}
+  .topbar .tg .tl{font-size:11px!important}
+  main{width:calc(100% - 32px)!important}
 }
-@media (max-width:899px){#outfit-empty .cover-full{width:100px;border-radius:8px;box-shadow:none}}
-@media(max-width:599px){main{padding:14px 16px calc(116px + env(safe-area-inset-bottom))!important}.topbar{margin-bottom:18px!important}.dock{padding-bottom:calc(7px + env(safe-area-inset-bottom))!important}.dock button{font-size:11px!important}}
-@media(prefers-reduced-motion:reduce){:root:not([data-theme="dark"]) *, :root:not([data-theme="dark"]) *::before,:root:not([data-theme="dark"]) *::after{transition:none!important;animation:none!important}}
+
+
+/* v33 — final desktop header correction: controls belong to the nav, no sticky header */
+@media (min-width:900px){
+  .dock{
+    position:relative!important;top:auto!important;bottom:auto!important;
+    margin:12px auto 26px!important;
+    padding-right:310px!important;
+    box-sizing:border-box!important;
+  }
+  .topbar{
+    position:absolute!important;
+    top:50%!important;right:22px!important;left:auto!important;
+    transform:translateY(-50%)!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;
+    margin:0!important;padding:0!important;gap:10px!important;
+    z-index:100!important;
+  }
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{
+    display:flex!important;align-items:center!important;visibility:visible!important;
+    opacity:1!important;flex:0 0 auto!important;
+  }
+  .topbar .top-search{width:38px!important;height:38px!important}
+  .topbar .avatar{width:40px!important;height:40px!important}
+}
+@media (min-width:900px) and (max-width:1150px){
+  .dock{padding-right:260px!important}
+  .topbar{right:14px!important;gap:6px!important}
+  .topbar .right{gap:6px!important}
+  .topbar .tg .tl{font-size:11px!important}
+}
+
+
+/* v34 — anchor desktop utility controls to the actual header row */
+@media (min-width:900px){
+  .shell{position:relative!important}
+  .dock{
+    position:relative!important;top:auto!important;bottom:auto!important;
+    margin-top:12px!important;
+  }
+  .topbar{
+    position:absolute!important;
+    top:52px!important;right:max(42px,calc((100vw - 1440px)/2 + 28px))!important;
+    left:auto!important;transform:translateY(-50%)!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;margin:0!important;padding:0!important;
+    z-index:100!important;
+  }
+}
+@media (min-width:900px) and (max-width:1150px){
+  .topbar{top:52px!important;right:20px!important}
+}
+
+
+/* v35 — single authoritative desktop header rule; overrides earlier conflicting patches */
+@media (min-width:900px){
+  .shell{position:relative!important}
+  .dock{position:relative!important;top:auto!important;bottom:auto!important;transform:none!important;z-index:2!important}
+  .topbar{
+    position:absolute!important;top:72px!important;right:clamp(24px,4.5vw,72px)!important;
+    left:auto!important;bottom:auto!important;transform:translateY(-50%)!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;height:40px!important;
+    margin:0!important;padding:0!important;gap:10px!important;z-index:20!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{display:flex!important;align-items:center!important;justify-content:center!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important}
+  .topbar .top-search{width:38px!important;height:38px!important}
+  .topbar .avatar{width:40px!important;height:40px!important}
+}
+@media (min-width:900px) and (max-width:1150px){
+  .topbar{top:72px!important;right:18px!important;gap:6px!important}
+  .topbar .right{gap:6px!important}
+  .topbar .tg .tl{font-size:11px!important}
+}
 
 </style>
 </head>
