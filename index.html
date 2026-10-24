@@ -1356,7 +1356,7 @@ section[id^="tab-"]>.win,section[id^="tab-"]>div>.win{margin-bottom:24px!importa
 }
 .cover .runway figure .arch>svg{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;position:absolute!important;inset:0!important}
 .cover .runway figure .arch>img.aiimg{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center bottom!important;display:block!important;mix-blend-mode:multiply!important}
-.cover .runway figure .arch:has(>img.aiimg)>svg{display:none!important}
+/* The SVG remains as fallback until the WebP illustration loads successfully. */
 .cover .runway figcaption{padding:10px 0 12px!important;font-size:10px!important;letter-spacing:.17em!important;color:#76635B!important}
 .cover .how{margin-top:22px!important;gap:18px!important}
 .cover .how li{line-height:1.65!important}
@@ -1414,6 +1414,60 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+
+
+/* v20 — warm ivory and wine palette; reliable illustration fallback */
+:root:not([data-theme="dark"]){
+  --bg:#F7F2EC;
+  --bg2:#F7F2EC;
+  --surface:#FCF9F5;
+  --surface2:#EEE4DB;
+  --paper:#FFFCF8;
+  --ink:#342B29;
+  --muted:#796963;
+  --outline:rgba(83,55,46,.14);
+  --outline2:rgba(83,55,46,.26);
+  --accent:#74414E;
+  --accent-ink:#FFF9F5;
+  --accent2:#A98C78;
+  --btn:#74414E;
+  --btn-ink:#FFF9F5;
+  --btn2:#E9DED4;
+  --bar-ink:#342B29;
+  --berry:#74414E;
+  --gold:#A98C78;
+  --pink:#F1E4DF;
+  --lilac:#EDE5DE;
+  --butter:#F0E5D7;
+  --sky:#E8E8E0;
+  --mint:#E3EAE2;
+  --t1:#F0E5DB;
+  --t2:#EAE2D9;
+  --t3:#F1E8E0;
+  --t4:#E8E0D7;
+  --side1:#F7F2EC;
+  --side2:#F7F2EC;
+  --side-ink:#342B29;
+  --chart:#74414E;
+  --chart2:#A98C78;
+  --chart3:#D6C3B7;
+  --shadow:0 12px 34px rgba(64,43,35,.055);
+  --shadow-sm:none;
+}
+:root:not([data-theme="dark"]) .dock button[aria-current="page"] .tile{
+  background:#74414E!important;color:#FFF9F5!important;
+}
+:root:not([data-theme="dark"]) .cover .runway{
+  background:linear-gradient(145deg,#F0E5DB,#E8DCD1)!important;
+}
+:root:not([data-theme="dark"]) .cover .runway figcaption{color:#765F57!important}
+:root:not([data-theme="dark"]) .cover .seg label:has(input:checked) span{
+  background:#74414E!important;color:#FFF9F5!important;
+}
+@media(min-width:900px){
+  main{padding-top:28px!important}
+  .dock{background:var(--surface)!important}
 }
 
 </style>
@@ -2350,7 +2404,7 @@ function aiImage(prompt){
     .then(function(u){ clearTimeout(to); delete IMG_PENDING[k]; return u; });
   IMG_PENDING[k]=p; return p;
 }
-function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onerror="this.remove()">':''; }
+function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="if(this.previousElementSibling&&this.previousElementSibling.tagName.toLowerCase()==="svg")this.previousElementSibling.style.display="none"" onerror="this.remove()">':''; }
 var RUNWAY = {
   wanita:[
     {cap:'Kerja',pose:0,p:{hijab:{c:hx('dustypink')},top:{c:hx('putih'),kind:'blouse'},bottom:{c:hx('navy'),type:'pants',wide:true},shoes:{c:hx('hitam')},bag:{c:hx('cokelat')},acc:{c:hx('mustard')}}},
