@@ -1958,6 +1958,27 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   .topbar .tg .tl{font-size:11px!important}
 }
 
+
+/* v34 — anchor desktop utility controls to the actual header row */
+@media (min-width:900px){
+  .shell{position:relative!important}
+  .dock{
+    position:relative!important;top:auto!important;bottom:auto!important;
+    margin-top:12px!important;
+  }
+  .topbar{
+    position:absolute!important;
+    top:52px!important;right:max(42px,calc((100vw - 1440px)/2 + 28px))!important;
+    left:auto!important;transform:translateY(-50%)!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;margin:0!important;padding:0!important;
+    z-index:100!important;
+  }
+}
+@media (min-width:900px) and (max-width:1150px){
+  .topbar{top:52px!important;right:20px!important}
+}
+
 </style>
 </head>
 <body>
