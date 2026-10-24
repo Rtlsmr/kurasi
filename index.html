@@ -882,6 +882,94 @@ input[type=text],input[type=url],input[type=search],input[type=date],input[type=
 :root[data-theme="dark"] .hero-art,:root[data-theme="dark"] .rcard .rfig{filter:brightness(.92)}
 .hero-art img,.rcard .rfig img{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%);mask-image:linear-gradient(180deg,transparent 0,#000 12%)}
 @media (min-width:900px){.dock .side-cta .btn{color:var(--btn-ink)!important;opacity:1!important;padding:8px 20px!important;border-radius:999px!important;background:var(--btn)!important}}
+/* ===== v15: luxury editorial, applied to every page ===== */
+/* type: fewer caps, calmer eyebrows */
+.hero .kicker{text-transform:none!important;letter-spacing:.01em!important;font-size:13.5px!important;font-weight:500!important}
+.rcard .rtt small{text-transform:none!important;letter-spacing:.01em!important;font-size:12.5px!important;font-weight:500!important}
+.issue{text-transform:none!important;letter-spacing:.02em!important;font-size:13.5px!important;font-weight:500!important}
+.pal b.pl{font-weight:500!important}
+.profile-hello{font-family:var(--title)!important;font-size:24px!important;font-weight:600!important;color:var(--ink)!important;margin:0 0 8px!important}
+.season-name{font-family:var(--title)!important;font-weight:600!important}
+/* search */
+.qsearch{position:relative;margin:0 0 18px}
+.qsearch .qbox{display:flex;align-items:center;gap:10px;padding:0 16px;height:50px;border:1px solid var(--outline);border-radius:999px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.qsearch .qbox:focus-within{border-color:color-mix(in srgb,var(--ink) 40%,transparent)}
+.qsearch svg{flex:none;width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round}
+.qsearch input{flex:1;min-width:0;border:0!important;background:transparent!important;box-shadow:none!important;padding:0!important;height:48px;font:400 15px var(--body);color:var(--ink);outline:none}
+.qsearch input::-webkit-search-cancel-button{opacity:.5}
+.sres{position:absolute;left:0;right:0;top:56px;z-index:30;max-height:min(70vh,520px);overflow:auto;background:var(--surface);border:1px solid var(--outline);border-radius:18px;box-shadow:var(--shadow);padding:8px}
+.sres h4{margin:8px 10px 4px;font:600 12.5px var(--body);color:var(--muted);letter-spacing:.01em}
+.sres .sitem{display:flex;align-items:center;gap:12px;width:100%;padding:8px 10px;border:0;border-radius:12px;background:transparent;color:var(--ink);text-align:left;cursor:pointer;font:inherit}
+.sres .sitem:hover,.sres .sitem:focus-visible{background:var(--surface2);outline:none}
+.sres .sth{position:relative;flex:none;width:40px;height:40px;border-radius:10px;background:#FFFDF9;border:1px solid var(--outline);overflow:hidden;display:grid;place-items:center}
+.sres .sth .art{inset:6%}
+.sres .sth .shade.ic{width:38px;height:38px;border:0}
+.sres .stx{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.sres .stx b{font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sres .stx span{font-size:12.5px;color:var(--muted)}
+.sres .none{padding:14px 10px;color:var(--muted);font-size:14px}
+.top-search{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--outline);background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.top-search svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+@media (min-width:900px){.top-search{display:none}}
+.flash{animation:flash 1.8s ease-out}
+@keyframes flash{0%,35%{box-shadow:0 0 0 2px var(--gold),var(--shadow)}100%{box-shadow:0 0 0 0 transparent}}
+/* navigation: five destinations on phones (Warna & Riwayat live on Beranda) */
+@media (max-width:899px){
+  .dock button[data-tab="warna"],.dock button[data-tab="riwayat"]{display:none!important}
+  .dock button{font-size:11.5px!important}
+}
+/* beauty: minimal product illustrations, calm status */
+.shade.ic{width:42px!important;height:42px!important;border-radius:50%!important;border:1px solid var(--outline)!important;background:var(--surface)!important;color:var(--ink);box-shadow:none!important;display:grid!important;place-items:center}
+.shade.ic svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linejoin:round;stroke-linecap:round}
+.shade.ic svg .f{stroke:none;fill:color-mix(in srgb,var(--gold) 45%,transparent)}
+.bitem{border:1px solid var(--outline)!important;border-left:1px solid var(--outline)!important;background:var(--surface)!important;border-radius:16px!important}
+.bitem .bi b{font-weight:600}
+.bitem .stdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px;background:#8FA98C}
+.bitem.warn .stdot{background:#C9A15A}.bitem.bad .stdot{background:#B4574D}.bitem.na .stdot{background:var(--muted)}
+.pbar{height:4px!important;background:color-mix(in srgb,var(--ink) 9%,transparent)!important}
+.pbar i{background:color-mix(in srgb,var(--ink) 55%,transparent)!important}
+.bitem.warn .pbar i{background:#C9A15A!important}.bitem.bad .pbar i{background:#B4574D!important}
+.bitem .tag.st{background:transparent!important;border:1px solid var(--outline);font-weight:500!important}
+.bitem.bad .tag.st{border-color:color-mix(in srgb,#B4574D 45%,transparent)}
+.bchip{font-weight:500!important}
+/* empty states */
+.empt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:18px 8px 8px}
+.empt svg{width:104px;height:104px;fill:none;stroke:var(--muted);stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
+.empt svg .g{stroke:var(--gold)}
+.empt svg .gf{fill:var(--gold);stroke:none}
+.empt h3{margin:4px 0 0;font-size:24px}
+.empt p{margin:0;max-width:40ch;color:var(--muted);font-size:14.5px}
+.empt .row{justify-content:center;margin-top:6px}
+li.empt{list-style:none}
+/* history with item thumbnails */
+.hist li{background:var(--surface)!important}
+.hist .minis{display:flex;flex:none}
+.hist .mini{position:relative;display:block!important;width:42px;height:42px;max-width:none!important;border-radius:10px;background:#FFFDF9;border:1px solid var(--outline);margin-left:-8px;overflow:hidden}
+.hist .mini:first-child{margin-left:0}
+.hist .mini .art{inset:6%}
+.hist .info b{font-family:var(--title);font-size:18px;font-weight:600}
+/* season recommendations */
+#season-recs:empty{display:none}
+#season-recs{margin:4px 0 22px}
+/* loading placeholder: line icon instead of emoji */
+.wait .hanger svg{width:40px;height:40px;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;opacity:.65}
+.lfig .wait .hanger svg{width:26px;height:26px}
+/* lemari cards: quieter */
+.card .cap b{font-weight:600}
+.card .edit{background:var(--surface)!important;color:var(--ink)!important}
+/* style mode control */
+.prefs .seg{margin:6px 0 8px;flex-wrap:wrap}
+.prefs .lbl{display:block;margin:16px 0 4px}
+/* v15 fixes */
+:root[data-theme="dark"] .pal input:checked + span{color:var(--ink)!important}
+.bitem.bad .tag.st,.bitem.warn .tag.st,.bitem.ok .tag.st{background:transparent!important;color:var(--ink)!important}
+.bchip,.bchip.bad,.bchip.warn,.bchip.ok{background:var(--surface)!important;color:var(--ink)!important;border:1px solid var(--outline)!important}
+.bchip::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:var(--muted)}
+.bchip.bad::before{background:#B4574D}.bchip.warn::before{background:#C9A15A}.bchip.ok::before{background:#8FA98C}
+.shade.ic svg{width:30px;height:30px;stroke-width:1.35}
+@media (min-width:1100px){#outfit-main>.qsearch{grid-column:1 / -1;max-width:640px}}
+.hist .tag,.hist .tag.hot{background:var(--t3)!important;color:var(--ink)!important;border:1px solid var(--outline)}
+.empt svg{width:120px;height:120px}
 </style>
 </head>
 <body>
@@ -889,12 +977,12 @@ input[type=text],input[type=url],input[type=search],input[type=date],input[type=
 <div class="shell">
   <nav class="dock" aria-label="Menu utama">
     <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier creates, ensemble elevates. Lihat sampul" data-intro><img class="mark mimg" src="img/logo-mark.webp" alt="" width="256" height="256"><span class="wm"><b>KURASI</b><small><span>atelier creates,</span> <span>ensemble elevates.</span></small></span></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Padu padan dan beauty dari lemarimu sendiri</small></div></div>
-    <button data-tab="outfit" aria-current="page"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg></span>Outfit</button>
+    <button data-tab="outfit" aria-current="page"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg></span>Beranda</button>
     <button data-tab="lemari"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span>Lemari</button>
     <button data-tab="tema"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg></span>Tema</button>
     <button data-tab="warna"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.5-1.2-2-1.2-3.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-3.9-4-7-9-7z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg></span>Warna</button>
     <button data-tab="riwayat"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></span>Riwayat</button>
-    <button data-tab="beauty"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="13" width="9" height="8" rx="1.5"/><path d="M9.5 13v-3h5v3M10.5 10V6.2l3-2.2V10"/></svg></span>Beauty</button>
+    <button data-tab="beauty"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="13" width="9" height="8" rx="1.5"/><path d="M9.5 13v-3h5v3M10.5 10V6.2l3-2.2V10"/></svg></span><span class="bl">Beauty</span></button>
     <button data-tab="profil"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span>Profil</button>
     <div class="side-cta"><span class="crown" aria-hidden="true">&#10022;</span><b>Kurasi di HP lain?</b><small>Pindahkan lemari, riwayat, dan ilustrasimu lewat satu file.</small><button class="btn small" type="button" data-go="profil">Pindahkan</button></div>
   </nav>
@@ -902,7 +990,7 @@ input[type=text],input[type=url],input[type=search],input[type=date],input[type=
   <main id="main">
     <div class="topbar">
       <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier creates, ensemble elevates. Lihat sampul" data-intro><img class="mark mimg" src="img/logo-mark.webp" alt="" width="256" height="256"><span class="wm"><b>KURASI</b><small><span>atelier creates,</span> <span>ensemble elevates.</span></small></span></span>
-      <div class="right"><button class="avatar" id="top-avatar" type="button" data-go="profil" aria-label="Buka profil"></button>
+      <div class="right"><button class="top-search" id="top-search" type="button" aria-label="Cari"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button><button class="avatar" id="top-avatar" type="button" data-go="profil" aria-label="Buka profil"></button>
       <label class="tg right" id="theme-wrap"><span class="tl">Mode gelap</span><input type="checkbox" id="theme-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></label></div>
     </div>
 
@@ -943,11 +1031,13 @@ input[type=text],input[type=url],input[type=search],input[type=date],input[type=
           <div class="hero-art" id="hero-art" aria-hidden="true"></div>
           <div class="row hero-cta"><button class="btn" type="button" id="hero-go">Kurasi outfit sekarang</button><button class="btn ghost" type="button" data-go="tema">Mulai eksplorasi</button></div>
         </section>
+        <div class="qsearch" role="search"><div class="qbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input type="search" id="q-search" placeholder="Cari item lemari, produk, atau tema" aria-label="Cari item lemari, produk beauty, atau tema" autocomplete="off" enterkeyhint="search"></div><div class="sres hidden" id="q-res"></div></div>
         <nav class="quick" aria-label="Akses cepat">
           <button class="qcard" type="button" id="q-outfit"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg></span><span class="qt"><b>Outfit</b><small>Padu padan untuk hari ini</small></span></button>
-          <button class="qcard" type="button" data-go="lemari"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span><span class="qt"><b>Lemari</b><small>Atelier pakaianmu</small></span></button>
+          
           <button class="qcard" type="button" data-go="warna"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.5-1.2-2-1.2-3.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-3.9-4-7-9-7z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg></span><span class="qt"><b>Warna</b><small>Personal color-mu</small></span></button>
-          <button class="qcard" type="button" data-go="beauty"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="13" width="9" height="8" rx="1.5"/><path d="M9.5 13v-3h5v3M10.5 10V6.2l3-2.2V10"/></svg></span><span class="qt"><b>Beauty</b><small>Makeup dan skincare</small></span></button>
+          <button class="qcard" type="button" data-go="riwayat"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5c2.6-.8 5.3-.5 7.5 1 2.2-1.5 4.9-1.8 7.5-1v13c-2.6-.8-5.3-.5-7.5 1-2.2-1.5-4.9-1.8-7.5-1z"/><path d="M12 6.5v13"/></svg></span><span class="qt"><b>Riwayat</b><small>Buku harian outfit</small></span></button>
+          <button class="qcard" type="button" data-go="beauty" id="q-beauty"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="13" width="9" height="8" rx="1.5"/><path d="M9.5 13v-3h5v3M10.5 10V6.2l3-2.2V10"/></svg></span><span class="qt"><b>Beauty</b><small>Makeup dan skincare</small></span></button>
         </nav>
         <div id="beauty-alert"></div>
         <div class="stats" id="stats"></div>
@@ -1085,6 +1175,7 @@ input[type=text],input[type=url],input[type=search],input[type=date],input[type=
       <h1 id="h-warna">Rona: personal color-mu</h1>
       <p class="lede">Warna yang selaras dengan kulitmu membuat wajah terlihat segar. Item yang paling dekat dengan wajah (hijab, scarf, atau atasan) paling berpengaruh.</p>
       <div class="win butter"><div class="bar"><span>Hasilmu</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div><div class="body" id="season-card"></div></div>
+      <section class="recs-today" id="season-recs" aria-label="Rekomendasi outfit sesuai personal color"></section>
 
       <form class="win lilac" id="quiz">
         <div class="bar"><span>Kuis singkat</span><span class="deco" aria-hidden="true"><i>?</i></span></div>
@@ -1136,7 +1227,7 @@ input[type=text],input[type=url],input[type=search],input[type=date],input[type=
     <!-- BEAUTY -->
     <section id="tab-beauty" class="hidden" aria-labelledby="h-beauty">
       <h1 id="h-beauty">Makeup &amp; beauty</h1>
-      <p class="lede">Catat makeup dan skincare yang kamu pakai. Kurasi mengingatkan sebelum kedaluwarsa, memeriksa rutinitas skincare, dan menjaga wishlist dari belanja shade kembar.</p>
+      <p class="lede" id="beauty-lede">Catat makeup dan skincare yang kamu pakai. Kurasi mengingatkan sebelum kedaluwarsa, memeriksa rutinitas skincare, dan menjaga wishlist dari belanja shade kembar.</p>
       <div class="seg btabs" role="radiogroup" aria-label="Fitur beauty"><label><input type="radio" name="btab" value="pao" checked><span>Kedaluwarsa</span></label><label><input type="radio" name="btab" value="rutin"><span>Rutinitas skincare</span></label><label><input type="radio" name="btab" value="wish"><span>Wishlist</span></label></div>
 
       <div data-bpanel="pao">
@@ -1211,6 +1302,9 @@ input[type=text],input[type=url],input[type=search],input[type=date],input[type=
         <div class="body">
           <label class="tg"><input type="checkbox" id="aiimg-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Ilustrasi AI otomatis</span></label>
           <p class="small muted" style="margin:0">Saat menyala, Kurasi memakai kuota AI gratis untuk menggambar item lemari, model, avatar, dan contoh produk rekomendasi. Matikan bila koneksi lambat; aplikasi tetap jalan dengan sketsa.</p>
+          <span class="lbl">Gaya tampilan</span>
+          <div class="seg" role="radiogroup" aria-label="Gaya tampilan"><label><input type="radio" name="uistyle" value="auto"><span>Ikuti padu padan</span></label><label><input type="radio" name="uistyle" value="femme"><span>Femme</span></label><label><input type="radio" name="uistyle" value="homme"><span>Homme</span></label></div>
+          <p class="small muted" style="margin:0">KURASI Femme lembut dan editorial (ivory, blush, rose taupe). KURASI Homme tegas dan terstruktur (sand, slate, charcoal). Pilihan ini hanya mengubah tampilan; semua fitur tetap sama.</p>
         </div>
       </div>
       <div class="win mint">
@@ -1325,6 +1419,7 @@ var state = {
   gender: load('gender', 'wanita'), opts: Object.assign({}, DEF_OPTS, load('opts', {})), aiImg: load('aiImg', true) !== false
 };
 state.profile = Object.assign({name:'',skin:'langsat',hair:'long',hijabStyle:'',vibes:[],avoid:[],done:false}, load('profile',{}));
+state.uiStyle = load('uiStyle','auto');
 var ranked = [], rankIdx = 0, showIntro = true, resultView = 'model';
 state.introSeen = load('introSeen', false);
 
@@ -1740,7 +1835,8 @@ function listEn(a){return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '
 function promptFor(wearing,seed){
   var hij=state.gender!=='pria'&&headOn(), sk=skinOf().en, pf=state.profile||{}, hr=pf.done&&HAIRS.find(function(h){return h.k===pf.hair;});
   var model=state.gender==='pria'?'a young Indonesian man with '+sk+' and short neat hair':(hij?'a young Indonesian woman with '+sk:'a young Indonesian woman with '+sk+' and '+(hr?hr.en:HAIR_EN[seed%HAIR_EN.length]));
-  return 'Fashion design illustration of '+model+' '+POSE_EN[seed%POSE_EN.length]+', wearing '+wearing+'.'+(hij?' Modest outfit with long sleeves, hair and neck fully covered by the hijab.':'')+' Full body from head to toe with shoes visible, the figure fills most of the image height, elongated fashion croquis proportions, hand-drawn with alcohol markers and watercolor, fine ink outlines, soft fabric shading and folds, plain warm white paper background, single figure centered, no text, no props, no scenery.';
+  var homme=styleG()==='pria';
+  return (homme?'Luxury editorial menswear illustration of ':'Luxury editorial couture fashion illustration of ')+model+' '+POSE_EN[seed%POSE_EN.length]+', wearing '+wearing+'.'+(hij?' Modest outfit with long sleeves, hair and neck fully covered by the hijab.':'')+' Full body from head to toe with shoes visible, the figure fills most of the image height, elongated fashion croquis proportions, '+(homme?'confident graphite and charcoal pencil linework with a restrained sepia and slate wash, crisp tailoring lines, plain light warm-grey paper background':'elegant fine ink and pencil linework with a soft watercolor wash in ivory, dusty rose and taupe, flowing fabric folds, plain warm ivory paper background')+', refined and minimal, single figure centered, no text, no props, no scenery.';
 }
 function comboSeed(c){return hashStr(['hijab','scarf','atasan','gamis','bawahan','outer','sepatu','tas','aksesoris'].map(function(k){return c[k]?c[k].id:'';}).join('|'));}
 function comboPrompt(c){
@@ -1958,7 +2054,7 @@ function renderWardrobe(){
   $('#lemari-count').textContent = n? n+' item di lemarimu.' : 'Mulai dengan 10-20 item yang paling sering kamu pakai. Foto saja, Kurasi yang mencatat jenis dan warnanya.';
   $('#btn-sample-2').classList.toggle('hidden', n>0);
   var w=$('#wardrobe');
-  if(!n){w.innerHTML='<div class="win pink"><div class="bar"><span>Lemari kosong</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body empty"><p class="muted">Tambahkan atasan dan bawahan dulu'+(state.gender==='wanita'?', atau gamis/dress,':'')+' supaya Kurasi bisa mulai memadukan.</p></div></div>';$('#wardrobe-foot').innerHTML='';CLOSET.sel=[];renderSelbar();return;}
+  if(!n){w.innerHTML='<div class="win pink"><div class="body">'+emptyHTML('lemari','Atelier-mu masih kosong','Tambahkan atasan dan bawahan dulu'+(state.gender==='wanita'?', atau gamis / dress,':'')+' supaya Kurasi bisa mulai memadukan. Cukup foto, Kurasi mencatat jenis dan warnanya.','<button class="btn" type="button" onclick="document.getElementById(\'btn-add\').click()">Tambah item</button>')+'</div></div>';$('#wardrobe-foot').innerHTML='';CLOSET.sel=[];renderSelbar();return;}
   renderCloset();
   $('#wardrobe-foot').innerHTML='<button class="linkbtn danger" id="btn-clear-all">Kosongkan lemari</button>';
   pumpIll();
@@ -2161,7 +2257,7 @@ $('#btn-clear-look').addEventListener('click',function(){state.look=null;save('l
 
 // ---------- Themes ----------
 function lookFig(lk,idx,src){
-  return '<span class="lfig" aria-hidden="true">'+(src?imgTag(src):'<span class="wait'+(state.aiImg&&state.worker?'':' off')+'"><span class="hanger">&#128087;</span><span>Ilustrasi menyusul</span></span>')+'</span>';
+  return '<span class="lfig" aria-hidden="true">'+(src?imgTag(src):'<span class="wait'+(state.aiImg&&state.worker?'':' off')+'"><span class="hanger">'+FORM_ICO+'</span><span>Ilustrasi menyusul</span></span>')+'</span>';
 }
 var THEME_RETRY={};
 function lookBtn(theme,lk,idx,src){
@@ -2261,7 +2357,7 @@ $('#season-chips').addEventListener('change',function(e){
   toast(k?'Personal color diatur: '+SEASONS[k].l+'.':'Personal color dikosongkan.');
 });
 function renderSeason(){
-  var c=$('#season-card'), k=state.season;
+  var c=$('#season-card'), k=state.season; renderSeasonRecs();
   $$('input[name=season]').forEach(function(r){r.checked=(r.value===(k||''));});
   if(!k){
     var lean=state.seasonInfo&&state.seasonInfo.lean;
@@ -2295,10 +2391,10 @@ function recomputeWorn(){
 }
 function renderHistory(){
   var el=$('#history');
-  if(!state.history.length){el.innerHTML='<div class="empty"><h2>Belum ada riwayat</h2><p class="muted">Setelah memilih outfit, ketuk "Pakai outfit ini" agar tercatat di sini.</p><button class="btn" data-go="outfit">Kurasi outfit</button></div>';return;}
+  if(!state.history.length){el.innerHTML=emptyHTML('riwayat','Belum ada riwayat','Setelah memilih outfit, ketuk "Pakai outfit ini" agar tercatat di sini. Item yang dipakai beristirahat 7 hari.','<button class="btn" data-go="outfit">Kurasi outfit</button>');return;}
   el.innerHTML='<ul class="hist">'+state.history.map(function(h){
     var d=new Date(h.t);
-    return '<li><span class="mini">'+h.items.map(function(x){return dot(x.color);}).join('')+'</span><span class="info"><b>'+d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'})+'</b>'+(h.look?' <span class="tag hot">'+esc(h.look)+'</span>':'')+'<br><span class="muted">'+h.items.map(function(x){return esc(x.name)+' '+colorLabel(x.color).toLowerCase();}).join(', ')+'</span></span><button class="linkbtn danger" data-del-hist="'+h.id+'">Hapus</button></li>';
+    return '<li><span class="minis">'+h.items.slice(0,4).map(function(x){var it=byId(x.id)||x;return '<span class="mini">'+(it.cat?itemArt(it):dot(x.color))+'</span>';}).join('')+'</span><span class="info"><b>'+d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'})+'</b>'+(h.look?' <span class="tag hot">'+esc(h.look)+'</span>':'')+'<br><span class="muted">'+h.items.map(function(x){return esc(x.name)+' '+colorLabel(x.color).toLowerCase();}).join(', ')+'</span></span><button class="linkbtn danger" data-del-hist="'+h.id+'">Hapus</button></li>';
   }).join('')+'</ul>';
 }
 $('#history').addEventListener('click',function(e){
@@ -2311,7 +2407,7 @@ $('#history').addEventListener('click',function(e){
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
   $('#theme-toggle').checked=(t==='dark');
-  var m=document.querySelector('meta[name=theme-color]'); if(m)m.setAttribute('content',t==='dark'?(state.gender==='pria'?'#121417':'#171311'):(state.gender==='pria'?'#F7F5F2':'#F8F4EF'));
+  var m=document.querySelector('meta[name=theme-color]'); if(m)m.setAttribute('content',t==='dark'?(styleG()==='pria'?'#121417':'#171311'):(styleG()==='pria'?'#F7F5F2':'#F8F4EF'));
 }
 var savedTheme=load('theme',null);
 applyTheme(savedTheme||'light');
@@ -2596,14 +2692,14 @@ function boardHTML(c,view){
 function mirrorHTML(c,pose){
   var prompt=comboPrompt(c), cached=state.aiImg?imgGet(imgKey(prompt)):null;
   var can=state.aiImg&&state.worker;
-  return '<div class="mirror" aria-hidden="true">'+(cached?imgTag(cached):'<div class="wait'+(can?'':' off')+'"><span class="hanger">&#128087;</span><span>'+(can?'Ilustrasi model sedang digambar…':'Ilustrasi AI sedang dimatikan. Lihat tampilan Flat-lay.')+'</span></div>')+'</div><p class="figcap">'+(cached?'Ilustrasi AI':(can?'Biasanya 5–15 detik':'&nbsp;'))+'</p>';
+  return '<div class="mirror" aria-hidden="true">'+(cached?imgTag(cached):'<div class="wait'+(can?'':' off')+'"><span class="hanger">'+FORM_ICO+'</span><span>'+(can?'Ilustrasi model sedang digambar…':'Ilustrasi AI sedang dimatikan. Lihat tampilan Flat-lay.')+'</span></div>')+'</div><p class="figcap">'+(cached?'Ilustrasi AI':(can?'Biasanya 5–15 detik':'&nbsp;'))+'</p>';
 }
 function fillMirrorAI(box,c,stillOk){
   var prompt=comboPrompt(c); if(!state.aiImg||!state.worker||imgGet(imgKey(prompt)))return;
   aiImage(prompt).then(function(u){ if(!stillOk())return; var m=box.querySelector('.mirror'), cap=box.querySelector('.figcap'); if(!m)return;
     var w=m.querySelector('.wait');
     if(u){ if(w)w.remove(); m.insertAdjacentHTML('beforeend',imgTag(u)); if(cap)cap.textContent='Ilustrasi AI'; }
-    else { if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">&#128087;</span><span>Ilustrasi model belum tersedia (kuota AI habis atau koneksi terputus). Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
+    else { if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">'+FORM_ICO+'</span><span>Ilustrasi model belum tersedia (kuota AI habis atau koneksi terputus). Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
 }
 function viewTabs(name,cur,opts){ return '<div class="seg small" role="radiogroup" aria-label="'+opts.label+'">'+opts.items.map(function(o){return '<label><input type="radio" name="'+name+'" value="'+o[0]+'"'+(cur===o[0]?' checked':'')+'><span>'+o[1]+'</span></label>';}).join('')+'</div>'; }
 function renderBoard(){
@@ -2639,7 +2735,7 @@ $('#board-win').addEventListener('change',function(e){
 });
 
 // ---------- Italic for foreign terms ----------
-var FX_LIST=['period after opening','routine checker','skin barrier','hyaluronic acid','azelaic acid','benzoyl peroxide','setting spray','lip tint','lip cream','lip balm','mix and match','personal color','dress code','dresscode','flat-lay','flat lay','smart casual','color block','power office','earth tone','dusty pink','tote bag','sling bag','flat shoes','outfits','outfit','looks','look','ensemble','blazer','outer','cardigan','scarf','sneakers','loafers','heels','jeans','denim','chino','polo','knit','blouse','sweater','crop','casual','retro','runway','spring','summer','autumn','winter','cream','beige','mocca','navy','wine','terracotta','mustard','olive','peach','sage','lilac','mint','fuchsia','pashmina','file','atelier','online','offline','sporty','makeup','skincare','wishlist','beauty','serum','toner','cleanser','sunscreen','foundation','cushion','concealer','eyeliner','eyeshadow','blush','bronzer','primer','essence','retinoid','retinol','niacinamide','ceramide','salicylic','powder','pomade','shade','checkout','swatch'];
+var FX_LIST=['grooming','pomade','aftershave','hair tonic','femme','homme','wax','period after opening','routine checker','skin barrier','hyaluronic acid','azelaic acid','benzoyl peroxide','setting spray','lip tint','lip cream','lip balm','mix and match','personal color','dress code','dresscode','flat-lay','flat lay','smart casual','color block','power office','earth tone','dusty pink','tote bag','sling bag','flat shoes','outfits','outfit','looks','look','ensemble','blazer','outer','cardigan','scarf','sneakers','loafers','heels','jeans','denim','chino','polo','knit','blouse','sweater','crop','casual','retro','runway','spring','summer','autumn','winter','cream','beige','mocca','navy','wine','terracotta','mustard','olive','peach','sage','lilac','mint','fuchsia','pashmina','file','atelier','online','offline','sporty','makeup','skincare','wishlist','beauty','serum','toner','cleanser','sunscreen','foundation','cushion','concealer','eyeliner','eyeshadow','blush','bronzer','primer','essence','retinoid','retinol','niacinamide','ceramide','salicylic','powder','pomade','shade','checkout','swatch'];
 var FX_SRC='(^|[^A-Za-z\\u00C0-\\u024F])('+FX_LIST.map(function(w){return w.replace(/[-]/g,'\\-');}).join('|')+')(?![A-Za-z\\u00C0-\\u024F])';
 var FX_TEST=new RegExp(FX_SRC,'i');
 function fxWrap(n){
@@ -2726,7 +2822,7 @@ function readProfile(box,px){
 $('#profile-fields').innerHTML=profileHTML('p-');
 $('#profile-form').addEventListener('change',function(e){ syncProfileVis($('#profile-form'),'p-'); if(e.target.name==='p-gender')setGender(e.target.value); });
 $('#profile-form').addEventListener('submit',function(e){ e.preventDefault(); readProfile($('#profile-form'),'p-'); state.profile.done=true; save('profile',state.profile); toast('Profil disimpan.'); renderProfile(); });
-function renderProfile(){ fillProfile($('#profile-form'),'p-'); $('#profile-hello').textContent=greet(); renderMoveInfo(); }
+function renderProfile(){ syncStyleRadios(); fillProfile($('#profile-form'),'p-'); $('#profile-hello').textContent=greet(); renderMoveInfo(); }
 // onboarding (stepper in a modal)
 var ONB={step:1};
 $('#onb-fields').innerHTML=profileHTML('o-');
@@ -2770,11 +2866,11 @@ $('#move-open').addEventListener('change',function(e){ var f=e.target.files&&e.t
   }; rd.readAsText(f); });
 
 // ---------- v7: dashboard, avatar, gender theme ----------
-function applyGenderTheme(){ document.documentElement.setAttribute('data-g',state.gender); var m=document.querySelector('meta[name=theme-color]'); if(m&&document.documentElement.getAttribute('data-theme')!=='dark')m.setAttribute('content',state.gender==='pria'?'#F7F5F2':'#F8F4EF'); }
+function applyGenderTheme(){ var g=styleG(); document.documentElement.setAttribute('data-g',g); var m=document.querySelector('meta[name=theme-color]'); if(m&&document.documentElement.getAttribute('data-theme')!=='dark')m.setAttribute('content',g==='pria'?'#F7F5F2':'#F8F4EF'); if(typeof BC==='object')applyBeautyLabels(); }
 var AVATAR={src:null};
 function avatarVariant(){ return state.gender==='pria'?'pria':(state.opts.hijab?'hijab':'wanita'); }
 function avatarInner(){ var n=(state.profile.name||'').trim(), src=AVATAR.src||('img/avatar-'+avatarVariant()+'.webp');
-  return '<b>'+esc(n?n.charAt(0).toUpperCase():'❀')+'</b><img src="'+src+'" alt="" onerror="this.remove()">'; }
+  return '<b>'+esc(n?n.charAt(0).toUpperCase():'K')+'</b><img src="'+src+'" alt="" onerror="this.remove()">'; }
 function avatarHTML(cls){ return '<span class="avatar'+(cls?' '+cls:'')+'" aria-hidden="true">'+avatarInner()+'</span>'; }
 function avatarKey(){ var p=state.profile; return [avatarVariant(),p.skin,p.hair,p.hijabStyle].join('|'); }
 function avatarPrompt(){ var p=state.profile, sk=skinOf().en, bg=state.gender==='pria'?'warm light grey':'warm ivory';
@@ -2814,7 +2910,7 @@ function renderDash(){
   var cols=['var(--lilac)','var(--pink)','var(--butter)','var(--mint)','var(--sky)','var(--lilac)','var(--pink)'], dn=['Sen','Sel','Rab','Kam','Jum','Sab','Min'], today=(new Date().getDay()+6)%7;
   $('#dash-week').innerHTML='<div class="bars" role="img" aria-label="Jumlah outfit dipakai per hari minggu ini"><div class="ax"><span>'+mx+'</span><span>'+Math.round(mx/2)+'</span><span>0</span></div>'+per.map(function(v,i){return '<div class="col"><span class="bar-v" style="height:'+Math.max(4,v/mx*100)+'%;background:'+cols[i]+(i===today?';outline:2px solid var(--btn);outline-offset:1px':'')+'" title="'+v+' outfit"></span><small>'+dn[i]+'</small></div>';}).join('')+'</div>'+(per.some(Boolean)?'':'<p class="note" style="margin-top:8px">Belum ada outfit tercatat minggu ini. Ketuk "Pakai outfit ini" setelah memilih.</p>');
   renderTodayRecs();
-  var ba=BEAUTY?beautyAlert():0; $('#beauty-alert').innerHTML=ba?'<div class="beauty-alert"><span>'+ba+' produk makeup / skincare kedaluwarsa atau segera habis.</span><button class="btn small" type="button" data-go="beauty">Cek di Beauty</button></div>':'';
+  var ba=BEAUTY?beautyAlert():0; $('#beauty-alert').innerHTML=ba?'<div class="beauty-alert"><span>'+ba+' produk '+(isHomme()?'grooming / skincare':'makeup / skincare')+' kedaluwarsa atau segera habis.</span><button class="btn small" type="button" data-go="beauty">Cek di '+(isHomme()?'Grooming':'Beauty')+'</button></div>':'';
   // terakhir dipakai
   var rec=state.history.slice(0,3);
   $('#dash-recent').innerHTML=rec.length?'<ul class="recent">'+rec.map(function(h){var its=h.items.map(function(x){return byId(x.id)||x;}).slice(0,4);return '<li><span class="minis">'+its.map(function(it){return '<span class="mini">'+(it.cat?itemArt(it):'')+'</span>';}).join('')+'</span><span class="tx"><b>'+new Date(h.t).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'})+'</b>'+(h.look?esc(h.look):h.items.length+' item')+'</span></li>';}).join('')+'</ul><button class="linkbtn" data-go="riwayat" style="margin-top:8px">Lihat semua riwayat</button>':'<p class="muted small" style="margin:0">Belum ada riwayat. Outfit yang kamu pakai akan muncul di sini.</p>';
@@ -2868,7 +2964,7 @@ function recText(r){ return (EN[r.color]||r.color)+' '+(KW_EN[r.kw]||r.kw)+(r.mo
 function recKey(r){ return 'shop.'+hashStr(recText(r)).toString(36); }
 function recCard(r,i){
   var q=recQuery(r), src=ITEM_IMG[recKey(r)];
-  return '<div class="rec"><div class="rimg" data-rec="'+i+'">'+(src?'<img src="'+src+'" alt="">':'<span class="wait'+(state.aiImg&&state.worker?'':' off')+'"><span class="hanger">&#128087;</span><span>Gambar contoh menyusul</span></span>')+'</div><div class="rtx"><span class="cat">'+CATL[r.cat]+'</span><b>'+esc(q.charAt(0).toUpperCase()+q.slice(1))+'</b><span class="shl">Marketplace</span><span class="shops">'+SHOPS.map(function(s){return '<a class="shop" href="'+s[1]+encodeURIComponent(q)+'" target="_blank" rel="noopener">'+s[0]+'</a>';}).join('')+'</span><span class="shl">Brand</span><span class="shops">'+BRANDS.filter(function(b){return !(b.w&&state.gender==='pria');}).map(function(b){return '<a class="shop br" href="'+esc(b.u(brandQuery(r)))+'" target="_blank" rel="noopener" data-nofx'+(b.t?' title="'+esc(b.t)+'"':'')+'>'+esc(b.n)+'</a>';}).join('')+'</span></div></div>';
+  return '<div class="rec"><div class="rimg" data-rec="'+i+'">'+(src?'<img src="'+src+'" alt="">':'<span class="wait'+(state.aiImg&&state.worker?'':' off')+'"><span class="hanger">'+FORM_ICO+'</span><span>Gambar contoh menyusul</span></span>')+'</div><div class="rtx"><span class="cat">'+CATL[r.cat]+'</span><b>'+esc(q.charAt(0).toUpperCase()+q.slice(1))+'</b><span class="shl">Marketplace</span><span class="shops">'+SHOPS.map(function(s){return '<a class="shop" href="'+s[1]+encodeURIComponent(q)+'" target="_blank" rel="noopener">'+s[0]+'</a>';}).join('')+'</span><span class="shl">Brand</span><span class="shops">'+BRANDS.filter(function(b){return !(b.w&&state.gender==='pria');}).map(function(b){return '<a class="shop br" href="'+esc(b.u(brandQuery(r)))+'" target="_blank" rel="noopener" data-nofx'+(b.t?' title="'+esc(b.t)+'"':'')+'>'+esc(b.n)+'</a>';}).join('')+'</span></div></div>';
 }
 function openLookPanel(theme,lk,src){
   LOOKP={theme:theme,lk:lk,src:src}; renderLookPanel(); openModal('look-modal');
@@ -2882,7 +2978,7 @@ function renderLookPanel(){
   if(!can&&!recs.length) recs=recPieces(lk);
   var mot={wajib:'Wajib satu item bermotif',hindari:'Tanpa motif',boleh:'Motif boleh'}[lk.motif]||'';
   var head='<div class="bar"><span id="look-title">'+esc(theme)+' · '+esc(lk.name)+'</span><button type="button" class="xbtn" id="look-close" aria-label="Tutup">&#10005;</button></div>';
-  var intro='<div class="lp-head"><span class="lfig">'+(img?imgTag(img):'<span class="wait off"><span class="hanger">&#128087;</span></span>')+'</span><div><p style="margin:0 0 8px">'+esc(lk.desc||'')+(mot?' '+mot+'.':'')+'</p><span class="dots">'+lk.colors.map(dot).join('')+'</span><p class="small muted" style="margin:8px 0 0">Warna tema: '+lk.colors.map(colorLabel).join(', ').toLowerCase()+'.</p></div></div>';
+  var intro='<div class="lp-head"><span class="lfig">'+(img?imgTag(img):'<span class="wait off"><span class="hanger">'+FORM_ICO+'</span></span>')+'</span><div><p style="margin:0 0 8px">'+esc(lk.desc||'')+(mot?' '+mot+'.':'')+'</p><span class="dots">'+lk.colors.map(dot).join('')+'</span><p class="small muted" style="margin:8px 0 0">Warna tema: '+lk.colors.map(colorLabel).join(', ').toLowerCase()+'.</p></div></div>';
   var have='<h3 style="margin-top:18px">Dari lemarimu <span class="small muted">('+its.length+' item cocok)</span></h3>'+(its.length?'<div class="closet mini-closet">'+its.map(function(it){return '<div class="card"><span class="pick" style="cursor:default"><span class="thumb">'+itemArt(it)+'</span><span class="cap"><b>'+esc(it.name)+'</b><span class="meta">'+dot(it.color)+'<span>'+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></span></span></div>';}).join('')+'</div>':'<p class="muted">Belum ada item di lemarimu yang warnanya masuk tema ini.</p>');
   var act=can?'<div class="row" style="margin-top:14px"><button class="btn" id="look-go">Padukan jadi ensemble</button><span class="small muted">'+combos.length+' kombinasi dari lemarimu</span></div>':'<div class="reasons" style="margin-top:14px">Item yang cocok belum cukup untuk satu ensemble lengkap.</div>';
   var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Tautan membuka hasil pencarian di marketplace atau situs resmi brand (H&amp;M lewat toko resminya di Zalora); cek ketersediaan, harga, dan ukuran di sana.</p>':'';
@@ -2913,10 +3009,11 @@ var BCATS=[
   {k:'maskara',l:'Maskara',m:3,g:'eye',t:'makeup'},{k:'eyeliner',l:'Eyeliner',m:6,g:'eye',t:'makeup'},{k:'eyeshadow',l:'Eyeshadow',m:24,g:'eye',t:'makeup'},{k:'alis',l:'Pensil / pomade alis',m:24,g:'eye',t:'makeup'},
   {k:'foundation',l:'Foundation',m:12,g:'base',t:'makeup'},{k:'cushion',l:'Cushion',m:6,g:'base',t:'makeup'},{k:'concealer',l:'Concealer',m:12,g:'base',t:'makeup'},{k:'bedak',l:'Bedak / powder',m:24,g:'base',t:'makeup'},{k:'primer',l:'Primer',m:12,g:'base',t:'makeup'},
   {k:'blush',l:'Blush / bronzer',m:24,g:'cheek',t:'makeup'},{k:'lipstik',l:'Lipstik',m:18,g:'lip',t:'makeup'},{k:'liptint',l:'Lip tint / lip cream',m:12,g:'lip',t:'makeup'},{k:'lipbalm',l:'Lip balm',m:12,g:'lip',t:'makeup'},
-  {k:'settingspray',l:'Setting spray',m:12,g:'base',t:'makeup'},{k:'parfum',l:'Parfum',m:36,g:'parfum',t:'makeup'},
+  {k:'settingspray',l:'Setting spray',m:12,g:'base',t:'makeup'},{k:'parfum',l:'Parfum',m:36,g:'parfum',t:'groom'},
   {k:'cleanser',l:'Pembersih (cleanser)',m:12,s:1,t:'skin'},{k:'toner',l:'Toner',m:12,s:2,t:'skin'},{k:'essence',l:'Essence',m:12,s:3,t:'skin'},{k:'exfoliant',l:'Eksfolian AHA / BHA',m:12,s:4,t:'skin',a:['aha']},
   {k:'serum',l:'Serum',m:6,s:5,t:'skin'},{k:'retinol',l:'Retinol / retinoid',m:6,s:5,t:'skin',a:['retinol']},{k:'krimmata',l:'Krim mata',m:6,s:6,t:'skin'},{k:'pelembap',l:'Pelembap',m:12,s:7,t:'skin'},
-  {k:'sunscreen',l:'Sunscreen',m:12,s:8,t:'skin',a:['spf']},{k:'masker',l:'Masker',m:12,s:9,t:'skin'}
+  {k:'sunscreen',l:'Sunscreen',m:12,s:8,t:'skin',a:['spf']},{k:'masker',l:'Masker',m:12,s:9,t:'skin'},
+  {k:'pomade',l:'Pomade / wax rambut',m:24,t:'groom'},{k:'shampoo',l:'Sampo',m:12,t:'groom'},{k:'hairtonic',l:'Hair tonic / serum rambut',m:12,t:'groom'},{k:'beardoil',l:'Minyak jenggot',m:12,t:'groom'},{k:'aftershave',l:'Aftershave',m:24,g:'parfum',t:'groom'}
 ];
 var BC={}; BCATS.forEach(function(c){BC[c.k]=c;});
 var ACTIVES=[{k:'retinol',l:'Retinol'},{k:'aha',l:'AHA'},{k:'bha',l:'BHA / salicylic'},{k:'vitc',l:'Vitamin C'},{k:'niacinamide',l:'Niacinamide'},{k:'bpo',l:'Benzoyl peroxide'},{k:'azelaic',l:'Azelaic acid'},{k:'ha',l:'Hyaluronic acid'},{k:'ceramide',l:'Ceramide'},{k:'spf',l:'SPF'}];
@@ -2958,16 +3055,16 @@ function renderPAO(){
   var n={ok:0,warn:0,bad:0,na:0}; list.forEach(function(p){n[bStatus(p).k]++;});
   $('#pao-sum').innerHTML='<span class="bchip bad">'+n.bad+' kedaluwarsa</span><span class="bchip warn">'+n.warn+' segera habis</span><span class="bchip ok">'+n.ok+' aman</span>'+(n.na?'<span class="bchip">'+n.na+' belum dibuka</span>':'');
   $('#pao-list').innerHTML=list.length?list.map(function(p){ var st=bStatus(p), e=bExpiry(p), o=parseD(p.opened), pct=o&&e?Math.min(100,Math.max(0,(Date.now()-o)/(e-o)*100)):0;
-    return '<li class="bitem '+st.k+'">'+(p.shade?'<span class="shade" style="background:'+p.shade+'"></span>':'<span class="shade ic">'+(BC[p.cat].t==='skin'?'&#129524;':'&#128132;')+'</span>')+'<div class="bi"><b>'+esc(p.name)+'</b><span class="muted small">'+esc(p.brand||'')+(p.brand?' · ':'')+BC[p.cat].l+(p.shadeName?' · shade '+esc(p.shadeName):'')+' · PAO '+(p.pao||BC[p.cat].m)+'M</span><span class="pbar"><i style="width:'+pct.toFixed(0)+'%"></i></span><span class="small"><span class="tag st">'+st.l+'</span>'+(e?' sampai '+fmtD(e):'')+'</span>'+(bActives(p).length?'<span class="acts small">'+bActives(p).map(function(a){return '<span class="tag">'+AL[a]+'</span>';}).join(' ')+'</span>':'')+'</div><div class="bact"><button class="linkbtn" data-bedit="'+p.id+'">Ubah</button><button class="linkbtn danger" data-bdel="'+p.id+'">Habis / buang</button></div></li>'; }).join(''):'<li class="empty muted">Belum ada produk. Tambahkan makeup atau skincare yang sedang dipakai, lalu Kurasi mengingatkan sebelum kedaluwarsa.</li>';
+    return '<li class="bitem '+st.k+'">'+bIcon(p)+'<div class="bi"><b>'+esc(p.name)+'</b><span class="muted small">'+esc(p.brand||'')+(p.brand?' · ':'')+BC[p.cat].l+(p.shadeName?' · shade '+esc(p.shadeName):'')+' · PAO '+(p.pao||BC[p.cat].m)+'M</span><span class="pbar"><i style="width:'+pct.toFixed(0)+'%"></i></span><span class="small"><span class="tag st"><span class="stdot"></span>'+st.l+'</span>'+(e?' sampai '+fmtD(e):'')+'</span>'+(bActives(p).length?'<span class="acts small">'+bActives(p).map(function(a){return '<span class="tag">'+AL[a]+'</span>';}).join(' ')+'</span>':'')+'</div><div class="bact"><button class="linkbtn" data-bedit="'+p.id+'">Ubah</button><button class="linkbtn danger" data-bdel="'+p.id+'">Habis / buang</button></div></li>'; }).join(''):'<li class="empt-li" style="list-style:none">'+emptyHTML('beauty','Belum ada produk',isHomme()?'Tambahkan produk grooming atau skincare yang sedang dipakai, lalu Kurasi mengingatkan sebelum kedaluwarsa.':'Tambahkan makeup atau skincare yang sedang dipakai, lalu Kurasi mengingatkan sebelum kedaluwarsa.')+'</li>';
 }
 function paoFormSync(){ var c=BC[$('#pb-cat').value]; $('#pb-pao').placeholder=c.m; if(!BEDIT||$('#pb-cat').dataset.prev!==c.k){ $('#pb-pao').value=c.m; } $('#pb-cat').dataset.prev=c.k;
   $('#pb-shade-wrap').classList.toggle('hidden',c.t!=='makeup'||c.k==='parfum'); $('#pb-act-wrap').classList.toggle('hidden',c.t!=='skin');
   $('#pb-paohint').textContent='Umumnya '+c.l.toLowerCase()+' aman dipakai '+c.m+' bulan setelah dibuka (lihat simbol wadah terbuka "'+c.m+'M" di kemasan).'; }
-$('#pb-cat').innerHTML='<optgroup label="Makeup">'+catOptions('makeup')+'</optgroup><optgroup label="Skincare">'+catOptions('skin')+'</optgroup>';
+$('#pb-cat').innerHTML=catSelectHTML();
 $('#pb-acts').innerHTML=ACTIVES.map(function(a){return '<label class="chip"><input type="checkbox" name="pb-act" value="'+a.k+'"><span>'+a.l+'</span></label>';}).join('');
 $('#pb-cat').addEventListener('change',paoFormSync);
 function openPAO(p){ BEDIT=p?p.id:null; var f=$('#pao-form'); f.classList.remove('hidden'); $('#pb-title').textContent=p?'Ubah produk':'Produk baru';
-  $('#pb-name').value=p&&!p.autoName?p.name:''; $('#pb-brand').value=p?p.brand||'':''; $('#pb-cat').value=p?p.cat:'foundation'; $('#pb-cat').dataset.prev=''; $('#pb-opened').value=p?p.opened||'':todayStr(); $('#pb-exp').value=p?p.exp||'':''; $('#pb-shade').value=p&&p.shade?p.shade:'#C98A73'; $('#pb-noshade').checked=p?!p.shade:false; $('#pb-shadename').value=p?p.shadeName||'':''; SHB.pb.src=p?p.shadeSrc||'':''; $('#pb-shnote').textContent=p&&p.shadeSrc==='foto'?'Diambil dari fotomu.':p&&p.shadeSrc==='ai'?'Perkiraan AI dari nama shade.':SHNOTE; $('#pb-shpick').classList.add('hidden');
+  $('#pb-name').value=p&&!p.autoName?p.name:''; $('#pb-brand').value=p?p.brand||'':''; $('#pb-cat').value=p?p.cat:(isHomme()?'pelembap':'foundation'); $('#pb-cat').dataset.prev=''; $('#pb-opened').value=p?p.opened||'':todayStr(); $('#pb-exp').value=p?p.exp||'':''; $('#pb-shade').value=p&&p.shade?p.shade:'#C98A73'; $('#pb-noshade').checked=p?!p.shade:false; $('#pb-shadename').value=p?p.shadeName||'':''; SHB.pb.src=p?p.shadeSrc||'':''; $('#pb-shnote').textContent=p&&p.shadeSrc==='foto'?'Diambil dari fotomu.':p&&p.shadeSrc==='ai'?'Perkiraan AI dari nama shade.':SHNOTE; $('#pb-shpick').classList.add('hidden');
   $$('input[name=pb-act]').forEach(function(c){c.checked=!!(p&&p.actives&&p.actives.indexOf(c.value)>-1);}); paoFormSync(); if(p)$('#pb-pao').value=p.pao||BC[p.cat].m; f.scrollIntoView({behavior:'smooth',block:'start'}); }
 $('#pao-add').addEventListener('click',function(){openPAO(null);});
 $('#pb-cancel').addEventListener('click',function(){$('#pao-form').classList.add('hidden');});
@@ -3021,7 +3118,7 @@ $('#tab-beauty').addEventListener('click',function(e){
   var r=e.target.closest('[data-rrm]'); if(r){ var pr=r.dataset.rrm.split(':'); BEAUTY[pr[0]]=BEAUTY[pr[0]].filter(function(x){return x!==pr[1];}); saveBeauty(); renderRoutine(); }
 });
 // --- Wishlist anti-duplicate ---
-$('#wb-cat').innerHTML=catOptions('makeup')+'<optgroup label="Skincare">'+catOptions('skin')+'</optgroup>';
+$('#wb-cat').innerHTML=catSelectHTML();
 function wishForm(){ return {name:$('#wb-name').value.trim(),brand:$('#wb-brand').value.trim(),cat:$('#wb-cat').value,shade:$('#wb-noshade').checked?'':$('#wb-shade').value,shadeName:$('#wb-noshade').checked?'':$('#wb-shadename').value.trim(),shadeSrc:SHB.wb.src,price:parseInt(String($('#wb-price').value).replace(/\D/g,''),10)||0,link:$('#wb-link').value.trim()}; }
 function wishCheck(){ var w=wishForm(), c=BC[w.cat]; $('#wb-shade-wrap').classList.toggle('hidden',c.t!=='makeup'||c.k==='parfum'); if(c.t!=='makeup')w.shade='';
   var d=(w.name||w.shade)?dupesFor(w,null):[];
@@ -3033,7 +3130,7 @@ function renderWish(){
   var tot=BEAUTY.wish.reduce(function(s,w){return s+(w.price||0);},0);
   $('#wish-tot').textContent=BEAUTY.wish.length?BEAUTY.wish.length+' produk'+(tot?' · total '+rupiah(tot):''):'';
   $('#wish-list').innerHTML=BEAUTY.wish.length?BEAUTY.wish.map(function(w){ var d=dupesFor(w,w.id);
-    return '<li class="bitem'+(d.length?' warn':'')+'">'+(w.shade?'<span class="shade" style="background:'+w.shade+'"></span>':'<span class="shade ic">&#128132;</span>')+'<div class="bi"><b>'+esc(w.name)+'</b><span class="muted small">'+esc(w.brand||'')+(w.brand?' · ':'')+BC[w.cat].l+(w.shadeName?' · shade '+esc(w.shadeName):'')+(w.price?' · '+rupiah(w.price):'')+'</span>'+(d.length?'<span class="small"><span class="tag st">Mirip '+esc(d[0].p.name)+' ('+(d[0].src==='punya'?'sudah punya':'di wishlist')+')</span></span>':'<span class="small"><span class="tag okt">Tidak ada duplikat</span></span>')+(w.link?'<a class="pin small" href="'+esc(w.link)+'" target="_blank" rel="noopener">Buka tautan produk</a>':'')+'</div><div class="bact"><button class="linkbtn" data-wbuy="'+w.id+'">Sudah dibeli</button><button class="linkbtn danger" data-wdel="'+w.id+'">Hapus</button></div></li>'; }).join(''):'<li class="empty muted">Wishlist masih kosong. Sebelum checkout, catat di sini supaya tidak membeli shade yang sudah kamu punya.</li>';
+    return '<li class="bitem'+(d.length?' warn':'')+'">'+bIcon(w)+'<div class="bi"><b>'+esc(w.name)+'</b><span class="muted small">'+esc(w.brand||'')+(w.brand?' · ':'')+BC[w.cat].l+(w.shadeName?' · shade '+esc(w.shadeName):'')+(w.price?' · '+rupiah(w.price):'')+'</span>'+(d.length?'<span class="small"><span class="tag st">Mirip '+esc(d[0].p.name)+' ('+(d[0].src==='punya'?'sudah punya':'di wishlist')+')</span></span>':'<span class="small"><span class="tag okt">Tidak ada duplikat</span></span>')+(w.link?'<a class="pin small" href="'+esc(w.link)+'" target="_blank" rel="noopener">Buka tautan produk</a>':'')+'</div><div class="bact"><button class="linkbtn" data-wbuy="'+w.id+'">Sudah dibeli</button><button class="linkbtn danger" data-wdel="'+w.id+'">Hapus</button></div></li>'; }).join(''):'<li class="empt-li" style="list-style:none">'+emptyHTML('wish','Wishlist masih kosong',isHomme()?'Sebelum checkout, catat di sini supaya tidak membeli produk yang sudah kamu punya.':'Sebelum checkout, catat di sini supaya tidak membeli shade yang sudah kamu punya.')+'</li>';
 }
 $('#wish-list').addEventListener('click',function(e){
   var b=e.target.closest('[data-wbuy]'); if(b){ var w=BEAUTY.wish.find(function(x){return x.id===b.dataset.wbuy;}); if(!w)return; BEAUTY.wish=BEAUTY.wish.filter(function(x){return x.id!==w.id;}); BEAUTY.items.push({id:uid(),name:w.name,autoName:!!w.autoName,brand:w.brand,cat:w.cat,shade:w.shade,shadeName:w.shadeName||'',shadeSrc:w.shadeSrc||'',opened:'',exp:'',pao:BC[w.cat].m,actives:[]}); saveBeauty(); renderWish(); toast('Dipindah ke koleksi. Isi tanggal dibuka saat mulai dipakai.'); return; }
@@ -3078,6 +3175,87 @@ function beautyAlert(){ var n=BEAUTY.items.filter(function(p){var k=bStatus(p).k
 wishCheck();
 
 if(/[?&]dev\b/.test(location.search))$('#ai-settings').classList.remove('hidden');
+
+// ---------- v15: style mode (Femme / Homme), beauty illustrations, empty states, search ----------
+function styleG(){ var s=state.uiStyle; return s==='femme'?'wanita':s==='homme'?'pria':state.gender; }
+function isHomme(){ return styleG()==='pria'; }
+var FORM_ICO='<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4.5a2.2 2.2 0 1 1 0 4.4"/><path d="M14 9.5c2 1.2 10 1.2 12 0 1.4 3 1.8 6.2.6 9.5-.9 2.5-.9 5 .4 7.5H13c1.3-2.5 1.3-5 .4-7.5-1.2-3.3-.8-6.5.6-9.5z"/><path d="M20 26.5v8M14 37.5l6-3 6 3"/></svg>';
+var BICO={
+  lipstick:'<rect x="11" y="17" width="10" height="12" rx="1.6"/><rect x="12" y="13" width="8" height="4" rx=".8"/><path class="f" d="M13.3 13V7.6Q13.3 5.6 15 5L18.7 3.6V13Z"/><path d="M13.3 13V7.6Q13.3 5.6 15 5L18.7 3.6V13"/>',
+  balm:'<rect x="12.5" y="15" width="7" height="13" rx="1.6"/><rect x="13" y="8" width="6" height="7" rx="1.4"/><path class="f" d="M13.6 15.5h4.8v3h-4.8z"/>',
+  wand:'<rect x="13.5" y="3.5" width="5" height="11" rx="1.4"/><path d="M14.5 14.5h3"/><rect x="13" y="14.5" width="6" height="14" rx="2"/><path class="f" d="M14 19h4v8.3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>',
+  compact:'<circle cx="16" cy="17" r="11"/><circle class="f" cx="16" cy="17" r="7"/><circle cx="16" cy="17" r="7"/><path d="M9 8.5a10 10 0 0 1 14 0"/>',
+  cushion:'<circle cx="16" cy="17" r="11"/><ellipse class="f" cx="16" cy="17" rx="7" ry="5"/><ellipse cx="16" cy="17" rx="7" ry="5"/><path d="M13 17h6"/>',
+  pencil:'<path d="M8 25.5 22.5 11l3 3L11 28.5H8z"/><path d="M20.5 13l3 3"/><path class="f" d="M8 25.5 8 28.5 11 28.5z"/>',
+  pump:'<rect x="10" y="13" width="12" height="16" rx="3"/><path d="M14 13V9h4v4M16 9V5.5h4.5"/><path class="f" d="M11.2 20h9.6v6.2a1.6 1.6 0 0 1-1.6 1.6h-6.4a1.6 1.6 0 0 1-1.6-1.6z"/>',
+  perfume:'<rect x="8.5" y="13" width="15" height="15" rx="3.5"/><path d="M14 13V9.5h4V13"/><rect x="12.5" y="4" width="7" height="5.5" rx="1.2"/><path class="f" d="M10.2 19h11.6v6a1.6 1.6 0 0 1-1.6 1.6h-8.4a1.6 1.6 0 0 1-1.6-1.6z"/>',
+  dropper:'<rect x="11" y="14.5" width="10" height="14" rx="2.6"/><rect x="12.5" y="11" width="7" height="3.5" rx=".8"/><path d="M14.3 11V6.5a1.7 1.7 0 0 1 3.4 0V11"/><path class="f" d="M12.2 21h7.6v5.4a1.3 1.3 0 0 1-1.3 1.3h-5a1.3 1.3 0 0 1-1.3-1.3z"/>',
+  tall:'<rect x="11" y="9" width="10" height="20" rx="3"/><rect x="13" y="4" width="6" height="5" rx="1"/><path class="f" d="M12.2 17h7.6v9.6a1.3 1.3 0 0 1-1.3 1.3h-5a1.3 1.3 0 0 1-1.3-1.3z"/>',
+  tube:'<path d="M10 4.5h12l-1.6 18.5h-8.8z"/><path d="M10 7.5h12"/><rect x="12.5" y="23" width="7" height="5" rx="1"/><path class="f" d="M11.2 12h9.6l-.7 8h-8.2z"/>',
+  jar:'<rect x="8" y="15" width="16" height="11.5" rx="3"/><rect x="7.5" y="10" width="17" height="5" rx="1.5"/><path class="f" d="M9.4 19h13.2v4.5a1.6 1.6 0 0 1-1.6 1.6h-10a1.6 1.6 0 0 1-1.6-1.6z"/>',
+  tin:'<ellipse cx="16" cy="12" rx="10" ry="3.5"/><path d="M6 12v9c0 2 4.5 3.5 10 3.5s10-1.5 10-3.5v-9"/><path class="f" d="M7.2 15.5c2 1.3 5.3 2 8.8 2s6.8-.7 8.8-2v5c-1.6 1.5-5 2.4-8.8 2.4s-7.2-.9-8.8-2.4z"/>'
+};
+var BKIND={lipstik:'lipstick',liptint:'wand',lipbalm:'balm',maskara:'wand',eyeliner:'wand',concealer:'wand',eyeshadow:'compact',blush:'compact',bedak:'compact',cushion:'cushion',alis:'pencil',foundation:'pump',primer:'pump',settingspray:'tall',parfum:'perfume',aftershave:'perfume',cleanser:'tube',sunscreen:'tube',krimmata:'tube',toner:'tall',essence:'tall',exfoliant:'tall',shampoo:'tall',serum:'dropper',retinol:'dropper',hairtonic:'dropper',beardoil:'dropper',pelembap:'jar',masker:'jar',pomade:'tin'};
+function bIcon(p){ var k=BKIND[p.cat]||'jar', s=BICO[k];
+  if(p.shade) s=s.replace(/class="f"/g,'class="f" style="fill:'+p.shade+'"');
+  return '<span class="shade ic" aria-hidden="true"><svg viewBox="0 0 32 32">'+s+'</svg></span>'; }
+var EMPTY_ART={
+  lemari:'<svg viewBox="0 0 104 104" aria-hidden="true"><path d="M52 12a4 4 0 1 1 0 8"/><path d="M38 22c4 2.6 24 2.6 28 0 3 6.4 3.8 13.4 1.2 20.3-1.8 5-1.8 10.2.8 15.7H36c2.6-5.5 2.6-10.7.8-15.7C34.2 35.4 35 28.4 38 22z"/><path d="M41 31c6 1.8 16 1.8 22 0" class="g" stroke-dasharray="2.5 3"/><path d="M52 58v22M40 88l12-8 12 8"/><path class="gf" d="M76 22l1.4 3.6 3.6 1.4-3.6 1.4L76 32l-1.4-3.6-3.6-1.4 3.6-1.4z"/></svg>',
+  riwayat:'<svg viewBox="0 0 104 104" aria-hidden="true"><path d="M20 24c10-3 22-2 32 4 10-6 22-7 32-4v52c-10-3-22-2-32 4-10-6-22-7-32-4z"/><path d="M52 28v52"/><path d="M30 40h14M30 48h14M30 56h10M60 40h14M60 48h10"/><path class="g" d="M68 22v22l4-3 4 3V22"/></svg>',
+  beauty:'<svg viewBox="0 0 104 104" aria-hidden="true"><rect x="26" y="52" width="18" height="30" rx="3"/><rect x="28" y="42" width="14" height="10" rx="1.5"/><path class="g" d="M30.5 42V30q0-3 3-4.4L40 23v19"/><rect x="54" y="58" width="28" height="22" rx="5"/><rect x="53" y="50" width="30" height="8" rx="2.5"/><path class="gf" d="M74 26l1.4 3.6 3.6 1.4-3.6 1.4L74 36l-1.4-3.6-3.6-1.4 3.6-1.4z"/></svg>',
+  wish:'<svg viewBox="0 0 104 104" aria-hidden="true"><path d="M26 38h52l-4 46H30z"/><path d="M40 38v-6a12 12 0 0 1 24 0v6"/><path class="g" d="M52 74s-10-6-10-12.5a5.5 5.5 0 0 1 10-3.2 5.5 5.5 0 0 1 10 3.2C62 68 52 74 52 74z"/></svg>'
+};
+function emptyHTML(kind,title,text,actions){ return '<div class="empt">'+(EMPTY_ART[kind]||'')+'<h3>'+title+'</h3><p>'+text+'</p>'+(actions?'<div class="row">'+actions+'</div>':'')+'</div>'; }
+function catSelectHTML(){ var h=isHomme(), mk='<optgroup label="Makeup">'+catOptions('makeup')+'</optgroup>', sk='<optgroup label="Skincare">'+catOptions('skin')+'</optgroup>', gr='<optgroup label="'+(h?'Grooming & parfum':'Rambut & parfum')+'">'+catOptions('groom')+'</optgroup>'; return h?gr+sk+mk:mk+sk+gr; }
+function applyBeautyLabels(){
+  var h=isHomme(), nm=h?'Grooming':'Beauty';
+  var bl=document.querySelector('.dock button[data-tab="beauty"] .bl'); if(bl)bl.textContent=nm;
+  var qb=$('#q-beauty'); if(qb){ qb.querySelector('b').textContent=nm; qb.querySelector('small').textContent=h?'Kulit, rambut, dan parfum':'Makeup dan skincare'; }
+  var sm=document.querySelector('.brandbox .me small'); if(sm)sm.textContent=h?'Padu padan dan grooming dari lemarimu sendiri':'Padu padan dan beauty dari lemarimu sendiri';
+  var hb=$('#h-beauty'); if(hb)hb.textContent=h?'Grooming & skincare':'Makeup & beauty';
+  var ld=$('#beauty-lede'); if(ld)ld.textContent=h?'Catat produk grooming, skincare, dan parfum yang kamu pakai. Kurasi mengingatkan sebelum kedaluwarsa, memeriksa rutinitas skincare, dan menjaga wishlist dari belanja produk kembar.':'Catat makeup dan skincare yang kamu pakai. Kurasi mengingatkan sebelum kedaluwarsa, memeriksa rutinitas skincare, dan menjaga wishlist dari belanja shade kembar.';
+  ['pb-cat','wb-cat'].forEach(function(id){ var s=$('#'+id); if(!s)return; var v=s.value; s.innerHTML=catSelectHTML(); if(v&&BC[v])s.value=v; });
+}
+document.addEventListener('change',function(e){ if(e.target.name!=='uistyle')return; state.uiStyle=e.target.value; save('uiStyle',state.uiStyle); applyGenderTheme(); applyTheme(document.documentElement.getAttribute('data-theme')||'light'); renderChrome(); if(!$('#tab-beauty').classList.contains('hidden'))renderBeauty(); toast(state.uiStyle==='auto'?'Gaya tampilan mengikuti pilihan padu padan.':'Gaya tampilan KURASI '+(state.uiStyle==='femme'?'Femme':'Homme')+' aktif.'); });
+function syncStyleRadios(){ $$('input[name=uistyle]').forEach(function(r){r.checked=(r.value===(state.uiStyle||'auto'));}); }
+// --- season recommendations
+function renderSeasonRecs(){ var el=$('#season-recs'); if(!el)return; var k=state.season; if(!k||!SEASONS[k]){el.innerHTML='';return;}
+  var sc=SEASONS[k].c, list=[]; PRESETS.forEach(function(t,ti){ t.looks.forEach(function(lk,li){ var n=lk.colors.filter(function(c){return sc.indexOf(c)>-1;}).length; if(n)list.push({ti:ti,li:li,n:n}); }); });
+  list.sort(function(a,b){return b.n-a.n;}); list=list.slice(0,6);
+  el.innerHTML=list.length?'<div class="sechead"><div><h2>Rekomendasi outfit</h2><p>Look yang warnanya selaras dengan '+esc(SEASONS[k].l)+'. Ketuk untuk melihat padanan dari lemarimu.</p></div></div><div class="rrow">'+list.map(function(x){ var t=PRESETS[x.ti], lk=t.looks[x.li];
+    return '<button class="rcard" type="button" data-src="preset" data-theme="'+esc(t.name)+'" data-idx="'+x.li+'"><span class="rfig">'+imgTag('img/look-'+x.ti+'-'+x.li+'-'+figVariant()+'.webp')+'</span><span class="rtt"><small>'+esc(t.name)+'</small><b>'+esc(lk.name)+'</b><span class="dots">'+lk.colors.map(dot).join('')+'</span></span></button>'; }).join('')+'</div>':'';
+}
+// --- global search (Beranda)
+function searchAll(q){ var n=bnorm(q); if(n.length<2)return null; var words=n.split(' ');
+  function hit(s){ s=bnorm(s); return words.every(function(w){return s.indexOf(w)>-1;}); }
+  var cats=catsFor(state.gender).map(function(c){return c.k;});
+  var items=state.items.filter(function(it){ return cats.indexOf(it.cat)>-1&&hit([it.name,CATL[it.cat],colorLabel(it.color),it.motif?'motif':''].join(' ')); }).slice(0,6);
+  var bea=BEAUTY.items.map(function(p){return {p:p,w:0};}).concat(BEAUTY.wish.map(function(p){return {p:p,w:1};})).filter(function(x){ var p=x.p; return hit([p.name,p.brand,p.shadeName,BC[p.cat]?BC[p.cat].l:''].join(' ')); }).slice(0,5);
+  var th=[]; function scan(t,src){ t.looks.forEach(function(lk,i){ if(hit([t.name,lk.name,lk.desc,(lk.colors||[]).map(colorLabel).join(' ')].join(' ')))th.push({t:t,lk:lk,i:i,src:src}); }); }
+  PRESETS.forEach(function(t){scan(t,'preset');}); state.aiThemes.forEach(function(t){scan(t,'ai');});
+  return {items:items,bea:bea,th:th.slice(0,5)};
+}
+function renderSearch(){ var q=$('#q-search').value, box=$('#q-res'), r=searchAll(q);
+  if(!r){ box.classList.add('hidden'); box.innerHTML=''; return; }
+  var h='';
+  if(r.items.length) h+='<h4>Lemari</h4>'+r.items.map(function(it){ return '<button class="sitem" type="button" data-s="i:'+it.id+'"><span class="sth">'+itemArt(it)+'</span><span class="stx"><b>'+esc(it.name)+'</b><span>'+CATL[it.cat]+' · '+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></button>'; }).join('');
+  if(r.bea.length) h+='<h4>'+(isHomme()?'Grooming':'Beauty')+'</h4>'+r.bea.map(function(x){ var p=x.p; return '<button class="sitem" type="button" data-s="'+(x.w?'w':'b')+':'+p.id+'"><span class="sth">'+bIcon(p)+'</span><span class="stx"><b>'+esc(p.name)+'</b><span>'+esc(p.brand||'')+(p.brand?' · ':'')+(BC[p.cat]?BC[p.cat].l:'')+(x.w?' · wishlist':'')+'</span></span></button>'; }).join('');
+  if(r.th.length) h+='<h4>Tema &amp; look</h4>'+r.th.map(function(x){ return '<button class="sitem" type="button" data-s="t:'+x.src+':'+x.i+':'+encodeURIComponent(x.t.name)+'"><span class="sth"><span class="dots">'+x.lk.colors.slice(0,3).map(dot).join('')+'</span></span><span class="stx"><b>'+esc(x.lk.name)+'</b><span>Tema '+esc(x.t.name)+'</span></span></button>'; }).join('');
+  box.innerHTML=h||'<div class="none">Tidak ada hasil untuk “'+esc(q)+'”. Coba nama item, warna, merek, atau tema.</div>';
+  box.classList.remove('hidden');
+}
+function flashEl(el){ if(!el)return; el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+function goSearch(v){ var p=v.split(':'), box=$('#q-res'); box.classList.add('hidden');
+  if(p[0]==='i'){ var it=byId(p[1]); if(!it)return; CLOSET.filter='all'; showTab('lemari'); setTimeout(function(){ var b=document.querySelector('[data-pick="'+p[1]+'"]'); flashEl(b&&b.closest('.card')); },120); }
+  else if(p[0]==='b'||p[0]==='w'){ BTAB=p[0]==='b'?'pao':'wish'; showTab('beauty'); setTimeout(function(){ var b=document.querySelector(p[0]==='b'?'[data-bedit="'+p[1]+'"]':'[data-wbuy="'+p[1]+'"]'); flashEl(b&&b.closest('li')); },120); }
+  else if(p[0]==='t'){ var src=p[1], i=+p[2], name=decodeURIComponent(p.slice(3).join(':')), t=(src==='preset'?PRESETS:state.aiThemes).find(function(x){return x.name===name;}); if(t&&t.looks[i])openLookPanel(t.name,t.looks[i],src); }
+}
+$('#q-search').addEventListener('input',renderSearch);
+$('#q-search').addEventListener('focus',renderSearch);
+$('#q-search').addEventListener('keydown',function(e){ if(e.key==='Escape'){ this.value=''; renderSearch(); this.blur(); } else if(e.key==='Enter'){ e.preventDefault(); var f=$('#q-res .sitem'); if(f)goSearch(f.dataset.s); } else if(e.key==='ArrowDown'){ var f2=$('#q-res .sitem'); if(f2){e.preventDefault();f2.focus();} } });
+$('#q-res').addEventListener('click',function(e){ var b=e.target.closest('.sitem'); if(b)goSearch(b.dataset.s); });
+document.addEventListener('click',function(e){ if(!e.target.closest('.qsearch'))$('#q-res').classList.add('hidden'); });
+$('#top-search').addEventListener('click',function(){ showTab('outfit'); setTimeout(function(){ var s=$('#q-search'); s.scrollIntoView({behavior:'smooth',block:'center'}); s.focus({preventScroll:true}); },60); });
 
 // ---------- Init ----------
 applyGenderTheme();
