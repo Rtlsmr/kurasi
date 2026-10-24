@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kurasi</title>
 <meta name="description" content="Kurasi: atelier creates, ensemble elevates. Padu padan pakaian dari lemari sendiri dan pelacak beauty, untuk wanita dan pria.">
-<meta name="theme-color" content="#FFD3E5">
+<meta name="theme-color" content="#F8F4EF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Bodoni+Moda:opsz,wght@6..96,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/webp" href="img/logo-mark.webp">
 <style>
 :root{
@@ -710,6 +710,178 @@ button.avatar{cursor:pointer;padding:0}
   .brandbox .logo .wm small{color:var(--side-ink)!important;opacity:.9;font-size:9px!important}
   .cover-logo{display:block!important}
 }
+/* ===== v14: Modern Luxury Editorial (Femme / Homme, light / dark) ===== */
+:root{
+  --title:'Cormorant Garamond',Georgia,'Times New Roman',serif; --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --bg:#F8F4EF; --bg2:#FBF8F4; --surface:#FFFDFA; --surface2:#F4EEE8; --ink:#3D2A21; --muted:#7F6A5D; --outline:rgba(75,51,41,.13);
+  --pink:#EBD9D2; --lilac:#E6D7CC; --butter:#EFE2C8; --sky:#E9E2D9; --mint:#DEE4D6; --berry:#8E634B;
+  --btn:#4B3329; --btn2:#E8D5CE; --btn-ink:#FBF6F1; --bar-ink:#3D2A21; --danger:#A8433F;
+  --side1:#FFFDFA; --side2:#FBF7F2; --side-ink:#3D2A21; --gold:#B8935F;
+  --t1:#F2E7E1; --t2:#F5ECE2; --t3:#F3EBDD; --t4:#EEE8E0;
+  --shadow:0 1px 2px rgba(75,51,41,.04),0 12px 32px rgba(75,51,41,.07); --shadow-sm:0 1px 2px rgba(75,51,41,.05),0 4px 14px rgba(75,51,41,.05); --r:18px; --hi:0 0 0 transparent;
+}
+:root[data-g="pria"]{
+  --bg:#F7F5F2; --bg2:#FAF9F7; --surface:#FFFFFF; --surface2:#EFECE7; --ink:#24272C; --muted:#646A72; --outline:rgba(36,39,44,.13);
+  --pink:#E5E1DA; --lilac:#DADEE3; --butter:#E9E1D3; --sky:#DDE2E7; --mint:#DCE2DA; --berry:#4F5A66;
+  --btn:#2B2F35; --btn2:#E5E1DA; --btn-ink:#F7F5F2; --bar-ink:#24272C; --danger:#A3403E;
+  --side1:#FFFFFF; --side2:#FAF9F7; --side-ink:#24272C; --gold:#8B6F56;
+  --t1:#ECE9E4; --t2:#E8EBEE; --t3:#EEE8DE; --t4:#E6E9EC;
+  --shadow:0 1px 2px rgba(36,39,44,.04),0 12px 32px rgba(36,39,44,.07); --shadow-sm:0 1px 2px rgba(36,39,44,.05),0 4px 14px rgba(36,39,44,.05);
+}
+:root[data-theme="dark"]{
+  --bg:#171311; --bg2:#1E1916; --surface:#221C19; --surface2:#2C2420; --ink:#F2E8E1; --muted:#B8A396; --outline:rgba(242,232,225,.11);
+  --pink:#4A3832; --lilac:#45372F; --butter:#4A3F2E; --sky:#3A322D; --mint:#33392F; --berry:#D7AC92;
+  --btn:#CFA084; --btn2:#4A3832; --btn-ink:#1E1714; --bar-ink:#F2E8E1; --danger:#F08F86;
+  --side1:#1E1916; --side2:#1B1613; --side-ink:#F2E8E1; --gold:#D4B07A;
+  --t1:#2F2622; --t2:#33291F; --t3:#302A22; --t4:#2A2522;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.32); --shadow-sm:0 1px 2px rgba(0,0,0,.25),0 4px 14px rgba(0,0,0,.22);
+}
+:root[data-theme="dark"][data-g="pria"]{
+  --bg:#121417; --bg2:#171A1E; --surface:#1B1F24; --surface2:#242A30; --ink:#E8ECEF; --muted:#A0A9B2; --outline:rgba(232,236,239,.11);
+  --pink:#2E3640; --lilac:#2F3742; --butter:#3A362E; --sky:#2B3540; --mint:#2C3631; --berry:#A3BCD2;
+  --btn:#93AEC6; --btn2:#2E3640; --btn-ink:#121417; --bar-ink:#E8ECEF; --danger:#F08F86;
+  --side1:#171A1E; --side2:#15181B; --side-ink:#E8ECEF; --gold:#C4A27C;
+  --t1:#222930; --t2:#252B33; --t3:#2A2A28; --t4:#232A31;
+}
+body{font-weight:400!important;background:var(--bg)!important;letter-spacing:0}
+b,strong{font-weight:600}
+.stars,.deco,.hero::after,.side-cta .crown,.discover .star{display:none!important}
+h1{font-family:var(--title);font-weight:600;font-size:clamp(34px,8.6vw,50px);line-height:1.04;letter-spacing:-.005em}
+h2{font-size:26px;line-height:1.15}
+h3{font-size:20px;line-height:1.2}
+.cover h1{font-size:clamp(40px,10vw,60px);line-height:1}
+@media (min-width:900px){.cover h1{font-size:64px}}
+.lede{font-size:15.5px}
+legend,label.lbl{font-family:var(--body)!important;font-size:13.5px!important;font-weight:600!important;color:var(--ink);letter-spacing:.01em}
+.issue{font-family:var(--body)!important;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--berry)}
+.note,.muted{font-weight:400}
+.linkbtn{font-weight:500;color:var(--ink)}
+/* windows: paper cards with hairline headers */
+.win{background:var(--surface)!important;border:1px solid var(--outline)!important;box-shadow:var(--shadow)!important;border-radius:var(--r)!important}
+.win .bar{background:transparent!important;color:var(--ink)!important;border-bottom:1px solid var(--outline)!important;padding:14px 18px 12px!important;font-family:var(--title)!important;font-size:21px!important;font-weight:600!important;letter-spacing:.005em}
+/* buttons: one primary, one secondary, one text */
+.btn{background:var(--btn)!important;color:var(--btn-ink)!important;border:1px solid var(--btn)!important;box-shadow:none!important;border-radius:999px!important;font-family:var(--body);font-weight:600!important;font-size:14.5px;letter-spacing:.02em;transition:opacity .15s,background .15s}
+.btn:hover{opacity:.9}
+.btn.alt,.btn.butter,.btn.ghost{background:transparent!important;color:var(--ink)!important;border:1px solid color-mix(in srgb,var(--ink) 38%,transparent)!important;box-shadow:none!important}
+.btn.alt:hover,.btn.butter:hover,.btn.ghost:hover{background:var(--surface2)!important;opacity:1}
+:root[data-theme="dark"] .btn.alt,:root[data-theme="dark"] .btn.butter{color:var(--ink)!important}
+/* form controls */
+input[type=text],input[type=url],input[type=search],input[type=date],input[type=number],select,textarea{border:1px solid var(--outline)!important;background:var(--surface)!important;border-radius:12px!important;font-weight:400!important}
+.chip span{border:1px solid var(--outline)!important;background:var(--surface)!important;box-shadow:none!important;font-weight:500}
+.chip input:checked + span,:root[data-g="pria"] .chip input:checked + span{background:var(--btn)!important;color:var(--btn-ink)!important;border-color:var(--btn)!important;box-shadow:none!important}
+:root[data-theme="dark"] .chip input:checked + span{color:var(--btn-ink)!important}
+.seg{background:var(--surface2)!important;box-shadow:none!important}
+.seg span{font-weight:500}
+.seg input:checked + span{background:var(--surface)!important;color:var(--ink)!important;box-shadow:var(--shadow-sm)!important;font-weight:600}
+.tg input:checked + .trk{background:var(--btn)!important}
+.pal input:checked + span{border-color:var(--ink)!important}
+.tile{background:transparent!important;box-shadow:none!important}
+.card{box-shadow:none!important;border-radius:16px!important}
+.card.on{background:var(--t1)!important;box-shadow:0 0 0 1.5px var(--ink)!important}
+.look{box-shadow:none!important;border-radius:16px!important}
+.look[aria-pressed="true"]{background:var(--t1)!important;box-shadow:0 0 0 1.5px var(--ink)!important}
+.lfig,.mirror,.arch{box-shadow:none!important;background:linear-gradient(180deg,var(--t1),var(--t3))!important}
+.board,.seq{box-shadow:var(--shadow-sm)!important}
+.pieces li,.items li,.hist li{background:var(--surface2)!important;border-radius:14px!important}
+.lookbar,.nudge{background:var(--t3)!important;box-shadow:none!important}
+.closet-tabs button{box-shadow:none!important;font-weight:500}
+.closet-tabs button[aria-selected="true"]{background:var(--btn)!important;color:var(--btn-ink)!important}
+.how li::before{background:transparent!important;border:1px solid var(--gold)!important;color:var(--berry);box-shadow:none!important;font-family:var(--title)}
+.tag,.bchip,.shop{font-weight:600}
+.legend{font-weight:500}
+.rtx .cat,.shl{font-weight:600}
+.dot,.sw{border:1px solid rgba(0,0,0,.12)!important}
+/* navigation: one line-icon family */
+.dock{background:color-mix(in srgb,var(--surface) 92%,transparent)!important;border:1px solid var(--outline)!important;box-shadow:var(--shadow)!important}
+.dock .tile svg{stroke:var(--muted)!important;stroke-width:1.6}
+.dock button{font-weight:500}
+.dock button[aria-current="page"] .tile{background:transparent!important;transform:none!important}
+.dock button[aria-current="page"] .tile svg{stroke:var(--ink)!important;stroke-width:1.9}
+.dock button[aria-current="page"]{color:var(--ink)!important;font-weight:600}
+@media (max-width:899px){
+  .dock button[aria-current="page"] .tile{position:relative}
+  .dock button[aria-current="page"] .tile::after{content:"";position:absolute;left:50%;bottom:-2px;width:16px;height:2px;margin-left:-8px;border-radius:2px;background:var(--gold)}
+}
+@media (min-width:900px){
+  .dock{background:var(--side1)!important;border:1px solid var(--outline)!important;box-shadow:var(--shadow-sm)!important}
+  .dock button{color:var(--side-ink)!important;opacity:.82}
+  .dock .tile svg{stroke:var(--side-ink)!important}
+  .dock button[aria-current="page"]{background:var(--surface2)!important;opacity:1;box-shadow:none!important}
+  .dock button[aria-current="page"] .tile svg{stroke:var(--ink)!important}
+  .brandbox .logo .wm b{color:var(--logo-ink)!important}
+  .brandbox .logo .wm small{color:var(--logo-acc)!important;opacity:1}
+  .brandbox .me b{font-family:var(--title);font-size:22px;font-weight:600}
+  .side-cta{background:var(--surface2)!important;box-shadow:none!important;border:1px solid var(--outline)}
+}
+.avatar{background:var(--t1)!important;color:var(--berry)!important;font-family:var(--title)!important;font-weight:600!important;border:1px solid var(--outline)!important;box-shadow:none!important}
+/* Beranda: editorial hero */
+.hero{grid-template-columns:minmax(0,1fr) auto!important;gap:18px!important;padding:26px 22px 26px 26px!important;border-radius:24px!important;border:1px solid var(--outline)!important;box-shadow:var(--shadow)!important;background:linear-gradient(120deg,var(--surface) 0%,var(--t1) 100%)!important}
+.hero .kicker{font-size:11.5px!important;font-weight:600!important;letter-spacing:.16em;text-transform:uppercase;color:var(--berry)!important;margin:0 0 10px!important}
+.hero h1{font-size:clamp(32px,8.4vw,52px)!important;margin:0 0 10px!important;max-width:13ch}
+.hero p.sub2{font-size:15px;color:var(--muted)!important;opacity:1!important;margin:0 0 18px!important;max-width:40ch}
+.hero .row{gap:10px}
+.hero-art{width:clamp(108px,30vw,190px)!important;aspect-ratio:3/4!important;border-radius:999px 999px 18px 18px!important;background:linear-gradient(180deg,var(--t2),var(--surface))!important;box-shadow:none!important;border:1px solid var(--outline);overflow:hidden;position:relative}
+.hero-art img{position:absolute;inset:6% 4% 0;width:92%;height:94%;object-fit:contain;object-position:bottom;mix-blend-mode:multiply}
+:root[data-theme="dark"] .hero-art{background:linear-gradient(180deg,#F4ECE4,#E9DED3)!important}
+:root[data-theme="dark"][data-g="pria"] .hero-art{background:linear-gradient(180deg,#EEF0F2,#DFE3E7)!important}
+@media (max-width:520px){.hero{padding:22px 16px 22px 20px!important}.hero .row .btn{padding-left:16px;padding-right:16px}}
+/* quick access (4 features) */
+.quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 18px}
+.qcard{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px 12px;border:1px solid var(--outline);border-radius:18px;background:var(--surface);color:var(--ink);cursor:pointer;text-align:center;transition:background .15s,border-color .15s}
+.qcard:hover{background:var(--surface2);border-color:color-mix(in srgb,var(--ink) 25%,transparent)}
+.qcard .qi{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);background:var(--t1)}
+.qcard svg{width:21px;height:21px;fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.qcard b{font-family:var(--title);font-size:18px;font-weight:600;line-height:1}
+.qcard small{display:none;font-size:12.5px;color:var(--muted);line-height:1.35}
+@media (min-width:700px){.qcard{flex-direction:row;align-items:center;text-align:left;gap:12px;padding:14px 16px}.qcard small{display:block}.qcard span.qt{display:flex;flex-direction:column;gap:4px}}
+/* stats: quiet editorial figures */
+.stat{background:var(--surface)!important;border:1px solid var(--outline)!important;box-shadow:none!important;min-height:0!important;padding:14px 16px!important;border-radius:16px!important}
+.stat .ic{width:30px!important;height:30px!important;border-radius:50%!important;background:transparent!important;border:1px solid var(--outline);box-shadow:none!important;margin-bottom:6px!important}
+.stat .ic svg{width:16px!important;height:16px!important;stroke:var(--berry)!important;stroke-width:1.6!important}
+.stat .lb{font-size:12.5px!important;font-weight:500!important;opacity:1!important;color:var(--muted)!important}
+.stat .nv{font-family:var(--title)!important;font-size:34px!important;font-weight:600!important;line-height:1.05!important}
+.stat .dl{font-weight:400!important}
+/* today's recommendations */
+.recs-today{margin:0 0 22px}
+.sechead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 12px}
+.sechead h2{margin:0;font-size:26px}
+.sechead p{margin:2px 0 0;font-size:13.5px;color:var(--muted)}
+.rrow{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}
+.rcard{scroll-snap-align:start;display:flex;flex-direction:column;text-align:left;padding:0;border:1px solid var(--outline);border-radius:18px;background:var(--surface);color:var(--ink);cursor:pointer;overflow:hidden}
+.rcard:hover{border-color:color-mix(in srgb,var(--ink) 28%,transparent)}
+.rcard .rfig{position:relative;height:0;padding-top:118%;background:linear-gradient(180deg,var(--t1),var(--t3))}
+.rcard .rfig img{position:absolute;inset:6% 0 0;width:100%;height:94%;object-fit:contain;object-position:bottom;mix-blend-mode:multiply}
+:root[data-theme="dark"] .rcard .rfig{background:linear-gradient(180deg,#F4ECE4,#E9DED3)}
+:root[data-theme="dark"][data-g="pria"] .rcard .rfig{background:linear-gradient(180deg,#EEF0F2,#DFE3E7)}
+.rcard .rtt{display:flex;flex-direction:column;gap:5px;padding:10px 12px 12px}
+.rcard .rtt small{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--berry)}
+.rcard .rtt b{font-family:var(--title);font-size:19px;font-weight:600;line-height:1.1}
+.rcard .rtt .ai{font-size:11px;color:var(--muted)}
+@media (min-width:1100px){#outfit-main>.quick,#outfit-main>.recs-today{grid-column:1 / -1}}
+/* discover + alerts */
+.discover{background:var(--surface)!important;box-shadow:none!important;border:1px solid var(--outline)!important;border-left:3px solid var(--gold)!important;border-radius:18px!important}
+.discover b{font-size:22px!important;font-weight:600}
+.beauty-alert{background:var(--t3)!important;color:var(--ink)!important;font-weight:500!important;border-left:3px solid var(--gold)!important}
+.toast{background:var(--ink)!important;color:var(--surface)!important}
+
+.hero{grid-template-areas:"tx art" "cta art";align-items:start!important;row-gap:0!important}
+.hero>div:first-child{grid-area:tx;align-self:end}
+.hero-art{grid-area:art;align-self:center}
+.hero-cta{grid-area:cta;align-self:start}
+@media (max-width:520px){
+  .hero{grid-template-areas:"tx art" "cta cta";row-gap:4px!important}
+  .hero-art{width:96px!important;align-self:start}
+  .hero .kicker .sep{display:none}.hero .kicker #today{display:block;margin-top:2px}
+  .hero-cta .btn{flex:1 1 auto}
+}
+.tg .tl{font-weight:500}
+.bchip.bad,.bitem.bad .tag.st{background:#F3DEDA!important;color:#86302A!important}
+.bchip.warn,.bitem.warn .tag.st{background:#F1E6CD!important;color:#6B5110!important}
+.bchip.ok,.tag.okt{background:#E0E8DA!important;color:#2F5A3A!important}
+.bitem{border-left-color:#9DB59A}.bitem.warn{border-left-color:#D2B06A}.bitem.bad{border-left-color:#C77B70}
+:root[data-theme="dark"] .hero-art,:root[data-theme="dark"] .rcard .rfig{filter:brightness(.92)}
+.hero-art img,.rcard .rfig img{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%);mask-image:linear-gradient(180deg,transparent 0,#000 12%)}
+@media (min-width:900px){.dock .side-cta .btn{color:var(--btn-ink)!important;opacity:1!important;padding:8px 20px!important;border-radius:999px!important;background:var(--btn)!important}}
 </style>
 </head>
 <body>
@@ -764,13 +936,19 @@ button.avatar{cursor:pointer;padding:0}
       <div id="outfit-main">
         <section class="hero" aria-labelledby="h-outfit">
           <div>
-            <p class="kicker">Ensemble hari ini · <span id="today"></span></p>
-            <h1 id="h-outfit">Selamat pagi!</h1>
-            <p class="sub2" id="hero-sub">Siap tampil memukau hari ini? Kurasi memadukan isi lemarimu dalam sekali ketuk.</p>
-            <button class="btn" type="button" id="hero-go">Kurasi outfit sekarang</button>
+            <p class="kicker"><span id="hero-greet">Selamat pagi</span><span class="sep"> · </span><span id="today"></span></p>
+            <h1 id="h-outfit">Temukan gaya khasmu</h1>
+            <p class="sub2" id="hero-sub">Padu padan yang mencerminkan karakter dan preferensimu, langsung dari isi lemarimu.</p>
           </div>
           <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+          <div class="row hero-cta"><button class="btn" type="button" id="hero-go">Kurasi outfit sekarang</button><button class="btn ghost" type="button" data-go="tema">Mulai eksplorasi</button></div>
         </section>
+        <nav class="quick" aria-label="Akses cepat">
+          <button class="qcard" type="button" id="q-outfit"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg></span><span class="qt"><b>Outfit</b><small>Padu padan untuk hari ini</small></span></button>
+          <button class="qcard" type="button" data-go="lemari"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span><span class="qt"><b>Lemari</b><small>Atelier pakaianmu</small></span></button>
+          <button class="qcard" type="button" data-go="warna"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.5-1.2-2-1.2-3.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-3.9-4-7-9-7z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg></span><span class="qt"><b>Warna</b><small>Personal color-mu</small></span></button>
+          <button class="qcard" type="button" data-go="beauty"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="13" width="9" height="8" rx="1.5"/><path d="M9.5 13v-3h5v3M10.5 10V6.2l3-2.2V10"/></svg></span><span class="qt"><b>Beauty</b><small>Makeup dan skincare</small></span></button>
+        </nav>
         <div id="beauty-alert"></div>
         <div class="stats" id="stats"></div>
         <div class="nudge hidden" id="nudge"><span>Lengkapi profil agar saran dan ilustrasinya terasa seperti kamu.</span><button class="btn small butter" type="button" id="nudge-go">Isi profil</button></div>
@@ -780,7 +958,7 @@ button.avatar{cursor:pointer;padding:0}
           <button class="linkbtn" id="btn-clear-look">Lepas tema</button>
         </div>
 
-        <div class="win lilac">
+        <div class="win lilac" id="style-panel">
           <div class="bar"><span>Atur gaya hari ini</span><span class="deco" aria-hidden="true"><i>&#9734;</i><i>&#9825;</i></span></div>
           <div class="body">
             <div class="grid2">
@@ -811,12 +989,13 @@ button.avatar{cursor:pointer;padding:0}
         </div>
 
         <div id="result" class="win butter hidden ph" aria-live="polite"></div>
+        <section class="recs-today" id="recs-today" aria-labelledby="h-recs"></section>
         <div class="dash2">
           <div class="win sky"><div class="bar"><span>Warna lemarimu</span><span class="deco" aria-hidden="true"><i>&#9673;</i></span></div><div class="body" id="dash-donut"></div></div>
           <div class="win pink"><div class="bar"><span>Outfit minggu ini</span><span class="deco" aria-hidden="true"><i>&#9776;</i></span></div><div class="body" id="dash-week"></div></div>
           <div class="win mint"><div class="bar"><span>Terakhir dipakai</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body" id="dash-recent"></div></div>
         </div>
-        <div class="discover"><span class="star" aria-hidden="true">&#11088;</span><div><b>Ada dresscode atau tema acara?</b><span>Ketik temanya, AI menyusun 3 look lalu Kurasi memadukan dari lemarimu.</span></div><button class="btn alt" type="button" data-go="tema">Jelajahi tema</button></div>
+        <div class="discover"><div><b>Ada dresscode atau tema acara?</b><span>Ketik temanya, AI menyusun 3 look lalu Kurasi memadukan dari lemarimu.</span></div><button class="btn alt" type="button" data-go="tema">Jelajahi tema</button></div>
       </div>
     </section>
 
@@ -988,8 +1167,8 @@ button.avatar{cursor:pointer;padding:0}
         <div class="win lilac"><div class="bar"><span>Skincare routine checker</span><span class="deco" aria-hidden="true"><i>&#10003;</i></span></div><div class="body">
           <p class="small muted" id="rt-hint" style="margin-top:0"></p>
           <div class="bgrid">
-            <div><h3>&#9728;&#65039; Pagi</h3><div id="rt-am"></div></div>
-            <div><h3>&#127769; Malam</h3><div id="rt-pm"></div></div>
+            <div><h3>Pagi</h3><div id="rt-am"></div></div>
+            <div><h3>Malam</h3><div id="rt-pm"></div></div>
           </div>
           <h3 style="margin-top:18px">Hasil pemeriksaan</h3>
           <div id="rt-check"></div>
@@ -1950,7 +2129,7 @@ function wear(c,btn){
 }
 function renderOutfitPage(){
   var d=new Date(), ds=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long'});
-  $('#today').textContent=ds.charAt(0).toUpperCase()+ds.slice(1); $('#h-outfit').textContent=greet()+' '+greetIcon(); $('#cover-issue').textContent='Edisi '+ds+(state.profile.name?' · untuk '+state.profile.name:'');
+  $('#today').textContent=ds.charAt(0).toUpperCase()+ds.slice(1); $('#hero-greet').textContent=greet().replace(/!$/,''); $('#cover-issue').textContent='Edisi '+ds+(state.profile.name?' · untuk '+state.profile.name:'');
   $('#nudge').classList.toggle('hidden',!!state.profile.done);
   var rs=$('#result'); if(rs.classList.contains('ph')) rs.innerHTML='<div class="bar"><span>Ensemble-mu muncul di sini</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div><div class="body ph-empty"><div class="mirror" aria-hidden="true">'+imgTag('img/run-'+state.gender+'-1.webp')+'</div><p style="margin-top:14px">Atur acara dan item di kiri, lalu ketuk <b>Kurasi outfit</b>.</p></div>';
   var cats=catsFor(state.gender);
@@ -2003,7 +2182,7 @@ function renderThemes(){
   if(!state.worker)$('#ai-status').innerHTML='<span class="muted">Fitur AI belum disambungkan. Tema siap pakai tetap bisa dipakai.</span>';
 }
 document.addEventListener('click',function(e){
-  var b=e.target.closest('.look'); if(!b)return;
+  var b=e.target.closest('.look,.rcard'); if(!b)return;
   var theme=b.dataset.theme, idx=+b.dataset.idx, lk;
   if(b.dataset.src==='preset')lk=PRESETS.find(function(t){return t.name===theme;}).looks[idx];
   else lk=state.aiThemes.find(function(t){return t.name===theme;}).looks[idx];
@@ -2132,7 +2311,7 @@ $('#history').addEventListener('click',function(e){
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
   $('#theme-toggle').checked=(t==='dark');
-  var m=document.querySelector('meta[name=theme-color]'); if(m)m.setAttribute('content',t==='dark'?'#2A1430':'#FFD3E5');
+  var m=document.querySelector('meta[name=theme-color]'); if(m)m.setAttribute('content',t==='dark'?(state.gender==='pria'?'#121417':'#171311'):(state.gender==='pria'?'#F7F5F2':'#F8F4EF'));
 }
 var savedTheme=load('theme',null);
 applyTheme(savedTheme||'light');
@@ -2591,25 +2770,30 @@ $('#move-open').addEventListener('change',function(e){ var f=e.target.files&&e.t
   }; rd.readAsText(f); });
 
 // ---------- v7: dashboard, avatar, gender theme ----------
-function applyGenderTheme(){ document.documentElement.setAttribute('data-g',state.gender); var m=document.querySelector('meta[name=theme-color]'); if(m&&document.documentElement.getAttribute('data-theme')!=='dark')m.setAttribute('content',state.gender==='pria'?'#DFE7EF':'#EEE6FF'); }
+function applyGenderTheme(){ document.documentElement.setAttribute('data-g',state.gender); var m=document.querySelector('meta[name=theme-color]'); if(m&&document.documentElement.getAttribute('data-theme')!=='dark')m.setAttribute('content',state.gender==='pria'?'#F7F5F2':'#F8F4EF'); }
 var AVATAR={src:null};
 function avatarVariant(){ return state.gender==='pria'?'pria':(state.opts.hijab?'hijab':'wanita'); }
 function avatarInner(){ var n=(state.profile.name||'').trim(), src=AVATAR.src||('img/avatar-'+avatarVariant()+'.webp');
   return '<b>'+esc(n?n.charAt(0).toUpperCase():'❀')+'</b><img src="'+src+'" alt="" onerror="this.remove()">'; }
 function avatarHTML(cls){ return '<span class="avatar'+(cls?' '+cls:'')+'" aria-hidden="true">'+avatarInner()+'</span>'; }
 function avatarKey(){ var p=state.profile; return [avatarVariant(),p.skin,p.hair,p.hijabStyle].join('|'); }
-function avatarPrompt(){ var p=state.profile, sk=skinOf().en, bg=state.gender==='pria'?'soft steel blue':'soft lavender';
+function avatarPrompt(){ var p=state.profile, sk=skinOf().en, bg=state.gender==='pria'?'warm light grey':'warm ivory';
   var who=state.gender==='pria'?'a friendly young Indonesian man with '+sk+' and short neat black hair, wearing a casual shirt':(state.opts.hijab?'a friendly young Indonesian woman with '+sk+' wearing a '+(p.hijabStyle==='turban'?'turban hijab':'soft pastel hijab')+' and a cozy knit top':'a friendly young Indonesian woman with '+sk+' and '+((HAIRS.find(function(h){return h.k===p.hair;})||HAIRS[0]).en)+', wearing a cozy knit top');
-  return 'Cute 3D clay cartoon avatar portrait of '+who+', warm smile, big expressive eyes, head and shoulders, centered, soft studio lighting, plain '+bg+' background, polished Pixar-like character render, no text.'; }
+  return 'Editorial fashion illustration portrait of '+who+', gentle smile, head and shoulders, centered, hand-drawn with fine ink lines and soft watercolor wash, elegant and minimal, plain '+bg+' paper background, no text.'; }
 function loadAvatar(){ idbGet('avatar').then(function(v){ if(v&&v.k===avatarKey()&&v.u){AVATAR.src=v.u;renderChrome();} else if(state.profile.done)makeAvatar(); }); }
 function makeAvatar(){ if(!state.worker||!state.aiImg)return; var k=avatarKey();
   aiPost({type:'image',prompt:avatarPrompt()},50000).then(function(j){ if(!j.image)return; return loadImg('data:image/jpeg;base64,'+j.image).then(function(im){ if(!im)return; var c=document.createElement('canvas'); c.width=256; c.height=256; c.getContext('2d').drawImage(im,0,0,256,256); var u=c.toDataURL('image/webp',0.85); if(u.indexOf('data:image/webp')!==0)u=c.toDataURL('image/jpeg',0.86); AVATAR.src=u; idbPut('avatar',{k:k,u:u}); renderChrome(); }); }).catch(function(){}); }
 function renderChrome(){
   var n=(state.profile.name||'').trim();
-  $('#side-avatar').innerHTML=avatarHTML('big'); $('#side-hello').textContent='Hai'+(n?', '+n:'')+'! 👋';
+  $('#side-avatar').innerHTML=avatarHTML('big'); $('#side-hello').textContent='Hai'+(n?', '+n:'');
   $('#top-avatar').innerHTML=avatarInner();
-  var ha=$('#hero-art'); if(ha)ha.innerHTML=avatarHTML();
+  var ha=$('#hero-art'); if(ha){ var tl=todayLooks()[0]; ha.innerHTML=imgTag('img/look-'+tl.ti+'-'+tl.li+'-'+figVariant()+'.webp'); }
 }
+function todayLooks(){ var d=Math.floor((Date.now()-new Date().getTimezoneOffset()*6e4)/864e5), out=[];
+  for(var i=0;i<4;i++){ var ti=(d+i)%PRESETS.length, li=(d+i*2)%3; out.push({ti:ti,li:li}); } return out; }
+function renderTodayRecs(){ var el=$('#recs-today'); if(!el)return;
+  el.innerHTML='<div class="sechead"><div><h2 id="h-recs">Rekomendasi hari ini</h2><p>Kurasi pilihan untukmu. Ketuk untuk melihat padanan dari lemarimu.</p></div><button class="linkbtn" type="button" data-go="tema">Lihat semua</button></div><div class="rrow">'+todayLooks().map(function(x){ var t=PRESETS[x.ti], lk=t.looks[x.li];
+    return '<button class="rcard" type="button" data-src="preset" data-theme="'+esc(t.name)+'" data-idx="'+x.li+'"><span class="rfig">'+imgTag('img/look-'+x.ti+'-'+x.li+'-'+figVariant()+'.webp')+'</span><span class="rtt"><small>'+esc(t.name)+'</small><b>'+esc(lk.name)+'</b><span class="dots">'+lk.colors.map(dot).join('')+'</span><span class="ai">Ilustrasi contoh AI</span></span></button>'; }).join('')+'</div>'; }
 function weekStart(){ var d=new Date(); d.setHours(0,0,0,0); var w=(d.getDay()+6)%7; d.setDate(d.getDate()-w); return d.getTime(); }
 function itemCreated(it){ var t=parseInt(String(it.id).slice(0,8),36); return isFinite(t)&&t>1.6e12&&t<4e12?t:0; }
 function streakDays(){ var days={}; state.history.forEach(function(h){var d=new Date(h.t);d.setHours(0,0,0,0);days[d.getTime()]=1;}); var d=new Date(); d.setHours(0,0,0,0); var n=0; if(!days[d.getTime()])d.setDate(d.getDate()-1); while(days[d.getTime()]){n++;d.setDate(d.getDate()-1);} return n; }
@@ -2624,18 +2808,20 @@ function renderDash(){
   var cnt={}; vis.forEach(function(i){cnt[i.color]=(cnt[i.color]||0)+1;}); var keys=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a];}), tot=vis.length||1;
   var top=keys.slice(0,5), other=keys.slice(5).reduce(function(s,k){return s+cnt[k];},0), seg=top.map(function(k){return {c:hx(k),l:colorLabel(k),n:cnt[k]};}); if(other)seg.push({c:'#C9C3D6',l:'Lainnya',n:other});
   var R=44, C=2*Math.PI*R, off=0, arcs=vis.length?seg.map(function(s){var len=s.n/tot*C; var a='<circle r="'+R+'" cx="60" cy="60" fill="none" stroke="'+s.c+'" stroke-width="20" stroke-dasharray="'+Math.max(len-1.5,0.5).toFixed(2)+' '+(C-len+1.5).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'" transform="rotate(-90 60 60)"/>'; off+=len; return a;}).join(''):'<circle r="'+R+'" cx="60" cy="60" fill="none" stroke="var(--surface2)" stroke-width="20"/>';
-  $('#dash-donut').innerHTML='<div class="donut"><svg viewBox="0 0 120 120" aria-hidden="true"><circle r="'+R+'" cx="60" cy="60" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="22"/>'+arcs+'<text x="60" y="58" text-anchor="middle" font-family="Fredoka" font-size="20" font-weight="700" fill="currentColor">'+vis.length+'</text><text x="60" y="74" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">item</text></svg><ul class="legend">'+(vis.length?seg.map(function(s){return '<li><i class="dot" style="background:'+s.c+'"></i>'+esc(s.l)+'<span>'+Math.round(s.n/tot*100)+'%</span></li>';}).join(''):'<li>Lemari masih kosong</li>')+'</ul></div>';
+  $('#dash-donut').innerHTML='<div class="donut"><svg viewBox="0 0 120 120" aria-hidden="true"><circle r="'+R+'" cx="60" cy="60" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="22"/>'+arcs+'<text x="60" y="58" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="24" font-weight="600" fill="currentColor">'+vis.length+'</text><text x="60" y="74" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">item</text></svg><ul class="legend">'+(vis.length?seg.map(function(s){return '<li><i class="dot" style="background:'+s.c+'"></i>'+esc(s.l)+'<span>'+Math.round(s.n/tot*100)+'%</span></li>';}).join(''):'<li>Lemari masih kosong</li>')+'</ul></div>';
   // grafik minggu ini
   var per=[0,0,0,0,0,0,0]; state.history.forEach(function(h){ if(h.t>=ws&&h.t<ws+7*864e5)per[Math.floor((h.t-ws)/864e5)]++; }); var mx=Math.max(2,Math.max.apply(null,per));
   var cols=['var(--lilac)','var(--pink)','var(--butter)','var(--mint)','var(--sky)','var(--lilac)','var(--pink)'], dn=['Sen','Sel','Rab','Kam','Jum','Sab','Min'], today=(new Date().getDay()+6)%7;
   $('#dash-week').innerHTML='<div class="bars" role="img" aria-label="Jumlah outfit dipakai per hari minggu ini"><div class="ax"><span>'+mx+'</span><span>'+Math.round(mx/2)+'</span><span>0</span></div>'+per.map(function(v,i){return '<div class="col"><span class="bar-v" style="height:'+Math.max(4,v/mx*100)+'%;background:'+cols[i]+(i===today?';outline:2px solid var(--btn);outline-offset:1px':'')+'" title="'+v+' outfit"></span><small>'+dn[i]+'</small></div>';}).join('')+'</div>'+(per.some(Boolean)?'':'<p class="note" style="margin-top:8px">Belum ada outfit tercatat minggu ini. Ketuk "Pakai outfit ini" setelah memilih.</p>');
-  var ba=BEAUTY?beautyAlert():0; $('#beauty-alert').innerHTML=ba?'<div class="beauty-alert"><span>&#128132; '+ba+' produk makeup / skincare kedaluwarsa atau segera habis.</span><button class="btn small" type="button" data-go="beauty">Cek di Beauty</button></div>':'';
+  renderTodayRecs();
+  var ba=BEAUTY?beautyAlert():0; $('#beauty-alert').innerHTML=ba?'<div class="beauty-alert"><span>'+ba+' produk makeup / skincare kedaluwarsa atau segera habis.</span><button class="btn small" type="button" data-go="beauty">Cek di Beauty</button></div>':'';
   // terakhir dipakai
   var rec=state.history.slice(0,3);
   $('#dash-recent').innerHTML=rec.length?'<ul class="recent">'+rec.map(function(h){var its=h.items.map(function(x){return byId(x.id)||x;}).slice(0,4);return '<li><span class="minis">'+its.map(function(it){return '<span class="mini">'+(it.cat?itemArt(it):'')+'</span>';}).join('')+'</span><span class="tx"><b>'+new Date(h.t).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'})+'</b>'+(h.look?esc(h.look):h.items.length+' item')+'</span></li>';}).join('')+'</ul><button class="linkbtn" data-go="riwayat" style="margin-top:8px">Lihat semua riwayat</button>':'<p class="muted small" style="margin:0">Belum ada riwayat. Outfit yang kamu pakai akan muncul di sini.</p>';
 }
 
 $('#hero-go').addEventListener('click',function(){ kurasi(); });
+$('#q-outfit').addEventListener('click',function(){ var p=$('#style-panel'); if(p){ p.scrollIntoView({behavior:'smooth',block:'start'}); var f=p.querySelector('select,input,button'); if(f)setTimeout(function(){f.focus({preventScroll:true});},350); } });
 // ---------- v8: theme panel (wardrobe matches + shopping suggestions) ----------
 var LOOKP={theme:null,lk:null,src:null,img:null};
 function lookItems(lk){
@@ -2900,7 +3086,7 @@ renderOutfitPage();
 fxScan(document.body); FX_OBS.observe(document.body,{childList:true,subtree:true,characterData:true});
 idbAll().then(function(all){ Object.keys(all||{}).forEach(function(k){ if(k.indexOf('it.')===0||k.indexOf('shop.')===0)ITEM_IMG[k]=all[k]; }); IDB_READY=true; if(!$('#tab-lemari').classList.contains('hidden'))renderWardrobe(); if(!$('#tab-outfit').classList.contains('hidden'))renderDash(); setTimeout(pumpIll,1500); });
 loadAvatar();
-setInterval(function(){ var h=$('#h-outfit'); if(h)h.textContent=greet()+' '+greetIcon(); },60000);
+setInterval(function(){ var h=$('#hero-greet'); if(h)h.textContent=greet().replace(/!$/,''); },60000);
 })();
 </script>
 </body>
