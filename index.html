@@ -1662,6 +1662,33 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   #outfit-empty .cover-full{width:100px;border-radius:8px;box-shadow:none}
 }
 
+
+/* v26 — balance the desktop cover typography and visual weight */
+@media (min-width:900px){
+  #outfit-empty.cover>.body{
+    grid-template-columns:minmax(390px,.9fr) minmax(0,1.1fr)!important;
+    column-gap:clamp(38px,4vw,64px)!important;
+    padding:clamp(30px,3.2vw,48px)!important;
+  }
+  #outfit-empty .cover-full{width:68px!important}
+  #outfit-empty .cover-logo{margin-bottom:10px!important}
+  #outfit-empty .issue{margin-bottom:12px!important}
+  #outfit-empty h1{
+    font-size:clamp(46px,3.8vw,60px)!important;
+    line-height:1.01!important;
+    max-width:11ch!important;
+    letter-spacing:-.025em!important;
+    margin-bottom:16px!important;
+  }
+  #outfit-empty .sub{max-width:42ch!important;font-size:15.5px!important;line-height:1.75!important}
+  #outfit-empty .runway{align-self:center!important;max-width:760px!important}
+  #outfit-empty .arch{aspect-ratio:3/5!important}
+}
+@media (min-width:900px) and (max-width:1100px){
+  #outfit-empty.cover>.body{grid-template-columns:minmax(330px,.9fr) minmax(0,1.1fr)!important}
+  #outfit-empty h1{font-size:46px!important;max-width:10ch!important}
+}
+
 </style>
 </head>
 <body>
