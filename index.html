@@ -2068,6 +2068,26 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
 /* desktop: the "Atur gaya hari ini" panel no longer sticks over the sections below it */
 @media (min-width:900px){#outfit-main>.win.lilac,#style-panel{position:static!important;top:auto!important}}
 
+/* v38 — focused ensemble view: after "Padukan jadi ensemble" / "Kurasi outfit" only the ensemble and its controls are shown */
+.ens-head{display:none}
+body.ens-focus .ens-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:8px 0 18px;padding-bottom:14px;border-bottom:1px solid var(--outline)}
+.ens-back{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 14px 6px 10px;border:1px solid var(--outline2);border-radius:var(--rb,999px);background:transparent;color:var(--ink);font:600 13px var(--body);letter-spacing:.02em;cursor:pointer}
+.ens-back svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ens-back:hover{border-color:var(--accent);color:var(--accent)}
+.ens-head .eyebrow{display:block;margin:0 0 4px}
+.ens-head h1{margin:0!important;font-size:clamp(30px,8vw,40px)!important}
+body.ens-focus #outfit-main>*:not(#ens-head):not(#lookbar):not(#result):not(#style-panel){display:none!important}
+body.ens-focus #outfit-main{display:flex!important;flex-direction:column!important}
+body.ens-focus #ens-head{order:0}body.ens-focus #lookbar{order:1;margin-bottom:16px!important}body.ens-focus #result{order:2;margin-bottom:28px!important}body.ens-focus #style-panel{order:3}
+body.ens-focus #result.hidden{display:none!important}
+@media (min-width:1100px){
+  body.ens-focus #outfit-main{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,360px)!important;column-gap:32px!important;align-items:start!important}
+  body.ens-focus #ens-head,body.ens-focus #lookbar{grid-column:1 / -1}
+  body.ens-focus #result{grid-column:1;grid-row:3}
+  body.ens-focus #style-panel{grid-column:2;grid-row:3}
+  body.ens-focus #result .rsplit{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+}
+
 </style>
 </head>
 <body>
@@ -2120,7 +2140,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
       </div>
 
       <div id="outfit-main">
-        <section class="hero" aria-labelledby="h-outfit">
+        <div id="ens-head" class="ens-head" aria-live="polite"><div><span class="eyebrow" id="ens-eyebrow">Ensemble</span><h1 id="ens-title">Ensemble-mu</h1></div><button type="button" class="ens-back" id="ens-back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span id="ens-back-l">Kembali</span></button></div>
+                <section class="hero" aria-labelledby="h-outfit">
           <div>
             <p class="kicker" data-nofx><span>Personal style atelier</span><span class="sep"> · </span><span id="today"></span></p>
             <h1 id="h-outfit">Gaya yang <em>dikurasi</em> untukmu.</h1>
@@ -3021,6 +3042,7 @@ function renderRunway(){
 
 // ---------- Tabs ----------
 function showTab(name){
+  if(document.body.classList.contains('ens-focus')&&!ENS_KEEP)exitEnsFocus();
   $$('.dock button').forEach(function(b){if(b.dataset.tab===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
   $$('main > section').forEach(function(s){s.classList.toggle('hidden', s.id!=='tab-'+name);});
   if(name==='outfit')renderOutfitPage();
@@ -3294,7 +3316,7 @@ function kurasi(){
   var r=$('#result'); r.classList.remove('hidden'); r.classList.remove('ph');
   if(!ranked.length){ r.innerHTML='<div class="bar"><span>Belum ketemu padanannya</span><span class="deco" aria-hidden="true"><i>?</i></span></div><div class="body"><p>'+esc(missingMsg(lock,o.head||(lock&&lock.cat==='hijab')))+'</p><button class="btn butter" data-go="lemari">Buka lemari</button></div>'; return; }
   renderResult();
-  r.scrollIntoView({behavior:'smooth',block:'start'});
+  enterEnsFocus();
 }
 $('#btn-kurasi').addEventListener('click',kurasi);
 function pinQuery(extra){
@@ -4093,7 +4115,7 @@ function renderLookPanel(){
   var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Tautan membuka hasil pencarian di marketplace atau situs resmi brand (H&amp;M lewat toko resminya di Zalora); cek ketersediaan, harga, dan ukuran di sana.</p>':'';
   w.innerHTML=head+'<div class="body">'+intro+have+act+rec+'</div>';
   $('#look-close').onclick=function(){closeModal('look-modal');};
-  var g=$('#look-go'); if(g)g.onclick=function(){ state.look=Object.assign({theme:theme},lk); save('look',state.look); closeModal('look-modal'); showIntro=false; showTab('outfit'); kurasi(); };
+  var g=$('#look-go'); if(g)g.onclick=function(){ var from=($('#tab-tema')&&!$('#tab-tema').classList.contains('hidden'))?'tema':'outfit'; state.look=Object.assign({theme:theme},lk); save('look',state.look); closeModal('look-modal'); showIntro=false; showTab('outfit'); ENS_FROM=from; kurasi(); };
   LOOKP.recs=recs; fillRecImages(recs);
 }
 var REC_BUSY={};
@@ -4411,6 +4433,22 @@ renderHeroVisual(); renderIdent();
     if(mq.matches){ if(r.parentElement!==dock)dock.appendChild(r); } else if(r.parentElement!==tb){ tb.appendChild(r); } }
   place(); if(mq.addEventListener)mq.addEventListener('change',place); else if(mq.addListener)mq.addListener(place);
 })();
+
+// ---------- v38: focused ensemble view ----------
+var ENS_FROM='outfit', ENS_KEEP=false;
+function enterEnsFocus(){
+  var r=$('#result'); if(!r)return;
+  var fromTema=ENS_FROM==='tema';
+  $('#ens-back-l').textContent=fromTema?'Kembali ke Tema':'Kembali ke Beranda';
+  $('#ens-eyebrow').textContent=state.look?((state.look.theme?state.look.theme+' · ':'')+'look '+state.look.name):'Kurasi hari ini';
+  $('#ens-title').textContent=state.look?'Ensemble '+state.look.name:'Ensemble-mu';
+  document.body.classList.add('ens-focus');
+  window.scrollTo(0,0);
+}
+function exitEnsFocus(){ document.body.classList.remove('ens-focus'); ENS_FROM='outfit'; }
+$('#ens-back').addEventListener('click',function(){
+  var to=ENS_FROM==='tema'?'tema':'outfit'; exitEnsFocus(); showTab(to); window.scrollTo(0,0);
+});
 // ---------- Init ----------
 applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
