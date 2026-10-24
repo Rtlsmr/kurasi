@@ -2003,6 +2003,65 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   .topbar .tg .tl{font-size:11px!important}
 }
 
+
+/* v36 — audit fixes: Homme light identity, dark navigation, header row, tap targets, contrast */
+/* 1. Homme · Light keeps its own palette (stone, slate, forest) — later light-only patches had made it identical to Femme */
+:root[data-g="pria"]:not([data-theme="dark"]){
+  --bg:#F1F0EB;--bg2:#F1F0EB;--surface:#F8F7F3;--surface2:#DDDAD2;--paper:#FBFAF7;
+  --ink:#292F2D;--muted:#5A605C;--outline:rgba(41,47,45,.15);--outline2:rgba(41,47,45,.27);
+  --accent:#344C43;--accent-ink:#FFFFFF;--accent2:#858980;
+  --btn:#344C43;--btn-ink:#FFFFFF;--btn2:#DDDAD2;--bar-ink:#292F2D;--berry:#344C43;--gold:#858980;
+  --pink:#DDDAD2;--lilac:#D6D8D2;--butter:#E4E0D6;--sky:#D9DCD8;--mint:#D5DDD7;
+  --t1:#E7E5DF;--t2:#E9E8E2;--t3:#E6E4DD;--t4:#E2E1DA;--side1:#F1F0EB;--side2:#F1F0EB;--side-ink:#292F2D;
+  --chart:#344C43;--chart2:#858980;--chart3:#CFD2CB;--atelier-line:rgba(41,47,45,.15);
+}
+:root[data-g="pria"]:not([data-theme="dark"]) body{background:#F1F0EB!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .btn{background:#344C43!important;border-color:#344C43!important;color:#FFFFFF!important;border-radius:2px!important;text-transform:uppercase;letter-spacing:.1em!important;font-size:12px!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .btn:hover{background:#2A3E37!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .btn.alt,:root[data-g="pria"]:not([data-theme="dark"]) .btn.butter,:root[data-g="pria"]:not([data-theme="dark"]) .btn.ghost{background:transparent!important;color:#292F2D!important;border-color:rgba(41,47,45,.35)!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .btn.alt:hover,:root[data-g="pria"]:not([data-theme="dark"]) .btn.ghost:hover,:root[data-g="pria"]:not([data-theme="dark"]) .btn.butter:hover{background:#E6E4DD!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .win{border-radius:3px!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .win .bar,:root[data-g="pria"]:not([data-theme="dark"]) .win[class] .bar{background:#E6E4DD!important;color:#3B423F!important;border-radius:2px 2px 0 0!important}
+:root[data-g="pria"]:not([data-theme="dark"]) input:focus,:root[data-g="pria"]:not([data-theme="dark"]) select:focus,:root[data-g="pria"]:not([data-theme="dark"]) textarea:focus{border-color:#344C43!important;outline-color:rgba(52,76,67,.15)!important}
+:root[data-g="pria"]:not([data-theme="dark"]) input[type=text],:root[data-g="pria"]:not([data-theme="dark"]) input[type=search],:root[data-g="pria"]:not([data-theme="dark"]) input[type=number],:root[data-g="pria"]:not([data-theme="dark"]) input[type=date],:root[data-g="pria"]:not([data-theme="dark"]) input[type=url],:root[data-g="pria"]:not([data-theme="dark"]) select,:root[data-g="pria"]:not([data-theme="dark"]) textarea{background:#FBFAF7!important;border-color:rgba(41,47,45,.24)!important;border-radius:2px!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .chip span,:root[data-g="pria"]:not([data-theme="dark"]) .tag{border-radius:2px!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .dock{background:rgba(248,247,243,.96)!important;border-color:rgba(41,47,45,.16)!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .dock button[aria-current="page"]{color:#344C43!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .dock button[aria-current="page"] .tile{background:#E1E6E2!important;border-color:rgba(52,76,67,.3)!important;border-radius:3px!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .dock button[aria-current="page"] .tile svg{stroke:#344C43!important}
+:root[data-g="pria"] .dock .brandbox{border-right-color:rgba(41,47,45,.2)!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .cover .runway,:root[data-g="pria"]:not([data-theme="dark"]) #outfit-empty .arch{background:#E6E4DD!important;border-color:rgba(41,47,45,.14)!important}
+:root[data-g="pria"] #outfit-empty .arch{border-radius:2px!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .cover .runway figcaption,:root[data-g="pria"]:not([data-theme="dark"]) #outfit-empty .runway figcaption{color:#565C58!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .cover .seg label:has(input:checked) span{background:#344C43!important;color:#FFFFFF!important}
+:root[data-g="pria"]:not([data-theme="dark"]) #outfit-empty .how li:before{border-color:rgba(52,76,67,.3)!important;color:#344C43!important;background:#F8F7F3!important;border-radius:2px!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .rcard:hover,:root[data-g="pria"]:not([data-theme="dark"]) .look:hover{border-color:#858980!important}
+:root[data-g="pria"]:not([data-theme="dark"]) .topbar{border-bottom-color:rgba(41,47,45,.15)!important}
+/* 2. Dark mode: navigation follows the dark palette (was a light bar with unreadable labels) */
+:root[data-theme="dark"] .dock{background:color-mix(in srgb,var(--surface) 96%,transparent)!important;border-color:var(--outline)!important;box-shadow:0 8px 28px rgba(0,0,0,.35)!important}
+:root[data-theme="dark"] .dock button{color:var(--muted)!important}
+:root[data-theme="dark"] .dock .tile svg{stroke:currentColor!important}
+:root[data-theme="dark"] .dock button[aria-current="page"]{color:var(--accent)!important}
+:root[data-theme="dark"] .dock button[aria-current="page"] .tile{background:color-mix(in srgb,var(--accent) 16%,transparent)!important;border-color:color-mix(in srgb,var(--accent) 40%,transparent)!important}
+:root[data-theme="dark"] .dock button[aria-current="page"] .tile svg{stroke:var(--accent)!important}
+/* 3. Desktop: search, profile and dark-mode switch live inside the navigation row */
+@media (min-width:900px){
+  .dock{padding-right:18px!important}
+  .dock>.right{display:flex!important;align-items:center!important;gap:10px!important;margin-left:auto!important;flex:0 0 auto!important;position:static!important}
+  .dock>.right .top-search,.dock>.right .avatar{display:grid!important;place-items:center!important;width:38px!important;height:38px!important;min-height:0!important;padding:0!important;margin:0!important;border-radius:50%!important;border:1px solid var(--outline)!important;background:transparent!important;color:var(--ink)!important;opacity:1!important;box-shadow:none!important;font-size:inherit!important}
+  .dock>.right .avatar{font-family:var(--title)!important;font-size:17px!important;color:var(--accent)!important}
+  .dock>.right .tg{display:flex!important;align-items:center!important;gap:8px!important;color:var(--ink)!important;font:500 13px var(--body)!important}
+  .topbar:not(:has(>.right)){display:none!important}
+}
+@media (min-width:900px) and (max-width:1279px){.dock>.right .tg .tl{display:none!important}}
+/* homme keeps square buttons in dark mode too */
+:root[data-g="pria"] .btn{border-radius:2px!important}
+/* 4. Comfortable tap targets for the journey links */
+.journey .jl button{min-height:40px!important;padding:8px 0!important}
+/* 5. Readable small text on tinted panels */
+.hv-cap small,.hv-cap .lp,.hv-cap small em{color:var(--ink)!important;opacity:.82}
+.discover span{color:var(--ink)!important;opacity:.85}
+
 </style>
 </head>
 <body>
@@ -2937,7 +2996,7 @@ function aiImage(prompt){
     .then(function(u){ clearTimeout(to); delete IMG_PENDING[k]; return u; });
   IMG_PENDING[k]=p; return p;
 }
-function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="this.parentElement.classList.add(\'has-loaded-image\')" onerror="if(this.previousElementSibling&&this.previousElementSibling.tagName.toLowerCase()===\'svg\')this.previousElementSibling.style.display=\'block\';this.remove()">':''; }
+function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="this.parentElement&&this.parentElement.classList.add(\'has-loaded-image\')" onerror="if(this.previousElementSibling&&this.previousElementSibling.tagName.toLowerCase()===\'svg\')this.previousElementSibling.style.display=\'block\';this.remove()">':''; }
 var RUNWAY = {
   wanita:[
     {cap:'Kerja',pose:0,p:{hijab:{c:hx('dustypink')},top:{c:hx('putih'),kind:'blouse'},bottom:{c:hx('navy'),type:'pants',wide:true},shoes:{c:hx('hitam')},bag:{c:hx('cokelat')},acc:{c:hx('mustard')}}},
@@ -4147,7 +4206,7 @@ function renderRoutine(){
     BEAUTY[k]=BEAUTY[k].filter(byB);
     var ids=sortStep(BEAUTY[k]), wrong=ids.join()!==BEAUTY[k].join();
     $('#rt-'+k).innerHTML=(ids.length?'<ol class="rsteps">'+ids.map(function(id){var p=byB(id);return '<li><b>'+esc(p.name)+'</b><span class="small muted">'+BC[p.cat].l+(bActives(p).length?' · '+bActives(p).map(function(a){return AL[a];}).join(', '):'')+'</span><button class="linkbtn danger" data-rrm="'+k+':'+id+'" aria-label="Keluarkan '+esc(p.name)+'">Keluarkan</button></li>';}).join('')+'</ol>'+(wrong?'<p class="note">Urutan di atas sudah disusun ulang dari tekstur paling ringan ke paling berat.</p>':''):'<p class="muted small">Belum ada produk.</p>')+
-      '<div class="row" style="gap:8px;margin-top:8px"><select id="rt-sel-'+k+'" aria-label="Pilih produk">'+(sk.length?sk.filter(function(p){return BEAUTY[k].indexOf(p.id)<0;}).map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+' ('+BC[p.cat].l+')</option>';}).join(''):'')+'</select><button class="btn small" type="button" data-radd="'+k+'"'+(sk.length?'':' disabled')+'>Tambah</button></div>';
+      '<div class="row" style="gap:8px;margin-top:8px"><select id="rt-sel-'+k+'" aria-label="Pilih produk"'+(sk.length?'':' disabled')+'>'+(sk.length?sk.filter(function(p){return BEAUTY[k].indexOf(p.id)<0;}).map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+' ('+BC[p.cat].l+')</option>';}).join(''):'<option value="">Belum ada produk skincare</option>')+'</select><button class="btn small" type="button" data-radd="'+k+'"'+(sk.length?'':' disabled')+'>Tambah</button></div>';
     if(sk.length&&!sk.filter(function(p){return BEAUTY[k].indexOf(p.id)<0;}).length){ var s=$('#rt-sel-'+k); s.innerHTML='<option value="">Semua produk sudah masuk</option>'; s.disabled=true; }
   });
   if(!sk.length) $('#rt-hint').innerHTML='Tambahkan produk skincare dulu di tab <b>Kedaluwarsa</b> (pilih kategori skincare dan kandungan aktifnya), lalu susun rutinitasnya di sini.'; else $('#rt-hint').textContent='Pilih produk untuk rutinitas pagi dan malam. Kurasi menyusun urutannya dan memeriksa kombinasi bahan aktif.';
@@ -4337,6 +4396,13 @@ document.addEventListener('click',function(e){
 });
 renderHeroVisual(); renderIdent();
 
+
+// ---------- v36: desktop controls sit in the navigation row ----------
+(function(){ var mq=matchMedia('(min-width:900px)');
+  function place(){ var dock=document.querySelector('.dock'), tb=document.querySelector('.topbar'), r=document.querySelector('.topbar>.right')||document.querySelector('.dock>.right'); if(!dock||!tb||!r)return;
+    if(mq.matches){ if(r.parentElement!==dock)dock.appendChild(r); } else if(r.parentElement!==tb){ tb.appendChild(r); } }
+  place(); if(mq.addEventListener)mq.addEventListener('change',place); else if(mq.addListener)mq.addListener(place);
+})();
 // ---------- Init ----------
 applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
