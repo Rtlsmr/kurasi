@@ -2062,6 +2062,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
 .hv-cap small,.hv-cap .lp,.hv-cap small em{color:var(--ink)!important;opacity:.82}
 .discover span{color:var(--ink)!important;opacity:.85}
 
+/* v37 — theme-to-ensemble flow fixes */
+/* pop-up windows scroll again (a later "overflow:hidden" on every card had clipped them on phones) */
+.modal>.win,.modal>form.win{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch}
+/* desktop: the "Atur gaya hari ini" panel no longer sticks over the sections below it */
+@media (min-width:900px){#outfit-main>.win.lilac,#style-panel{position:static!important;top:auto!important}}
+
 </style>
 </head>
 <body>
@@ -2521,7 +2527,7 @@ var state = {
 state.profile = Object.assign({name:'',skin:'langsat',hair:'long',hijabStyle:'',vibes:[],avoid:[],done:false}, load('profile',{}));
 state.uiStyle = load('uiStyle','auto');
 var STATIC_ART={item:false,avatar:false}; // set true once img/item/*.webp and img/avatar-*.webp are committed
-var ranked = [], rankIdx = 0, showIntro = true, resultView = 'model';
+var ranked = [], rankIdx = 0, showIntro = true, resultView = 'model', RV_USER = false;
 state.introSeen = load('introSeen', false);
 
 // ---------- Helpers ----------
@@ -3262,7 +3268,7 @@ function generate(o){
   combos.forEach(function(c){
     var r=scoreMain(c,o); if(!r)return;
     extras.forEach(function(x){ if(x[1]||(lock&&lock.cat===x[0])){ var it=pickExtra(x[0],c,o,lock); if(it)c[x[0]]=it; } });
-    c.score=r.s; c.why=r.why; out.push(c);
+    c.score=r.s; c.why=r.why; var xr=['outer','scarf'].map(function(k){return c[k];}).filter(function(it){return it&&restLeft(it);}); if(xr.length){ c.score-=2*xr.length; c.why=c.why.concat(['Catatan: '+xr.map(function(p){return p.name.toLowerCase()+' '+colorLabel(p.color).toLowerCase();}).join(', ')+' baru dipakai minggu ini, belum ada pengganti yang cocok di lemari.']); } out.push(c);
   });
   out.sort(function(a,b){return b.score-a.score;});
   var seen={}, varied=[], rest=[];
@@ -3281,7 +3287,7 @@ function currentOpts(){
   return {lockId:$('#lock').value||null, style:($('input[name=style]:checked')||{}).value||'', opts:state.opts, head:headOn(), look:state.look};
 }
 function kurasi(){
-  if(!state.introSeen||showIntro){ closeIntro(); renderOutfitPage(); }
+  if(!state.introSeen||showIntro){ closeIntro(true); renderOutfitPage(); }
   var o=currentOpts();
   ranked=generate(o); rankIdx=0;
   var lock=o.lockId?state.items.find(function(i){return i.id===o.lockId;}):null;
@@ -3298,6 +3304,7 @@ function pinQuery(extra){
 function renderResult(){
   var c=ranked[rankIdx], r=$('#result');
   var top=c.gamis||c.atasan;
+  if(resultView==='model'&&!RV_USER&&!(state.aiImg&&state.worker))resultView='flat';
   var vis=resultView==='flat'?boardHTML(c,'kolase'):mirrorHTML(c,rankIdx);
   var rows=['hijab','scarf','outer','atasan','gamis','bawahan','sepatu','tas','aksesoris'].filter(function(k){return c[k];});
   var sc=state.season&&SEASONS[state.season]?SEASONS[state.season].c:null;
@@ -3314,13 +3321,14 @@ function renderResult(){
   $('#btn-wear').addEventListener('click',function(){ wear(c,$('#btn-wear')); });
   if(resultView==='model')fillMirrorAI(r,c,function(){return ranked[rankIdx]===c&&resultView==='model';});
 }
-$('#result').addEventListener('change',function(e){ if(e.target.name==='rview'){ resultView=e.target.value; renderResult(); } });
+$('#result').addEventListener('change',function(e){ if(e.target.name==='rview'){ RV_USER=true; resultView=e.target.value; renderResult(); } });
 function wear(c,btn){
   var now=Date.now();
   var its=['hijab','scarf','outer','atasan','gamis','bawahan','sepatu','tas','aksesoris'].map(function(k){return c[k];}).filter(Boolean);
   its.forEach(function(it){ if(rests(it))it.lastWorn=now; });
   state.history.unshift({id:uid(),t:now,look:state.look?state.look.name:null,items:its.map(function(it){return {id:it.id,cat:it.cat,name:it.name,color:it.color};})});
   save('items',state.items); save('history',state.history);
+  if(typeof renderDash==='function')renderDash();
   toast('Outfit dicatat. Pakaiannya istirahat '+REST_DAYS+' hari.');
   if(btn){ btn.disabled=true; btn.textContent='Sudah dicatat'; }
 }
@@ -3345,7 +3353,7 @@ function renderOutfitPage(){
   else lb.classList.add('hidden');
   renderToggles(); syncGender(); renderDash(); renderChrome();
 }
-function closeIntro(){ showIntro=false; if(!state.introSeen){state.introSeen=true;save('introSeen',true);} if(!state.profile.done&&!ONB.shown){ ONB.shown=true; setTimeout(openOnboarding,350); } }
+function closeIntro(quiet){ showIntro=false; if(!state.introSeen){state.introSeen=true;save('introSeen',true);} if(!quiet&&!state.profile.done&&!ONB.shown){ ONB.shown=true; setTimeout(openOnboarding,350); } }
 $('#nudge-go').addEventListener('click',function(){ openOnboarding(); });
 $('#btn-start').addEventListener('click',function(){ closeIntro(); renderOutfitPage(); window.scrollTo(0,0); });
 document.addEventListener('click',function(e){
@@ -3800,7 +3808,7 @@ function fillMirrorAI(box,c,stillOk){
   aiImage(prompt).then(function(u){ if(!stillOk())return; var m=box.querySelector('.mirror'), cap=box.querySelector('.figcap'); if(!m)return;
     var w=m.querySelector('.wait');
     if(u){ if(w)w.remove(); m.insertAdjacentHTML('beforeend',imgTag(u)); if(cap)cap.textContent='Ilustrasi AI'; }
-    else { if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">'+FORM_ICO+'</span><span>Ilustrasi model belum tersedia (kuota AI habis atau koneksi terputus). Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
+    else { if(box&&box.id==='result'&&!RV_USER&&resultView==='model'){ resultView='flat'; renderResult(); return; } if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">'+FORM_ICO+'</span><span>Ilustrasi model belum tersedia (kuota AI habis atau koneksi terputus). Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
 }
 function viewTabs(name,cur,opts){ return '<div class="seg small" role="radiogroup" aria-label="'+opts.label+'">'+opts.items.map(function(o){return '<label><input type="radio" name="'+name+'" value="'+o[0]+'"'+(cur===o[0]?' checked':'')+'><span>'+o[1]+'</span></label>';}).join('')+'</div>'; }
 function renderBoard(){
