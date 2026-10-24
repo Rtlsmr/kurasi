@@ -1378,6 +1378,44 @@ section[id^="tab-"]>.win,section[id^="tab-"]>div>.win{margin-bottom:24px!importa
   .cover .how{margin-top:12px!important}
 }
 
+
+/* v19 — atelier-wide visual system */
+:root{
+  --atelier-line:rgba(91,62,51,.16);
+  --atelier-soft:rgba(125,88,71,.055);
+}
+body{letter-spacing:.005em}
+h1,h2,h3,.logo,.wm b,.cover h1{letter-spacing:-.025em}
+button,.btn,input,select,textarea{transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.win:not(.cover){border:1px solid var(--atelier-line)!important;box-shadow:0 8px 28px rgba(48,31,24,.035)!important;border-radius:5px!important;overflow:hidden}
+.win:not(.cover) .bar{border-bottom:1px solid var(--atelier-line)!important}
+.btn{border-radius:4px!important;box-shadow:none!important;font-weight:600!important;letter-spacing:.015em!important}
+.btn:not(.ghost):not(.small){min-height:44px}
+.btn:hover{filter:brightness(.98);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+input,select,textarea{border-radius:4px!important;box-shadow:none!important}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)!important}
+.sechead{padding-bottom:10px!important;border-bottom:1px solid var(--atelier-line)!important;margin-bottom:18px!important}
+.sechead h2{letter-spacing:-.035em!important}
+.rcard,.look{box-shadow:none!important;border:1px solid var(--atelier-line)!important;border-radius:5px!important;transition:transform .2s ease,border-color .2s ease,background-color .2s ease!important}
+.rcard:hover,.look:hover{transform:translateY(-2px);border-color:var(--outline2)!important}
+.look[aria-pressed="true"]{border-color:var(--accent)!important;box-shadow:inset 0 0 0 1px var(--accent)!important}
+.theme{border-top:1px solid var(--atelier-line)!important}
+.theme:first-of-type{border-top:0!important}
+.dock{border:1px solid var(--atelier-line)!important;border-radius:8px!important;box-shadow:0 8px 30px rgba(45,30,25,.12)!important}
+.dock button{border-radius:5px!important}
+@media(min-width:900px){
+  main{max-width:1160px!important;padding:34px clamp(28px,4vw,64px) 100px!important}
+  .topbar{margin-bottom:26px!important}
+  .win:not(.cover){margin-bottom:28px!important}
+  .sechead{margin-bottom:24px!important}
+  .dock{width:min(700px,calc(100% - 48px))!important;bottom:18px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+
 </style>
 </head>
 <body>
