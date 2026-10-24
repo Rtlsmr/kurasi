@@ -1503,6 +1503,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   .dock{background:rgba(252,249,245,.96)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(83,55,46,.16)!important}
 }
 
+
+/* v22 — hide vector only after the raster artwork has actually loaded */
+.cover .runway figure .arch.has-loaded-image>svg{display:none!important}
+.cover .runway figure .arch>img.aiimg{z-index:2!important}
+.cover .runway figure .arch>svg{z-index:1!important}
+
 </style>
 </head>
 <body>
@@ -2437,7 +2443,7 @@ function aiImage(prompt){
     .then(function(u){ clearTimeout(to); delete IMG_PENDING[k]; return u; });
   IMG_PENDING[k]=p; return p;
 }
-function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="if(this.previousElementSibling&&this.previousElementSibling.tagName.toLowerCase()===\'svg\')this.previousElementSibling.style.display=\'none\'" onerror="this.remove()">':''; }
+function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="this.parentElement.classList.add(\'has-loaded-image\')" onerror="this.remove()">':''; }
 var RUNWAY = {
   wanita:[
     {cap:'Kerja',pose:0,p:{hijab:{c:hx('dustypink')},top:{c:hx('putih'),kind:'blouse'},bottom:{c:hx('navy'),type:'pants',wide:true},shoes:{c:hx('hitam')},bag:{c:hx('cokelat')},acc:{c:hx('mustard')}}},
