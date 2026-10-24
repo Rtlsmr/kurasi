@@ -1509,6 +1509,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
 .cover .runway figure .arch>img.aiimg{z-index:2!important}
 .cover .runway figure .arch>svg{z-index:1!important}
 
+
+/* v23 — deterministic single illustration layer; inline fallback */
+.cover .runway figure .arch>svg{display:none!important}
+.cover .runway figure .arch.has-loaded-image>svg{display:none!important}
+
 </style>
 </head>
 <body>
@@ -2443,7 +2448,7 @@ function aiImage(prompt){
     .then(function(u){ clearTimeout(to); delete IMG_PENDING[k]; return u; });
   IMG_PENDING[k]=p; return p;
 }
-function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="this.parentElement.classList.add(\'has-loaded-image\')" onerror="this.remove()">':''; }
+function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="this.parentElement.classList.add(\'has-loaded-image\')" onerror="if(this.previousElementSibling&&this.previousElementSibling.tagName.toLowerCase()===\'svg\')this.previousElementSibling.style.display=\'block\';this.remove()">':''; }
 var RUNWAY = {
   wanita:[
     {cap:'Kerja',pose:0,p:{hijab:{c:hx('dustypink')},top:{c:hx('putih'),kind:'blouse'},bottom:{c:hx('navy'),type:'pants',wide:true},shoes:{c:hx('hitam')},bag:{c:hx('cokelat')},acc:{c:hx('mustard')}}},
@@ -2457,7 +2462,7 @@ var RUNWAY = {
   ]
 };
 function renderRunway(){
-  $('#runway').innerHTML=RUNWAY[state.gender].map(function(l,i){return '<figure><div class="arch">'+figSVG(l.p,110,state.gender,{pose:l.pose})+imgTag('img/run-'+state.gender+'-'+(i+1)+'.webp')+'</div><figcaption>'+l.cap+'</figcaption></figure>';}).join('');
+  $('#runway').innerHTML=RUNWAY[state.gender].map(function(l,i){var art=figSVG(l.p,110,state.gender,{pose:l.pose});var img=imgTag('img/run-'+state.gender+'-'+(i+1)+'.webp');if(img)art=art.replace('<svg ','<svg style="display:none" ');return '<figure><div class="arch">'+art+img+'</div><figcaption>'+l.cap+'</figcaption></figure>';}).join('');
 }
 
 // ---------- Tabs ----------
