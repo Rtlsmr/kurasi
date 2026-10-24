@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kurasi</title>
-<meta name="description" content="Kurasi: atelier lemarimu, satu ensemble setiap pagi. Padu padan pakaian dari lemari sendiri, untuk wanita dan pria.">
+<meta name="description" content="Kurasi: atelier lemari, ensemble kurasa serasi. Padu padan pakaian dari lemari sendiri dan pelacak beauty, untuk wanita dan pria.">
 <meta name="theme-color" content="#FFD3E5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Bodoni+Moda:opsz,wght@6..96,500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='15'%20fill='%23F6F1E8'/%3E%3Cpath%20d='M14%2058V30a18%2018%200%200%201%2036%200V58'%20fill='none'%20stroke='%23B8956A'%20stroke-width='3.5'/%3E%3Ctext%20x='32'%20y='52'%20text-anchor='middle'%20font-family='Didot,Bodoni%2072,Georgia,serif'%20font-size='36'%20fill='%233A2340'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='15'%20fill='%23F6F1E8'/%3E%3Cpath%20d='M14%2060V32a18%2018%200%200%201%2036%200V60'%20fill='none'%20stroke='%23B8956A'%20stroke-width='3.5'/%3E%3Cpath%20d='M32%2014V10a3%203%200%201%201%203%20-3'%20fill='none'%20stroke='%23B8956A'%20stroke-width='2.5'%20stroke-linecap='round'/%3E%3Ctext%20x='32'%20y='54'%20text-anchor='middle'%20font-family='Didot,Bodoni%2072,Georgia,serif'%20font-size='34'%20fill='%233A2340'%3EK%3C/text%3E%3C/svg%3E">
 <style>
 :root{
   --bg:#FFD3E5; --bg2:#FFE7F2; --surface:#FFF9FC; --surface2:#FFEEF6; --ink:#4A1F42; --muted:#87597A; --outline:#5B2A4E;
@@ -652,13 +652,24 @@ button.avatar{cursor:pointer;padding:0}
 }
 .shpick{margin-top:10px}
 .shpick canvas{display:block;max-width:100%;border-radius:14px;cursor:crosshair;border:1px solid var(--outline)}
+
+/* v10 logo: subtle fashion (hanger hook, stitching) + beauty (mirror glint) */
+.logo .mark .md{stroke:var(--logo-acc);opacity:.85}
+.logo .mark .mh{stroke:var(--logo-acc)}
+.logo .wm small span{display:block}
+.logo .wm small{line-height:1.45}
+@media (max-width:899px){.topbar .logo .wm small{font-size:6.8px!important;letter-spacing:.14em!important;margin-top:3px!important}}
+@media (min-width:900px){
+  .brandbox .logo .mark .md,.brandbox .logo .mark .mh{stroke:#F3DDB4}
+  :root[data-g="pria"] .brandbox .logo .mark .md,:root[data-g="pria"] .brandbox .logo .mark .mh{stroke:#C9A86E}
+}
 </style>
 </head>
 <body>
 <div class="stars" aria-hidden="true"><span style="top:8%;left:6%">&#10022;</span><span style="top:22%;right:8%">&#10023;</span><span style="top:48%;left:3%">&#10023;</span><span style="top:64%;right:4%">&#10022;</span><span style="top:86%;left:44%">&#10023;</span></div>
 <div class="shell">
   <nav class="dock" aria-label="Menu utama">
-    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, ensemble yang kurasa pas. Lihat sampul" data-intro><svg class="mark" viewBox="0 0 160 204" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="ms" d="M80 30l3 7.5 7.5 3-7.5 3-3 7.5-3-7.5-7.5-3 7.5-3z"/><text class="mk" x="80" y="163" text-anchor="middle" font-size="110">K</text></svg><span class="wm"><b>KURASI</b><small>ensemble yang kurasa pas</small></span></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Atelier lemarimu, satu ensemble setiap pagi</small></div></div>
+    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier lemari, ensemble kurasa serasi. Lihat sampul" data-intro><svg class="mark" viewBox="0 -4 160 208" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="md" d="M27 196V82a53 53 0 0 1 106 0V196" fill="none" stroke-width="2.5" stroke-dasharray="6 7"/><path class="mh" d="M80 14V7a6.5 6.5 0 1 1 6.5 -6.5" fill="none" stroke-width="5" stroke-linecap="round"/><path class="ms" d="M141 18l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z"/><text class="mk" x="80" y="163" text-anchor="middle" font-size="104">K</text></svg><span class="wm"><b>KURASI</b><small><span>atelier lemari,</span> <span>ensemble kurasa serasi</span></small></span></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Padu padan dan beauty dari lemarimu sendiri</small></div></div>
     <button data-tab="outfit" aria-current="page"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg></span>Outfit</button>
     <button data-tab="lemari"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span>Lemari</button>
     <button data-tab="tema"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg></span>Tema</button>
@@ -671,7 +682,7 @@ button.avatar{cursor:pointer;padding:0}
 
   <main id="main">
     <div class="topbar">
-      <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, ensemble yang kurasa pas. Lihat sampul" data-intro><svg class="mark" viewBox="0 0 160 204" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="ms" d="M80 30l3 7.5 7.5 3-7.5 3-3 7.5-3-7.5-7.5-3 7.5-3z"/><text class="mk" x="80" y="163" text-anchor="middle" font-size="110">K</text></svg><span class="wm"><b>KURASI</b><small>ensemble yang kurasa pas</small></span></span>
+      <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier lemari, ensemble kurasa serasi. Lihat sampul" data-intro><svg class="mark" viewBox="0 -4 160 208" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="md" d="M27 196V82a53 53 0 0 1 106 0V196" fill="none" stroke-width="2.5" stroke-dasharray="6 7"/><path class="mh" d="M80 14V7a6.5 6.5 0 1 1 6.5 -6.5" fill="none" stroke-width="5" stroke-linecap="round"/><path class="ms" d="M141 18l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z"/><text class="mk" x="80" y="163" text-anchor="middle" font-size="104">K</text></svg><span class="wm"><b>KURASI</b><small><span>atelier lemari,</span> <span>ensemble kurasa serasi</span></small></span></span>
       <div class="right"><button class="avatar" id="top-avatar" type="button" data-go="profil" aria-label="Buka profil"></button>
       <label class="tg right" id="theme-wrap"><span class="tl">Mode gelap</span><input type="checkbox" id="theme-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></label></div>
     </div>
@@ -681,7 +692,7 @@ button.avatar{cursor:pointer;padding:0}
       <div id="outfit-empty" class="win pink cover hidden">
         <div class="bar"><span>Selamat datang di Kurasi</span><span class="deco" aria-hidden="true"><i>&#9825;</i><i>&#9734;</i><i>&#10047;</i></span></div>
         <div class="body">
-          <div class="logo cover-logo" aria-hidden="true"><svg class="mark" viewBox="0 0 160 204" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="ms" d="M80 30l3 7.5 7.5 3-7.5 3-3 7.5-3-7.5-7.5-3 7.5-3z"/><text class="mk" x="80" y="163" text-anchor="middle" font-size="110">K</text></svg><span class="wm"><b>KURASI</b><small>ensemble yang kurasa pas</small></span></div>
+          <div class="logo cover-logo" aria-hidden="true"><svg class="mark" viewBox="0 -4 160 208" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="md" d="M27 196V82a53 53 0 0 1 106 0V196" fill="none" stroke-width="2.5" stroke-dasharray="6 7"/><path class="mh" d="M80 14V7a6.5 6.5 0 1 1 6.5 -6.5" fill="none" stroke-width="5" stroke-linecap="round"/><path class="ms" d="M141 18l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z"/><text class="mk" x="80" y="163" text-anchor="middle" font-size="104">K</text></svg><span class="wm"><b>KURASI</b><small><span>atelier lemari,</span> <span>ensemble kurasa serasi</span></small></span></div>
           <p class="issue" id="cover-issue"></p>
           <h1>Bingung mau pakai apa hari ini?</h1>
           <p class="sub">Kurasi memadukan pakaian dan aksesori dari lemarimu sendiri, sesuai acara, dresscode, dan personal color-mu.</p>
@@ -910,15 +921,15 @@ button.avatar{cursor:pointer;padding:0}
           <form id="pao-form" class="bf hidden" autocomplete="off" style="margin-top:16px">
             <h3 id="pb-title">Produk baru</h3>
             <div class="bgrid">
-              <div><label class="lbl" for="pb-name">Nama produk</label><input type="text" id="pb-name" maxlength="50" placeholder="Contoh: Lip cream nude"></div>
-              <div><label class="lbl" for="pb-brand">Merek (opsional)</label><input type="text" id="pb-brand" maxlength="40"></div>
+              <div><label class="lbl" for="pb-name">Seri produk (opsional)</label><input type="text" id="pb-name" maxlength="50" placeholder="Contoh: Superstay Matte Ink"></div>
+              <div><label class="lbl" for="pb-brand">Merek (wajib)</label><input type="text" id="pb-brand" maxlength="40" placeholder="Contoh: Maybelline" aria-required="true"></div>
               <div><label class="lbl" for="pb-cat">Kategori</label><select id="pb-cat"></select></div>
               <div><label class="lbl" for="pb-pao">PAO (bulan)</label><input type="number" id="pb-pao" min="1" max="60"></div>
               <div><label class="lbl" for="pb-opened">Tanggal dibuka</label><input type="date" id="pb-opened"></div>
               <div><label class="lbl" for="pb-exp">Tanggal kedaluwarsa di kemasan (opsional)</label><input type="date" id="pb-exp"></div>
             </div>
             <p class="note" id="pb-paohint"></p>
-            <div id="pb-shade-wrap"><label class="lbl" for="pb-shadename">Nama shade (tulis persis seperti di kemasan)</label><div class="row" style="gap:8px"><input type="text" id="pb-shadename" maxlength="40" placeholder="Contoh: 02 Natural, Pioneer, Rosy Nude" style="flex:1;min-width:150px"><button class="btn small alt" type="button" data-shfind="pb">Cari warna</button></div><div class="row" style="gap:12px;margin-top:10px;flex-wrap:nowrap"><input type="color" id="pb-shade" value="#C98A73" aria-label="Warna shade"><span class="small muted" id="pb-shnote">Tulis nama shade, warnanya terisi otomatis.</span></div><div class="row" style="gap:10px;margin-top:10px"><label class="btn small ghost filebtn">Ambil warna dari foto<input type="file" accept="image/*" id="pb-shphoto" aria-label="Ambil warna shade dari foto"></label><label class="tg"><input type="checkbox" id="pb-noshade" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Tanpa shade</span></label></div><div class="shpick hidden" id="pb-shpick"><canvas aria-label="Foto produk, ketuk untuk mengambil warna"></canvas><p class="note">Ketuk bagian produk atau swatch yang warnanya paling mewakili shade.</p></div></div>
+            <div id="pb-shade-wrap"><label class="lbl" for="pb-shadename">Nama shade (tulis persis seperti di kemasan)</label><div class="row" style="gap:8px"><input type="text" id="pb-shadename" maxlength="40" placeholder="Contoh: 02 Natural, Pioneer, Rosy Nude" style="flex:1;min-width:150px"><button class="btn small alt" type="button" data-shfind="pb">Cari warna</button></div><div class="row" style="gap:12px;margin-top:10px;flex-wrap:nowrap"><input type="color" id="pb-shade" value="#C98A73" aria-label="Warna shade"><span class="small muted" id="pb-shnote">Isi merek dan nama shade, warnanya terisi otomatis.</span></div><div class="row" style="gap:10px;margin-top:10px"><label class="btn small ghost filebtn">Ambil warna dari foto<input type="file" accept="image/*" id="pb-shphoto" aria-label="Ambil warna shade dari foto"></label><label class="tg"><input type="checkbox" id="pb-noshade" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Tanpa shade</span></label></div><div class="shpick hidden" id="pb-shpick"><canvas aria-label="Foto produk, ketuk untuk mengambil warna"></canvas><p class="note">Ketuk bagian produk atau swatch yang warnanya paling mewakili shade.</p></div></div>
             <fieldset id="pb-act-wrap" style="margin-top:12px"><legend>Kandungan aktif (untuk pemeriksa rutinitas)</legend><div class="chips" id="pb-acts"></div></fieldset>
             <div class="row" style="margin-top:14px"><button class="btn" type="submit">Simpan produk</button><button class="btn ghost" type="button" id="pb-cancel">Batal</button></div>
           </form>
@@ -942,12 +953,12 @@ button.avatar{cursor:pointer;padding:0}
         <div class="win butter"><div class="bar"><span>Wishlist makeup anti-duplikat</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body">
           <form id="wish-form" class="bf" autocomplete="off">
             <div class="bgrid">
-              <div><label class="lbl" for="wb-name">Nama produk</label><input type="text" id="wb-name" maxlength="50" placeholder="Contoh: Lipstik matte brick red"></div>
-              <div><label class="lbl" for="wb-brand">Merek (opsional)</label><input type="text" id="wb-brand" maxlength="40"></div>
+              <div><label class="lbl" for="wb-name">Seri produk (opsional)</label><input type="text" id="wb-name" maxlength="50" placeholder="Contoh: Lip Matte Cream"></div>
+              <div><label class="lbl" for="wb-brand">Merek (wajib)</label><input type="text" id="wb-brand" maxlength="40" placeholder="Contoh: Wardah" aria-required="true"></div>
               <div><label class="lbl" for="wb-cat">Kategori</label><select id="wb-cat"></select></div>
               <div><label class="lbl" for="wb-price">Harga (opsional)</label><input type="text" id="wb-price" inputmode="numeric" placeholder="Contoh: 89000"></div>
             </div>
-            <div id="wb-shade-wrap"><label class="lbl" for="wb-shadename">Nama shade (tulis persis seperti di kemasan)</label><div class="row" style="gap:8px"><input type="text" id="wb-shadename" maxlength="40" placeholder="Contoh: 02 Natural, Pioneer, Rosy Nude" style="flex:1;min-width:150px"><button class="btn small alt" type="button" data-shfind="wb">Cari warna</button></div><div class="row" style="gap:12px;margin-top:10px;flex-wrap:nowrap"><input type="color" id="wb-shade" value="#C98A73" aria-label="Warna shade"><span class="small muted" id="wb-shnote">Tulis nama shade, warnanya terisi otomatis.</span></div><div class="row" style="gap:10px;margin-top:10px"><label class="btn small ghost filebtn">Ambil warna dari foto<input type="file" accept="image/*" id="wb-shphoto" aria-label="Ambil warna shade dari foto"></label><label class="tg"><input type="checkbox" id="wb-noshade" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Tanpa shade</span></label></div><div class="shpick hidden" id="wb-shpick"><canvas aria-label="Foto produk, ketuk untuk mengambil warna"></canvas><p class="note">Ketuk bagian produk atau swatch yang warnanya paling mewakili shade.</p></div></div>
+            <div id="wb-shade-wrap"><label class="lbl" for="wb-shadename">Nama shade (tulis persis seperti di kemasan)</label><div class="row" style="gap:8px"><input type="text" id="wb-shadename" maxlength="40" placeholder="Contoh: 02 Natural, Pioneer, Rosy Nude" style="flex:1;min-width:150px"><button class="btn small alt" type="button" data-shfind="wb">Cari warna</button></div><div class="row" style="gap:12px;margin-top:10px;flex-wrap:nowrap"><input type="color" id="wb-shade" value="#C98A73" aria-label="Warna shade"><span class="small muted" id="wb-shnote">Isi merek dan nama shade, warnanya terisi otomatis.</span></div><div class="row" style="gap:10px;margin-top:10px"><label class="btn small ghost filebtn">Ambil warna dari foto<input type="file" accept="image/*" id="wb-shphoto" aria-label="Ambil warna shade dari foto"></label><label class="tg"><input type="checkbox" id="wb-noshade" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Tanpa shade</span></label></div><div class="shpick hidden" id="wb-shpick"><canvas aria-label="Foto produk, ketuk untuk mengambil warna"></canvas><p class="note">Ketuk bagian produk atau swatch yang warnanya paling mewakili shade.</p></div></div>
             <label class="lbl" for="wb-link" style="margin-top:10px">Tautan produk (opsional)</label><input type="url" id="wb-link" placeholder="https://">
             <div id="wb-dupe" style="margin-top:12px"></div>
             <button class="btn" type="submit" style="margin-top:12px">Masukkan wishlist</button>
@@ -2693,7 +2704,7 @@ function bnorm(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ')
 function dupesFor(w,skipId){
   var out=[], gw=(BC[w.cat]||{}).g;
   function cmp(p,src){ if(p.id===skipId)return; var same=p.cat===w.cat, grp=gw&&(BC[p.cat]||{}).g===gw, why=null;
-    if(bnorm(p.name)&&bnorm(p.name)===bnorm(w.name)&&bnorm(p.brand)===bnorm(w.brand))why='nama dan merek sama';
+    if(!p.autoName&&!w.autoName&&bnorm(p.name)&&bnorm(p.name)===bnorm(w.name)&&bnorm(p.brand)===bnorm(w.brand))why='nama dan merek sama';
     else if((same||grp)&&bnorm(w.shadeName)&&bnorm(w.shadeName)===bnorm(p.shadeName)&&bnorm(p.brand)===bnorm(w.brand))why='merek dan nama shade sama';
     else if((same||grp)&&w.shade&&p.shade&&dE(w.shade,p.shade)<12)why='shade hampir sama (selisih warna '+Math.round(dE(w.shade,p.shade))+')';
     else if(same&&!w.shade&&!p.shade&&bnorm(p.brand)&&bnorm(p.brand)===bnorm(w.brand))why='kategori dan merek sama';
@@ -2723,12 +2734,13 @@ $('#pb-cat').innerHTML='<optgroup label="Makeup">'+catOptions('makeup')+'</optgr
 $('#pb-acts').innerHTML=ACTIVES.map(function(a){return '<label class="chip"><input type="checkbox" name="pb-act" value="'+a.k+'"><span>'+a.l+'</span></label>';}).join('');
 $('#pb-cat').addEventListener('change',paoFormSync);
 function openPAO(p){ BEDIT=p?p.id:null; var f=$('#pao-form'); f.classList.remove('hidden'); $('#pb-title').textContent=p?'Ubah produk':'Produk baru';
-  $('#pb-name').value=p?p.name:''; $('#pb-brand').value=p?p.brand||'':''; $('#pb-cat').value=p?p.cat:'foundation'; $('#pb-cat').dataset.prev=''; $('#pb-opened').value=p?p.opened||'':todayStr(); $('#pb-exp').value=p?p.exp||'':''; $('#pb-shade').value=p&&p.shade?p.shade:'#C98A73'; $('#pb-noshade').checked=p?!p.shade:false; $('#pb-shadename').value=p?p.shadeName||'':''; SHB.pb.src=p?p.shadeSrc||'':''; $('#pb-shnote').textContent=p&&p.shadeSrc==='foto'?'Diambil dari fotomu.':p&&p.shadeSrc==='ai'?'Perkiraan AI dari nama shade.':SHNOTE; $('#pb-shpick').classList.add('hidden');
+  $('#pb-name').value=p&&!p.autoName?p.name:''; $('#pb-brand').value=p?p.brand||'':''; $('#pb-cat').value=p?p.cat:'foundation'; $('#pb-cat').dataset.prev=''; $('#pb-opened').value=p?p.opened||'':todayStr(); $('#pb-exp').value=p?p.exp||'':''; $('#pb-shade').value=p&&p.shade?p.shade:'#C98A73'; $('#pb-noshade').checked=p?!p.shade:false; $('#pb-shadename').value=p?p.shadeName||'':''; SHB.pb.src=p?p.shadeSrc||'':''; $('#pb-shnote').textContent=p&&p.shadeSrc==='foto'?'Diambil dari fotomu.':p&&p.shadeSrc==='ai'?'Perkiraan AI dari nama shade.':SHNOTE; $('#pb-shpick').classList.add('hidden');
   $$('input[name=pb-act]').forEach(function(c){c.checked=!!(p&&p.actives&&p.actives.indexOf(c.value)>-1);}); paoFormSync(); if(p)$('#pb-pao').value=p.pao||BC[p.cat].m; f.scrollIntoView({behavior:'smooth',block:'start'}); }
 $('#pao-add').addEventListener('click',function(){openPAO(null);});
 $('#pb-cancel').addEventListener('click',function(){$('#pao-form').classList.add('hidden');});
-$('#pao-form').addEventListener('submit',function(e){ e.preventDefault(); var name=$('#pb-name').value.trim(); if(!name){$('#pb-name').focus();toast('Isi nama produk dulu.');return;}
+$('#pao-form').addEventListener('submit',function(e){ e.preventDefault(); var name=$('#pb-name').value.trim(); if(!$('#pb-brand').value.trim()){$('#pb-brand').focus();toast('Isi merek dulu.');return;}
   var c=BC[$('#pb-cat').value], o={name:name,brand:$('#pb-brand').value.trim(),cat:c.k,opened:$('#pb-opened').value,exp:$('#pb-exp').value,pao:Math.max(1,Math.min(60,parseInt($('#pb-pao').value,10)||c.m)),shade:(c.t==='makeup'&&c.k!=='parfum'&&!$('#pb-noshade').checked)?$('#pb-shade').value:'',shadeName:(c.t==='makeup'&&c.k!=='parfum'&&!$('#pb-noshade').checked)?$('#pb-shadename').value.trim():'',shadeSrc:SHB.pb.src,actives:c.t==='skin'?$$('input[name=pb-act]:checked').map(function(x){return x.value;}):[]};
+  if(!o.name){ o.name=autoName(c.k,o.shadeName); o.autoName=true; } else o.autoName=false;
   if(BEDIT){ var p=BEAUTY.items.find(function(x){return x.id===BEDIT;}); Object.assign(p,o); } else { o.id=uid(); BEAUTY.items.push(o); }
   saveBeauty(); $('#pao-form').classList.add('hidden'); toast(BEDIT?'Produk diperbarui.':'Produk ditambahkan.'); renderPAO(); });
 $('#pao-list').addEventListener('click',function(e){ var b=e.target.closest('[data-bedit]'); if(b){openPAO(BEAUTY.items.find(function(x){return x.id===b.dataset.bedit;}));return;}
@@ -2782,7 +2794,7 @@ function wishCheck(){ var w=wishForm(), c=BC[w.cat]; $('#wb-shade-wrap').classLi
   var d=(w.name||w.shade)?dupesFor(w,null):[];
   $('#wb-dupe').innerHTML=d.length?'<ul class="issues"><li class="warn"><b>Hati-hati, mungkin duplikat:</b> '+d.slice(0,3).map(function(x){return esc(x.p.name)+(x.p.brand?' ('+esc(x.p.brand)+')':'')+' di '+(x.src==='punya'?'koleksimu':'wishlist')+', '+x.why+(x.p.shade?' <span class="shade sm" style="background:'+x.p.shade+'"></span>':'');}).join('; ')+'.</li></ul>':(w.name?'<p class="okmsg small">&#10003; Belum ada yang mirip di koleksi dan wishlist-mu.</p>':''); }
 ['wb-name','wb-brand','wb-cat','wb-shade','wb-noshade','wb-shadename'].forEach(function(id){ $('#'+id).addEventListener('input',wishCheck); $('#'+id).addEventListener('change',wishCheck); });
-$('#wish-form').addEventListener('submit',function(e){ e.preventDefault(); var w=wishForm(); if(!w.name){toast('Isi nama produk dulu.');$('#wb-name').focus();return;} if(BC[w.cat].t!=='makeup')w.shade=''; if(w.link&&!/^https?:\/\//.test(w.link))w.link='https://'+w.link; w.id=uid(); BEAUTY.wish.push(w); saveBeauty(); $('#wish-form').reset(); $('#wb-shade').value='#C98A73'; SHB.wb.src=''; $('#wb-shnote').textContent=SHNOTE; $('#wb-shpick').classList.add('hidden'); wishCheck(); renderWish(); toast('Masuk wishlist.'); });
+$('#wish-form').addEventListener('submit',function(e){ e.preventDefault(); var w=wishForm(); if(!w.brand){toast('Isi merek dulu.');$('#wb-brand').focus();return;} if(!w.name){ w.name=autoName(w.cat,w.shadeName); w.autoName=true; } if(BC[w.cat].t!=='makeup')w.shade=''; if(w.link&&!/^https?:\/\//.test(w.link))w.link='https://'+w.link; w.id=uid(); BEAUTY.wish.push(w); saveBeauty(); $('#wish-form').reset(); $('#wb-shade').value='#C98A73'; SHB.wb.src=''; $('#wb-shnote').textContent=SHNOTE; $('#wb-shpick').classList.add('hidden'); wishCheck(); renderWish(); toast('Masuk wishlist.'); });
 function rupiah(n){ return 'Rp'+n.toLocaleString('id-ID'); }
 function renderWish(){
   var tot=BEAUTY.wish.reduce(function(s,w){return s+(w.price||0);},0);
@@ -2791,19 +2803,20 @@ function renderWish(){
     return '<li class="bitem'+(d.length?' warn':'')+'">'+(w.shade?'<span class="shade" style="background:'+w.shade+'"></span>':'<span class="shade ic">&#128132;</span>')+'<div class="bi"><b>'+esc(w.name)+'</b><span class="muted small">'+esc(w.brand||'')+(w.brand?' · ':'')+BC[w.cat].l+(w.shadeName?' · shade '+esc(w.shadeName):'')+(w.price?' · '+rupiah(w.price):'')+'</span>'+(d.length?'<span class="small"><span class="tag st">Mirip '+esc(d[0].p.name)+' ('+(d[0].src==='punya'?'sudah punya':'di wishlist')+')</span></span>':'<span class="small"><span class="tag okt">Tidak ada duplikat</span></span>')+(w.link?'<a class="pin small" href="'+esc(w.link)+'" target="_blank" rel="noopener">Buka tautan produk</a>':'')+'</div><div class="bact"><button class="linkbtn" data-wbuy="'+w.id+'">Sudah dibeli</button><button class="linkbtn danger" data-wdel="'+w.id+'">Hapus</button></div></li>'; }).join(''):'<li class="empty muted">Wishlist masih kosong. Sebelum checkout, catat di sini supaya tidak membeli shade yang sudah kamu punya.</li>';
 }
 $('#wish-list').addEventListener('click',function(e){
-  var b=e.target.closest('[data-wbuy]'); if(b){ var w=BEAUTY.wish.find(function(x){return x.id===b.dataset.wbuy;}); if(!w)return; BEAUTY.wish=BEAUTY.wish.filter(function(x){return x.id!==w.id;}); BEAUTY.items.push({id:uid(),name:w.name,brand:w.brand,cat:w.cat,shade:w.shade,shadeName:w.shadeName||'',shadeSrc:w.shadeSrc||'',opened:'',exp:'',pao:BC[w.cat].m,actives:[]}); saveBeauty(); renderWish(); toast('Dipindah ke koleksi. Isi tanggal dibuka saat mulai dipakai.'); return; }
+  var b=e.target.closest('[data-wbuy]'); if(b){ var w=BEAUTY.wish.find(function(x){return x.id===b.dataset.wbuy;}); if(!w)return; BEAUTY.wish=BEAUTY.wish.filter(function(x){return x.id!==w.id;}); BEAUTY.items.push({id:uid(),name:w.name,autoName:!!w.autoName,brand:w.brand,cat:w.cat,shade:w.shade,shadeName:w.shadeName||'',shadeSrc:w.shadeSrc||'',opened:'',exp:'',pao:BC[w.cat].m,actives:[]}); saveBeauty(); renderWish(); toast('Dipindah ke koleksi. Isi tanggal dibuka saat mulai dipakai.'); return; }
   var d=e.target.closest('[data-wdel]'); if(d){ BEAUTY.wish=BEAUTY.wish.filter(function(x){return x.id!==d.dataset.wdel;}); saveBeauty(); renderWish(); }
 });
 // ---------- v9: shade by name (AI estimate + keywords) and photo eyedropper ----------
 var SHADE_KW=[[/\b(clear|transparan|transparent|bening)\b/,null],[/\bmlbb\b/,'#B9776B'],[/\b(porcelain|ivory|fair|gading)\b/,'#F1D9C4'],[/\b(light|cerah)\b/,'#E8C7AA'],[/\b(nude|naked)\b/,'#C69C86'],[/\b(natural|medium|sand|pasir|neutral|netral)\b/,'#D6AE8C'],[/\b(beige|krem|cream)\b/,'#D9B99B'],[/\b(honey|golden|caramel|karamel|madu)\b/,'#C08A5B'],[/\b(tan|tanned|sawo)\b/,'#B07A52'],[/\b(warm)\b/,'#D2A27E'],[/\b(espresso|cocoa|coffee|kopi|mocha|mocca)\b/,'#7A4A33'],[/\b(deep|dark)\b/,'#8A5A3C'],[/\b(brown|chocolate|cokelat|coklat)\b/,'#6B3F2A'],[/\b(brick|bata)\b/,'#9C3B2E'],[/\b(terracotta|terakota|rust)\b/,'#B5563A'],[/\b(cherry|ceri)\b/,'#9E1B32'],[/\b(red|merah|ruby|scarlet|crimson)\b/,'#B3202A'],[/\b(coral|koral)\b/,'#EF6F5E'],[/\b(peach|persik|apricot)\b/,'#F2A27E'],[/\b(orange|oranye|jingga)\b/,'#E8743B'],[/\b(mauve)\b/,'#B07D8E'],[/\b(rose|rosy|mawar|blush)\b/,'#C96F7F'],[/\b(pink|merah muda)\b/,'#E58FA8'],[/\b(berry|plum|wine|burgundy|maroon|marun)\b/,'#7A2340'],[/\b(fuchsia|fuschia|magenta)\b/,'#C2186B'],[/\b(purple|ungu|violet|lilac)\b/,'#6E3B7A'],[/\b(taupe)\b/,'#8F7A6E'],[/\b(black|hitam|noir)\b/,'#1E1A1A'],[/\b(gold|emas)\b/,'#C9A24A'],[/\b(bronze|perunggu)\b/,'#A8703F'],[/\b(champagne|sampanye)\b/,'#E8CFA6'],[/\b(silver|perak)\b/,'#B9B9C0'],[/\b(grey|gray|abu)\b/,'#8A8A8A'],[/\b(white|putih)\b/,'#F4F1EC']];
 function shadeLocal(s){ var t=String(s||'').toLowerCase(); for(var i=0;i<SHADE_KW.length;i++){ if(SHADE_KW[i][0].test(t))return SHADE_KW[i][1]===null?'':SHADE_KW[i][1]; } return null; }
 var SHB={pb:{src:''},wb:{src:''}};
-var SHNOTE='Tulis nama shade, warnanya terisi otomatis.';
+var SHNOTE='Isi merek dan nama shade, warnanya terisi otomatis.';
 function shSet(px,hex,src,note){ $('#'+px+'-shade').value=hex; SHB[px].src=src; $('#'+px+'-shnote').textContent=note; if(px==='wb')wishCheck(); }
 function shFind(px,auto){
   var nm=$('#'+px+'-shadename').value.trim(); if(!nm){ if(!auto){toast('Tulis nama shade dulu.');$('#'+px+'-shadename').focus();} return; }
   if(auto&&(SHB[px].src==='foto'||SHB[px].src==='manual'))return;
-  var brand=$('#'+px+'-brand').value.trim(), prod=$('#'+px+'-name').value.trim(), cat=BC[$('#'+px+'-cat').value].l, loc=shadeLocal(nm+' '+prod), q=[brand,prod,'('+cat+')','shade '+nm].filter(Boolean).join(' ');
+  var brand=$('#'+px+'-brand').value.trim(); if(!brand){ if(!auto){toast('Isi merek dulu supaya warna shade akurat.');$('#'+px+'-brand').focus();} else $('#'+px+'-shnote').textContent='Isi merek dulu, lalu warna shade dicari otomatis.'; return; }
+  var prod=$('#'+px+'-name').value.trim(), cat=BC[$('#'+px+'-cat').value].l, loc=shadeLocal(nm+' '+prod), q=[brand,prod,'('+cat+')','shade '+nm].filter(Boolean).join(' ');
   if(loc) shSet(px,loc,'nama','Perkiraan dari kata di nama shade. Mencari yang lebih tepat…');
   if(!state.worker){ if(!loc)$('#'+px+'-shnote').textContent='Warna shade belum ketemu. Ambil dari foto kemasan/swatch atau pilih manual.'; return; }
   if(!loc)$('#'+px+'-shnote').textContent='Mencari warna shade "'+nm+'"…';
@@ -2819,12 +2832,14 @@ function shPickAt(px,mx,my){ var box=$('#'+px+'-shpick'), cv=box.querySelector('
   var hex='#'+s.map(function(v){return Math.round(v/n).toString(16).padStart(2,'0');}).join('').toUpperCase(); shSet(px,hex,'foto','Diambil dari fotomu. Ketuk bagian lain untuk mengganti.'); }
 function shPhoto(px,f){ if(!f)return; var rd=new FileReader(); rd.onload=function(){ loadImg(rd.result).then(function(im){ if(!im){toast('Foto tidak terbaca.');return;} var box=$('#'+px+'-shpick'), cv=box.querySelector('canvas'); box.classList.remove('hidden'); var W=Math.min(320,(box.clientWidth||320)), k=W/im.naturalWidth; cv.width=W; cv.height=Math.round(im.naturalHeight*k); box._im=im; shPickAt(px,cv.width/2,cv.height/2); box.scrollIntoView({behavior:'smooth',block:'nearest'}); }); }; rd.readAsDataURL(f); }
 ['pb','wb'].forEach(function(px){
+  $('#'+px+'-brand').addEventListener('change',function(){ if($('#'+px+'-shadename').value.trim()&&SHB[px].src!=='foto'&&SHB[px].src!=='manual')shFind(px,true); });
   $('#'+px+'-shadename').addEventListener('change',function(){ if(SHB[px].src!=='foto'&&SHB[px].src!=='manual')shFind(px,true); });
   $('#'+px+'-shade').addEventListener('input',function(){ SHB[px].src='manual'; $('#'+px+'-shnote').textContent='Warna dipilih manual.'; });
   $('#'+px+'-shphoto').addEventListener('change',function(e){ shPhoto(px,e.target.files&&e.target.files[0]); e.target.value=''; });
   $('#'+px+'-shpick canvas').addEventListener('click',function(e){ var r=this.getBoundingClientRect(); shPickAt(px,(e.clientX-r.left)*this.width/r.width,(e.clientY-r.top)*this.height/r.height); });
 });
 document.addEventListener('click',function(e){ var b=e.target.closest('[data-shfind]'); if(!b)return; SHB[b.dataset.shfind].src=''; shFind(b.dataset.shfind,false); });
+function autoName(cat,shade){ return BC[cat].l.split(' / ')[0].replace(/ \(.*\)$/,'')+(shade?' '+shade:''); }
 function beautyAlert(){ var n=BEAUTY.items.filter(function(p){var k=bStatus(p).k;return k==='bad'||k==='warn';}).length; return n; }
 
 wishCheck();
