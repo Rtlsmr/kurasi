@@ -1,4 +1,4 @@
-// Kurasi AI Worker v6
+// Kurasi AI Worker v8 (+ cek stok toko, daftar kandidat produk)
 // - Tema: 3 look per tema (Llama 3.3 70B fast + JSON mode).
 // - Gambar model: ilustrasi fashion dari FLUX.1 schnell.
 // - Foto item: dikenali Llama 4 Scout (kategori, nama, warna, motif),
@@ -242,15 +242,91 @@ if (/limit|quota|4006|neuron/i.test(last)) throw e;
 return { looks: [], raw: last.slice(0, 2000) };
 }
 
+
+// ---------- Cek stok toko (v7) ----------
+// Lazada, Uniqlo, Zara, dan This is April dicek dari hasil pencarian resminya.
+// ok:true  -> ada produk tersedia, url = halaman produk teratas; list = hingga 12 produk tersedia
+//            (aplikasi memilih yang jenis dan warnanya sesuai rekomendasi)
+// ok:false -> tidak ada produk yang cocok/tersedia
+// unknown  -> toko tidak bisa dihubungi/diblokir (aplikasi memakai tautan pencarian)
+const SUA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36';
+async function getJSON(url, headers) {
+  const ac = new AbortController();
+  const t = setTimeout(() => ac.abort(), 7000);
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': SUA, 'Accept': 'application/json, text/plain, */*', 'Accept-Language': 'id-ID,id;q=0.9,en;q=0.8', ...(headers || {}) }, signal: ac.signal });
+    if (!r.ok) return { err: r.status };
+    const ct = r.headers.get('content-type') || '';
+    if (!ct.includes('json')) return { err: 'html' };
+    return { data: await r.json() };
+  } catch (e) { return { err: 'net' }; } finally { clearTimeout(t); }
+}
+const pack = (av) => (av.length ? { ok: true, url: av[0].url, name: av[0].name, price: av[0].price, list: av } : { ok: false, list: [] });
+const rupiah = (v) => (v ? 'Rp' + Math.round(+v).toLocaleString('id-ID') : '');
+const stores = {
+  async lazada(it) {
+    const r = await getJSON('https://www.lazada.co.id/catalog/?ajax=true&q=' + encodeURIComponent(it.q));
+    if (r.err) return { unknown: true };
+    const list = (r.data && r.data.mods && r.data.mods.listItems) || null;
+    if (!list) return { unknown: true };
+    const av = list.filter((x) => x.inStock !== false && x.itemUrl).slice(0, 12).map((p) => ({ url: (p.itemUrl.startsWith('//') ? 'https:' : '') + p.itemUrl, name: String(p.name || '').slice(0, 100), price: p.priceShow || rupiah(p.price) }));
+    return pack(av);
+  },
+  async uniqlo(it) {
+    const r = await getJSON('https://www.uniqlo.com/id/api/commerce/v5/id/products?q=' + encodeURIComponent(it.en) + '&limit=16&offset=0&httpFailure=true', { 'x-fr-clientid': 'uq.id.web-spa' });
+    if (r.err || !r.data || r.data.status !== 'ok') return { unknown: true };
+    const items = (r.data.result && r.data.result.items) || [];
+    const want = it.g === 'pria' ? ['MEN', 'UNISEX'] : ['WOMEN', 'UNISEX'];
+    const av = items.filter((x) => want.includes(String(x.genderCategory || '').toUpperCase()) && x.productId).slice(0, 12).map((p) => {
+      const pr = p.prices && (p.prices.promo || p.prices.base);
+      return { url: 'https://www.uniqlo.com/id/id/products/' + p.productId + '/' + (p.priceGroup || '00'), name: String(p.name || '').slice(0, 100), price: pr ? rupiah(pr.value) : '' };
+    });
+    return pack(av);
+  },
+  async zara(it) {
+    const sec = it.g === 'pria' ? 'MAN' : 'WOMAN';
+    const r = await getJSON('https://www.zara.com/itxrest/1/search/store/11760/query?query=' + encodeURIComponent(it.en) + '&locale=id_ID&section=' + sec + '&offset=0&limit=16');
+    if (r.err || !r.data || r.data.status !== 'SUCCESS') return { unknown: true };
+    const res = (r.data.results || []).map((x) => x.content).filter(Boolean);
+    const av = res.filter((c) => c.availability === 'in_stock' && c.seo && c.seo.keyword && c.seo.seoProductId).slice(0, 12).map((p) => ({ url: 'https://www.zara.com/id/en/' + p.seo.keyword + '-p' + p.seo.seoProductId + '.html' + (p.seo.discernProductId ? '?v1=' + p.seo.discernProductId : ''), name: String(p.name || '').slice(0, 100), price: '' }));
+    return pack(av);
+  },
+  async april(it) {
+    if (it.g === 'pria') return { ok: false };
+    const r = await getJSON('https://thisisapril.com/search/suggest.json?q=' + encodeURIComponent(it.en) + '&resources[type]=product&resources[limit]=10');
+    if (r.err || !r.data || !r.data.resources) return { unknown: true };
+    const ps = (r.data.resources.results && r.data.resources.results.products) || [];
+    const av = ps.filter((x) => x.available && x.url).slice(0, 12).map((p) => ({ url: 'https://thisisapril.com' + String(p.url).split('?')[0], name: String(p.title || '').slice(0, 100), price: p.price ? rupiah(p.price) : '' }));
+    return pack(av);
+  },
+};
+async function stockCheck(b) {
+  const items = (Array.isArray(b.items) ? b.items : []).slice(0, 4).map((x) => ({
+    k: String(x.k || '').slice(0, 40), q: String(x.q || '').slice(0, 100), en: String(x.en || '').slice(0, 80), g: x.g === 'pria' ? 'pria' : 'wanita',
+  })).filter((x) => x.k && x.q);
+  const out = {};
+  await Promise.all(items.map(async (it) => {
+    const names = Object.keys(stores);
+    const rs = await Promise.all(names.map((n) => stores[n](it).catch(() => ({ unknown: true }))));
+    out[it.k] = {};
+    names.forEach((n, i) => { out[it.k][n] = rs[i]; });
+  }));
+  return { results: out, at: Date.now() };
+}
+
 export default {
 async fetch(request, env) {
 if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
-if (request.method === 'GET') return json({ ok: true, app: 'Kurasi AI', v: 6, text: TEXT_MODEL, image: IMAGE_MODEL, item: ITEM_MODEL, vision: VISION_MODEL });
+if (request.method === 'GET') return json({ ok: true, app: 'Kurasi AI', v: 8, text: TEXT_MODEL, image: IMAGE_MODEL, item: ITEM_MODEL, vision: VISION_MODEL });
 if (request.method !== 'POST') return json({ error: 'Gunakan POST' }, 405);
 if (!env.AI) return json({ error: 'Binding Workers AI dengan nama AI belum dipasang' }, 500);
 
 let b = {};
 try { b = await request.json(); } catch (e) {}
+
+if (b.type === 'stock') {
+try { return json(await stockCheck(b)); } catch (e) { return json({ error: 'Cek stok belum bisa dilakukan' }, 502); }
+}
 
 try {
 if (b.type === 'image') {
