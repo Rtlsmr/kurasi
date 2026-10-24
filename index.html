@@ -2404,7 +2404,7 @@ function aiImage(prompt){
     .then(function(u){ clearTimeout(to); delete IMG_PENDING[k]; return u; });
   IMG_PENDING[k]=p; return p;
 }
-function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="if(this.previousElementSibling&&this.previousElementSibling.tagName.toLowerCase()==="svg")this.previousElementSibling.style.display="none"" onerror="this.remove()">':''; }
+function imgTag(src){ return src?'<img class="aiimg" src="'+src+'" alt="" loading="lazy" onload="if(this.previousElementSibling&&this.previousElementSibling.tagName.toLowerCase()===\'svg\')this.previousElementSibling.style.display=\'none\'" onerror="this.remove()">':''; }
 var RUNWAY = {
   wanita:[
     {cap:'Kerja',pose:0,p:{hijab:{c:hx('dustypink')},top:{c:hx('putih'),kind:'blouse'},bottom:{c:hx('navy'),type:'pants',wide:true},shoes:{c:hx('hitam')},bag:{c:hx('cokelat')},acc:{c:hx('mustard')}}},
