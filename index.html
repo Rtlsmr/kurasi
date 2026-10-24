@@ -1456,7 +1456,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   --shadow-sm:none;
 }
 :root:not([data-theme="dark"]) .dock button[aria-current="page"] .tile{
-  background:#74414E!important;color:#FFF9F5!important;
+  background:#F0E1E2!important;
+  border-color:rgba(116,65,78,.32)!important;
+  box-shadow:none!important;
+  transform:translateY(-1px)!important;
+}
+:root:not([data-theme="dark"]) .dock button[aria-current="page"] .tile svg{
+  stroke:#74414E!important;
+  fill:none!important;
 }
 :root:not([data-theme="dark"]) .cover .runway{
   background:linear-gradient(145deg,#F0E5DB,#E8DCD1)!important;
@@ -1468,6 +1475,32 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
 @media(min-width:900px){
   main{padding-top:28px!important}
   .dock{background:var(--surface)!important}
+}
+
+
+/* v21 — reliable single-layer runway + outlined navigation icons */
+.cover .runway figure .arch:has(>img.aiimg)>svg{display:none!important}
+.cover .runway figure .arch>img.aiimg{z-index:2!important}
+.cover .runway figure .arch>svg{z-index:1!important}
+.cover .runway figure .arch>img.aiimg[style*="display: none"]{display:none!important}
+.dock .tile,.dock button[aria-current="page"] .tile{
+  border-radius:50%!important;
+}
+.dock .tile svg{
+  fill:none!important;
+  stroke:currentColor!important;
+}
+.dock button[aria-current="page"] .tile{
+  background:#F0E1E2!important;
+  border:1px solid rgba(116,65,78,.32)!important;
+  box-shadow:none!important;
+}
+.dock button[aria-current="page"] .tile svg{
+  stroke:#74414E!important;
+  fill:none!important;
+}
+@media(max-width:899px){
+  .dock{background:rgba(252,249,245,.96)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(83,55,46,.16)!important}
 }
 
 </style>
