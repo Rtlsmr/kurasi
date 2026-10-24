@@ -1925,6 +1925,39 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   main{width:calc(100% - 32px)!important}
 }
 
+
+/* v33 — final desktop header correction: controls belong to the nav, no sticky header */
+@media (min-width:900px){
+  .dock{
+    position:relative!important;top:auto!important;bottom:auto!important;
+    margin:12px auto 26px!important;
+    padding-right:310px!important;
+    box-sizing:border-box!important;
+  }
+  .topbar{
+    position:absolute!important;
+    top:50%!important;right:22px!important;left:auto!important;
+    transform:translateY(-50%)!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;
+    margin:0!important;padding:0!important;gap:10px!important;
+    z-index:100!important;
+  }
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{
+    display:flex!important;align-items:center!important;visibility:visible!important;
+    opacity:1!important;flex:0 0 auto!important;
+  }
+  .topbar .top-search{width:38px!important;height:38px!important}
+  .topbar .avatar{width:40px!important;height:40px!important}
+}
+@media (min-width:900px) and (max-width:1150px){
+  .dock{padding-right:260px!important}
+  .topbar{right:14px!important;gap:6px!important}
+  .topbar .right{gap:6px!important}
+  .topbar .tg .tl{font-size:11px!important}
+}
+
 </style>
 </head>
 <body>
