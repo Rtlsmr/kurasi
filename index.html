@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kurasi</title>
-<meta name="description" content="Kurasi: atelier di genggaman, ensemble menawan. Padu padan pakaian dari lemari sendiri dan pelacak beauty, untuk wanita dan pria.">
+<meta name="description" content="Kurasi: atelier creates, ensemble elevates. Padu padan pakaian dari lemari sendiri dan pelacak beauty, untuk wanita dan pria.">
 <meta name="theme-color" content="#FFD3E5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Bodoni+Moda:opsz,wght@6..96,500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='15'%20fill='%23F6F1E8'/%3E%3Cpath%20d='M12%2060V32a20%2020%200%200%201%2040%200V60'%20fill='none'%20stroke='%23B8956A'%20stroke-width='3.5'/%3E%3Crect%20x='21'%20y='26'%20width='6'%20height='28'%20fill='%233A2340'/%3E%3Cpath%20d='M27%2042L42%2027'%20stroke='%233A2340'%20stroke-width='2.6'%20stroke-linecap='round'/%3E%3Cg%20transform='translate(37%2048)%20rotate(-45)'%3E%3Crect%20x='-3.2'%20y='0'%20width='6.4'%20height='10'%20rx='1'%20fill='%233A2340'/%3E%3Crect%20x='-3.4'%20y='-3'%20width='6.8'%20height='3'%20fill='%23B8956A'/%3E%3Cpath%20d='M-2.2%20-3V-9L2.2%20-11.5V-3Z'%20fill='%23B5446E'/%3E%3C/g%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Bodoni+Moda:opsz,wght@6..96,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="img/logo-mark.webp">
 <style>
 :root{
   --bg:#FFD3E5; --bg2:#FFE7F2; --surface:#FFF9FC; --surface2:#FFEEF6; --ink:#4A1F42; --muted:#87597A; --outline:#5B2A4E;
@@ -690,13 +690,33 @@ button.avatar{cursor:pointer;padding:0}
 .cover-logo .mark{width:42px!important;height:54px!important}
 @media (max-width:899px){.topbar .logo .mark{width:28px!important;height:36px!important}}
 @media (min-width:900px){.brandbox .logo .mark{width:50px!important;height:64px!important}}
+
+/* v13 logo: user's rose-gold logo (image) + Cormorant wordmark */
+:root{--logo-ink:#8A5A40!important;--logo-acc:#B07E5E!important}
+:root[data-theme="dark"]{--logo-ink:#E6C3A6!important;--logo-acc:#D2A585!important}
+.logo .mark.mimg{display:block;width:40px!important;height:40px!important;border-radius:12px;object-fit:cover;box-shadow:0 2px 8px rgba(90,55,35,.18),inset 0 0 0 1px rgba(160,110,80,.2);background:#F4EADF}
+.logo .wm b{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;font-size:26px!important;letter-spacing:.24em!important;color:var(--logo-ink)!important}
+.logo .wm small{color:var(--logo-acc)!important;filter:none!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-size:9.5px!important;font-weight:600!important;letter-spacing:.18em!important}
+.cover-logo{margin:0 0 6px}
+.cover-full{display:block;width:170px;height:auto;border-radius:18px;box-shadow:0 6px 18px rgba(90,55,35,.12)}
+@media (max-width:899px){
+  .topbar .logo .mark.mimg{width:36px!important;height:36px!important;border-radius:10px}
+  .topbar .logo .wm b{font-size:22px!important}
+  .topbar .logo .wm small{font-size:8px!important;letter-spacing:.14em!important}
+}
+@media (min-width:900px){
+  .brandbox .logo .mark.mimg{width:72px!important;height:72px!important;border-radius:20px}
+  .brandbox .logo .wm b{color:var(--side-ink)!important;font-size:26px!important}
+  .brandbox .logo .wm small{color:var(--side-ink)!important;opacity:.9;font-size:9px!important}
+  .cover-logo{display:block!important}
+}
 </style>
 </head>
 <body>
 <div class="stars" aria-hidden="true"><span style="top:8%;left:6%">&#10022;</span><span style="top:22%;right:8%">&#10023;</span><span style="top:48%;left:3%">&#10023;</span><span style="top:64%;right:4%">&#10022;</span><span style="top:86%;left:44%">&#10023;</span></div>
 <div class="shell">
   <nav class="dock" aria-label="Menu utama">
-    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier di genggaman, ensemble menawan. Lihat sampul" data-intro><svg class="mark" viewBox="0 0 160 204" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="md" d="M26 196V82a54 54 0 0 1 108 0V196" fill="none" stroke-width="2.5" stroke-dasharray="6 7"/><path class="ms" d="M139 18l2.6 6.6 6.6 2.6-6.6 2.6-2.6 6.6-2.6-6.6-6.6-2.6 6.6-2.6z"/><path class="mt" d="M102.9 91.3C114 76 129 82 134 100" fill="none" stroke-width="2.2" stroke-linecap="round"/><path class="mk" d="M49 86h13v88h-13zM43 86h25v3.5h-25zM43 170.5h25v3.5h-25z"/><path class="mk" fill-rule="evenodd" d="M60 136L75.6 123L108.3 89.3A2.5 2.5 0 0 0 104.7 85.9L72.3 119.9ZM101.1 93.2A2.6 0.95 -46.1 0 1 104.7 89.5A2.6 0.95 -46.1 0 1 101.1 93.2Z"/><g transform="translate(90.8 148.8) rotate(-45)"><rect class="mf" x="-7.6" y="25" width="15.2" height="5" rx="1.2"/><rect class="mk" x="-7.2" y="4" width="14.4" height="21"/><rect class="mf" x="-7.2" y="13.6" width="14.4" height="1.2"/><rect class="mf" x="-7.6" y="-2" width="15.2" height="6" rx="1"/><rect class="mf2" x="-5.8" y="-6" width="11.6" height="4"/><path class="mb" d="M-5 -6V-21Q-5 -24.5 -2 -26L5 -30V-6Z"/><path d="M-2.8 -8V-21" stroke="#fff" stroke-opacity=".45" stroke-width="1.1" stroke-linecap="round"/></g></svg><span class="wm"><b>KURASI</b><small><span>atelier di genggaman,</span> <span>ensemble menawan</span></small></span></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Padu padan dan beauty dari lemarimu sendiri</small></div></div>
+    <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier creates, ensemble elevates. Lihat sampul" data-intro><img class="mark mimg" src="img/logo-mark.webp" alt="" width="256" height="256"><span class="wm"><b>KURASI</b><small><span>atelier creates,</span> <span>ensemble elevates.</span></small></span></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Padu padan dan beauty dari lemarimu sendiri</small></div></div>
     <button data-tab="outfit" aria-current="page"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/></svg></span>Outfit</button>
     <button data-tab="lemari"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span>Lemari</button>
     <button data-tab="tema"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg></span>Tema</button>
@@ -709,7 +729,7 @@ button.avatar{cursor:pointer;padding:0}
 
   <main id="main">
     <div class="topbar">
-      <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier di genggaman, ensemble menawan. Lihat sampul" data-intro><svg class="mark" viewBox="0 0 160 204" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="md" d="M26 196V82a54 54 0 0 1 108 0V196" fill="none" stroke-width="2.5" stroke-dasharray="6 7"/><path class="ms" d="M139 18l2.6 6.6 6.6 2.6-6.6 2.6-2.6 6.6-2.6-6.6-6.6-2.6 6.6-2.6z"/><path class="mt" d="M102.9 91.3C114 76 129 82 134 100" fill="none" stroke-width="2.2" stroke-linecap="round"/><path class="mk" d="M49 86h13v88h-13zM43 86h25v3.5h-25zM43 170.5h25v3.5h-25z"/><path class="mk" fill-rule="evenodd" d="M60 136L75.6 123L108.3 89.3A2.5 2.5 0 0 0 104.7 85.9L72.3 119.9ZM101.1 93.2A2.6 0.95 -46.1 0 1 104.7 89.5A2.6 0.95 -46.1 0 1 101.1 93.2Z"/><g transform="translate(90.8 148.8) rotate(-45)"><rect class="mf" x="-7.6" y="25" width="15.2" height="5" rx="1.2"/><rect class="mk" x="-7.2" y="4" width="14.4" height="21"/><rect class="mf" x="-7.2" y="13.6" width="14.4" height="1.2"/><rect class="mf" x="-7.6" y="-2" width="15.2" height="6" rx="1"/><rect class="mf2" x="-5.8" y="-6" width="11.6" height="4"/><path class="mb" d="M-5 -6V-21Q-5 -24.5 -2 -26L5 -30V-6Z"/><path d="M-2.8 -8V-21" stroke="#fff" stroke-opacity=".45" stroke-width="1.1" stroke-linecap="round"/></g></svg><span class="wm"><b>KURASI</b><small><span>atelier di genggaman,</span> <span>ensemble menawan</span></small></span></span>
+      <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier creates, ensemble elevates. Lihat sampul" data-intro><img class="mark mimg" src="img/logo-mark.webp" alt="" width="256" height="256"><span class="wm"><b>KURASI</b><small><span>atelier creates,</span> <span>ensemble elevates.</span></small></span></span>
       <div class="right"><button class="avatar" id="top-avatar" type="button" data-go="profil" aria-label="Buka profil"></button>
       <label class="tg right" id="theme-wrap"><span class="tl">Mode gelap</span><input type="checkbox" id="theme-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></label></div>
     </div>
@@ -719,7 +739,7 @@ button.avatar{cursor:pointer;padding:0}
       <div id="outfit-empty" class="win pink cover hidden">
         <div class="bar"><span>Selamat datang di Kurasi</span><span class="deco" aria-hidden="true"><i>&#9825;</i><i>&#9734;</i><i>&#10047;</i></span></div>
         <div class="body">
-          <div class="logo cover-logo" aria-hidden="true"><svg class="mark" viewBox="0 0 160 204" aria-hidden="true"><path class="ma" d="M14 196V80a66 66 0 0 1 132 0V196M6 196H154" fill="none" stroke-width="6"/><path class="md" d="M26 196V82a54 54 0 0 1 108 0V196" fill="none" stroke-width="2.5" stroke-dasharray="6 7"/><path class="ms" d="M139 18l2.6 6.6 6.6 2.6-6.6 2.6-2.6 6.6-2.6-6.6-6.6-2.6 6.6-2.6z"/><path class="mt" d="M102.9 91.3C114 76 129 82 134 100" fill="none" stroke-width="2.2" stroke-linecap="round"/><path class="mk" d="M49 86h13v88h-13zM43 86h25v3.5h-25zM43 170.5h25v3.5h-25z"/><path class="mk" fill-rule="evenodd" d="M60 136L75.6 123L108.3 89.3A2.5 2.5 0 0 0 104.7 85.9L72.3 119.9ZM101.1 93.2A2.6 0.95 -46.1 0 1 104.7 89.5A2.6 0.95 -46.1 0 1 101.1 93.2Z"/><g transform="translate(90.8 148.8) rotate(-45)"><rect class="mf" x="-7.6" y="25" width="15.2" height="5" rx="1.2"/><rect class="mk" x="-7.2" y="4" width="14.4" height="21"/><rect class="mf" x="-7.2" y="13.6" width="14.4" height="1.2"/><rect class="mf" x="-7.6" y="-2" width="15.2" height="6" rx="1"/><rect class="mf2" x="-5.8" y="-6" width="11.6" height="4"/><path class="mb" d="M-5 -6V-21Q-5 -24.5 -2 -26L5 -30V-6Z"/><path d="M-2.8 -8V-21" stroke="#fff" stroke-opacity=".45" stroke-width="1.1" stroke-linecap="round"/></g></svg><span class="wm"><b>KURASI</b><small><span>atelier di genggaman,</span> <span>ensemble menawan</span></small></span></div>
+          <div class="cover-logo"><img class="cover-full" src="img/logo-full.webp" alt="Kurasi, atelier creates, ensemble elevates." width="520" height="572"></div>
           <p class="issue" id="cover-issue"></p>
           <h1>Bingung mau pakai apa hari ini?</h1>
           <p class="sub">Kurasi memadukan pakaian dan aksesori dari lemarimu sendiri, sesuai acara, dresscode, dan personal color-mu.</p>
