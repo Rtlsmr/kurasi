@@ -4481,15 +4481,59 @@ qChips();
 (function(){ var st=showTab; showTab=function(n){ st.apply(this,arguments); if((n==='lemari'||n==='riwayat')&&typeof renderDash==='function'){ try{renderDash();}catch(e){} } }; })();
 
 // ---------- v40: stock-aware shop links (checked by the Worker) ----------
-var STOCK_STORES={'Lazada':'lazada','Zara':'zara','Uniqlo':'uniqlo','This is April':'april'}, STOCK_TTL=6*3600e3;
-function stockGet(k){ try{ var v=JSON.parse(localStorage.getItem('kurasi.stock.'+k)||'null'); if(v&&Date.now()-v.t<STOCK_TTL)return v.r; }catch(e){} return null; }
-function stockPut(k,r){ try{ localStorage.setItem('kurasi.stock.'+k,JSON.stringify({t:Date.now(),r:r})); }catch(e){} }
+var STOCK_STORES={'Lazada':'lazada','Zara':'zara','Uniqlo':'uniqlo','This is April':'april'}, STOCK_TTL=6*3600e3, STOCK_V=2;
+function stockGet(k){ try{ var v=JSON.parse(localStorage.getItem('kurasi.stock'+STOCK_V+'.'+k)||'null'); if(v&&Date.now()-v.t<STOCK_TTL)return v.r; }catch(e){} return null; }
+function stockPut(k,r){ try{ localStorage.setItem('kurasi.stock'+STOCK_V+'.'+k,JSON.stringify({t:Date.now(),r:r})); }catch(e){} }
 function stockEn(r){ return (BCOL[r.color]||r.color)+' '+(BQ[r.kw]||r.kw); }
-function applyStock(card,res){
+// a store result only counts when the product really is the recommended item (type, then colour)
+var STOCK_TYPE={
+  'kemeja':[['kemeja','shirt','hem']],'kemeja pria':[['kemeja','shirt','hem']],
+  'kaos':[['kaos','t-shirt','tshirt','tee','tees']],
+  'blouse':[['blouse','blus','tunik','tunic','top','atasan']],
+  'sweater rajut':[['sweater','rajut','knit','knitted','pullover','jumper']],
+  'rompi':[['rompi','vest','gilet']],
+  'jaket':[['jaket','jacket','bomber','parka','blouson']],
+  'blazer':[['blazer','jas']],'blazer pria':[['blazer','jas']],
+  'outer cardigan':[['cardigan','kardigan']],
+  'gamis':[['gamis','dress','abaya','terusan']],
+  'dress':[['dress','gaun','terusan']],
+  'rok plisket':[['rok','skirt'],['plisket','pleated','plisket']],
+  'rok':[['rok','skirt']],
+  'celana kulot':[['kulot','culotte','culottes','wide leg','wide-leg']],
+  'celana pendek':[['celana pendek','shorts','short pants','bermuda']],
+  'jeans':[['jeans','denim']],
+  'celana chino pria':[['chino','chinos']],
+  'celana bahan':[['celana bahan','celana kain','trousers','slacks','pants','celana panjang','pantalon']],
+  'hijab segi empat':[['hijab','jilbab','kerudung','segi empat','segiempat','bawal','pashmina','square scarf','voal']],
+  'scarf':[['scarf','syal','shawl']]
+};
+var STOCK_NOT={
+  'kemeja':['t-shirt','tshirt','kaos','tee','polo','overshirt jacket'],'kemeja pria':['t-shirt','tshirt','kaos','tee','polo'],
+  'blouse':['t-shirt','tshirt','kaos','tee','tank','bra','bikini','crop top'],
+  'jeans':['jaket','jacket','kemeja','shirt','rok','skirt','dress'],
+  'celana bahan':['jeans','legging','leggings','pendek','shorts'],
+  'hijab segi empat':['heattech','syal leher','neck','muffler','inner'],
+  'rompi':['puffer'],'gamis':['shirt dress'],'dress':['shirt dress','dressing']
+};
+var STOCK_COL={putih:['putih','white','off white','offwhite'],cream:['cream','krem','ivory','off white','offwhite','gading'],beige:['beige','krem','nude','sand'],mocca:['mocca','mocha','moka','camel','coklat muda','brown','tan'],cokelat:['cokelat','coklat','brown','chocolate'],abumuda:['abu','grey','gray','silver'],abutua:['abu tua','charcoal','dark grey','dark gray','grey','gray'],hitam:['hitam','black'],navy:['navy','dongker','dark blue'],wine:['wine','maroon','marun','burgundy','bordeaux'],merah:['merah','red'],terracotta:['terracotta','terakota','rust','bata'],mustard:['mustard','kuning','yellow'],olive:['olive','army','khaki','hijau army'],peach:['peach','salem','coral'],birumuda:['biru muda','light blue','baby blue','sky blue','biru','blue'],sage:['sage','hijau','green'],dustypink:['dusty pink','dusty rose','pink','rose'],lilac:['lilac','lavender','ungu','purple'],mint:['mint','tosca','toska','turquoise'],fuchsia:['fuchsia','fuschia','magenta','pink']};
+function stHas(t,w){ return new RegExp('(^|[^a-z])'+w.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&')+'($|[^a-z])').test(t); }
+function stockTypeOk(name,kw){ var t=String(name||'').toLowerCase(), need=STOCK_TYPE[kw]; if(!need)return true;
+  if((STOCK_NOT[kw]||[]).some(function(w){return stHas(t,w);}))return false;
+  return need.every(function(grp){ return grp.some(function(w){return stHas(t,w);}); }); }
+function stockColOk(name,col){ var t=String(name||'').toLowerCase(); return (STOCK_COL[col]||[]).some(function(w){return stHas(t,w);}); }
+function stockPick(x,r){
+  if(!x||x.unknown)return null;
+  var list=Array.isArray(x.list)?x.list:(x.ok&&x.url?[{name:x.name,url:x.url,price:x.price}]:[]);
+  var typed=list.filter(function(p){return p&&p.url&&stockTypeOk(p.name,r.kw);});
+  if(typed.length){ var c=typed.filter(function(p){return stockColOk(p.name,r.color);}); return {live:c[0]||typed[0]}; }
+  if(Array.isArray(x.list)||x.ok===false)return {off:true};
+  return null; // single result of another product type: keep the search link
+}
+function applyStock(card,res,r){
   card.querySelectorAll('.shops a.shop[data-st]').forEach(function(a){
-    var st=a.dataset.st, x=res&&res[st]; a.classList.remove('chk'); a.removeAttribute('aria-busy');
-    if(x&&x.ok&&x.url){ a.href=x.url; a.classList.add('live'); a.title=(x.name||'Produk tersedia')+(x.price?' · '+x.price:'')+' — buka halaman produk'; }
-    else if(x&&x.ok===false){ var s=document.createElement('span'); s.className='shop off'; s.setAttribute('aria-disabled','true'); s.title='Belum ada produk yang cocok di '+a.textContent; s.textContent=a.textContent; a.replaceWith(s); }
+    var st=a.dataset.st, pk=stockPick(res&&res[st],r||{}); a.classList.remove('chk'); a.removeAttribute('aria-busy');
+    if(pk&&pk.live){ var p=pk.live; a.href=p.url; a.classList.add('live'); a.title=(p.name||'Produk tersedia')+(p.price?' · '+p.price:'')+' — buka halaman produk'; }
+    else if(pk&&pk.off){ var s=document.createElement('span'); s.className='shop off'; s.setAttribute('aria-disabled','true'); s.title='Belum ada produk yang cocok di '+a.textContent; s.textContent=a.textContent; a.replaceWith(s); }
   });
 }
 function fillStock(recs){
@@ -4497,15 +4541,15 @@ function fillStock(recs){
   var cards=[].slice.call(box.querySelectorAll('.recs .rec')), need=[];
   recs.forEach(function(r,i){ var c=cards[i]; if(!c)return; var k=recKey(r);
     c.querySelectorAll('.shops a.shop').forEach(function(a){ var st=STOCK_STORES[a.textContent.trim()]; if(st){ a.dataset.st=st; a.dataset.k=k; } });
-    var cached=stockGet(k); if(cached){ applyStock(c,cached); return; }
+    var cached=stockGet(k); if(cached){ applyStock(c,cached,r); return; }
     c.querySelectorAll('.shops a.shop[data-st]').forEach(function(a){ a.classList.add('chk'); a.setAttribute('aria-busy','true'); });
     need.push({r:r,c:c,k:k});
   });
   if(!need.length)return;
-  if(!state.worker){ need.forEach(function(n){applyStock(n.c,null);}); return; }
-  aiPost({type:'stock',items:need.map(function(n){return {k:n.k,q:recQuery(n.r),en:stockEn(n.r),g:state.gender};})},15000).then(function(j){
-    var res=j&&j.results; need.forEach(function(n){ var r=res&&res[n.k]; if(r)stockPut(n.k,r); applyStock(n.c,r||null); });
-  }).catch(function(){ need.forEach(function(n){applyStock(n.c,null);}); });
+  if(!state.worker){ need.forEach(function(n){applyStock(n.c,null,n.r);}); return; }
+  aiPost({type:'stock',items:need.map(function(n){return {k:n.k,q:recQuery(n.r),en:stockEn(n.r),g:state.gender,kw:n.r.kw,c:n.r.color};})},15000).then(function(j){
+    var res=j&&j.results; need.forEach(function(n){ var r=res&&res[n.k]; if(r)stockPut(n.k,r); applyStock(n.c,r||null,n.r); });
+  }).catch(function(){ need.forEach(function(n){applyStock(n.c,null,n.r);}); });
 }
 (function(){ var rl=renderLookPanel; renderLookPanel=function(){ rl.apply(this,arguments); try{ fillStock(LOOKP.recs); }catch(e){} }; })();
 // ---------- Init ----------
