@@ -1838,6 +1838,41 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box
   .brandbox .logo .wm small{letter-spacing:.08em!important;font-size:7px!important}
 }
 
+
+/* v31 — precise desktop header alignment and restore hero-logo scale */
+@media (min-width:900px){
+  .shell{position:relative!important}
+  .dock{
+    position:relative!important;top:auto!important;
+    padding-right:270px!important;
+  }
+  .topbar{
+    position:absolute!important;top:34px!important;
+    right:clamp(46px,5vw,78px)!important;left:auto!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    width:auto!important;max-width:none!important;margin:0!important;padding:0!important;
+    gap:10px!important;z-index:1001!important;
+  }
+  .topbar .logo{display:none!important}
+  .topbar .right{display:flex!important;align-items:center!important;gap:10px!important}
+  .topbar .top-search,.topbar .avatar,.topbar .tg{
+    display:flex!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important;
+  }
+  .topbar .top-search{width:38px!important;height:38px!important}
+  .topbar .avatar{width:40px!important;height:40px!important}
+  #outfit-empty .cover-full{
+    width:108px!important;height:auto!important;box-sizing:border-box!important;
+    padding:7px 12px!important;object-fit:contain!important;
+    background:#F5E9E0!important;border-radius:8px!important;
+  }
+}
+@media (min-width:900px) and (max-width:1100px){
+  .dock{padding-right:250px!important}
+  .topbar{right:38px!important;top:34px!important}
+  .topbar .tg .tl{font-size:12px!important}
+  #outfit-empty .cover-full{width:100px!important;padding:6px 10px!important}
+}
+
 </style>
 </head>
 <body>
