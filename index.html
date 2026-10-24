@@ -2088,6 +2088,40 @@ body.ens-focus #result.hidden{display:none!important}
   body.ens-focus #result .rsplit{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
 }
 
+/* v39 — calmer Beranda: hero, search, style tools, result, today's picks, one compact summary */
+.qsearch{max-width:720px;margin:0 0 44px!important}
+.qsearch .qbox{height:58px!important;padding:0 20px!important;gap:12px!important;border:1px solid transparent!important;background:color-mix(in srgb,var(--surface2) 55%,var(--surface))!important;box-shadow:none!important;transition:background-color .25s var(--ease,ease),border-color .25s var(--ease,ease),box-shadow .25s var(--ease,ease)}
+:root:not([data-g="pria"]) .qsearch .qbox{border-radius:999px!important}
+:root[data-g="pria"] .qsearch .qbox{border-radius:3px!important}
+.qsearch .qbox:hover{border-color:var(--outline)!important}
+.qsearch .qbox:focus-within{background:var(--surface)!important;border-color:var(--accent)!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 10%,transparent)!important}
+.qsearch .qbox svg{width:20px!important;height:20px!important;stroke:var(--accent)!important;stroke-width:1.6!important}
+html:root .qsearch .qbox input[type=search],html:root .qsearch .qbox input[type=search]:focus{font:400 16px/1.2 var(--body)!important;color:var(--ink)!important;background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important;min-height:0!important;height:56px!important;padding:0!important;border-radius:0!important}
+.qsearch input::placeholder{font-family:var(--title);font-style:italic;font-size:19px;color:var(--muted);opacity:1;transition:opacity .3s}
+.qsearch input.fade::placeholder{opacity:0}
+.qchips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 4px 0}
+.qchips .ql{font:500 12.5px var(--body);color:var(--muted);margin-right:2px}
+.qchip{min-height:34px;padding:0 14px;border:1px solid var(--outline);border-radius:var(--rb,999px);background:transparent;color:var(--ink);font:500 13px var(--body);cursor:pointer;transition:background-color .2s,border-color .2s}
+.qchip:hover{background:var(--surface2);border-color:var(--outline2)}
+.sres{top:66px!important}
+.summary{margin:0 0 40px}
+.summary .sechead{align-items:flex-end}
+.sumlinks{display:flex;gap:18px;flex-wrap:wrap}
+.summary .stats{margin:0 0 20px!important}
+.summary .sum-recent{margin:0!important}
+.lm-donut,.rw-week{margin:28px 0 0!important}
+#tab-riwayat .rw-week{margin:0 0 24px!important}
+@media (min-width:1100px){#outfit-main>.summary{grid-column:1 / -1}#outfit-main>.qsearch{max-width:720px!important}}
+
+/* v40 — stock-aware shop buttons */
+.shop.chk{position:relative;opacity:.55;pointer-events:none}
+.shop.chk::after{content:"";display:inline-block;width:9px;height:9px;margin-left:6px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-1px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.shop.live{border-color:color-mix(in srgb,#3F7D58 45%,transparent)!important}
+.shop.live::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#3F7D58;vertical-align:1px}
+:root[data-theme="dark"] .shop.live::before{background:#8CC9A2}
+.shop.off{opacity:.45;cursor:not-allowed;text-decoration:line-through;text-decoration-thickness:1px;background:transparent!important}
+
 </style>
 </head>
 <body>
@@ -2150,24 +2184,8 @@ body.ens-focus #result.hidden{display:none!important}
           <button class="hero-art hv" id="hero-art" type="button" aria-label="Lihat look pilihan"></button>
           <div class="row hero-cta"><button class="btn" type="button" id="hero-go">Kurasi outfit</button><button class="btn ghost" type="button" data-go="tema">Jelajahi tema</button></div>
         </section>
-        <div class="qsearch" role="search"><div class="qbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input type="search" id="q-search" placeholder="Cari item lemari, produk, atau tema" aria-label="Cari item lemari, produk beauty, atau tema" autocomplete="off" enterkeyhint="search"></div><div class="sres hidden" id="q-res"></div></div>
-        <section class="ident" aria-labelledby="h-ident">
-          <div class="sechead"><div><span class="eyebrow">Dua karakter, satu atelier</span><h2 id="h-ident">Pilih karakter gayamu</h2></div></div>
-          <div class="ident-grid">
-            <button class="idc" type="button" data-g="wanita" aria-pressed="false"><span class="idf"></span><span class="idm"><span class="idn" data-nofx>01 / Femme</span><span class="idt">Keanggunan lembut</span><span class="idd">Ivory, taupe, dan burgundy. Draping dan detail yang halus.</span><span class="ida">Jelajahi Femme</span></span></button>
-            <button class="idc" type="button" data-g="pria" aria-pressed="false"><span class="idf"></span><span class="idm"><span class="idn" data-nofx>02 / Homme</span><span class="idt">Struktur yang tenang</span><span class="idd">Stone, slate, dan forest. Tailoring yang presisi.</span><span class="ida">Jelajahi Homme</span></span></button>
-          </div>
-        </section>
-        <section class="journey" aria-labelledby="h-journey">
-          <div class="sechead"><div><span class="eyebrow">Cara kerja</span><h2 id="h-journey">Satu atelier, tiga langkah</h2></div></div>
-          <ol>
-            <li><span class="jn">01</span><h3 class="jt">Temukan</h3><p class="jd">Jelajahi tema dan dresscode, dari kerja sampai 80's.</p><div class="jl"><button type="button" data-go="tema">Jelajahi tema</button></div></li>
-            <li><span class="jn">02</span><h3 class="jt">Kurasi</h3><p class="jd">Padukan isi lemarimu menjadi satu ensemble yang utuh.</p><div class="jl"><button type="button" id="q-outfit">Kurasi outfit</button><button type="button" data-go="lemari">Buka lemari</button></div></li>
-            <li><span class="jn">03</span><h3 class="jt">Sempurnakan</h3><p class="jd">Personal color, riwayat pakai, dan rutinitas perawatan.</p><div class="jl"><button type="button" data-go="warna">Personal color</button><button type="button" data-go="riwayat">Riwayat</button><button type="button" data-go="beauty" id="q-beauty"><b>Beauty</b><small>Makeup dan skincare</small></button></div></li>
-          </ol>
-        </section>
+        <div class="qsearch" role="search"><div class="qbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input type="search" id="q-search" placeholder="Cari item lemari, produk, atau tema" aria-label="Cari item lemari, produk beauty, atau tema" autocomplete="off" enterkeyhint="search"></div><div class="qchips" id="q-chips" aria-label="Coba cari"></div><div class="sres hidden" id="q-res"></div></div>
         <div id="beauty-alert"></div>
-        <div class="stats" id="stats"></div>
         <div class="nudge hidden" id="nudge"><span>Lengkapi profil agar saran dan ilustrasinya terasa seperti kamu.</span><button class="btn small butter" type="button" id="nudge-go">Isi profil</button></div>
 
         <div id="lookbar" class="lookbar hidden">
@@ -2207,12 +2225,11 @@ body.ens-focus #result.hidden{display:none!important}
 
         <div id="result" class="win butter hidden ph" aria-live="polite"></div>
         <section class="recs-today" id="recs-today" aria-labelledby="h-recs"></section>
-        <div class="dash2">
-          <div class="win sky"><div class="bar"><span>Warna lemarimu</span><span class="deco" aria-hidden="true"><i>&#9673;</i></span></div><div class="body" id="dash-donut"></div></div>
-          <div class="win pink"><div class="bar"><span>Outfit minggu ini</span><span class="deco" aria-hidden="true"><i>&#9776;</i></span></div><div class="body" id="dash-week"></div></div>
-          <div class="win mint"><div class="bar"><span>Terakhir dipakai</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body" id="dash-recent"></div></div>
-        </div>
-        <div class="discover"><div><b>Ada dresscode atau tema acara?</b><span>Ketik temanya, AI menyusun 3 look lalu Kurasi memadukan dari lemarimu.</span></div><button class="btn alt" type="button" data-go="tema">Jelajahi tema</button></div>
+        <section class="summary" id="summary" aria-labelledby="h-summary">
+          <div class="sechead"><div><span class="eyebrow">Minggu ini</span><h2 id="h-summary">Ringkasan</h2></div><div class="sumlinks"><button class="linkbtn" type="button" data-go="riwayat">Riwayat</button><button class="linkbtn" type="button" data-go="warna">Personal color</button></div></div>
+          <div class="stats" id="stats"></div>
+          <div class="win mint sum-recent"><div class="bar"><span>Terakhir dipakai</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body" id="dash-recent"></div></div>
+        </section>
       </div>
     </section>
 
@@ -2264,6 +2281,7 @@ body.ens-focus #result.hidden{display:none!important}
 
       <div id="wardrobe"></div>
       <p id="wardrobe-foot"></p>
+      <div class="win sky lm-donut"><div class="bar"><span>Warna lemarimu</span><span class="deco" aria-hidden="true"><i>&#9673;</i></span></div><div class="body" id="dash-donut"></div></div>
     </section>
 
     <!-- TEMA -->
@@ -2348,6 +2366,7 @@ body.ens-focus #result.hidden{display:none!important}
     <section id="tab-riwayat" class="hidden" aria-labelledby="h-riwayat">
       <h1 id="h-riwayat">Riwayat ensemble</h1>
       <p class="lede">Item yang sudah dipakai beristirahat 7 hari, jadi Kurasi tidak menyarankannya dulu.</p>
+      <div class="win pink rw-week"><div class="bar"><span>Outfit minggu ini</span><span class="deco" aria-hidden="true"><i>&#9776;</i></span></div><div class="body" id="dash-week"></div></div>
       <div class="win sky"><div class="bar"><span>Buku harian outfit</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body" id="history"></div></div>
     </section>
 
@@ -4048,7 +4067,7 @@ function renderDash(){
 }
 
 $('#hero-go').addEventListener('click',function(){ kurasi(); });
-$('#q-outfit').addEventListener('click',function(){ var p=$('#style-panel'); if(p){ p.scrollIntoView({behavior:'smooth',block:'start'}); var f=p.querySelector('select,input,button'); if(f)setTimeout(function(){f.focus({preventScroll:true});},350); } });
+if($('#q-outfit'))$('#q-outfit').addEventListener('click',function(){ var p=$('#style-panel'); if(p){ p.scrollIntoView({behavior:'smooth',block:'start'}); var f=p.querySelector('select,input,button'); if(f)setTimeout(function(){f.focus({preventScroll:true});},350); } });
 // ---------- v8: theme panel (wardrobe matches + shopping suggestions) ----------
 var LOOKP={theme:null,lk:null,src:null,img:null};
 function lookItems(lk){
@@ -4112,7 +4131,7 @@ function renderLookPanel(){
   var intro='<div class="lp-head"><span class="lfig">'+(img?imgTag(img):'<span class="wait off"><span class="hanger">'+FORM_ICO+'</span></span>')+'</span><div><p style="margin:0 0 8px">'+esc(lk.desc||'')+(mot?' '+mot+'.':'')+'</p><span class="dots">'+lk.colors.map(dot).join('')+'</span><p class="small muted" style="margin:8px 0 0">Warna tema: '+lk.colors.map(colorLabel).join(', ').toLowerCase()+'.</p></div></div>';
   var have='<h3 style="margin-top:18px">Dari lemarimu <span class="small muted">('+its.length+' item cocok)</span></h3>'+(its.length?'<div class="closet mini-closet">'+its.map(function(it){return '<div class="card"><span class="pick" style="cursor:default"><span class="thumb">'+itemArt(it)+'</span><span class="cap"><b>'+esc(it.name)+'</b><span class="meta">'+dot(it.color)+'<span>'+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></span></span></div>';}).join('')+'</div>':'<p class="muted">Belum ada item di lemarimu yang warnanya masuk tema ini.</p>');
   var act=can?'<div class="row" style="margin-top:14px"><button class="btn" id="look-go">Padukan jadi ensemble</button><span class="small muted">'+combos.length+' kombinasi dari lemarimu</span></div>':'<div class="reasons" style="margin-top:14px">Item yang cocok belum cukup untuk satu ensemble lengkap.</div>';
-  var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Tautan membuka hasil pencarian di marketplace atau situs resmi brand (H&amp;M lewat toko resminya di Zalora); cek ketersediaan, harga, dan ukuran di sana.</p>':'';
+  var rec=recs.length?'<h3 style="margin-top:20px">'+(its.length?'Lengkapi dengan':'Belum punya? Ini rekomendasinya')+'</h3><div class="recs">'+recs.map(recCard).join('')+'</div><p class="note">Gambar adalah contoh buatan AI sebagai gambaran, bukan foto produk toko. Lazada, Zara, Uniqlo, dan This is April dicek otomatis: tombol bertitik hijau langsung membuka halaman produk teratas yang tersedia, tombol abu-abu berarti belum ada produk yang cocok. Shopee, Tokopedia, Zalora (termasuk H&amp;M), Stradivarius, dan Pull&amp;Bear tidak bisa dicek otomatis, jadi membuka hasil pencarian di situsnya.</p>':'';
   w.innerHTML=head+'<div class="body">'+intro+have+act+rec+'</div>';
   $('#look-close').onclick=function(){closeModal('look-modal');};
   var g=$('#look-go'); if(g)g.onclick=function(){ var from=($('#tab-tema')&&!$('#tab-tema').classList.contains('hidden'))?'tema':'outfit'; state.look=Object.assign({theme:theme},lk); save('look',state.look); closeModal('look-modal'); showIntro=false; showTab('outfit'); ENS_FROM=from; kurasi(); };
@@ -4449,6 +4468,46 @@ function exitEnsFocus(){ document.body.classList.remove('ens-focus'); ENS_FROM='
 $('#ens-back').addEventListener('click',function(){
   var to=ENS_FROM==='tema'?'tema':'outfit'; exitEnsFocus(); showTab(to); window.scrollTo(0,0);
 });
+
+// ---------- v39: search suggestions + gentle rotating examples ----------
+function qChips(){ var box=$('#q-chips'); if(!box)return; var h=isHomme(), list=h?['Kerja','Kondangan','Navy','Kemeja','Pomade']:(headOn()?['Kerja','Kondangan','Pashmina','Wine','Lip tint']:['Kerja','Kondangan','Blouse','Wine','Lip tint']);
+  box.innerHTML='<span class="ql">Coba:</span>'+list.map(function(x){return '<button type="button" class="qchip">'+esc(x)+'</button>';}).join(''); }
+document.addEventListener('click',function(e){ var c=e.target.closest('.qchip'); if(!c)return; var s=$('#q-search'); s.value=c.textContent; s.focus({preventScroll:true}); renderSearch(); });
+(function(){ var ex=['Cari blazer, lip tint, atau tema…','Coba “kemeja putih”','Coba “kondangan”','Coba “wine”','Coba “sunscreen”'], i=0, s=$('#q-search'); if(!s)return; s.setAttribute('placeholder',ex[0]);
+  setInterval(function(){ if(document.activeElement===s||s.value)return; s.classList.add('fade'); setTimeout(function(){ i=(i+1)%ex.length; s.setAttribute('placeholder',ex[i]); s.classList.remove('fade'); },300); },3800);
+})();
+(function(){ var ag=applyGenderTheme; applyGenderTheme=function(){ ag.apply(this,arguments); qChips(); }; })();
+qChips();
+(function(){ var st=showTab; showTab=function(n){ st.apply(this,arguments); if((n==='lemari'||n==='riwayat')&&typeof renderDash==='function'){ try{renderDash();}catch(e){} } }; })();
+
+// ---------- v40: stock-aware shop links (checked by the Worker) ----------
+var STOCK_STORES={'Lazada':'lazada','Zara':'zara','Uniqlo':'uniqlo','This is April':'april'}, STOCK_TTL=6*3600e3;
+function stockGet(k){ try{ var v=JSON.parse(localStorage.getItem('kurasi.stock.'+k)||'null'); if(v&&Date.now()-v.t<STOCK_TTL)return v.r; }catch(e){} return null; }
+function stockPut(k,r){ try{ localStorage.setItem('kurasi.stock.'+k,JSON.stringify({t:Date.now(),r:r})); }catch(e){} }
+function stockEn(r){ return (BCOL[r.color]||r.color)+' '+(BQ[r.kw]||r.kw); }
+function applyStock(card,res){
+  card.querySelectorAll('.shops a.shop[data-st]').forEach(function(a){
+    var st=a.dataset.st, x=res&&res[st]; a.classList.remove('chk'); a.removeAttribute('aria-busy');
+    if(x&&x.ok&&x.url){ a.href=x.url; a.classList.add('live'); a.title=(x.name||'Produk tersedia')+(x.price?' · '+x.price:'')+' — buka halaman produk'; }
+    else if(x&&x.ok===false){ var s=document.createElement('span'); s.className='shop off'; s.setAttribute('aria-disabled','true'); s.title='Belum ada produk yang cocok di '+a.textContent; s.textContent=a.textContent; a.replaceWith(s); }
+  });
+}
+function fillStock(recs){
+  var box=$('#look-win'); if(!box||!recs||!recs.length)return;
+  var cards=[].slice.call(box.querySelectorAll('.recs .rec')), need=[];
+  recs.forEach(function(r,i){ var c=cards[i]; if(!c)return; var k=recKey(r);
+    c.querySelectorAll('.shops a.shop').forEach(function(a){ var st=STOCK_STORES[a.textContent.trim()]; if(st){ a.dataset.st=st; a.dataset.k=k; } });
+    var cached=stockGet(k); if(cached){ applyStock(c,cached); return; }
+    c.querySelectorAll('.shops a.shop[data-st]').forEach(function(a){ a.classList.add('chk'); a.setAttribute('aria-busy','true'); });
+    need.push({r:r,c:c,k:k});
+  });
+  if(!need.length)return;
+  if(!state.worker){ need.forEach(function(n){applyStock(n.c,null);}); return; }
+  aiPost({type:'stock',items:need.map(function(n){return {k:n.k,q:recQuery(n.r),en:stockEn(n.r),g:state.gender};})},15000).then(function(j){
+    var res=j&&j.results; need.forEach(function(n){ var r=res&&res[n.k]; if(r)stockPut(n.k,r); applyStock(n.c,r||null); });
+  }).catch(function(){ need.forEach(function(n){applyStock(n.c,null);}); });
+}
+(function(){ var rl=renderLookPanel; renderLookPanel=function(){ rl.apply(this,arguments); try{ fillStock(LOOKP.recs); }catch(e){} }; })();
 // ---------- Init ----------
 applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
