@@ -3070,15 +3070,16 @@ function shrinkImg(b64){ return new Promise(function(res){ var src='data:image/j
     res(out.toDataURL('image/jpeg',0.82));
   }catch(e){ res(src); } };
   im.onerror=function(){res(null);}; im.src=src; }); }
+var AI_LAST_ERR='';
 function aiImage(prompt){
   if(!state.worker||!state.aiImg) return Promise.resolve(null);
   var k=imgKey(prompt), have=imgGet(k); if(have) return Promise.resolve(have);
   if(IMG_PENDING[k]) return IMG_PENDING[k];
   var ctrl=('AbortController' in window)?new AbortController():null, to=setTimeout(function(){if(ctrl)ctrl.abort();},45000);
   var p=fetch(state.worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'image',prompt:prompt}),signal:ctrl?ctrl.signal:undefined})
-    .then(function(r){return r.ok?r.json():null;})
-    .then(function(j){return j&&j.image?shrinkImg(j.image):null;})
-    .then(function(u){ if(u)imgPut(k,u); return u; }, function(){ return null; })
+    .then(function(r){ if(r.ok){ AI_LAST_ERR=''; return r.json(); } AI_LAST_ERR=r.status===429?'quota':'error'; return null; })
+    .then(function(j){ if(j&&!j.image)AI_LAST_ERR='error'; return j&&j.image?shrinkImg(j.image):null;})
+    .then(function(u){ if(u)imgPut(k,u); return u; }, function(e){ AI_LAST_ERR=(e&&e.name==='AbortError')?'timeout':'net'; return null; })
     .then(function(u){ clearTimeout(to); delete IMG_PENDING[k]; return u; });
   IMG_PENDING[k]=p; return p;
 }
@@ -3899,10 +3900,10 @@ function mirrorHTML(c,pose){
 }
 function fillMirrorAI(box,c,stillOk){
   var prompt=comboPrompt(c); if(!state.aiImg||!state.worker||imgGet(imgKey(prompt)))return;
-  aiImage(prompt).then(function(u){ if(!stillOk())return; var m=box.querySelector('.mirror'), cap=box.querySelector('.figcap'); if(!m)return;
+  aiImage(prompt).then(function(u){ return (u||AI_LAST_ERR==='quota')?u:new Promise(function(r){setTimeout(r,1500);}).then(function(){ return aiImage(prompt); }); }).then(function(u){ if(!stillOk())return; var m=box.querySelector('.mirror'), cap=box.querySelector('.figcap'); if(!m)return;
     var w=m.querySelector('.wait');
     if(u){ if(w)w.remove(); m.insertAdjacentHTML('beforeend',imgTag(u)); if(cap)cap.textContent='Ilustrasi AI'; }
-    else { if(box&&box.id==='result'&&!RV_USER&&resultView==='model'){ resultView='flat'; renderResult(); return; } if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">'+FORM_ICO+'</span><span>Ilustrasi model belum tersedia (kuota AI habis atau koneksi terputus). Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
+    else { if(box&&box.id==='result'&&!RV_USER&&resultView==='model'){ resultView='flat'; renderResult(); return; } if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">'+FORM_ICO+'</span><span>'+(AI_LAST_ERR==='quota'?'Jatah AI gratis hari ini sudah habis, jadi ilustrasi model belum bisa dibuat. Jatah kembali pukul 07.00 WIB.':(AI_LAST_ERR==='timeout'||AI_LAST_ERR==='net'?'Koneksi ke AI terputus, ilustrasi model belum bisa dibuat. Coba lagi sebentar lagi.':'Ilustrasi model untuk padanan ini gagal dibuat. Coba Ganti outfit atau buka lagi nanti.'))+' Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
 }
 function viewTabs(name,cur,opts){ return '<div class="seg small" role="radiogroup" aria-label="'+opts.label+'">'+opts.items.map(function(o){return '<label><input type="radio" name="'+name+'" value="'+o[0]+'"'+(cur===o[0]?' checked':'')+'><span>'+o[1]+'</span></label>';}).join('')+'</div>'; }
 function renderBoard(){
