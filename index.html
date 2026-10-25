@@ -2149,6 +2149,9 @@ html:root:not(#_) .rcard{align-items:stretch}
 html:root:not(#_) .rcard .rfig{display:block;width:100%;align-self:stretch;flex:0 0 auto;box-sizing:border-box}
 html:root:not(#_) .rcard .rtt{width:100%;box-sizing:border-box}
 
+/* v52 — realistic product photos for the sample wardrobe blend into the paper-coloured tiles */
+:root:not([data-theme="dark"]) .art img{mix-blend-mode:multiply}
+
 </style>
 </head>
 <body>
@@ -2593,7 +2596,7 @@ var state = {
 };
 state.profile = Object.assign({name:'',skin:'langsat',hair:'long',hijabStyle:'',vibes:[],avoid:[],done:false}, load('profile',{}));
 state.uiStyle = load('uiStyle','auto');
-var STATIC_ART={item:false,avatar:false}; // set true once img/item/*.webp and img/avatar-*.webp are committed
+var STATIC_ART={item:true,avatar:false}; // set true once img/item/*.webp and img/avatar-*.webp are committed
 var ranked = [], rankIdx = 0, showIntro = true, resultView = 'model', RV_USER = false;
 state.introSeen = load('introSeen', false);
 
