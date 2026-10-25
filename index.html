@@ -2622,7 +2622,8 @@ function dot(c){return '<i class="dot" style="background:'+hx(c)+'" aria-hidden=
 function sw(it){return '<span class="sw'+(it.motif?' motif':'')+'" style="background:'+hx(it.color)+'" aria-hidden="true"></span>';}
 var toastTimer;
 function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show');},2800);}
-function byCat(cat){return state.items.filter(function(i){return i.cat===cat;});}
+function forG(it){ if(it.g)return it.g===state.gender; if(it.sample)return (it.sample.charAt(0)==='p')===(state.gender==='pria'); return true; }
+function byCat(cat){return state.items.filter(function(i){return i.cat===cat&&forG(i);});}
 function headOn(){return state.gender==='wanita'&&state.opts.hijab;}
 
 // ---------- Fashion illustration ----------
@@ -3177,7 +3178,8 @@ var SAMPLE = {
   ]
 };
 function fillSample(){
-  if(state.items.length && !confirm('Lemari contoh akan ditambahkan ke isi lemarimu. Lanjutkan?'))return;
+  var pre=state.gender==='pria'?'p':'w'; if(state.items.some(function(i){return i.sample&&i.sample.charAt(0)===pre;})){ toast('Lemari contoh '+(pre==='p'?'Homme':'Femme')+' sudah ada di lemarimu.'); return; }
+  if(state.items.some(forG) && !confirm('Lemari contoh akan ditambahkan ke isi lemarimu. Lanjutkan?'))return;
   var s=SAMPLE[state.gender];
   s.forEach(function(x,i){state.items.push({id:uid(),cat:x[0],name:x[1],color:x[2],motif:!!x[3],styles:['kerja','santai','formal'],lastWorn:null,sample:(state.gender==='pria'?'p':'w')+i});});
   save('items',state.items);
@@ -3223,10 +3225,10 @@ $('#item-form').addEventListener('submit',function(e){
   var id=$('#f-id').value, target;
   if(id){
     var it=state.items.find(function(i){return i.id===id;});
-    if(it){ var changed=(it.name!==name||it.cat!==cat||it.color!==color||it.motif!==$('#f-motif').checked); it.name=name;it.cat=cat;it.color=color;it.motif=$('#f-motif').checked;it.styles=styles; if(changed&&!FORM.ill&&!FORM.photo&&(it.ill==='a'||it.sample)){ dropItemImg(it); delete it.sample; } target=it; }
+    if(it){ var changed=(it.name!==name||it.cat!==cat||it.color!==color||it.motif!==$('#f-motif').checked); it.name=name;it.cat=cat;it.color=color;it.motif=$('#f-motif').checked;it.styles=styles; if(changed&&!FORM.ill&&!FORM.photo&&(it.ill==='a'||it.sample)){ dropItemImg(it); it.g=it.g||(it.sample&&it.sample.charAt(0)==='p'?'pria':'wanita'); delete it.sample; } target=it; }
     toast('Perubahan disimpan.'); $('#item-form').classList.add('hidden');
   } else {
-    target={id:uid(),cat:cat,name:name,color:color,motif:$('#f-motif').checked,styles:styles,lastWorn:null};
+    target={id:uid(),cat:cat,name:name,color:color,motif:$('#f-motif').checked,styles:styles,lastWorn:null,g:state.gender};
     state.items.push(target);
     toast(CATL[cat]+' '+name.toLowerCase()+' '+colorLabel(color).toLowerCase()+' disimpan.');
   }
@@ -3240,7 +3242,7 @@ $('#item-form').addEventListener('submit',function(e){
 });
 function renderWardrobe(){
   var cats=catsFor(state.gender);
-  var vis=state.items.filter(function(i){return cats.some(function(c){return c.k===i.cat;});});
+  var vis=state.items.filter(function(i){return forG(i)&&cats.some(function(c){return c.k===i.cat;});});
   var n=vis.length;
   var ns=vis.filter(function(i){return i.sample;}).length;
   $('#lemari-count').textContent = n? n+' item di lemarimu'+(ns?(ns===n?', semuanya dari lemari contoh.':', '+ns+' di antaranya dari lemari contoh.'):'.') : 'Mulai dengan 10-20 item yang paling sering kamu pakai. Foto saja, Kurasi yang mencatat jenis dan warnanya.';
@@ -3433,7 +3435,7 @@ function renderOutfitPage(){
   $('#nudge').classList.toggle('hidden',!!state.profile.done);
   var rs=$('#result'); if(rs.classList.contains('ph')) rs.innerHTML='<div class="bar"><span>Ensemble-mu muncul di sini</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div><div class="body ph-empty"><div class="mirror" aria-hidden="true">'+imgTag('img/run-'+state.gender+'-1.webp')+'</div><p style="margin-top:14px">Atur acara dan item di kiri, lalu ketuk <b>Kurasi outfit</b>.</p></div>';
   var cats=catsFor(state.gender);
-  var empty=!state.items.some(function(i){return cats.some(function(c){return c.k===i.cat;});});
+  var empty=!state.items.some(function(i){return forG(i)&&cats.some(function(c){return c.k===i.cat;});});
   var cover=empty||!state.introSeen||showIntro;
   $('#outfit-empty').classList.toggle('hidden',!cover);
   $('#outfit-main').classList.toggle('hidden',cover);
@@ -3826,7 +3828,7 @@ $('#board-modal').addEventListener('click',function(e){ if(e.target.id==='board-
 var CLOSET={filter:'all',sel:[]};
 var MAIN_CATS=['hijab','atasan','bawahan','gamis'];
 function renderCloset(){
-  var cats=catsFor(state.gender), vis=state.items.filter(function(i){return cats.some(function(c){return c.k===i.cat;});});
+  var cats=catsFor(state.gender), vis=state.items.filter(function(i){return forG(i)&&cats.some(function(c){return c.k===i.cat;});});
   CLOSET.sel=CLOSET.sel.filter(function(id){return vis.some(function(i){return i.id===id;});});
   if(CLOSET.filter!=='all'&&!vis.some(function(i){return i.cat===CLOSET.filter;}))CLOSET.filter='all';
   var tabs='<div class="closet-tabs" role="tablist" aria-label="Kategori lemari"><button type="button" role="tab" data-filter="all" aria-selected="'+(CLOSET.filter==='all')+'">Semua <span>'+vis.length+'</span></button>'+cats.map(function(c){var n=byCat(c.k).length;return n?'<button type="button" role="tab" data-filter="'+c.k+'" aria-selected="'+(CLOSET.filter===c.k)+'">'+c.l+' <span>'+n+'</span></button>':'';}).join('')+'</div>';
@@ -4100,7 +4102,7 @@ function streakDays(){ var days={}; state.history.forEach(function(h){var d=new 
 var IC={closet:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/>',shirt:'<path d="M9 3c0 1.7 1.3 3 3 3s3-1.3 3-3l4 2 2 5-3 1v10H6V11l-3-1 2-5z"/>',moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',flame:'<path d="M12 3c1 3 4 4.5 4 9a4 4 0 0 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 0-8z"/>'};
 function statHTML(ic,lb,nv,dl){ return '<div class="stat"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">'+IC[ic]+'</svg></span><span class="lb">'+lb+'</span><span class="nv">'+nv+'</span><span class="dl">'+dl+'</span></div>'; }
 function renderDash(){
-  var cats=catsFor(state.gender), vis=state.items.filter(function(i){return cats.some(function(c){return c.k===i.cat;});});
+  var cats=catsFor(state.gender), vis=state.items.filter(function(i){return forG(i)&&cats.some(function(c){return c.k===i.cat;});});
   var ws=weekStart(), now=Date.now(), added=vis.filter(function(i){return itemCreated(i)>=now-7*864e5;}).length;
   var worn=state.history.filter(function(h){return h.t>=ws;}).length, rest=vis.filter(function(i){return restLeft(i)>0;}).length, st=streakDays();
   $('#stats').innerHTML=statHTML('closet','Isi lemari',vis.length,added?'<b>+'+added+'</b> minggu ini':'item tercatat')+statHTML('shirt','Outfit dipakai',worn,'minggu ini')+statHTML('moon','Sedang istirahat',rest,'item, maks. 7 hari')+statHTML('flame','Hari beruntun',st,'hari berturut-turut');
@@ -4127,7 +4129,7 @@ var LOOKP={theme:null,lk:null,src:null,img:null};
 function lookItems(lk){
   var cats=catsFor(state.gender).map(function(c){return c.k;});
   return state.items.filter(function(it){
-    if(cats.indexOf(it.cat)<0)return false;
+    if(cats.indexOf(it.cat)<0||!forG(it))return false;
     if(it.cat==='hijab'&&!headOn())return false;
     if(lk.colors.indexOf(it.color)<0)return false;
     if(lk.motif==='hindari'&&it.motif)return false;
@@ -4433,7 +4435,7 @@ function renderSeasonRecs(){ var el=$('#season-recs'); if(!el)return; var k=stat
 function searchAll(q){ var n=bnorm(q); if(n.length<2)return null; var words=n.split(' ');
   function hit(s){ s=bnorm(s); return words.every(function(w){return s.indexOf(w)>-1;}); }
   var cats=catsFor(state.gender).map(function(c){return c.k;});
-  var items=state.items.filter(function(it){ return cats.indexOf(it.cat)>-1&&hit([it.name,CATL[it.cat],colorLabel(it.color),it.motif?'motif':''].join(' ')); }).slice(0,6);
+  var items=state.items.filter(function(it){ return cats.indexOf(it.cat)>-1&&forG(it)&&hit([it.name,CATL[it.cat],colorLabel(it.color),it.motif?'motif':''].join(' ')); }).slice(0,6);
   var bea=BEAUTY.items.map(function(p){return {p:p,w:0};}).concat(BEAUTY.wish.map(function(p){return {p:p,w:1};})).filter(function(x){ var p=x.p; return hit([p.name,p.brand,p.shadeName,BC[p.cat]?BC[p.cat].l:''].join(' ')); }).slice(0,5);
   var th=[]; function scan(t,src){ t.looks.forEach(function(lk,i){ if(hit([t.name,lk.name,lk.desc,(lk.colors||[]).map(colorLabel).join(' ')].join(' ')))th.push({t:t,lk:lk,i:i,src:src}); }); }
   PRESETS.forEach(function(t){scan(t,'preset');}); state.aiThemes.forEach(function(t){scan(t,'ai');});
