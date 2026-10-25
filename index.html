@@ -2137,6 +2137,10 @@ html:root:not(#_) .seg span{border-radius:var(--btn-r-in)!important}
 /* v46 — Tema search field follows the button shape (Femme pill, Homme rounded square) */
 html:root:not(#_) #ai-theme,html:root:not(#_) #worker-url{border-radius:var(--btn-r)!important;padding-left:18px!important;padding-right:18px!important}
 
+/* v47 — sample wardrobe items are labelled and can be removed on their own */
+.card .smp{position:absolute;right:6px;bottom:6px;z-index:3;padding:2px 8px;border:1px solid var(--outline2,var(--outline));border-radius:var(--btn-r,999px);background:color-mix(in srgb,var(--surface) 88%,transparent);color:var(--muted);font:600 10px/1.4 var(--body);letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
+#wardrobe-foot{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+
 </style>
 </head>
 <body>
@@ -3216,15 +3220,26 @@ function renderWardrobe(){
   var cats=catsFor(state.gender);
   var vis=state.items.filter(function(i){return cats.some(function(c){return c.k===i.cat;});});
   var n=vis.length;
-  $('#lemari-count').textContent = n? n+' item di lemarimu.' : 'Mulai dengan 10-20 item yang paling sering kamu pakai. Foto saja, Kurasi yang mencatat jenis dan warnanya.';
+  var ns=vis.filter(function(i){return i.sample;}).length;
+  $('#lemari-count').textContent = n? n+' item di lemarimu'+(ns?(ns===n?', semuanya dari lemari contoh.':', '+ns+' di antaranya dari lemari contoh.'):'.') : 'Mulai dengan 10-20 item yang paling sering kamu pakai. Foto saja, Kurasi yang mencatat jenis dan warnanya.';
   $('#btn-sample-2').classList.toggle('hidden', n>0);
   var w=$('#wardrobe');
   if(!n){w.innerHTML='<div class="win pink"><div class="body">'+emptyHTML('lemari','Atelier-mu masih kosong','Tambahkan atasan dan bawahan dulu'+(state.gender==='wanita'?', atau gamis / dress,':'')+' supaya Kurasi bisa mulai memadukan. Cukup foto, Kurasi mencatat jenis dan warnanya.','<button class="btn" type="button" onclick="document.getElementById(\'btn-add\').click()">Tambah item</button>')+'</div></div>';$('#wardrobe-foot').innerHTML='';CLOSET.sel=[];renderSelbar();return;}
   renderCloset();
-  $('#wardrobe-foot').innerHTML='<button class="linkbtn danger" id="btn-clear-all">Kosongkan lemari</button>';
+  var nsAll=state.items.filter(function(i){return i.sample;}).length;
+  $('#wardrobe-foot').innerHTML=(nsAll?'<button class="linkbtn" id="btn-clear-sample">Hapus item contoh saja ('+nsAll+')</button>':'')+'<button class="linkbtn danger" id="btn-clear-all">Kosongkan lemari</button>';
   pumpIll();
 }
 $('#wardrobe-foot').addEventListener('click',function(e){
+  if(e.target.id==='btn-clear-sample'){
+    var smp=state.items.filter(function(i){return i.sample;}), own=state.items.length-smp.length;
+    if(!smp.length)return;
+    if(confirm(smp.length+' item dari lemari contoh akan dihapus. '+(own?own+' item milikmu tetap ada.':'Lemarimu akan kosong dan siap diisi baju sendiri.')+' Lanjutkan?')){
+      smp.forEach(dropItemImg); state.items=state.items.filter(function(i){return !i.sample;}); CLOSET.sel=CLOSET.sel.filter(function(id){return state.items.some(function(i){return i.id===id;});});
+      save('items',state.items); renderWardrobe(); renderOutfitPage(); toast(smp.length+' item contoh dihapus'+(own?', item milikmu tetap ada.':'.'));
+    }
+    return;
+  }
   if(e.target.id!=='btn-clear-all')return;
   if(confirm('Semua item di lemari akan dihapus. Lanjutkan?')){state.items.forEach(dropItemImg);state.items=[];CLOSET.sel=[];save('items',state.items);renderWardrobe();toast('Lemari dikosongkan.');}
 });
@@ -3797,7 +3812,7 @@ function renderCloset(){
   var list=vis.filter(function(i){return CLOSET.filter==='all'||i.cat===CLOSET.filter;}).sort(function(a,b){return order[a.cat]-order[b.cat];});
   var grid='<div class="closet">'+list.map(function(it){
     var on=CLOSET.sel.indexOf(it.id)>-1, r=restLeft(it);
-    return '<div class="card'+(on?' on':'')+'"><button type="button" class="pick" data-pick="'+it.id+'" aria-pressed="'+on+'"><span class="thumb">'+itemArt(it)+'<span class="chk" aria-hidden="true">&#10003;</span>'+(r?'<span class="rest">Istirahat '+r+' hr</span>':'')+'</span><span class="cap"><b>'+esc(it.name)+'</b><span class="meta">'+dot(it.color)+'<span>'+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></span></button><button type="button" class="edit" data-edit="'+it.id+'" aria-label="Ubah '+esc(it.name)+'">&#9998;</button></div>';
+    return '<div class="card'+(on?' on':'')+'"><button type="button" class="pick" data-pick="'+it.id+'" aria-pressed="'+on+'"><span class="thumb">'+itemArt(it)+'<span class="chk" aria-hidden="true">&#10003;</span>'+(r?'<span class="rest">Istirahat '+r+' hr</span>':'')+(it.sample?'<span class="smp" title="Item dari lemari contoh">Contoh</span>':'')+'</span><span class="cap"><b>'+esc(it.name)+'</b><span class="meta">'+dot(it.color)+'<span>'+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></span></button><button type="button" class="edit" data-edit="'+it.id+'" aria-label="Ubah '+esc(it.name)+'">&#9998;</button></div>';
   }).join('')+'</div>';
   $('#wardrobe').innerHTML='<div class="win sky"><div class="bar"><span>Isi lemari</span><span class="deco" aria-hidden="true"><i>&#10047;</i><i>&#9825;</i></span></div><div class="body">'+tabs+'<p class="note" style="margin:0 0 12px">Ketuk item untuk memilih. Pilih satu item lalu <b>Padukan</b> agar Kurasi melengkapinya, atau pilih beberapa item untuk melihat hasil gabungannya.</p>'+grid+'</div></div>';
   renderSelbar();
