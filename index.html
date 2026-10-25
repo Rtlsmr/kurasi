@@ -2162,6 +2162,12 @@ html:root:not(#_) .board .col{height:100%;min-height:0;align-self:stretch}
 html:root:not(#_) .board .pc{min-height:40px}
 .recnote{font-size:11px!important;line-height:1.5!important;margin-top:10px!important;opacity:.85}
 
+/* v59 — phone: the cover headline sits on exactly two lines ("Bingung mau pakai" / "apa hari ini?") */
+@media (max-width:640px){
+  html:root:not(#_) #outfit-empty h1{max-width:none!important;font-size:min(46px,calc((100vw - 92px) / 7.3))!important;line-height:1.04!important}
+  #outfit-empty h1 .hl1,#outfit-empty h1 .hl2{display:block;white-space:nowrap}
+}
+
 </style>
 </head>
 <body>
@@ -2193,7 +2199,7 @@ html:root:not(#_) .board .pc{min-height:40px}
         <div class="body">
           <div class="cover-logo"><img class="cover-full" src="img/logo-full.webp" alt="Kurasi, atelier creates, ensemble elevates." width="520" height="572"></div>
           <p class="issue" id="cover-issue"></p>
-          <h1>Bingung mau pakai apa hari ini?</h1>
+          <h1><span class="hl1">Bingung mau pakai</span> <span class="hl2">apa hari ini?</span></h1>
           <p class="sub">Kurasi memadukan pakaian dan aksesori dari lemarimu sendiri, sesuai acara, dresscode, dan personal color-mu.</p>
           <div class="who"><b>Padu padan untuk</b><div class="seg" role="radiogroup" aria-label="Padu padan untuk"><label><input type="radio" name="gender-a" value="wanita"><span>Femme</span></label><label><input type="radio" name="gender-a" value="pria"><span>Homme</span></label></div></div>
           <div class="runway" id="runway"></div>
