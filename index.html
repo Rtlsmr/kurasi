@@ -2128,6 +2128,12 @@ a.shop:active{transform:translateY(0);box-shadow:0 1px 2px rgba(40,25,30,.14)}
 /* v43 — coloured sun on the light/dark switch */
 #theme-wrap input:not(:checked) + .trk .knob::before{content:"";display:block;width:16px;height:16px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><defs><radialGradient id='g' cx='.4' cy='.36' r='.72'><stop offset='0' stop-color='%23FFE680'/><stop offset='.55' stop-color='%23FDBB2D'/><stop offset='1' stop-color='%23F2930F'/></radialGradient></defs><g stroke='%23F4A21E' stroke-width='2.3' stroke-linecap='round'><path d='M12 1.6v2.7M12 19.7v2.7M1.6 12h2.7M19.7 12h2.7M4.65 4.65l1.9 1.9M17.45 17.45l1.9 1.9M4.65 19.35l1.9-1.9M17.45 6.55l1.9-1.9'/></g><circle cx='12' cy='12' r='5.3' fill='url(%23g)'/></svg>") center/contain no-repeat}
 
+/* v44 — one button shape per style: Femme pill, Homme square with softly rounded corners */
+:root{--btn-r:999px;--btn-r-in:999px}
+:root[data-g="pria"]{--btn-r:7px;--btn-r-in:5px}
+html:root:not(#_) :is(.btn,label.btn,a.btn,.shop,.qchip,.chip span,.seg,.ens-back,.pin,.filebtn.btn){border-radius:var(--btn-r)!important}
+html:root:not(#_) .seg span{border-radius:var(--btn-r-in)!important}
+
 </style>
 </head>
 <body>
