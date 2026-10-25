@@ -4082,9 +4082,11 @@ function avatarKey(){ var p=state.profile; return [avatarVariant(),p.skin,p.hair
 function avatarPrompt(){ var p=state.profile, sk=skinOf().en, bg=state.gender==='pria'?'warm light grey':'warm ivory';
   var who=state.gender==='pria'?'a friendly young Indonesian man with '+sk+' and short neat black hair, wearing a casual shirt':(state.opts.hijab?'a friendly young Indonesian woman with '+sk+' wearing a '+(p.hijabStyle==='turban'?'turban hijab':'soft pastel hijab')+' and a cozy knit top':'a friendly young Indonesian woman with '+sk+' and '+((HAIRS.find(function(h){return h.k===p.hair;})||HAIRS[0]).en)+', wearing a cozy knit top');
   return 'Editorial fashion illustration portrait of '+who+', gentle smile, head and shoulders, centered, hand-drawn with fine ink lines and soft watercolor wash, elegant and minimal, plain '+bg+' paper background, no text.'; }
-function loadAvatar(){ idbGet('avatar').then(function(v){ if(v&&v.k===avatarKey()&&v.u){AVATAR.src=v.u;renderChrome();} else if(state.profile.done)makeAvatar(); }); }
+function loadAvatar(){ var k=avatarKey();
+  Promise.all([idbGet('avatar.'+k),idbGet('avatar')]).then(function(r){ if(k!==avatarKey())return; var v=(r[0]&&r[0].u)?r[0]:((r[1]&&r[1].k===k&&r[1].u)?r[1]:null);
+    if(v){ AVATAR.src=v.u; renderChrome(); } else { AVATAR.src=null; renderChrome(); if(state.profile.done)makeAvatar(); } }); }
 function makeAvatar(){ if(!state.worker||!state.aiImg)return; var k=avatarKey();
-  aiPost({type:'image',prompt:avatarPrompt()},50000).then(function(j){ if(!j.image)return; return loadImg('data:image/jpeg;base64,'+j.image).then(function(im){ if(!im)return; var c=document.createElement('canvas'); c.width=256; c.height=256; c.getContext('2d').drawImage(im,0,0,256,256); var u=c.toDataURL('image/webp',0.85); if(u.indexOf('data:image/webp')!==0)u=c.toDataURL('image/jpeg',0.86); AVATAR.src=u; idbPut('avatar',{k:k,u:u}); renderChrome(); }); }).catch(function(){}); }
+  aiPost({type:'image',prompt:avatarPrompt()},50000).then(function(j){ if(!j.image)return; return loadImg('data:image/jpeg;base64,'+j.image).then(function(im){ if(!im)return; var c=document.createElement('canvas'); c.width=256; c.height=256; c.getContext('2d').drawImage(im,0,0,256,256); var u=c.toDataURL('image/webp',0.85); if(u.indexOf('data:image/webp')!==0)u=c.toDataURL('image/jpeg',0.86); idbPut('avatar.'+k,{k:k,u:u}); if(k!==avatarKey())return; AVATAR.src=u; idbPut('avatar',{k:k,u:u}); renderChrome(); }); }).catch(function(){}); }
 function renderChrome(){
   var n=(state.profile.name||'').trim();
   $('#side-avatar').innerHTML=avatarHTML('big'); $('#side-hello').textContent='Hai'+(n?', '+n:'');
