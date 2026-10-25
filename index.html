@@ -3476,7 +3476,7 @@ function lookBtn(theme,lk,idx,src){
   var active=state.look&&state.look.theme===theme&&state.look.name===lk.name;
   var mot={wajib:'Wajib satu item bermotif',hindari:'Tanpa motif',boleh:'Motif boleh'}[lk.motif]||'';
   var ti=src==='preset'?PRESETS.findIndex(function(t){return t.name===theme;}):-1;
-  var img=ti>-1?'img/look-'+ti+'-'+idx+'-'+figVariant()+'.webp':(lk.img||'');
+  var img=ti>-1?'img/look-'+ti+'-'+idx+'-'+figVariant()+'.webp':lookImgOf(lk);
   return '<div class="lookwrap"><button class="look" type="button" data-src="'+src+'" data-theme="'+esc(theme)+'" data-idx="'+idx+'" aria-pressed="'+(active?'true':'false')+'">'+lookFig(lk,idx,img)+'<span class="lt"><b>'+esc(lk.name)+'</b><span class="dots">'+lk.colors.map(dot).join('')+'</span><span class="d">'+esc(lk.desc)+(mot?' '+mot+'.':'')+'</span></span></button><a class="pin" href="'+pinQuery(theme+' '+lk.name)+'" target="_blank" rel="noopener">Cari inspirasi di Pinterest</a></div>';
 }
 function renderThemes(){
@@ -3486,7 +3486,7 @@ function renderThemes(){
     mt.innerHTML='<div class="win butter"><div class="bar"><span>Tema buatanmu</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div><div class="body">'+state.aiThemes.map(function(t,ti){return '<div class="theme"><h3 style="display:flex;justify-content:space-between;gap:8px">'+esc(t.name)+' <button class="linkbtn danger" data-del-theme="'+ti+'">Hapus</button></h3><div class="looks">'+t.looks.map(function(lk,i){return lookBtn(t.name,lk,i,'ai');}).join('')+'</div></div>';}).join('')+'</div></div>';
   } else mt.innerHTML='';
   $('#worker-url').value=state.worker||'';
-  state.aiThemes.forEach(function(t){ if(!THEME_RETRY[t.name]&&t.looks.some(function(l){return !l.img;})){ THEME_RETRY[t.name]=1; fillThemeImages(t); } });
+  state.aiThemes.forEach(function(t){ var rk=t.name+'|'+figVariant(); if(!THEME_RETRY[rk]&&t.looks.some(function(l){return !lookImgOf(l);})){ THEME_RETRY[rk]=1; fillThemeImages(t); } });
   if(!state.worker)$('#ai-status').innerHTML='<span class="muted">Fitur AI belum disambungkan. Tema siap pakai tetap bisa dipakai.</span>';
 }
 document.addEventListener('click',function(e){
@@ -3536,7 +3536,7 @@ $('#ai-form').addEventListener('submit',function(e){
   .then(function(data){
     var looks=sanitizeLooks(data);
     if(!looks.length)throw new Error('AI tidak memberi look yang bisa dipakai');
-    var t={name:theme,looks:looks}; state.aiThemes.unshift(t); save('aiThemes',state.aiThemes);
+    var t={name:theme,looks:looks,who:figVariant()}; state.aiThemes.unshift(t); save('aiThemes',state.aiThemes);
     st.textContent=looks.length+' look untuk '+theme+' siap. Pilih salah satu di bawah'+(state.aiImg?', ilustrasinya menyusul.':'.');
     $('#ai-theme').value=''; renderThemes(); $('#my-themes').scrollIntoView({behavior:'smooth'});
     fillThemeImages(t);
@@ -3547,14 +3547,18 @@ $('#ai-form').addEventListener('submit',function(e){
   })
   .then(function(){btn.disabled=false;});
 });
+// AI theme illustrations are kept per figure variant (berhijab / wanita / pria), so switching hijab or Femme/Homme never shows the wrong figure
+function lookImgOf(lk){ return (lk.imgv&&lk.imgv[figVariant()])||''; }
+(function(){ var ch=false; (state.aiThemes||[]).forEach(function(t){ (t.looks||[]).forEach(function(lk){ if(lk.img&&!lk.imgv){ lk.imgv={}; lk.imgv[t.who||'hijab']=lk.img; delete lk.img; ch=true; } }); }); if(ch)save('aiThemes',state.aiThemes); })();
 function fillThemeImages(t){
   var i=0;
   (function next(){
     if(i>=t.looks.length||!state.aiImg)return;
     var lk=t.looks[i], idx=i; i++;
-    if(lk.img)return next();
+    if(lookImgOf(lk))return next();
+    var v=figVariant();
     aiImage(lookPrompt(lk,idx)).then(function(u){
-      if(u){ lk.img=u; save('aiThemes',state.aiThemes); if(!$('#tab-tema').classList.contains('hidden'))renderThemes(); }
+      if(u){ lk.imgv=lk.imgv||{}; lk.imgv[v]=u; save('aiThemes',state.aiThemes); if(!$('#tab-tema').classList.contains('hidden'))renderThemes(); }
       next();
     });
   })();
@@ -4186,7 +4190,7 @@ function openLookPanel(theme,lk,src){
 function renderLookPanel(){
   var theme=LOOKP.theme, lk=LOOKP.lk, src=LOOKP.src, w=$('#look-win');
   var ti=src==='preset'?PRESETS.findIndex(function(t){return t.name===theme;}):-1, idx=LOOKP.idx||0;
-  var img=ti>-1?'img/look-'+ti+'-'+(PRESETS[ti].looks.indexOf(lk))+'-'+figVariant()+'.webp':(lk.img||'');
+  var img=ti>-1?'img/look-'+ti+'-'+(PRESETS[ti].looks.indexOf(lk))+'-'+figVariant()+'.webp':lookImgOf(lk);
   var its=lookItems(lk), combos=[]; try{ combos=generate({lockId:null,style:'',opts:state.opts,head:headOn(),look:Object.assign({theme:theme},lk)}); }catch(e){}
   var can=combos.length>0, recs=recPieces(lk).filter(function(r){ return !its.some(function(it){return it.cat===r.cat||(r.cat==='atasan'&&it.cat==='gamis')||(r.cat==='gamis'&&it.cat==='atasan');}); });
   if(!can&&!recs.length) recs=recPieces(lk);
