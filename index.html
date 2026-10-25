@@ -2144,6 +2144,11 @@ html:root:not(#_) #ai-theme,html:root:not(#_) #worker-url{border-radius:var(--bt
 /* v50 — segmented tabs (Beauty: Kedaluwarsa / Rutinitas / Wishlist) keep the selected fill centred */
 html:root:not(#_) .seg.btabs{padding:3px!important;border:1px solid var(--outline2)!important;align-items:center}
 
+/* v51 — Safari: the illustration box inside recommendation cards (a <button>) collapsed to 0 px wide because its only child is absolutely positioned; give it the full card width explicitly */
+html:root:not(#_) .rcard{align-items:stretch}
+html:root:not(#_) .rcard .rfig{display:block;width:100%;align-self:stretch;flex:0 0 auto;box-sizing:border-box}
+html:root:not(#_) .rcard .rtt{width:100%;box-sizing:border-box}
+
 </style>
 </head>
 <body>
