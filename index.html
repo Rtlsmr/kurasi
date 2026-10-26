@@ -2245,11 +2245,9 @@ html:root:not(#_) .eyebrow,html:root:not(#_) .kicker{color:var(--accent)!importa
   html:root:not(#_) .topbar .top-search,html:root:not(#_) .topbar .avatar{width:38px!important;height:38px!important;border:0!important;background:transparent!important}
   html:root:not(#_) .topbar .avatar{border:1px solid var(--outline)!important;overflow:hidden}
   html:root:not(#_) .topbar .top-search svg{width:21px!important;height:21px!important;stroke-width:1.7!important}
-  body[data-tab="outfit"] .lx-menu{display:grid}
-  body:not([data-tab="outfit"]) .lx-back{display:grid}
-  body:not([data-tab="outfit"]) .topbar .logo,body:not([data-tab="outfit"]) .topbar .avatar{display:none!important}
-  body:not([data-tab="outfit"]) .lx-title{display:block;position:absolute;left:64px;right:64px;text-align:center;font:600 16px/1.2 var(--body);letter-spacing:.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
-  body[data-tab="outfit"] .topbar .logo .mark{width:30px!important;height:30px!important}
+  .lx-menu{display:grid}
+  .lx-title.lx-old{display:block;position:absolute;left:64px;right:64px;text-align:center;font:600 16px/1.2 var(--body);letter-spacing:.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+  html:root:not(#_) .topbar .logo .mark{width:30px!important;height:30px!important}
   /* page titles move into the app bar on phones */
   body[data-tab="lemari"] #tab-lemari>h1:first-of-type,body[data-tab="tema"] #tab-tema>h1:first-of-type,body[data-tab="riwayat"] #tab-riwayat>h1:first-of-type,body[data-tab="beauty"] #tab-beauty>h1:first-of-type,body[data-tab="profil"] #tab-profil>h1:first-of-type{font-size:28px!important;margin-top:4px!important}
 }
@@ -2362,7 +2360,7 @@ html:root:not(#_)[data-theme="dark"] .rcard .rfig{background:var(--paper)!import
    ===================================================================== */
 /* inner pages: the title lives in the app bar on phones */
 @media (max-width:899px){
-  html:root:not(#_) body:not([data-tab="outfit"]) main>section>h1:first-of-type{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;margin:0!important;padding:0!important}
+  html:root:not(#_) body:not([data-tab="outfit"]) main>section>h1:first-of-type{font-size:30px!important;line-height:1.1!important;margin:6px 0 8px!important}
   html:root:not(#_) body:not([data-tab="outfit"]) main>section>h1:first-of-type+.lede{font-size:13.5px!important;line-height:1.55!important;margin:2px 0 16px!important;color:var(--muted)!important}
 }
 .lx-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 18px;padding:2px 16px 4px;scroll-padding-left:16px}
@@ -2433,6 +2431,22 @@ html:root:not(#_) .lx-pc-txt h2{font-family:var(--title)!important;font-weight:5
 .lx-pc-txt p{margin:0 0 16px;max-width:56%;font-size:13px;line-height:1.5;color:var(--muted)}
 .lx-pc .lx-cta{margin-top:0}
 @media (min-width:900px){.lx-pc{min-height:320px}.lx-pc-txt{padding:40px 44px}html:root:not(#_) .lx-pc-txt h2{font-size:44px!important;max-width:10em}.lx-pc-txt p{max-width:24em;font-size:15px}}
+
+/* =====================================================================
+   v64 · masukan pengguna: judul hero 2 baris, ilustrasi lebih ke kanan, chip rata tengah
+   ===================================================================== */
+html:root:not(#_) #lx-h1{max-width:none!important;font-size:clamp(26px,7.4vw,36px)!important}
+html:root:not(#_) #lx-h1>span{display:block;white-space:nowrap}
+@media (max-width:899px){html:root:not(#_)[data-g="pria"] #lx-h1{font-size:clamp(24px,6.7vw,33px)!important}}
+.lx-hero-img{width:44%!important}
+.lx-hero-img img{object-position:50% 12%!important;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%)!important;mask-image:linear-gradient(90deg,transparent 0%,#000 26%)!important}
+@media (min-width:900px){
+  html:root:not(#_) #lx-h1{font-size:clamp(46px,4.4vw,64px)!important}
+  .lx-hero-img{width:50%!important}
+}
+/* filter chips: label centred both ways (the font shorthand had reset line-height in Safari) */
+html:root:not(#_) .seg.btabs label span{display:flex!important;align-items:center!important;justify-content:center!important;gap:.28em!important;height:38px!important;min-height:38px!important;padding:0 18px!important;line-height:1!important;text-align:center!important;box-sizing:border-box!important;width:auto!important}
+html:root:not(#_) .lx-chips button,html:root:not(#_) .closet-tabs button{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;min-height:38px!important;padding:0 18px!important;line-height:1!important;box-sizing:border-box!important}
 
 </style>
 </head>
@@ -4924,7 +4938,7 @@ function lxHeroSrc(){ return 'img/hero-'+figVariant()+(document.documentElement.
 function lxHero(){
   var homme=styleG()==='pria';
   var h=$('#lx-h1'), s=$('#lx-sub'), k=$('#lx-kicker'), sb=$('#lx-short-beauty');
-  if(h)h.textContent=homme?'Tingkatkan Gayamu Setiap Hari':'Temukan Gaya Terbaik Versimu';
+  if(h)h.innerHTML=homme?'<span>Tingkatkan Gayamu</span> <span>Setiap Hari</span>':'<span>Temukan Gaya</span> <span>Terbaik Versimu</span>';
   if(s)s.textContent=homme?'Outfit, grooming, dan gaya hidup dalam satu tempat.':'Padu padan outfit, beauty, dan gaya hidup dalam satu tempat.';
   if(k){ var d=new Date(); k.textContent=(state.profile&&state.profile.name?'Hai, '+state.profile.name+' · ':'')+d.toLocaleDateString('id-ID',{day:'numeric',month:'long'}); }
   if(sb)sb.textContent=state.gender==='pria'?'Grooming':'Beauty';
