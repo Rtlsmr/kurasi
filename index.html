@@ -2357,6 +2357,83 @@ html:root:not(#_)[data-theme="dark"] .rcard .rfig{background:var(--paper)!import
   html:root:not(#_) #outfit-main>.lx-hero,html:root:not(#_) #outfit-main>.lx-short{grid-column:1 / -1}
 }
 
+/* =====================================================================
+   v63 · Kurasi Luxe — halaman Outfit (chip + kartu 2 kolom + favorit)
+   ===================================================================== */
+/* inner pages: the title lives in the app bar on phones */
+@media (max-width:899px){
+  html:root:not(#_) body:not([data-tab="outfit"]) main>section>h1:first-of-type{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;margin:0!important;padding:0!important}
+  html:root:not(#_) body:not([data-tab="outfit"]) main>section>h1:first-of-type+.lede{font-size:13.5px!important;line-height:1.55!important;margin:2px 0 16px!important;color:var(--muted)!important}
+}
+.lx-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 18px;padding:2px 16px 4px;scroll-padding-left:16px}
+.lx-chips::-webkit-scrollbar{display:none}
+.lx-chips button{flex:0 0 auto;min-height:36px;padding:0 16px;border-radius:var(--btn-r,999px);border:1px solid var(--outline2);background:var(--surface);color:var(--ink);font:500 13px var(--body);cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.lx-chips button svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}
+.lx-chips button[aria-pressed="true"]{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
+.lx-chips button[aria-pressed="true"] svg{fill:currentColor}
+@media (min-width:900px){.lx-chips{margin:0 0 22px;padding:2px 0 4px;flex-wrap:wrap}}
+.lx-empty{margin:0 0 18px;padding:18px;border:1px dashed var(--outline2);border-radius:var(--rc);color:var(--muted);font-size:13.5px;text-align:center}
+
+/* ready-made themes: no outer card, groups of 2-column cards */
+html:root:not(#_) #lx-presets,html:root:not(#_) #my-themes>.win{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html:root:not(#_) #lx-presets>.bar{display:none!important}
+html:root:not(#_) #my-themes>.win>.bar{padding:0 0 10px!important;border:0!important;font:600 16px var(--body)!important}
+html:root:not(#_) #lx-presets>.body,html:root:not(#_) #my-themes>.win>.body{padding:0!important}
+html:root:not(#_) #tab-tema .theme{margin:0 0 26px!important;padding:0!important;border:0!important}
+html:root:not(#_) #tab-tema .theme>h3{font:600 16px/1.3 var(--body)!important;letter-spacing:0!important;margin:0 0 12px!important;color:var(--ink)!important}
+html:root:not(#_) #tab-tema .looks{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:0!important}
+@media (min-width:900px){html:root:not(#_) #tab-tema .looks{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}}
+html:root:not(#_) #tab-tema .lookwrap{position:relative;display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--outline);border-radius:var(--rc);overflow:hidden;transition:border-color .2s ease,transform .2s ease}
+html:root:not(#_) #tab-tema .lookwrap:hover{transform:translateY(-2px);border-color:var(--outline2)}
+html:root:not(#_) #tab-tema .lookwrap:has(.look[aria-pressed="true"]){border-color:var(--accent)}
+html:root:not(#_) #tab-tema .look{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;transform:none!important}
+html:root:not(#_) #tab-tema .look .lfig{width:100%!important;aspect-ratio:4/5!important;border:0!important;border-radius:0!important;padding:10px 0 0!important;background:linear-gradient(180deg,var(--lx-hero2),var(--lx-hero1))!important}
+html:root:not(#_)[data-theme="dark"] #tab-tema .look .lfig{background:var(--paper)!important}
+html:root:not(#_) #tab-tema .look .lfig img{width:100%;height:100%;object-fit:contain;object-position:50% 100%}
+html:root:not(#_) #tab-tema .look .lt{padding:10px 12px 4px!important;gap:4px!important}
+html:root:not(#_) #tab-tema .look .lt b{font-size:16px!important;line-height:1.2!important}
+html:root:not(#_) #tab-tema .look .dots{gap:4px!important}
+html:root:not(#_) #tab-tema .look .dots i,html:root:not(#_) #tab-tema .look .dots span{width:11px!important;height:11px!important}
+html:root:not(#_) #tab-tema .look .d{font-size:12px!important;line-height:1.45!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+html:root:not(#_) #tab-tema .lookwrap .pin{margin:auto 12px 12px!important;padding:6px 0 0!important;font:500 11.5px var(--body)!important;color:var(--accent)!important;text-decoration:none!important;border:0!important;background:transparent!important}
+.lx-fav{position:absolute;top:8px;right:8px;z-index:6;width:34px;height:34px;border-radius:50%;border:0;display:grid;place-items:center;background:color-mix(in srgb,var(--surface) 88%,transparent);color:var(--ink);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.lx-fav svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}
+.lx-fav[aria-pressed="true"]{color:var(--accent)}
+.lx-fav[aria-pressed="true"] svg{fill:currentColor}
+#tab-tema[data-f="fav"] .lookwrap:not(:has(.lx-fav[aria-pressed="true"])){display:none!important}
+#tab-tema[data-f="fav"] .theme:not(:has(.lx-fav[aria-pressed="true"])){display:none!important}
+#tab-tema .theme.lx-off,#tab-tema #my-themes.lx-off,#tab-tema #lx-presets.lx-off{display:none!important}
+
+/* v63 · chip pills for Beauty and Lemari filters, Personal Color hero, lemari grid without outer card */
+html:root:not(#_) .seg.btabs{display:flex!important;gap:8px!important;width:auto!important;max-width:none!important;padding:2px 16px 4px!important;margin:0 -16px 18px!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow-x:auto;scrollbar-width:none}
+html:root:not(#_) .seg.btabs::-webkit-scrollbar{display:none}
+html:root:not(#_) .seg.btabs label{flex:0 0 auto!important}
+html:root:not(#_) .seg.btabs label span{display:inline-block!important;line-height:34px!important;min-height:36px!important;padding:0 16px!important;border:1px solid var(--outline2)!important;background:var(--surface)!important;color:var(--ink)!important;border-radius:var(--btn-r,999px)!important;font:500 13px var(--body)!important;letter-spacing:0!important;text-transform:none!important;white-space:nowrap}
+html:root:not(#_) .seg.btabs label:has(input:checked) span{background:var(--btn)!important;border-color:var(--btn)!important;color:var(--btn-ink)!important}
+html:root:not(#_) .seg.btabs input:focus-visible+span{outline:2px solid var(--accent)!important;outline-offset:2px}
+@media (min-width:900px){html:root:not(#_) .seg.btabs{margin:0 0 22px!important;padding:2px 0 4px!important}}
+html:root:not(#_) .closet-tabs{gap:8px!important;border:0!important;padding:2px 0 14px!important;scrollbar-width:none}
+html:root:not(#_) .closet-tabs button{flex:0 0 auto!important;min-height:36px!important;padding:0 14px!important;border:1px solid var(--outline2)!important;background:var(--surface)!important;color:var(--ink)!important;border-radius:var(--btn-r,999px)!important;font:500 13px var(--body)!important;letter-spacing:0!important;text-transform:none!important;box-shadow:none!important}
+html:root:not(#_) .closet-tabs button::after{display:none!important}
+html:root:not(#_) .closet-tabs button span{color:var(--muted)!important;font-weight:500!important;margin-left:4px}
+html:root:not(#_) .closet-tabs button[aria-selected="true"]{background:var(--btn)!important;border-color:var(--btn)!important;color:var(--btn-ink)!important}
+html:root:not(#_) .closet-tabs button[aria-selected="true"] span{color:inherit!important;opacity:.75}
+@media (max-width:899px){
+  html:root:not(#_) #tab-lemari .win:has(#wardrobe){background:transparent!important;border:0!important;box-shadow:none!important}
+  html:root:not(#_) #tab-lemari .win:has(#wardrobe)>.bar{padding:0 0 10px!important;border:0!important}
+  html:root:not(#_) #tab-lemari .win:has(#wardrobe)>.body{padding:0!important}
+}
+html:root:not(#_) #wardrobe .card{background:var(--surface)!important;border:1px solid var(--outline)!important;border-radius:var(--rc)!important;box-shadow:none!important}
+.lx-pc{position:relative;display:grid;margin:0 0 22px;min-height:250px;border-radius:22px;overflow:hidden;background:linear-gradient(160deg,var(--lx-hero2),var(--lx-hero1))}
+.lx-pc-img{position:absolute;top:0;right:0;bottom:0;width:52%}
+.lx-pc-img img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;display:block;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40%);mask-image:linear-gradient(90deg,transparent 0,#000 40%)}
+.lx-pc-img img:not([src]){display:none}
+.lx-pc-txt{position:relative;z-index:2;padding:24px 20px 22px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+html:root:not(#_) .lx-pc-txt h2{font-family:var(--title)!important;font-weight:500!important;font-size:clamp(26px,7.4vw,34px)!important;line-height:1.08!important;max-width:62%;margin:0 0 10px!important;color:var(--ink)!important}
+.lx-pc-txt p{margin:0 0 16px;max-width:56%;font-size:13px;line-height:1.5;color:var(--muted)}
+.lx-pc .lx-cta{margin-top:0}
+@media (min-width:900px){.lx-pc{min-height:320px}.lx-pc-txt{padding:40px 44px}html:root:not(#_) .lx-pc-txt h2{font-size:44px!important;max-width:10em}.lx-pc-txt p{max-width:24em;font-size:15px}}
+
 </style>
 </head>
 <body>
@@ -2565,14 +2642,24 @@ html:root:not(#_)[data-theme="dark"] .rcard .rfig{background:var(--paper)!import
         </div>
       </div>
 
+      <div class="lx-chips" id="lx-tchips" role="toolbar" aria-label="Saring tema"></div>
+      <p class="lx-empty hidden" id="lx-fav-empty">Belum ada <i>look</i> favorit. Ketuk ikon hati di kartu untuk menyimpannya di sini.</p>
       <div id="my-themes"></div>
-      <div class="win sky"><div class="bar"><span>Tema siap pakai</span><span class="deco" aria-hidden="true"><i>&#9734;</i><i>&#10047;</i><i>&#9825;</i></span></div><div class="body" id="preset-themes"></div></div>
+      <div class="win sky" id="lx-presets"><div class="bar"><span>Tema siap pakai</span><span class="deco" aria-hidden="true"><i>&#9734;</i><i>&#10047;</i><i>&#9825;</i></span></div><div class="body" id="preset-themes"></div></div>
     </section>
 
     <!-- WARNA -->
     <section id="tab-warna" class="hidden" aria-labelledby="h-warna">
       <h1 id="h-warna">Rona: personal color-mu</h1>
       <p class="lede">Warna yang selaras dengan kulitmu membuat wajah terlihat segar. Item yang paling dekat dengan wajah (hijab, scarf, atau atasan) paling berpengaruh.</p>
+      <section class="lx-pc" id="lx-pc" aria-labelledby="lx-pc-h">
+        <div class="lx-pc-img" aria-hidden="true"><img id="lx-pc-img" alt="" decoding="async"></div>
+        <div class="lx-pc-txt">
+          <h2 id="lx-pc-h">Temukan warna yang paling cocok untukmu.</h2>
+          <p>Kuis singkat untuk mengenali <i>undertone</i> dan musim warnamu.</p>
+          <button class="lx-cta" type="button" id="lx-pc-go"><span>Mulai analisis</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </section>
       <div class="win butter"><div class="bar"><span>Hasilmu</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div><div class="body" id="season-card"></div></div>
       <section class="recs-today" id="season-recs" aria-label="Rekomendasi outfit sesuai personal color"></section>
 
@@ -4866,6 +4953,57 @@ function lxHero(){
   var ag=applyGenderTheme; applyGenderTheme=function(){ ag.apply(this,arguments); try{lxSync();}catch(e){} };
   var hc=hijabChanged; hijabChanged=function(){ hc.apply(this,arguments); try{lxHero();}catch(e){} };
   lxSync();
+})();
+
+// ---------- v63: halaman Outfit — chip filter, kartu 2 kolom, favorit ----------
+var LX_FAV=(function(){ try{ return JSON.parse(localStorage.getItem('kurasi.favLooks'))||[]; }catch(e){ return []; } })();
+var LX_TF='all';
+var HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.3A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.3-7.5 10.3z"/></svg>';
+function lxFavKey(b){ return b.dataset.theme+'|'+b.dataset.idx+'|'+b.dataset.src; }
+function lxThemeChips(){
+  var bar=$('#lx-tchips'); if(!bar)return;
+  var opts=[['all','Semua'],['fav',HEART+'Favorit']].concat(PRESETS.map(function(t){return [t.name,esc(t.name)];}));
+  if(state.aiThemes.length)opts.push(['mine','Buatanmu']);
+  if(!opts.some(function(o){return o[0]===LX_TF;}))LX_TF='all';
+  bar.innerHTML=opts.map(function(o){return '<button type="button" data-tf="'+esc(o[0])+'" aria-pressed="'+(o[0]===LX_TF)+'">'+o[1]+'</button>';}).join('');
+}
+function lxThemeFilter(){
+  var tab=$('#tab-tema'); if(!tab)return; tab.setAttribute('data-f',LX_TF==='fav'?'fav':'');
+  $$('#preset-themes .theme').forEach(function(t){ var n=t.querySelector('h3').textContent.trim(); t.classList.toggle('lx-off',!(LX_TF==='all'||LX_TF==='fav'||LX_TF===n)); });
+  var mt=$('#my-themes'); if(mt)mt.classList.toggle('lx-off',!(LX_TF==='all'||LX_TF==='fav'||LX_TF==='mine'));
+  var pr=$('#lx-presets'); if(pr)pr.classList.toggle('lx-off',LX_TF==='mine');
+  var anyFav=!!document.querySelector('#tab-tema .lx-fav[aria-pressed="true"]');
+  $('#lx-fav-empty').classList.toggle('hidden',!(LX_TF==='fav'&&!anyFav));
+}
+function lxDecorateLooks(){
+  $$('#tab-tema .lookwrap').forEach(function(w){
+    var b=w.querySelector('.look'); if(!b||w.querySelector('.lx-fav'))return;
+    var k=lxFavKey(b), on=LX_FAV.indexOf(k)>-1, f=document.createElement('button');
+    f.type='button'; f.className='lx-fav'; f.setAttribute('aria-pressed',on?'true':'false'); f.setAttribute('aria-label',(on?'Hapus dari':'Simpan ke')+' favorit: '+b.dataset.theme+', '+(b.querySelector('b')||{}).textContent);
+    f.dataset.k=k; f.innerHTML=HEART; w.insertBefore(f,w.firstChild);
+  });
+}
+(function(){
+  // AI card goes below the ready-made themes
+  var ai=$('#ai-form'), aiw=ai&&ai.closest('.win'), pr=$('#lx-presets'); if(aiw&&pr)pr.parentNode.insertBefore(aiw,pr.nextSibling);
+  $('#lx-tchips').addEventListener('click',function(e){ var b=e.target.closest('[data-tf]'); if(!b)return; LX_TF=b.dataset.tf; $$('#lx-tchips [data-tf]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');}); lxThemeFilter(); });
+  document.addEventListener('click',function(e){
+    var f=e.target.closest('.lx-fav'); if(!f)return; e.preventDefault(); e.stopPropagation();
+    var k=f.dataset.k, i=LX_FAV.indexOf(k), on=i<0; if(on)LX_FAV.push(k); else LX_FAV.splice(i,1);
+    try{ localStorage.setItem('kurasi.favLooks',JSON.stringify(LX_FAV)); }catch(_){}
+    f.setAttribute('aria-pressed',on?'true':'false'); f.setAttribute('aria-label',f.getAttribute('aria-label').replace(on?'Simpan ke':'Hapus dari',on?'Hapus dari':'Simpan ke'));
+    toast(on?'Disimpan ke favorit.':'Dihapus dari favorit.'); lxThemeFilter();
+  },true);
+  var rt=renderThemes; renderThemes=function(){ rt.apply(this,arguments); try{ lxThemeChips(); lxDecorateLooks(); lxThemeFilter(); }catch(e){} };
+  try{ lxThemeChips(); lxDecorateLooks(); lxThemeFilter(); }catch(e){}
+})();
+
+// ---------- v63: Personal Color hero ----------
+function lxPcHero(){ var im=$('#lx-pc-img'); if(!im)return; var v=figVariant(), src='img/pc-hero-'+v+'.webp'; if(im.getAttribute('data-src')===src)return; im.setAttribute('data-src',src); im.onerror=function(){ this.onerror=null; this.src='img/avatar-'+v+'.webp'; }; im.src=src; }
+(function(){
+  var go=$('#lx-pc-go'); if(go)go.addEventListener('click',function(){ var q=$('#quiz'); if(q){ q.scrollIntoView({behavior:'smooth',block:'start'}); var f=q.querySelector('input'); if(f)setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } });
+  var hs=lxHero; lxHero=function(){ hs.apply(this,arguments); try{lxPcHero();}catch(e){} };
+  lxPcHero();
 })();
 // ---------- Init ----------
 applyGenderTheme();
