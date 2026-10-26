@@ -2569,6 +2569,9 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img{top:14px!important;bottom:14px
 html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!important;top:3%!important;height:94%!important}
 @media (min-width:900px){html:root:not(#_)[data-theme="dark"] .lx-hero-img{top:22px!important;bottom:22px!important;right:22px!important;width:34%!important}}
 
+/* v75 · bingkai ilustrasi mode gelap sedikit lebih ramping agar judul tidak tertutup */
+@media (max-width:899px){html:root:not(#_)[data-theme="dark"] .lx-hero-img{width:28%!important}}
+
 </style>
 </head>
 <body>
@@ -2604,7 +2607,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
           <div class="cover-logo"><img class="cover-full" src="img/logo-full.webp" alt="Kurasi, atelier creates, ensemble elevates." width="520" height="572"></div>
           <p class="issue" id="cover-issue"></p>
           <h1><span class="hl1">Bingung mau pakai</span> <span class="hl2">apa hari ini?</span></h1>
-          <p class="sub">Kurasi memadukan pakaian dan aksesori dari lemarimu sendiri, sesuai acara, dresscode, dan personal color-mu.</p>
+          <p class="sub">Padanan dari lemarimu sendiri, untuk setiap acara, dresscode, dan personal color-mu.</p>
           <div class="who"><b>Padu padan untuk</b><div class="seg" role="radiogroup" aria-label="Padu padan untuk"><label><input type="radio" name="gender-a" value="wanita"><span>Femme</span></label><label><input type="radio" name="gender-a" value="pria"><span>Homme</span></label></div></div>
           <div class="runway" id="runway"></div>
           <ol class="how">
@@ -2630,7 +2633,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
           <div class="lx-hero-txt">
             <p class="lx-kicker" id="lx-kicker" data-nofx></p>
             <h1 id="lx-h1">Temukan Gaya Terbaik Versimu</h1>
-            <p class="lx-sub" id="lx-sub">Padu padan outfit, beauty, dan gaya hidup dalam satu tempat.</p>
+            <p class="lx-sub" id="lx-sub">Lemari, padanan, dan beauty-mu dalam satu tempat.</p>
             <div class="lx-search-slot" id="lx-search-slot"></div>
             <button class="lx-cta" id="lx-go" type="button"><span>Kurasi outfit hari ini</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
@@ -2716,7 +2719,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
           <div class="photo-box">
             <div class="thumb" id="f-thumb"></div>
             <div>
-              <p class="note" id="f-photo-note">Foto pakaianmu: AI mengenali kategori dan warnanya, lalu menggambar ulang jadi ilustrasi. Foto aslinya tidak disimpan.</p>
+              <p class="note" id="f-photo-note">Foto pakaianmu; AI mengenali jenis dan warnanya, lalu membuat ilustrasinya. Foto asli tidak disimpan.</p>
               <div class="row" style="gap:8px">
                 <label class="btn small alt filebtn">Foto pakaian<input type="file" id="f-photo" accept="image/*" aria-label="Foto pakaian"></label>
                 <button type="button" class="linkbtn hidden" id="f-redraw">Gambar ulang ilustrasi</button>
@@ -2759,7 +2762,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
       <div class="win pink">
         <div class="bar"><span>Tema lain dengan AI</span><span class="deco" aria-hidden="true"><i>&#10022;</i><i>&#9825;</i></span></div>
         <div class="body">
-          <p class="muted small">Ketik tema apa pun, AI menyusun 3 pilihan look dari warna yang ada di palet.</p>
+          <p class="muted small">Ketik tema apa pun; AI menyiapkan tiga look untukmu.</p>
           <form id="ai-form" class="row" style="align-items:stretch">
             <label class="sr" for="ai-theme">Nama tema</label>
             <input type="text" id="ai-theme" placeholder="Contoh: Hawaiian, Bollywood, ulang tahun kantor" maxlength="60" style="flex:1;min-width:200px">
@@ -2779,7 +2782,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
       </div>
 
       <div class="lx-chips" id="lx-tchips" role="toolbar" aria-label="Saring tema"></div>
-      <p class="lx-empty hidden" id="lx-fav-empty">Belum ada <i>look</i> favorit. Ketuk ikon hati di kartu untuk menyimpannya di sini.</p>
+      <p class="lx-empty hidden" id="lx-fav-empty">Belum ada <i>look</i> favorit. Ketuk ikon hati untuk menyimpannya.</p>
       <div id="my-themes"></div>
       <div class="win sky" id="lx-presets"><div class="bar"><span>Tema siap pakai</span><span class="deco" aria-hidden="true"><i>&#9734;</i><i>&#10047;</i><i>&#9825;</i></span></div><div class="body" id="preset-themes"></div></div>
     </section>
@@ -2802,7 +2805,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
       <form class="win lilac" id="quiz">
         <div class="bar"><span>Kuis singkat</span><span class="deco" aria-hidden="true"><i>?</i></span></div>
         <div class="body">
-          <p class="small muted">Lakukan di dekat jendela dengan cahaya alami, tanpa makeup.</p>
+          <p class="small muted">Paling akurat di dekat jendela, tanpa makeup.</p>
           <fieldset class="q"><legend>Warna urat nadi di pergelangan tangan bagian dalam</legend><div class="chips">
             <label class="chip"><input type="radio" name="q1" value="w" required><span>Hijau/zaitun</span></label>
             <label class="chip"><input type="radio" name="q1" value="c"><span>Biru/ungu</span></label>
@@ -2824,12 +2827,12 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
       </form>
 
       <div class="win pink"><div class="bar"><span>Pilih sendiri</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body">
-        <p class="small muted">Sudah tahu tipemu dari analisis langsung? Pilih di sini.</p>
+        <p class="small muted">Sudah pernah dianalisis? Pilih musimmu.</p>
         <div class="chips" id="season-chips" data-nofx></div>
       </div></div>
 
       <div class="win mint"><div class="bar"><span>Tes tempel kain</span><span class="deco" aria-hidden="true"><i>&#10047;</i></span></div><div class="body">
-        <p class="small muted">Cara paling jujur kalau hasil kuis belum tegas. Tempelkan kain, hijab, atau scarf bergantian di bawah wajah, dekat jendela.</p>
+        <p class="small muted">Hasil kuis belum tegas? Tempelkan kain bergantian di bawah wajah, dekat jendela.</p>
         <ol class="steps">
           <li>Bandingkan mustard atau terracotta dengan fuchsia atau pink terang. Kalau yang pertama lebih segar, kulitmu cenderung hangat.</li>
           <li>Bandingkan mocca atau cokelat susu dengan abu-abu. Mocca lebih segar berarti hangat, abu-abu lebih segar berarti dingin.</li>
@@ -2855,7 +2858,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
 
       <div data-bpanel="pao">
         <div class="win pink"><div class="bar"><span>Pelacak kedaluwarsa (PAO)</span><span class="deco" aria-hidden="true"><i>&#9203;</i></span></div><div class="body">
-          <p class="small muted" style="margin-top:0">PAO (period after opening) adalah batas aman setelah kemasan dibuka, ditandai simbol wadah terbuka seperti "12M" di kemasan.</p>
+          <p class="small muted" style="margin-top:0">PAO (period after opening): batas aman setelah kemasan dibuka, seperti simbol "12M" di kemasan.</p>
           <div class="bchips" id="pao-sum"></div>
           <button class="btn" type="button" id="pao-add">Tambah produk</button>
           <form id="pao-form" class="bf hidden" autocomplete="off" style="margin-top:16px">
@@ -2924,23 +2927,23 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
         <div class="bar"><span>Preferensi</span><span class="deco" aria-hidden="true"><i>&#9881;</i></span></div>
         <div class="body">
           <label class="tg"><input type="checkbox" id="aiimg-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Ilustrasi AI otomatis</span></label>
-          <p class="small muted" style="margin:0">Saat menyala, Kurasi memakai kuota AI gratis untuk menggambar item lemari, model, avatar, dan contoh produk rekomendasi. Matikan bila koneksi lambat; aplikasi tetap jalan dengan sketsa.</p>
+          <p class="small muted" style="margin:0">AI menggambar item, model, dan avatar. Matikan bila koneksi lambat; Kurasi tetap berjalan dengan sketsa.</p>
           <span class="lbl">Gaya tampilan</span>
           <div class="seg" role="radiogroup" aria-label="Gaya tampilan"><label><input type="radio" name="uistyle" value="auto"><span>Ikuti padu padan</span></label><label><input type="radio" name="uistyle" value="femme"><span>Femme</span></label><label><input type="radio" name="uistyle" value="homme"><span>Homme</span></label></div>
-          <p class="small muted" style="margin:0">Femme: keanggunan lembut (ivory, taupe, burgundy). Homme: struktur yang tenang (stone, slate, forest). Pilihan ini hanya mengubah tampilan; semua fitur tetap sama. Bisa juga dipilih lewat kartu Femme / Homme di Beranda.</p>
+          <p class="small muted" style="margin:0">Femme: ivory, blush, dan copper. Homme: ivory, sand, dan bronze. Hanya mengubah tampilan; semua fitur tetap sama.</p>
         </div>
       </div>
       <div class="win mint">
         <div class="bar"><span>Pindahkan lemari</span><span class="deco" aria-hidden="true"><i>&#10022;</i></span></div>
         <div class="body">
-          <p>Mau pakai Kurasi di HP lain atau laptop? Simpan lemarimu jadi satu file, kirim lewat WhatsApp, email, atau Drive, lalu buka file itu di perangkat tujuan.</p>
+          <p>Pindah ke perangkat lain? Simpan lemarimu sebagai file, lalu buka di perangkat tujuan.</p>
           <p class="small muted" id="move-info"></p>
           <div class="row" style="margin-bottom:14px">
             <button class="btn" type="button" id="move-save">Unduh file lemari</button>
             <button class="btn alt hidden" type="button" id="move-share">Bagikan file</button>
           </div>
           <label class="btn butter filebtn">Buka file lemari<input type="file" id="move-open" accept=".json,application/json" aria-label="Buka file lemari"></label>
-          <p class="note" style="margin-top:22px">Membuka file akan mengganti isi Kurasi di perangkat ini dengan isi file.</p>
+          <p class="note" style="margin-top:22px">Membuka file mengganti isi Kurasi di perangkat ini.</p>
         </div>
       </div>
     </section>
@@ -3648,7 +3651,7 @@ function openForm(item){
   $('#f-motif').checked = item?!!item.motif:false;
   $$('input[name=f-style]').forEach(function(c){c.checked = item?item.styles.indexOf(c.value)>-1:true;});
   FORM.token++; FORM.photo=null; FORM.ill=null; FORM.illSrc=null; FORM.en=''; FORM.auto={}; FORM.item=item||null; showFormArt();
-  photoNote(item?'Ingin ilustrasi dari foto asli item ini? Ketuk Foto pakaian. Fotonya tidak disimpan.':'Foto pakaianmu: AI mengenali kategori dan warnanya, lalu menggambar ulang jadi ilustrasi. Foto aslinya tidak disimpan.');
+  photoNote(item?'Ingin ilustrasi dari foto asli item ini? Ketuk Foto pakaian. Fotonya tidak disimpan.':'Foto pakaianmu; AI mengenali jenis dan warnanya, lalu membuat ilustrasinya. Foto asli tidak disimpan.');
   $('#f-del').classList.toggle('hidden',!item);
   f.scrollIntoView({behavior:'smooth',block:'start'});
   setTimeout(function(){$('#f-name').focus({preventScroll:true});},250);
@@ -3688,7 +3691,7 @@ function renderWardrobe(){
   var vis=state.items.filter(function(i){return forG(i)&&cats.some(function(c){return c.k===i.cat;});});
   var n=vis.length;
   var ns=vis.filter(function(i){return i.sample;}).length;
-  $('#lemari-count').textContent = n? n+' item di lemarimu'+(ns?(ns===n?', semuanya dari lemari contoh.':', '+ns+' di antaranya dari lemari contoh.'):'.') : 'Mulai dengan 10-20 item yang paling sering kamu pakai. Foto saja, Kurasi yang mencatat jenis dan warnanya.';
+  $('#lemari-count').textContent = n? n+' item di lemarimu'+(ns?(ns===n?', semuanya dari lemari contoh.':', '+ns+' di antaranya dari lemari contoh.'):'.') : 'Mulai dari 10–20 item favoritmu. Cukup foto, Kurasi mencatat jenis dan warnanya.';
   $('#btn-sample-2').classList.toggle('hidden', n>0);
   var w=$('#wardrobe');
   if(!n){w.innerHTML='<div class="win pink"><div class="body">'+emptyHTML('lemari','Atelier-mu masih kosong','Tambahkan atasan dan bawahan dulu'+(state.gender==='wanita'?', atau gamis / dress,':'')+' supaya Kurasi bisa mulai memadukan. Cukup foto, Kurasi mencatat jenis dan warnanya.','<button class="btn" type="button" onclick="document.getElementById(\'btn-add\').click()">Tambah item</button>')+'</div></div>';$('#wardrobe-foot').innerHTML='';CLOSET.sel=[];renderSelbar();return;}
@@ -4014,7 +4017,7 @@ function renderSeason(){
   $$('input[name=season]').forEach(function(r){r.checked=(r.value===(k||''));});
   if(!k){
     var lean=state.seasonInfo&&state.seasonInfo.lean;
-    c.innerHTML='<h2>Belum ada personal color</h2><p class="muted" style="margin:0">'+(lean?'Hasil kuis belum tegas, condong ke '+SEASONS[lean].l+'. Coba tes tempel kain di bawah, lalu pilih sendiri.':'Isi kuis singkat atau pilih sendiri. Tanpa personal color, Kurasi tetap memadukan berdasarkan warna.')+'</p>';
+    c.innerHTML='<h2>Belum ada personal color</h2><p class="muted" style="margin:0">'+(lean?'Hasil kuis belum tegas, condong ke '+SEASONS[lean].l+'. Coba tes tempel kain di bawah, lalu pilih sendiri.':'Isi kuis singkat atau pilih sendiri. Tanpanya pun, Kurasi tetap memadukan berdasarkan warna.')+'</p>';
     return;
   }
   var s=SEASONS[k], info=state.seasonInfo||{};
@@ -4285,7 +4288,7 @@ function renderCloset(){
     var on=CLOSET.sel.indexOf(it.id)>-1, r=restLeft(it);
     return '<div class="card'+(on?' on':'')+'"><button type="button" class="pick" data-pick="'+it.id+'" aria-pressed="'+on+'"><span class="thumb">'+itemArt(it)+'<span class="chk" aria-hidden="true">&#10003;</span>'+(r?'<span class="rest">Istirahat '+r+' hr</span>':'')+(it.sample?'<span class="smp" title="Item dari lemari contoh">Contoh</span>':'')+'</span><span class="cap"><b>'+esc(it.name)+'</b><span class="meta">'+dot(it.color)+'<span>'+colorLabel(it.color)+(it.motif?' · motif':'')+'</span></span></span></button><button type="button" class="edit" data-edit="'+it.id+'" aria-label="Ubah '+esc(it.name)+'">&#9998;</button></div>';
   }).join('')+'</div>';
-  $('#wardrobe').innerHTML='<div class="win sky"><div class="bar"><span>Isi lemari</span><span class="deco" aria-hidden="true"><i>&#10047;</i><i>&#9825;</i></span></div><div class="body">'+tabs+'<p class="note" style="margin:0 0 12px">Ketuk item untuk memilih. Pilih satu item lalu <b>Padukan</b> agar Kurasi melengkapinya, atau pilih beberapa item untuk melihat hasil gabungannya.</p>'+grid+'</div></div>';
+  $('#wardrobe').innerHTML='<div class="win sky"><div class="bar"><span>Isi lemari</span><span class="deco" aria-hidden="true"><i>&#10047;</i><i>&#9825;</i></span></div><div class="body">'+tabs+'<p class="note" style="margin:0 0 12px">Pilih satu item lalu <b>Padukan</b>, atau beberapa item untuk melihat gabungannya.</p>'+grid+'</div></div>';
   renderSelbar();
 }
 function renderSelbar(){
@@ -4710,7 +4713,7 @@ function renderPAO(){
   var n={ok:0,warn:0,bad:0,na:0}; list.forEach(function(p){n[bStatus(p).k]++;});
   $('#pao-sum').innerHTML='<span class="bchip bad">'+n.bad+' kedaluwarsa</span><span class="bchip warn">'+n.warn+' segera habis</span><span class="bchip ok">'+n.ok+' aman</span>'+(n.na?'<span class="bchip">'+n.na+' belum dibuka</span>':'');
   $('#pao-list').innerHTML=list.length?list.map(function(p){ var st=bStatus(p), e=bExpiry(p), o=parseD(p.opened), pct=o&&e?Math.min(100,Math.max(0,(Date.now()-o)/(e-o)*100)):0;
-    return '<li class="bitem '+st.k+'">'+bIcon(p)+'<div class="bi"><b>'+esc(p.name)+'</b><span class="muted small">'+esc(p.brand||'')+(p.brand?' · ':'')+BC[p.cat].l+(p.shadeName?' · shade '+esc(p.shadeName):'')+' · PAO '+(p.pao||BC[p.cat].m)+'M</span><span class="pbar"><i style="width:'+pct.toFixed(0)+'%"></i></span><span class="small"><span class="tag st"><span class="stdot"></span>'+st.l+'</span>'+(e?' sampai '+fmtD(e):'')+'</span>'+(bActives(p).length?'<span class="acts small">'+bActives(p).map(function(a){return '<span class="tag">'+AL[a]+'</span>';}).join(' ')+'</span>':'')+'</div><div class="bact"><button class="linkbtn" data-bedit="'+p.id+'">Ubah</button><button class="linkbtn danger" data-bdel="'+p.id+'">Habis / buang</button></div></li>'; }).join(''):'<li class="empt-li" style="list-style:none">'+emptyHTML('beauty','Belum ada produk',isHomme()?'Tambahkan produk grooming atau skincare yang sedang dipakai, lalu Kurasi mengingatkan sebelum kedaluwarsa.':'Tambahkan makeup atau skincare yang sedang dipakai, lalu Kurasi mengingatkan sebelum kedaluwarsa.')+'</li>';
+    return '<li class="bitem '+st.k+'">'+bIcon(p)+'<div class="bi"><b>'+esc(p.name)+'</b><span class="muted small">'+esc(p.brand||'')+(p.brand?' · ':'')+BC[p.cat].l+(p.shadeName?' · shade '+esc(p.shadeName):'')+' · PAO '+(p.pao||BC[p.cat].m)+'M</span><span class="pbar"><i style="width:'+pct.toFixed(0)+'%"></i></span><span class="small"><span class="tag st"><span class="stdot"></span>'+st.l+'</span>'+(e?' sampai '+fmtD(e):'')+'</span>'+(bActives(p).length?'<span class="acts small">'+bActives(p).map(function(a){return '<span class="tag">'+AL[a]+'</span>';}).join(' ')+'</span>':'')+'</div><div class="bact"><button class="linkbtn" data-bedit="'+p.id+'">Ubah</button><button class="linkbtn danger" data-bdel="'+p.id+'">Habis / buang</button></div></li>'; }).join(''):'<li class="empt-li" style="list-style:none">'+emptyHTML('beauty','Belum ada produk',isHomme()?'Tambahkan produk grooming atau skincare yang kamu pakai; Kurasi mengingatkan sebelum kedaluwarsa.':'Tambahkan makeup atau skincare yang kamu pakai; Kurasi mengingatkan sebelum kedaluwarsa.')+'</li>';
 }
 function paoFormSync(){ var c=BC[$('#pb-cat').value]; $('#pb-pao').placeholder=c.m; if(!BEDIT||$('#pb-cat').dataset.prev!==c.k){ $('#pb-pao').value=c.m; } $('#pb-cat').dataset.prev=c.k;
   $('#pb-shade-wrap').classList.toggle('hidden',c.t!=='makeup'||c.k==='parfum'); $('#pb-act-wrap').classList.toggle('hidden',c.t!=='skin');
@@ -4763,7 +4766,7 @@ function renderRoutine(){
       '<div class="row" style="gap:8px;margin-top:8px"><select id="rt-sel-'+k+'" aria-label="Pilih produk"'+(sk.length?'':' disabled')+'>'+(sk.length?sk.filter(function(p){return BEAUTY[k].indexOf(p.id)<0;}).map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+' ('+BC[p.cat].l+')</option>';}).join(''):'<option value="">Belum ada produk skincare</option>')+'</select><button class="btn small" type="button" data-radd="'+k+'"'+(sk.length?'':' disabled')+'>Tambah</button></div>';
     if(sk.length&&!sk.filter(function(p){return BEAUTY[k].indexOf(p.id)<0;}).length){ var s=$('#rt-sel-'+k); s.innerHTML='<option value="">Semua produk sudah masuk</option>'; s.disabled=true; }
   });
-  if(!sk.length) $('#rt-hint').innerHTML='Tambahkan produk skincare dulu di tab <b>Kedaluwarsa</b> (pilih kategori skincare dan kandungan aktifnya), lalu susun rutinitasnya di sini.'; else $('#rt-hint').textContent='Pilih produk untuk rutinitas pagi dan malam. Kurasi menyusun urutannya dan memeriksa kombinasi bahan aktif.';
+  if(!sk.length) $('#rt-hint').innerHTML='Tambahkan produk skincare di tab <b>Kedaluwarsa</b> dulu, lalu susun rutinitasnya di sini.'; else $('#rt-hint').textContent='Pilih produk pagi dan malam; Kurasi menyusun urutan dan memeriksa bahan aktifnya.';
   BEAUTY.am=sortStep(BEAUTY.am); BEAUTY.pm=sortStep(BEAUTY.pm); saveBeauty();
   var is=routineIssues();
   $('#rt-check').innerHTML=(!BEAUTY.am.length&&!BEAUTY.pm.length)?'<p class="muted">Hasil pemeriksaan muncul setelah kamu menyusun rutinitas.</p>':(is.length?'<ul class="issues">'+is.map(function(x){return '<li class="'+x.lv+'">'+esc(x.t)+'</li>';}).join('')+'</ul>':'<p class="okmsg">&#10003; Rutinitasmu aman: urutan tepat dan tidak ada bahan aktif yang bertabrakan.</p>')+'<p class="note">Panduan umum, bukan saran medis. Jika kulit iritasi, hentikan pemakaian dan konsultasikan ke dokter kulit.</p>';
@@ -5067,7 +5070,7 @@ function lxHero(){
   var homme=styleG()==='pria';
   var h=$('#lx-h1'), s=$('#lx-sub'), k=$('#lx-kicker'), sb=$('#lx-short-beauty');
   if(h)h.innerHTML=homme?'<span>Tingkatkan Gayamu</span> <span>Setiap Hari</span>':'<span>Temukan Gaya</span> <span>Terbaik Versimu</span>';
-  if(s)s.textContent=homme?'Outfit, grooming, dan gaya hidup dalam satu tempat.':'Padu padan outfit, beauty, dan gaya hidup dalam satu tempat.';
+  if(s)s.textContent=homme?'Lemari, padanan, dan grooming-mu dalam satu tempat.':'Lemari, padanan, dan beauty-mu dalam satu tempat.';
   if(k){ var d=new Date(); k.textContent=(state.profile&&state.profile.name?'Hai, '+state.profile.name+' · ':'')+d.toLocaleDateString('id-ID',{day:'numeric',month:'long'}); }
   if(sb)sb.textContent=state.gender==='pria'?'Grooming':'Beauty';
   var im=$('#lx-hero-img'); if(im){ var src=lxHeroSrc(); if(im.getAttribute('data-src')!==src){ im.setAttribute('data-src',src); im.onerror=function(){ var v=figVariant(), fb='img/hero-'+v+'.webp'; if(this.getAttribute('src')!==fb&&/-dark\.webp$/.test(this.getAttribute('src')||''))this.src=fb; else { var tl=todayLooks()[0]; this.onerror=null; this.src='img/look-'+tl.ti+'-'+tl.li+'-'+v+'.webp'; } }; im.src=src; } }
@@ -5151,18 +5154,18 @@ function lxPcHero(){ var im=$('#lx-pc-img'); if(!im)return; var v=figVariant(), 
 // ---------- v66: banner (hero) di setiap menu ----------
 function lxCount(){ try{ return state.items.filter(forG).length; }catch(e){ return state.items.length; } }
 var LX_PH={
-  tema:{k:function(){return 'Outfit & tema';},t:['Padu Padan','Sesuai Tema'],s:'Pilih tema dan look-nya, lalu Kurasi memadukan isi lemarimu agar sesuai.',c:'Buat tema dengan AI',art:[0,0],
+  tema:{k:function(){return 'Outfit & tema';},t:['Padu Padan','Sesuai Tema'],s:'Pilih tema, Kurasi memadukannya dari lemarimu.',c:'Buat tema dengan AI',art:[0,0],
     go:function(){ var f=$('#ai-theme'); if(f){ f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }},
-  lemari:{k:function(){ var n=lxCount(); return n?n+' item di lemarimu':'Lemari masih kosong'; },t:['Atelier Lemarimu'],s:'Simpan pakaian dan aksesori, lalu padukan dalam sekali ketuk.',c:'Tambah item',art:[1,2],
+  lemari:{k:function(){ var n=lxCount(); return n?n+' item di lemarimu':'Lemari masih kosong'; },t:['Atelier Lemarimu'],s:'Simpan koleksimu, padukan dalam sekali ketuk.',c:'Tambah item',art:[1,2],
     go:function(){ var b=$('#btn-add'); if(b)b.click(); }},
   beauty:{k:function(){ return state.gender==='pria'?'Grooming':'Beauty'; },t:function(){ return state.gender==='pria'?['Grooming','Lebih Teratur']:['Rawat Cantikmu','Lebih Teliti']; },
-    s:function(){ return state.gender==='pria'?'Pantau kedaluwarsa produk, cek rutinitas skincare, dan jaga wishlist.':'Pantau kedaluwarsa makeup, cek rutinitas skincare, dan jaga wishlist.'; },c:'Tambah produk',art:[2,0],
+    s:function(){ return state.gender==='pria'?'Kedaluwarsa, rutinitas, dan wishlist dalam satu tempat.':'Kedaluwarsa, rutinitas, dan wishlist dalam satu tempat.'; },c:'Tambah produk',art:[2,0],
     go:function(){ var r=document.querySelector('input[name=btab][value=pao]'); if(r&&!r.checked)r.click(); var b=$('#pao-add'); if(b)setTimeout(function(){ b.click(); },60); }},
   warna:{k:function(){return 'Personal Color';},t:['Temukan Warna','Terbaikmu'],s:'Kuis singkat untuk mengenali <i>undertone</i> dan musim warnamu.',c:'Mulai analisis',art:[5,0],
     go:function(){ var q=$('#quiz'); if(q){ q.scrollIntoView({behavior:'smooth',block:'start'}); var f=q.querySelector('input'); if(f)setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }},
-  riwayat:{k:function(){return 'Riwayat';},t:['Jejak Gaya','Minggu Ini'],s:'Item yang sudah dipakai beristirahat 7 hari agar gayamu tetap segar.',c:'Kurasi outfit hari ini',art:[3,0],
+  riwayat:{k:function(){return 'Riwayat';},t:['Jejak Gaya','Minggu Ini'],s:'Yang sudah dipakai beristirahat seminggu, agar gayamu tetap segar.',c:'Kurasi outfit hari ini',art:[3,0],
     go:function(){ showTab('outfit'); window.scrollTo(0,0); setTimeout(function(){ var b=$('#hero-go'); if(b)b.click(); },80); }},
-  profil:{k:function(){ var n=state.profile&&state.profile.name; return n?'Hai, '+n:'Profil'; },t:['Gayamu, Ceritamu'],s:'Atur nama, gaya, dan warna kulit agar Kurasi makin mengenalmu.',c:'Ubah profil',art:[2,1],
+  profil:{k:function(){ var n=state.profile&&state.profile.name; return n?'Hai, '+n:'Profil'; },t:['Gayamu, Ceritamu'],s:'Kenalkan dirimu, Kurasi menyesuaikan setiap padanan.',c:'Ubah profil',art:[2,1],
     go:function(){ var f=$('#p-name'); if(f){ f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }}
 };
 function lxArtSrc(a){ var v=figVariant(); if(a==='face')return 'img/avatar-'+v+'.webp'; if(a==='pc')return 'img/pc-hero-'+v+'.webp'; return 'img/look-'+a[0]+'-'+a[1]+'-'+v+'.webp'; }
