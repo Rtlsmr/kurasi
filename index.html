@@ -2572,6 +2572,11 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
 /* v75 · bingkai ilustrasi mode gelap sedikit lebih ramping agar judul tidak tertutup */
 @media (max-width:899px){html:root:not(#_)[data-theme="dark"] .lx-hero-img{width:28%!important}}
 
+/* v76 · masukan pengguna: pilihan segmen (Otomatis/Femme/Homme, Wanita/Pria, Femme/Homme) selalu satu baris */
+html:root:not(#_) .seg:not(.btabs){display:inline-flex!important;flex-wrap:nowrap!important;max-width:100%!important;width:auto!important;padding:4px!important;gap:2px!important;align-items:stretch!important}
+html:root:not(#_) .seg:not(.btabs) label{flex:0 1 auto!important;min-width:0!important;display:flex!important}
+html:root:not(#_) .seg:not(.btabs) span{display:flex!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;padding:0 16px!important;min-height:40px!important;line-height:1!important}
+
 </style>
 </head>
 <body>
@@ -2929,7 +2934,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!im
           <label class="tg"><input type="checkbox" id="aiimg-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Ilustrasi AI otomatis</span></label>
           <p class="small muted" style="margin:0">AI menggambar item, model, dan avatar. Matikan bila koneksi lambat; Kurasi tetap berjalan dengan sketsa.</p>
           <span class="lbl">Gaya tampilan</span>
-          <div class="seg" role="radiogroup" aria-label="Gaya tampilan"><label><input type="radio" name="uistyle" value="auto"><span>Ikuti padu padan</span></label><label><input type="radio" name="uistyle" value="femme"><span>Femme</span></label><label><input type="radio" name="uistyle" value="homme"><span>Homme</span></label></div>
+          <div class="seg" role="radiogroup" aria-label="Gaya tampilan"><label><input type="radio" name="uistyle" value="auto"><span>Otomatis</span></label><label><input type="radio" name="uistyle" value="femme"><span>Femme</span></label><label><input type="radio" name="uistyle" value="homme"><span>Homme</span></label></div>
           <p class="small muted" style="margin:0">Femme: ivory, blush, dan copper. Homme: ivory, sand, dan bronze. Hanya mengubah tampilan; semua fitur tetap sama.</p>
         </div>
       </div>
