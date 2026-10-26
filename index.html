@@ -3850,6 +3850,7 @@ function pinQuery(extra){
   return 'https://id.pinterest.com/search/pins/?q='+encodeURIComponent(base+' '+extra);
 }
 function renderResult(){
+  if(typeof ONB!=='undefined'&&ONB&&ONB.pending&&!ONB.shown&&!state.profile.done){ ONB.pending=false; ONB.shown=true; setTimeout(function(){ if(!state.profile.done&&$$('.modal').every(function(m){return m.classList.contains('hidden');}))openOnboarding(); },4500); }
   var c=ranked[rankIdx], r=$('#result');
   var top=c.gamis||c.atasan;
   if(resultView==='model'&&!RV_USER&&!(state.aiImg&&state.worker))resultView='flat';
@@ -3901,12 +3902,12 @@ function renderOutfitPage(){
   else lb.classList.add('hidden');
   renderToggles(); syncGender(); renderDash(); renderChrome();
 }
-function closeIntro(quiet){ showIntro=false; if(!state.introSeen){state.introSeen=true;save('introSeen',true);} if(!quiet&&!state.profile.done&&!ONB.shown){ ONB.shown=true; setTimeout(openOnboarding,350); } }
+function closeIntro(quiet){ showIntro=false; if(!state.introSeen){state.introSeen=true;save('introSeen',true);} if(!quiet&&!state.profile.done&&!ONB.shown){ ONB.pending=true; } }
 $('#nudge-go').addEventListener('click',function(){ openOnboarding(); });
 $('#btn-start').addEventListener('click',function(){ closeIntro(); renderOutfitPage(); window.scrollTo(0,0); });
 document.addEventListener('click',function(e){
   if(e.target.closest('#outfit-empty [data-go]'))closeIntro();
-  if(e.target.closest('#btn-sample-1')){ closeIntro(); renderOutfitPage(); }
+  if(e.target.closest('#btn-sample-1')){ closeIntro(); renderOutfitPage(); window.scrollTo(0,0); }
   if(e.target.closest('[data-intro]')){ showIntro=true; showTab('outfit'); }
 });
 document.addEventListener('keydown',function(e){ if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-intro]')){e.preventDefault();showIntro=true;showTab('outfit');} });
@@ -4430,7 +4431,7 @@ function profileHTML(px){
   return ''+
   '<fieldset class="pstep" data-step="1"><legend>Kenalan dulu</legend>'+
     '<label class="lbl" for="'+px+'name">Nama panggilan</label><input type="text" id="'+px+'name" maxlength="20" placeholder="Contoh: Adhesty" style="margin-bottom:14px">'+
-    '<div class="pseg"><span class="lbl">Padu padan untuk</span><div class="seg" role="radiogroup" aria-label="Padu padan untuk"><label><input type="radio" name="'+px+'gender" value="wanita"><span>Wanita</span></label><label><input type="radio" name="'+px+'gender" value="pria"><span>Pria</span></label></div></div>'+
+    '<div class="pseg"><span class="lbl">Padu padan untuk</span><div class="seg" role="radiogroup" aria-label="Padu padan untuk"><label><input type="radio" name="'+px+'gender" value="wanita"><span>Femme</span></label><label><input type="radio" name="'+px+'gender" value="pria"><span>Homme</span></label></div></div>'+
   '</fieldset>'+
   '<fieldset class="pstep" data-step="2"><legend>Rambut dan hijab</legend>'+
     '<div class="only-w"><label class="tg" style="margin-bottom:8px"><input type="checkbox" role="switch" id="'+px+'hijab"><span class="trk" aria-hidden="true"><span class="knob"></span></span><span class="tl">Saya berhijab</span></label>'+
