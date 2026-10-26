@@ -2174,6 +2174,189 @@ html:root:not(#_) .logo .wm b{padding-left:.24em!important}
 html:root:not(#_) .logo .wm small{margin-left:0!important;margin-right:0!important;text-align:center!important;padding-left:.16em}
 @media (max-width:899px){html:root:not(#_) .topbar .logo .wm small{letter-spacing:.14em!important;padding-left:.14em!important}}
 
+/* =====================================================================
+   v62 · Kurasi Luxe — tampilan mengikuti mockup (Femme/Homme × terang/gelap)
+   ===================================================================== */
+html:root:not(#_):not([data-g="pria"]):not([data-theme="dark"]){
+  --bg:#FBF6F2;--bg2:#FBF6F2;--surface:#FFFFFF;--surface2:#F4E9E3;--paper:#FFFFFF;
+  --ink:#4B3329;--muted:#8A7369;--outline:rgba(75,51,41,.11);--outline2:rgba(75,51,41,.22);
+  --accent:#A26B55;--accent-ink:#FFFFFF;--accent2:#D6B77D;--btn:#A26B55;--btn-ink:#FFFFFF;--btn2:#F4E9E3;
+  --berry:#A26B55;--gold:#D6B77D;--bar-ink:#4B3329;--pink:#E9D5CE;--lilac:#F1E4DE;--butter:#F6ECDF;--sky:#F3EAE5;--mint:#F1ECE5;
+  --t1:#F6ECE6;--t2:#F8F0EB;--t3:#F4E9E3;--t4:#F1E4DD;--side1:#FBF6F2;--side2:#FBF6F2;--side-ink:#4B3329;
+  --chart:#A26B55;--chart2:#D6B77D;--chart3:#E9D5CE;--logo-ink:#6B4A3C;--logo-acc:#B68A72;
+  --lx-hero1:#F6E8E1;--lx-hero2:#FBF3EE;--lx-glow:rgba(182,138,114,.18);
+  --shadow:0 10px 30px rgba(75,51,41,.06);--rc:14px;
+}
+html:root:not(#_)[data-g="pria"]:not([data-theme="dark"]){
+  --bg:#F7F5F2;--bg2:#F7F5F2;--surface:#FFFFFF;--surface2:#ECE8E2;--paper:#FFFFFF;
+  --ink:#3E3A36;--muted:#77706A;--outline:rgba(62,58,54,.12);--outline2:rgba(62,58,54,.24);
+  --accent:#8B6F56;--accent-ink:#FFFFFF;--accent2:#C9BDB1;--btn:#3E3A36;--btn-ink:#FFFFFF;--btn2:#ECE8E2;
+  --berry:#8B6F56;--gold:#C9BDB1;--bar-ink:#3E3A36;--pink:#E5E1DA;--lilac:#EAE6E0;--butter:#EFEAE2;--sky:#E9E7E3;--mint:#E8E6E0;
+  --t1:#EFECE7;--t2:#F2F0EC;--t3:#ECE8E2;--t4:#E7E3DC;--side1:#F7F5F2;--side2:#F7F5F2;--side-ink:#3E3A36;
+  --chart:#8B6F56;--chart2:#C9BDB1;--chart3:#E5E1DA;--logo-ink:#3E3A36;--logo-acc:#8B6F56;
+  --lx-hero1:#E9E6E1;--lx-hero2:#F5F3F0;--lx-glow:rgba(139,111,86,.14);
+  --shadow:0 10px 30px rgba(62,58,54,.06);--rc:10px;
+}
+html:root:not(#_):not([data-g="pria"])[data-theme="dark"]{
+  --bg:#141010;--bg2:#141010;--surface:#1E1816;--surface2:#2A211E;--paper:#F4ECE6;
+  --ink:#F4E9E1;--muted:#BCA79C;--outline:rgba(244,233,225,.10);--outline2:rgba(244,233,225,.22);
+  --accent:#D2A07E;--accent-ink:#1E1410;--accent2:#8C5D47;--btn:#C98F6B;--btn-ink:#1E1410;--btn2:#2A211E;
+  --berry:#D2A07E;--gold:#D6B77D;--bar-ink:#F4E9E1;--pink:#2E2420;--lilac:#2B2220;--butter:#2E261F;--sky:#27201D;--mint:#26211C;
+  --t1:#231C19;--t2:#251E1B;--t3:#221B18;--t4:#201916;--side1:#141010;--side2:#141010;--side-ink:#F4E9E1;
+  --chart:#D2A07E;--chart2:#8C5D47;--chart3:#3A2D27;--logo-ink:#F1DCCB;--logo-acc:#D2A07E;
+  --lx-hero1:#2A1E19;--lx-hero2:#161110;--lx-glow:rgba(210,160,126,.16);
+  --shadow:0 12px 32px rgba(0,0,0,.35);--rc:14px;
+}
+html:root:not(#_)[data-g="pria"][data-theme="dark"]{
+  --bg:#0F141B;--bg2:#0F141B;--surface:#161D26;--surface2:#1F2833;--paper:#ECEAE6;
+  --ink:#ECE8E2;--muted:#A6ADB5;--outline:rgba(236,232,226,.10);--outline2:rgba(236,232,226,.22);
+  --accent:#C9A27A;--accent-ink:#141A21;--accent2:#5D6B7A;--btn:#C9A27A;--btn-ink:#141A21;--btn2:#1F2833;
+  --berry:#C9A27A;--gold:#C9A27A;--bar-ink:#ECE8E2;--pink:#1F2833;--lilac:#1E2731;--butter:#232A31;--sky:#1C2530;--mint:#1D262E;
+  --t1:#18202A;--t2:#19222C;--t3:#172029;--t4:#151D26;--side1:#0F141B;--side2:#0F141B;--side-ink:#ECE8E2;
+  --chart:#C9A27A;--chart2:#5D6B7A;--chart3:#2A3542;--logo-ink:#ECE8E2;--logo-acc:#C9A27A;
+  --lx-hero1:#1B2430;--lx-hero2:#10161D;--lx-glow:rgba(201,162,122,.14);
+  --shadow:0 12px 32px rgba(0,0,0,.4);--rc:10px;
+}
+html:root:not(#_) body{background:var(--bg)!important;color:var(--ink)}
+html:root:not(#_) .stars{display:none!important}
+html:root:not(#_) h1,html:root:not(#_) h2,html:root:not(#_) h3{color:var(--ink)}
+/* panels, buttons and fields read the tokens again (older layers hard-coded wine and stone colours) */
+html:root:not(#_) .win{background:var(--surface)!important;border:1px solid var(--outline)!important;border-radius:var(--rc)!important;box-shadow:var(--shadow)!important}
+html:root:not(#_) .cover .body{padding:18px 16px 20px!important}
+html:root:not(#_) .win .bar{background:transparent!important;color:var(--ink)!important;border:0!important;border-bottom:1px solid var(--outline)!important;border-radius:0!important}
+html:root:not(#_) .btn{background:var(--btn)!important;color:var(--btn-ink)!important;border-color:var(--btn)!important}
+html:root:not(#_) .btn:hover{background:var(--btn)!important;filter:brightness(1.06)}
+html:root:not(#_) .btn.alt,html:root:not(#_) .btn.butter,html:root:not(#_) .btn.ghost{background:transparent!important;color:var(--ink)!important;border-color:var(--outline2)!important}
+html:root:not(#_) .btn.alt:hover,html:root:not(#_) .btn.ghost:hover,html:root:not(#_) .btn.butter:hover{background:var(--surface2)!important}
+html:root:not(#_) input[type=text],html:root:not(#_) input[type=url],html:root:not(#_) input[type=number],html:root:not(#_) input[type=date],html:root:not(#_) select,html:root:not(#_) textarea{background:var(--surface)!important;color:var(--ink)!important;border-color:var(--outline2)!important}
+html:root:not(#_) input:focus,html:root:not(#_) select:focus,html:root:not(#_) textarea:focus{border-color:var(--accent)!important;outline:2px solid color-mix(in srgb,var(--accent) 18%,transparent)!important}
+html:root:not(#_) .seg label:has(input:checked) span,html:root:not(#_) .chip input:checked+span{background:var(--btn)!important;color:var(--btn-ink)!important;border-color:var(--btn)!important}
+html:root:not(#_) .linkbtn{color:var(--accent)!important}
+html:root:not(#_) .eyebrow,html:root:not(#_) .kicker{color:var(--accent)!important}
+
+/* ---------- top bar = app bar ---------- */
+.lx-ic{display:none;width:40px;height:40px;place-items:center;border:0;background:transparent;color:var(--ink);padding:0;cursor:pointer;border-radius:50%;flex:0 0 auto}
+.lx-ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.lx-title{display:none}
+@media (max-width:899px){
+  html:root:not(#_) .topbar{position:sticky!important;top:0!important;z-index:30!important;display:flex!important;align-items:center!important;gap:8px!important;min-height:60px!important;height:auto!important;margin:0 -16px 6px!important;padding:8px 14px!important;background:color-mix(in srgb,var(--bg) 92%,transparent)!important;-webkit-backdrop-filter:saturate(1.2) blur(14px);backdrop-filter:saturate(1.2) blur(14px);border:0!important;border-bottom:1px solid transparent!important;box-shadow:none!important}
+  html:root:not(#_) .topbar .right{margin-left:auto!important;display:flex!important;align-items:center!important;gap:8px!important}
+  html:root:not(#_) .topbar #theme-wrap{display:none!important}
+  html:root:not(#_) .topbar .top-search,html:root:not(#_) .topbar .avatar{width:38px!important;height:38px!important;border:0!important;background:transparent!important}
+  html:root:not(#_) .topbar .avatar{border:1px solid var(--outline)!important;overflow:hidden}
+  html:root:not(#_) .topbar .top-search svg{width:21px!important;height:21px!important;stroke-width:1.7!important}
+  body[data-tab="outfit"] .lx-menu{display:grid}
+  body:not([data-tab="outfit"]) .lx-back{display:grid}
+  body:not([data-tab="outfit"]) .topbar .logo,body:not([data-tab="outfit"]) .topbar .avatar{display:none!important}
+  body:not([data-tab="outfit"]) .lx-title{display:block;position:absolute;left:64px;right:64px;text-align:center;font:600 16px/1.2 var(--body);letter-spacing:.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+  body[data-tab="outfit"] .topbar .logo .mark{width:30px!important;height:30px!important}
+  /* page titles move into the app bar on phones */
+  body[data-tab="lemari"] #tab-lemari>h1:first-of-type,body[data-tab="tema"] #tab-tema>h1:first-of-type,body[data-tab="riwayat"] #tab-riwayat>h1:first-of-type,body[data-tab="beauty"] #tab-beauty>h1:first-of-type,body[data-tab="profil"] #tab-profil>h1:first-of-type{font-size:28px!important;margin-top:4px!important}
+}
+
+/* ---------- menu sheet ---------- */
+.lx-sheet{position:fixed;inset:0;z-index:90;display:none}
+.lx-sheet.open{display:block}
+.lx-sheet .scrim{position:absolute;inset:0;background:rgba(20,14,12,.38);animation:lxfade .2s ease both}
+.lx-sheet .pane{position:absolute;top:0;bottom:0;left:0;width:min(82vw,320px);background:var(--bg);color:var(--ink);padding:22px 18px calc(22px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:4px;box-shadow:12px 0 40px rgba(0,0,0,.18);animation:lxslide .24s cubic-bezier(.2,.7,.2,1) both;overflow-y:auto}
+.lx-sheet .pane .lx-sh-logo{display:flex;align-items:center;gap:10px;margin:0 6px 14px}
+.lx-sheet .pane .lx-sh-logo img{width:40px;height:40px;border-radius:10px}
+.lx-sheet .pane .lx-sh-logo b{font:600 22px/1 var(--title);letter-spacing:.22em;color:var(--logo-ink,var(--ink))}
+.lx-sheet .pane button.it{display:flex;align-items:center;gap:14px;width:100%;min-height:48px;padding:0 10px;border:0;border-radius:12px;background:transparent;color:var(--ink);font:500 15px var(--body);text-align:left;cursor:pointer}
+.lx-sheet .pane button.it svg{width:21px;height:21px;fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.lx-sheet .pane button.it[aria-current="page"]{background:var(--surface2);font-weight:600}
+.lx-sheet .pane hr{border:0;border-top:1px solid var(--outline);margin:10px 4px}
+.lx-sheet .pane .lx-dark{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:0 10px;font:500 15px var(--body)}
+@keyframes lxslide{from{transform:translateX(-100%)}to{transform:none}}
+@keyframes lxfade{from{opacity:0}to{opacity:1}}
+
+/* ---------- bottom navigation (phones) ---------- */
+@media (max-width:899px){
+  html:root:not(#_) .dock{background:color-mix(in srgb,var(--surface) 96%,transparent)!important;border:0!important;border-top:1px solid var(--outline)!important;border-radius:22px 22px 0 0!important;box-shadow:0 -6px 24px rgba(0,0,0,.05)!important}
+  html:root:not(#_) .dock button[data-tab="warna"],html:root:not(#_) .dock button[data-tab="riwayat"]{display:none!important}
+  html:root:not(#_) .dock button[data-tab="outfit"]{order:1}
+  html:root:not(#_) .dock button[data-tab="tema"]{order:2}
+  html:root:not(#_) .dock button[data-tab="beauty"]{order:3}
+  html:root:not(#_) .dock button[data-tab="lemari"]{order:4}
+  html:root:not(#_) .dock button[data-tab="profil"]{order:5}
+  html:root:not(#_) .dock button{color:var(--muted)!important;font-weight:500!important;font-size:11px!important}
+  html:root:not(#_) .dock button .tile{background:transparent!important;border:0!important;box-shadow:none!important}
+  html:root:not(#_) .dock button .tile svg{stroke:currentColor!important}
+  html:root:not(#_) .dock button[aria-current="page"]{color:var(--accent)!important;font-weight:600!important}
+  html:root:not(#_) .dock button[aria-current="page"] .tile{background:transparent!important;border:0!important}
+  html:root:not(#_) .dock button[aria-current="page"] .tile svg{stroke:var(--accent)!important;stroke-width:1.9!important}
+  html:root:not(#_) .dock button[aria-current="page"]::before{display:none!important}
+}
+@media (min-width:900px){
+  html:root:not(#_) .dock button[aria-current="page"]{color:var(--accent)!important}
+}
+
+/* ---------- Beranda: hero ---------- */
+html:root:not(#_) #outfit-main>section.hero{display:none!important}
+.lx-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr);margin:0 0 22px;border-radius:22px;overflow:visible;z-index:3;background:linear-gradient(160deg,var(--lx-hero2) 0%,var(--lx-hero1) 100%);min-height:330px;isolation:isolate}
+.lx-hero::after{content:"";position:absolute;right:0;bottom:0;width:70%;height:80%;border-radius:0 0 22px 0;background:radial-gradient(closest-side,var(--lx-glow),transparent);z-index:0;pointer-events:none}
+.lx-hero-img{position:absolute;top:0;right:0;bottom:0;width:56%;z-index:0;overflow:hidden;border-radius:0 22px 22px 0}
+.lx-hero-img img{width:100%;height:100%;object-fit:cover;object-position:60% 18%;display:block;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%);mask-image:linear-gradient(90deg,transparent 0%,#000 38%)}
+.lx-hero-img img:not([src]),.lx-hero-img img[src=""]{display:none}
+.lx-hero-txt{position:relative;z-index:2;padding:26px 20px 22px;display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.lx-kicker{margin:0 0 8px;white-space:nowrap;font:600 10.5px/1.3 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+html:root:not(#_) #lx-h1{font-family:var(--title)!important;font-weight:500!important;font-size:clamp(30px,8.6vw,40px)!important;line-height:1.06!important;letter-spacing:-.01em!important;max-width:min(8.4em,64%);margin:0 0 10px!important;color:var(--ink)!important}
+.lx-sub{margin:0 0 18px;max-width:min(17em,58%);font:400 13.5px/1.55 var(--body);color:var(--muted)}
+.lx-search-slot{align-self:stretch;position:relative;z-index:5}
+html:root:not(#_) .lx-search-slot .qsearch{margin:0!important;max-width:none!important}
+html:root:not(#_) .lx-search-slot .qchips{display:none!important}
+html:root:not(#_) .lx-search-slot .qbox{height:50px!important;border-radius:999px!important;background:var(--surface)!important;border:1px solid var(--outline)!important;box-shadow:0 8px 24px rgba(0,0,0,.06)!important;padding:0 6px 0 18px!important}
+html:root:not(#_)[data-g="pria"] .lx-search-slot .qbox{border-radius:12px!important}
+html:root:not(#_) .lx-search-slot .qbox>svg{display:none!important}
+html:root:not(#_) .lx-search-slot .qbox input[type=search]{height:48px!important;font:400 14px var(--body)!important}
+html:root:not(#_) .lx-search-slot .qsearch input::placeholder{font-family:var(--body)!important;font-style:normal!important;font-size:13.5px!important}
+.lx-sbtn{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:0;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+html:root:not(#_)[data-g="pria"] .lx-sbtn{border-radius:9px;background:var(--ink);color:var(--surface)}
+.lx-sbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+.lx-cta{margin-top:14px;display:inline-flex;align-items:center;gap:10px;min-height:42px;padding:0 18px 0 20px;border:0;border-radius:999px;background:var(--btn);color:var(--btn-ink);font:600 13px var(--body);letter-spacing:.02em;cursor:pointer;box-shadow:0 8px 20px color-mix(in srgb,var(--btn) 28%,transparent)}
+html:root:not(#_)[data-g="pria"] .lx-cta{border-radius:9px}
+.lx-cta svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lx-cta:hover{filter:brightness(1.06)}
+
+/* ---------- Beranda: shortcuts ---------- */
+.lx-short{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 26px}
+.lx-short button{display:flex;flex-direction:column;align-items:center;gap:8px;border:0;background:transparent;color:var(--ink);cursor:pointer;padding:0;font:500 11.5px/1.25 var(--body);text-align:center}
+.lx-short .c{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--outline);box-shadow:0 6px 18px rgba(0,0,0,.04);transition:transform .2s ease,border-color .2s ease}
+.lx-short .c svg{width:24px;height:24px;fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.lx-short button:hover .c{transform:translateY(-2px);border-color:var(--accent)}
+
+/* ---------- Beranda: recommendations ---------- */
+html:root:not(#_) #recs-today .sechead{border:0!important;padding:0!important;margin:0 0 12px!important;align-items:center!important}
+html:root:not(#_) #recs-today .sechead .eyebrow,html:root:not(#_) #recs-today .sechead p{display:none!important}
+html:root:not(#_) #recs-today #h-recs{font:600 16px/1.3 var(--body)!important;letter-spacing:0!important;margin:0!important}
+html:root:not(#_) #recs-today .lx-all{font:500 12.5px var(--body)!important;color:var(--accent)!important;text-decoration:none!important;border:0!important}
+@media (max-width:899px){
+  html:root:not(#_) #recs-today .rrow{display:flex!important;gap:12px!important;overflow-x:auto!important;scroll-snap-type:x mandatory;scroll-padding-left:16px;padding:2px 2px 8px!important;margin:0 -16px!important;padding-left:16px!important;padding-right:16px!important;scrollbar-width:none}
+  html:root:not(#_) #recs-today .rrow::-webkit-scrollbar{display:none}
+  html:root:not(#_) #recs-today .rcard{flex:0 0 40%!important;max-width:170px;scroll-snap-align:start}
+  html:root:not(#_) #recs-today .rcard .rtt .dots,html:root:not(#_) #recs-today .rcard .rtt .ai{display:none!important}
+  html:root:not(#_) #recs-today .rcard .rtt{padding:8px 4px 2px!important}
+  html:root:not(#_) #recs-today .rcard .rtt b{font-size:15px!important}
+}
+html:root:not(#_) .rcard{background:var(--surface)!important;border:1px solid var(--outline)!important;border-radius:var(--rc)!important;overflow:hidden}
+html:root:not(#_) .rcard .rfig{border:0!important;border-radius:0!important;background:linear-gradient(180deg,var(--lx-hero2),var(--lx-hero1))!important}
+html:root:not(#_)[data-theme="dark"] .rcard .rfig{background:var(--paper)!important}
+
+/* ---------- desktop composition ---------- */
+@media (min-width:900px){
+  .lx-hero{min-height:440px;border-radius:24px;margin-bottom:28px}
+  .lx-hero-img{border-radius:0 24px 24px 0}
+  .lx-hero-img{width:58%}
+  .lx-hero-img img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%);mask-image:linear-gradient(90deg,transparent 0%,#000 30%)}
+  .lx-hero-txt{padding:56px 52px;max-width:520px}
+  html:root:not(#_) #lx-h1{font-size:clamp(46px,4.4vw,64px)!important;max-width:9.5em}
+  .lx-sub{font-size:15.5px;max-width:22em}
+  .lx-search-slot{max-width:440px}
+  .lx-short{grid-template-columns:repeat(4,minmax(0,140px));justify-content:start;gap:22px;margin-bottom:34px}
+  .lx-short .c{width:64px;height:64px}
+  html:root:not(#_) #outfit-main>.lx-hero,html:root:not(#_) #outfit-main>.lx-short{grid-column:1 / -1}
+}
+
 </style>
 </head>
 <body>
@@ -2183,7 +2366,7 @@ html:root:not(#_) .logo .wm small{margin-left:0!important;margin-right:0!importa
     <div class="brandbox"><span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier creates, ensemble elevates. Lihat sampul" data-intro><img class="mark mimg" src="img/logo-mark.webp" alt="" width="256" height="256"><span class="wm"><b>KURASI</b><small><span>atelier creates,</span> <span>ensemble elevates.</span></small></span></span><div class="me"><span id="side-avatar"></span><b id="side-hello">Hai! &#128075;</b><small>Padu padan dan beauty dari lemarimu sendiri</small></div></div>
     <button data-tab="outfit" aria-current="page"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg></span>Beranda</button>
     <button data-tab="lemari"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M9.5 11v2M14.5 11v2"/></svg></span>Lemari</button>
-    <button data-tab="tema"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg></span>Tema</button>
+    <button data-tab="tema"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/></svg></span>Outfit</button>
     <button data-tab="warna"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.5-1.2-2-1.2-3.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-3.9-4-7-9-7z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg></span>Warna</button>
     <button data-tab="riwayat"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></span>Riwayat</button>
     <button data-tab="beauty"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="13" width="9" height="8" rx="1.5"/><path d="M9.5 13v-3h5v3M10.5 10V6.2l3-2.2V10"/></svg></span><span class="bl">Beauty</span></button>
@@ -2193,6 +2376,9 @@ html:root:not(#_) .logo .wm small{margin-left:0!important;margin-right:0!importa
 
   <main id="main">
     <div class="topbar">
+      <button class="lx-ic lx-menu" id="lx-menu" type="button" aria-label="Buka menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <button class="lx-ic lx-back" id="lx-back" type="button" aria-label="Kembali ke Beranda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <b class="lx-title" id="lx-title" aria-live="polite"></b>
       <span class="logo" role="button" tabindex="0" title="Lihat sampul Kurasi" aria-label="Kurasi, atelier creates, ensemble elevates. Lihat sampul" data-intro><img class="mark mimg" src="img/logo-mark.webp" alt="" width="256" height="256"><span class="wm"><b>KURASI</b><small><span>atelier creates,</span> <span>ensemble elevates.</span></small></span></span>
       <div class="right"><button class="top-search" id="top-search" type="button" aria-label="Cari"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button><button class="avatar" id="top-avatar" type="button" data-go="profil" aria-label="Buka profil"></button>
       <label class="tg right" id="theme-wrap"><span class="tl">Mode gelap</span><input type="checkbox" id="theme-toggle" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></label></div>
@@ -2227,6 +2413,22 @@ html:root:not(#_) .logo .wm small{margin-left:0!important;margin-right:0!importa
 
       <div id="outfit-main">
         <div id="ens-head" class="ens-head" aria-live="polite"><div><span class="eyebrow" id="ens-eyebrow">Ensemble</span><h1 id="ens-title">Ensemble-mu</h1></div><button type="button" class="ens-back" id="ens-back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span id="ens-back-l">Kembali</span></button></div>
+<section class="lx-hero" id="lx-hero" aria-labelledby="lx-h1">
+          <div class="lx-hero-img" aria-hidden="true"><img id="lx-hero-img" alt="" decoding="async"></div>
+          <div class="lx-hero-txt">
+            <p class="lx-kicker" id="lx-kicker" data-nofx></p>
+            <h1 id="lx-h1">Temukan Gaya Terbaik Versimu</h1>
+            <p class="lx-sub" id="lx-sub">Padu padan outfit, beauty, dan gaya hidup dalam satu tempat.</p>
+            <div class="lx-search-slot" id="lx-search-slot"></div>
+            <button class="lx-cta" id="lx-go" type="button"><span>Kurasi outfit hari ini</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </section>
+        <nav class="lx-short" id="lx-short" aria-label="Pintasan">
+          <button type="button" data-go="tema"><span class="c"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5.5" r="2.2"/><path d="M9 21l1-6-2-1 2.4-5.2h3.2L16 14l-2 1 1 6"/></svg></span><span class="l">Outfit</span></button>
+          <button type="button" data-go="beauty"><span class="c"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="12" width="8" height="9" rx="1.5"/><path d="M10 12V8.5h4V12M11 8.5V4.6l2-1.4v5.3"/></svg></span><span class="l" id="lx-short-beauty">Beauty</span></button>
+          <button type="button" data-go="warna"><span class="c"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.6 4.6L18 9.2l-4.4 1.6L12 15.4l-1.6-4.6L6 9.2l4.4-1.6z"/><path d="M18.5 15l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span><span class="l">Personal Color</span></button>
+          <button type="button" data-go="lemari"><span class="c"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M12 3v18M10 11v2M14 11v2"/></svg></span><span class="l">Lemari</span></button>
+        </nav>
                 <section class="hero" aria-labelledby="h-outfit">
           <div>
             <p class="kicker" data-nofx><span>Personal style atelier</span><span class="sep"> · </span><span id="today"></span></p>
@@ -4112,7 +4314,7 @@ function renderChrome(){
 function todayLooks(){ var d=Math.floor((Date.now()-new Date().getTimezoneOffset()*6e4)/864e5), out=[];
   for(var i=0;i<4;i++){ var ti=(d+i)%PRESETS.length, li=(d+i*2)%3; out.push({ti:ti,li:li}); } return out; }
 function renderTodayRecs(){ var el=$('#recs-today'); if(!el)return;
-  el.innerHTML='<div class="sechead"><div><span class="eyebrow">'+esc(new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long'}))+'</span><h2 id="h-recs">Rekomendasi hari ini</h2><p>Ketuk untuk melihat padanan dari lemarimu.</p></div><button class="linkbtn" type="button" data-go="tema">Lihat semua</button></div><div class="rrow">'+todayLooks().map(function(x){ var t=PRESETS[x.ti], lk=t.looks[x.li];
+  el.innerHTML='<div class="sechead"><div><span class="eyebrow">'+esc(new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long'}))+'</span><h2 id="h-recs">Rekomendasi untukmu</h2><p>Ketuk untuk melihat padanan dari lemarimu.</p></div><button class="linkbtn lx-all" type="button" data-go="tema">Lihat semua <span aria-hidden="true">&rsaquo;</span></button></div><div class="rrow">'+todayLooks().map(function(x){ var t=PRESETS[x.ti], lk=t.looks[x.li];
     return '<button class="rcard" type="button" data-src="preset" data-theme="'+esc(t.name)+'" data-idx="'+x.li+'"><span class="rfig">'+imgTag('img/look-'+x.ti+'-'+x.li+'-'+figVariant()+'.webp')+'</span><span class="rtt"><small>'+esc(t.name)+'</small><b>'+esc(lk.name)+'</b><span class="dots">'+lk.colors.map(dot).join('')+'</span><span class="ai">Ilustrasi contoh AI</span></span></button>'; }).join('')+'</div>'; }
 function weekStart(){ var d=new Date(); d.setHours(0,0,0,0); var w=(d.getDay()+6)%7; d.setDate(d.getDate()-w); return d.getTime(); }
 function itemCreated(it){ var t=parseInt(String(it.id).slice(0,8),36); return isFinite(t)&&t>1.6e12&&t<4e12?t:0; }
@@ -4626,6 +4828,45 @@ function fillStock(recs){
   }).catch(function(){ need.forEach(function(n){applyStock(n.c,null,n.r);}); });
 }
 (function(){ var rl=renderLookPanel; renderLookPanel=function(){ rl.apply(this,arguments); try{ fillStock(LOOKP.recs); }catch(e){} }; })();
+
+// ---------- v62: Kurasi Luxe — app bar, menu sheet, hero, shortcuts ----------
+var LX_TITLES={outfit:'Beranda',lemari:'Lemari',tema:'Outfit',warna:'Personal Color',riwayat:'Riwayat',beauty:'Beauty',profil:'Profil'};
+function lxTab(){ var s=[].slice.call(document.querySelectorAll('main > section')).find(function(x){return !x.classList.contains('hidden');}); return s?s.id.replace('tab-',''):'outfit'; }
+function lxSync(){ var t=lxTab(); document.body.setAttribute('data-tab',t); var tt=LX_TITLES[t]||''; if(t==='beauty'&&state.gender==='pria')tt='Grooming'; var el=$('#lx-title'); if(el)el.textContent=tt; lxHero(); }
+function lxHeroSrc(){ return 'img/hero-'+figVariant()+(document.documentElement.getAttribute('data-theme')==='dark'?'-dark':'')+'.webp'; }
+function lxHero(){
+  var homme=styleG()==='pria';
+  var h=$('#lx-h1'), s=$('#lx-sub'), k=$('#lx-kicker'), sb=$('#lx-short-beauty');
+  if(h)h.textContent=homme?'Tingkatkan Gayamu Setiap Hari':'Temukan Gaya Terbaik Versimu';
+  if(s)s.textContent=homme?'Outfit, grooming, dan gaya hidup dalam satu tempat.':'Padu padan outfit, beauty, dan gaya hidup dalam satu tempat.';
+  if(k){ var d=new Date(); k.textContent=(state.profile&&state.profile.name?'Hai, '+state.profile.name+' · ':'')+d.toLocaleDateString('id-ID',{day:'numeric',month:'long'}); }
+  if(sb)sb.textContent=state.gender==='pria'?'Grooming':'Beauty';
+  var im=$('#lx-hero-img'); if(im){ var src=lxHeroSrc(); if(im.getAttribute('data-src')!==src){ im.setAttribute('data-src',src); im.onerror=function(){ var v=figVariant(), fb='img/hero-'+v+'.webp'; if(this.getAttribute('src')!==fb&&/-dark\.webp$/.test(this.getAttribute('src')||''))this.src=fb; else { var tl=todayLooks()[0]; this.onerror=null; this.src='img/look-'+tl.ti+'-'+tl.li+'-'+v+'.webp'; } }; im.src=src; } }
+}
+(function(){
+  var slot=$('#lx-search-slot'), qs=document.querySelector('#outfit-main .qsearch'); if(slot&&qs)slot.appendChild(qs);
+  var box=document.querySelector('#lx-search-slot .qbox');
+  if(box&&!box.querySelector('.lx-sbtn')){ var b=document.createElement('button'); b.type='button'; b.className='lx-sbtn'; b.setAttribute('aria-label','Cari'); b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'; b.onclick=function(){ var s=$('#q-search'); if(s){ s.focus(); if(typeof renderSearch==='function')renderSearch(); } }; box.appendChild(b); }
+  var rt=$('#recs-today'), ls=$('#lx-short'); if(rt&&ls)ls.parentNode.insertBefore(rt,ls.nextSibling);
+  var go=$('#lx-go'); if(go)go.onclick=function(){ var hg=$('#hero-go'); if(hg)hg.click(); };
+  // menu sheet
+  var sh=document.createElement('div'); sh.className='lx-sheet'; sh.id='lx-sheet'; sh.setAttribute('role','dialog'); sh.setAttribute('aria-modal','true'); sh.setAttribute('aria-label','Menu');
+  var IT=[['outfit','Beranda','<path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/>'],['tema','Outfit & tema','<path d="M12 3l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.1 7.1 17.9l1.2-5.5-4.1-3.7 5.5-.6z"/>'],['lemari','Lemari','<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M12 3v18M10 11v2M14 11v2"/>'],['beauty','Beauty','<rect x="8" y="12" width="8" height="9" rx="1.5"/><path d="M10 12V8.5h4V12M11 8.5V4.6l2-1.4v5.3"/>'],['warna','Personal Color','<path d="M12 3l1.6 4.6L18 9.2l-4.4 1.6L12 15.4l-1.6-4.6L6 9.2l4.4-1.6z"/>'],['riwayat','Riwayat','<path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/>'],['profil','Profil','<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>']];
+  sh.innerHTML='<div class="scrim" data-lx-close></div><div class="pane"><div class="lx-sh-logo"><img src="img/logo-mark.webp" alt=""><b>KURASI</b></div>'+IT.map(function(x){return '<button type="button" class="it" data-lx-go="'+x[0]+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+x[2]+'</svg><span'+(x[0]==='beauty'?' id="lx-sh-beauty"':'')+'>'+x[1]+'</span></button>';}).join('')+'<hr><label class="lx-dark"><span>Mode gelap</span><span class="tg"><input type="checkbox" id="lx-dark" role="switch"><span class="trk" aria-hidden="true"><span class="knob"></span></span></span></label></div>';
+  document.body.appendChild(sh);
+  function openSheet(){ $$('#lx-sheet [data-lx-go]').forEach(function(b){ if(b.dataset.lxGo===lxTab())b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); }); var lb=$('#lx-sh-beauty'); if(lb)lb.textContent=state.gender==='pria'?'Grooming':'Beauty'; $('#lx-dark').checked=$('#theme-toggle').checked; sh.classList.add('open'); $('#lx-menu').setAttribute('aria-expanded','true'); }
+  function closeSheet(){ sh.classList.remove('open'); $('#lx-menu').setAttribute('aria-expanded','false'); }
+  $('#lx-menu').addEventListener('click',openSheet);
+  sh.addEventListener('click',function(e){ if(e.target.hasAttribute('data-lx-close'))closeSheet(); var g=e.target.closest('[data-lx-go]'); if(g){ closeSheet(); showTab(g.dataset.lxGo); window.scrollTo(0,0); } });
+  $('#lx-dark').addEventListener('change',function(){ var t=$('#theme-toggle'); if(t.checked!==this.checked)t.click(); setTimeout(lxHero,50); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&sh.classList.contains('open'))closeSheet(); });
+  $('#lx-back').addEventListener('click',function(){ showTab('outfit'); window.scrollTo(0,0); });
+  $('#theme-toggle').addEventListener('change',function(){ setTimeout(lxHero,30); });
+  var st=showTab; showTab=function(){ st.apply(this,arguments); try{lxSync();}catch(e){} };
+  var ag=applyGenderTheme; applyGenderTheme=function(){ ag.apply(this,arguments); try{lxSync();}catch(e){} };
+  var hc=hijabChanged; hijabChanged=function(){ hc.apply(this,arguments); try{lxHero();}catch(e){} };
+  lxSync();
+})();
 // ---------- Init ----------
 applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
