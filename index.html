@@ -2493,6 +2493,32 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img{background:#FFFFFF}
   html:root:not(#_) .lx-hero-img img{top:4%!important;height:96%!important}
 }
 
+/* =====================================================================
+   v71 · masukan pengguna: isi lemari tanpa ribet — banyak foto sekaligus
+   ===================================================================== */
+#bulk-modal>.win{max-width:720px}
+.bulk-list{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.bulk-row{display:grid;grid-template-columns:28px 76px minmax(0,1fr);gap:12px;align-items:start;padding:10px;border:1px solid var(--outline);border-radius:var(--rc);background:var(--surface)}
+.bulk-row.off{opacity:.45}
+.bulk-row.bad{border-color:var(--danger)}
+.bulk-row .bk-inc{display:grid;place-items:center;height:76px}
+.bulk-row .bk-inc input{width:20px;height:20px;accent-color:var(--accent)}
+.bulk-row .bk-ph{width:76px;height:76px;object-fit:cover;border-radius:10px;background:var(--surface2);display:block}
+.bulk-row .bk-st{font-size:12px;line-height:1.45;color:var(--muted);margin:0 0 8px;min-height:18px}
+.bulk-row .bk-st .spin{vertical-align:-2px;margin-right:4px}
+.bulk-row .bk-st.ok{color:var(--accent)}
+.bulk-row .bk-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.bulk-row .bk-cat{grid-column:1;grid-row:1}
+.bulk-row .bk-colw{grid-column:2;grid-row:1;display:block}
+.bulk-row .bk-grid .bk-name{grid-column:1 / -1;grid-row:2}
+.bulk-row select,.bulk-row input[type=text]{width:100%;min-width:0;height:38px;padding:0 8px 0 10px;font-size:13.5px;border-radius:10px}
+.bulk-row .bk-colw select{padding-left:30px!important}
+.bulk-row .bk-colw{position:relative}
+.bulk-row .bk-colw i{position:absolute;left:10px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;border:1px solid var(--outline2);pointer-events:none}
+.bulk-row .bk-colw select{padding-left:32px}
+html:root:not(#_) .bulk-actions{margin:14px -16px -16px!important;position:sticky;bottom:-16px;z-index:3;background:var(--surface);padding:12px 16px 16px;border-top:1px solid var(--outline)}
+@media (min-width:700px){.bulk-row .bk-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,1fr)}.bulk-row .bk-cat{grid-column:1;grid-row:1}.bulk-row .bk-grid .bk-name{grid-column:2;grid-row:1}.bulk-row .bk-colw{grid-column:3;grid-row:1}}
+
 </style>
 </head>
 <body>
@@ -2629,6 +2655,7 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img{background:#FFFFFF}
       <p class="lede" id="lemari-count"></p>
       <div class="row" style="margin-bottom:20px">
         <button class="btn" id="btn-add">Tambah item</button>
+        <label class="btn filebtn" id="bulk-btn">Banyak foto sekaligus<input type="file" id="bulk-photo" accept="image/*" multiple aria-label="Pilih beberapa foto pakaian sekaligus"></label>
         <button class="btn butter" id="btn-sample-2">Isi lemari contoh</button>
       </div>
 
@@ -2872,6 +2899,12 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img{background:#FFFFFF}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="selbar hidden" id="selbar" role="region" aria-label="Item terpilih"><span id="sel-text"></span><span class="row" style="gap:6px"><button class="linkbtn" type="button" id="sel-clear">Batal</button><button class="btn" type="button" id="sel-go">Padukan</button></span></div>
 <div class="modal hidden" id="board-modal" role="dialog" aria-modal="true" aria-labelledby="board-title"><div class="win butter" id="board-win"></div></div>
+<div class="modal hidden" id="bulk-modal" role="dialog" aria-modal="true" aria-labelledby="bulk-title"><div class="win pink" id="bulk-win"><div class="bar"><span id="bulk-title">Tambah dari foto</span><button class="xbtn" type="button" id="bulk-close" aria-label="Tutup">&#10005;</button></div><div class="body">
+  <p class="small muted" id="bulk-note" role="status"></p>
+  <ul class="bulk-list" id="bulk-list"></ul>
+  <p class="small" id="bulk-err" role="alert" style="color:var(--danger)"></p>
+  <div class="row bulk-actions"><button class="btn" type="button" id="bulk-save">Simpan</button><button class="btn ghost" type="button" id="bulk-cancel">Batal</button></div>
+</div></div></div>
 <div class="modal hidden" id="look-modal" role="dialog" aria-modal="true" aria-labelledby="look-title"><div class="win sky" id="look-win"></div></div>
 <div class="modal hidden" id="onb-modal" role="dialog" aria-modal="true" aria-labelledby="onb-title"><form class="win pink" id="onb-form" autocomplete="off"><div class="bar"><span id="onb-title">Kenalan dengan Kurasi</span><span class="deco" aria-hidden="true"><i>&#9825;</i></span></div><div class="body"><div id="onb-dots" aria-hidden="true"></div><div id="onb-fields"></div><div class="row" style="justify-content:space-between"><button class="linkbtn" type="button" id="onb-skip">Lewati dulu</button><span class="row" style="gap:8px"><button class="btn ghost" type="button" id="onb-back">Kembali</button><button class="btn" type="submit" id="onb-next">Lanjut</button></span></div></div></form></div>
 
@@ -5105,6 +5138,104 @@ function lxPageHeroes(){ Object.keys(LX_PH).forEach(function(k){ try{ lxPageHero
 (function(){
   var hs=lxHero; lxHero=function(){ hs.apply(this,arguments); lxPageHeroes(); };
   lxPageHeroes();
+})();
+
+// ---------- v71: isi lemari dari banyak foto sekaligus ----------
+var BULK={rows:[],tok:0,quota:false};
+function bulkThumb(im){ var S=320, c=document.createElement('canvas'); c.width=S; c.height=S; var x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,S,S);
+  var w=im.naturalWidth||im.width, h=im.naturalHeight||im.height, s=Math.min(S/w,S/h); x.drawImage(im,(S-w*s)/2,(S-h*s)/2,w*s,h*s);
+  var u=c.toDataURL('image/webp',0.82); if(u.indexOf('data:image/webp')!==0)u=c.toDataURL('image/jpeg',0.84); return u; }
+function bulkRowHTML(r,i){
+  var cats=catsFor(state.gender);
+  return '<li class="bulk-row" data-i="'+i+'"><label class="bk-inc"><input type="checkbox" checked aria-label="Simpan foto '+(i+1)+'"></label><img class="bk-ph" alt="Foto '+(i+1)+'" src="'+r.photo+'"><div class="bk-f"><p class="bk-st"></p><div class="bk-grid">'+
+    '<select class="bk-cat" aria-label="Kategori foto '+(i+1)+'"><option value="">Kategori</option>'+cats.map(function(c){return '<option value="'+c.k+'">'+esc(c.l)+'</option>';}).join('')+'</select>'+
+    '<input type="text" class="bk-name" maxlength="40" placeholder="Nama, misalnya kemeja" aria-label="Nama item foto '+(i+1)+'">'+
+    '<span class="bk-colw"><i></i><select class="bk-col" aria-label="Warna foto '+(i+1)+'"><option value="">Warna</option>'+PALETTE.map(function(p){return '<option value="'+p.k+'">'+esc(p.l)+'</option>';}).join('')+'</select></span>'+
+  '</div></div></li>';
+}
+function bulkEl(i){ return document.querySelector('#bulk-list .bulk-row[data-i="'+i+'"]'); }
+function bulkSet(i,o){ var el=bulkEl(i), r=BULK.rows[i]; if(!el||!r)return;
+  if(o.cat!==undefined&&catsFor(state.gender).some(function(c){return c.k===o.cat;})){ el.querySelector('.bk-cat').value=o.cat; r.cat=o.cat; }
+  if(o.name){ var n=el.querySelector('.bk-name'); if(!n.value.trim()||n.value===r.autoName){ n.value=o.name; r.autoName=o.name; } }
+  if(o.color&&PAL[o.color]){ el.querySelector('.bk-col').value=o.color; el.querySelector('.bk-colw i').style.background=hx(o.color); }
+  if(o.st!==undefined){ var s=el.querySelector('.bk-st'); s.innerHTML=o.st; s.classList.toggle('ok',!!o.ok); }
+}
+function bulkNote(){ var n=BULK.rows.length, done=BULK.rows.filter(function(r){return r.done;}).length;
+  $('#bulk-note').innerHTML=done<n?'<span class="spin" aria-hidden="true"></span> Mengenali '+done+' dari '+n+' foto… Kamu bisa langsung memeriksa yang sudah selesai.':
+    (BULK.quota||!state.worker?'Warna dikenali dari foto. Jatah AI sedang habis, jadi pilih kategorinya sendiri. Ilustrasi digambar otomatis begitu AI tersedia lagi.':'Semua foto sudah dikenali. Periksa kategori, nama, dan warnanya, lalu simpan.');
+  $('#bulk-save').textContent='Simpan '+BULK.rows.filter(function(r,i){ var el=bulkEl(i); return el&&el.querySelector('.bk-inc input').checked; }).length+' item';
+}
+function bulkClassify(){
+  var tok=BULK.tok, next=0, running=0;
+  function pump(){
+    if(tok!==BULK.tok)return;
+    while(running<2&&next<BULK.rows.length){
+      (function(i){ var r=BULK.rows[i]; running++;
+        var go=(!state.worker||BULK.quota)?Promise.reject({skip:true}):aiPost({type:'classify',photo:r.photo},30000);
+        go.then(function(j){ if(tok!==BULK.tok)return; r.en=j.en||''; r.motif=!!j.motif;
+          bulkSet(i,{cat:j.cat,name:j.name,color:j.color,st:'Dikenali'+(j.cat&&CATL[j.cat]?' sebagai <b>'+esc(CATL[j.cat])+'</b>':'')+'. Periksa sebelum menyimpan.',ok:true}); },
+          function(e){ if(tok!==BULK.tok)return; if(e&&e.quota)BULK.quota=true;
+          bulkSet(i,{st:(BULK.quota||!state.worker)?'Warna terdeteksi dari foto. Pilih kategorinya.':'AI belum bisa mengenali foto ini. Pilih kategorinya.'}); })
+        .then(function(){ r.done=true; running--; bulkNote(); pump(); });
+      })(next++);
+    }
+  };
+  pump();
+}
+function bulkOpen(files){
+  files=[].slice.call(files||[]).filter(function(f){return /^image\//.test(f.type)||/\.(jpe?g|png|webp|heic|heif)$/i.test(f.name);});
+  if(!files.length)return;
+  var extra=files.length>20; files=files.slice(0,20);
+  BULK={rows:[],tok:BULK.tok+1,quota:false};
+  $('#bulk-list').innerHTML=''; $('#bulk-err').textContent='';
+  $('#bulk-note').innerHTML='<span class="spin" aria-hidden="true"></span> Membuka '+files.length+' foto…';
+  openModal('bulk-modal');
+  var tok=BULK.tok;
+  Promise.all(files.map(function(file){ var url=URL.createObjectURL(file); return loadImg(url).then(function(im){ URL.revokeObjectURL(url); if(!im)return null; return {photo:downscale(im,448,0.85),thumb:bulkThumb(im),color:detectColor(im)}; }); }))
+  .then(function(list){
+    if(tok!==BULK.tok)return;
+    BULK.rows=list.filter(Boolean);
+    if(!BULK.rows.length){ $('#bulk-note').textContent='Foto tidak bisa dibuka. Coba foto JPG atau PNG.'; return; }
+    $('#bulk-list').innerHTML=BULK.rows.map(bulkRowHTML).join('');
+    BULK.rows.forEach(function(r,i){ bulkSet(i,{color:r.color,st:'<span class="spin" aria-hidden="true"></span> Mengenali…'}); });
+    if(extra)$('#bulk-err').textContent='Hanya 20 foto pertama yang dibuka. Tambahkan sisanya setelah ini.';
+    if(list.length>BULK.rows.length)$('#bulk-err').textContent=(list.length-BULK.rows.length)+' foto tidak bisa dibuka dan dilewati.';
+    bulkNote(); bulkClassify();
+  });
+}
+function bulkSave(){
+  var add=[], bad=0;
+  BULK.rows.forEach(function(r,i){ var el=bulkEl(i); if(!el)return; el.classList.remove('bad');
+    if(!el.querySelector('.bk-inc input').checked)return;
+    var cat=el.querySelector('.bk-cat').value, col=el.querySelector('.bk-col').value, name=el.querySelector('.bk-name').value.trim();
+    if(!cat||!col){ el.classList.add('bad'); bad++; return; }
+    add.push({r:r,cat:cat,color:col,name:name||CATL[cat]});
+  });
+  if(bad){ $('#bulk-err').textContent=bad+' foto belum punya kategori atau warna. Lengkapi, atau hapus centangnya.'; var f=document.querySelector('#bulk-list .bulk-row.bad'); if(f)f.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+  if(!add.length){ $('#bulk-err').textContent='Belum ada foto yang dicentang.'; return; }
+  add.forEach(function(a){
+    var it={id:uid(),cat:a.cat,name:a.name,color:a.color,motif:!!a.r.motif,styles:['kerja','santai','formal'],lastWorn:null,g:state.gender};
+    if(a.r.en)it.en=a.r.en;
+    it.ill='q'; ILLQ.failed[it.id]=0;
+    ITEM_IMG['it.'+it.id]=a.r.thumb; idbPut('it.'+it.id,a.r.thumb); idbPut('ph.'+it.id,a.r.photo);
+    state.items.push(it);
+  });
+  save('items',state.items); BULK.tok++; closeModal('bulk-modal'); renderWardrobe();
+  ILLQ.stop=false; setTimeout(pumpIll,600);
+  toast(add.length+' item ditambahkan ke lemari.'+(state.worker&&state.aiImg?' Ilustrasinya digambar otomatis.':''));
+}
+(function(){
+  $('#bulk-photo').addEventListener('change',function(e){ var fs=e.target.files; bulkOpen(fs); e.target.value=''; });
+  $('#bulk-save').addEventListener('click',bulkSave);
+  function cancel(){ BULK.tok++; closeModal('bulk-modal'); }
+  $('#bulk-cancel').addEventListener('click',cancel); $('#bulk-close').addEventListener('click',cancel);
+  $('#bulk-modal').addEventListener('click',function(e){ if(e.target.id==='bulk-modal')cancel(); });
+  $('#bulk-list').addEventListener('change',function(e){ var row=e.target.closest('.bulk-row'); if(!row)return;
+    if(e.target.classList.contains('bk-col'))row.querySelector('.bk-colw i').style.background=e.target.value?hx(e.target.value):'';
+    if(e.target.matches('.bk-inc input'))row.classList.toggle('off',!e.target.checked);
+    if(e.target.classList.contains('bk-cat')||e.target.classList.contains('bk-col'))row.classList.remove('bad');
+    bulkNote(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!$('#bulk-modal').classList.contains('hidden'))cancel(); });
 })();
 // ---------- Init ----------
 applyGenderTheme();
