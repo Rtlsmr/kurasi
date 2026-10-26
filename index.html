@@ -5056,7 +5056,7 @@ function lxCount(){ try{ return state.items.filter(forG).length; }catch(e){ retu
 var LX_PH={
   tema:{k:function(){return 'Outfit & tema';},t:['Padu Padan','Sesuai Tema'],s:'Pilih tema dan look-nya, lalu Kurasi memadukan isi lemarimu agar sesuai.',c:'Buat tema dengan AI',art:[0,0],
     go:function(){ var f=$('#ai-theme'); if(f){ f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }},
-  lemari:{k:function(){ var n=lxCount(); return n?n+' item di lemarimu':'Lemari masih kosong'; },t:['Atelier','Lemarimu'],s:'Simpan pakaian dan aksesori, lalu padukan dalam sekali ketuk.',c:'Tambah item',art:[1,2],
+  lemari:{k:function(){ var n=lxCount(); return n?n+' item di lemarimu':'Lemari masih kosong'; },t:['Atelier Lemarimu'],s:'Simpan pakaian dan aksesori, lalu padukan dalam sekali ketuk.',c:'Tambah item',art:[1,2],
     go:function(){ var b=$('#btn-add'); if(b)b.click(); }},
   beauty:{k:function(){ return state.gender==='pria'?'Grooming':'Beauty'; },t:function(){ return state.gender==='pria'?['Grooming','Lebih Teratur']:['Rawat Cantikmu','Lebih Teliti']; },
     s:function(){ return state.gender==='pria'?'Pantau kedaluwarsa produk, cek rutinitas skincare, dan jaga wishlist.':'Pantau kedaluwarsa makeup, cek rutinitas skincare, dan jaga wishlist.'; },c:'Tambah produk',art:[2,0],
@@ -5065,7 +5065,7 @@ var LX_PH={
     go:function(){ var q=$('#quiz'); if(q){ q.scrollIntoView({behavior:'smooth',block:'start'}); var f=q.querySelector('input'); if(f)setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }},
   riwayat:{k:function(){return 'Riwayat';},t:['Jejak Gaya','Minggu Ini'],s:'Item yang sudah dipakai beristirahat 7 hari agar gayamu tetap segar.',c:'Kurasi outfit hari ini',art:[3,0],
     go:function(){ showTab('outfit'); window.scrollTo(0,0); setTimeout(function(){ var b=$('#hero-go'); if(b)b.click(); },80); }},
-  profil:{k:function(){ var n=state.profile&&state.profile.name; return n?'Hai, '+n:'Profil'; },t:['Gayamu,','Ceritamu'],s:'Atur nama, gaya, dan warna kulit agar Kurasi makin mengenalmu.',c:'Ubah profil',art:[2,1],
+  profil:{k:function(){ var n=state.profile&&state.profile.name; return n?'Hai, '+n:'Profil'; },t:['Gayamu, Ceritamu'],s:'Atur nama, gaya, dan warna kulit agar Kurasi makin mengenalmu.',c:'Ubah profil',art:[2,1],
     go:function(){ var f=$('#p-name'); if(f){ f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }}
 };
 function lxArtSrc(a){ var v=figVariant(); if(a==='face')return 'img/avatar-'+v+'.webp'; if(a==='pc')return 'img/pc-hero-'+v+'.webp'; return 'img/look-'+a[0]+'-'+a[1]+'-'+v+'.webp'; }
@@ -5081,7 +5081,7 @@ function lxPageHero(tab){
   var t=typeof cfg.t==='function'?cfg.t():cfg.t, s=typeof cfg.s==='function'?cfg.s():cfg.s;
   el.setAttribute('data-art',cfg.art==='face'||cfg.art==='pc'?'face':'look');
   el.querySelector('.lx-kicker').textContent=cfg.k();
-  el.querySelector('.lx-ph-t').innerHTML='<span>'+esc(t[0])+'</span> <span>'+esc(t[1])+'</span>';
+  el.querySelector('.lx-ph-t').innerHTML=t.map(function(x){ return '<span>'+esc(x)+'</span>'; }).join(' ');
   el.querySelector('.lx-sub').innerHTML=s.indexOf('<i>')>-1?s:esc(s);
   el.querySelector('.lx-cta span').textContent=cfg.c;
   var im=el.querySelector('.lx-hero-img img'), src=lxArtSrc(cfg.art);
