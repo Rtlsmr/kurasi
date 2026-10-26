@@ -2519,6 +2519,9 @@ html:root:not(#_)[data-theme="dark"] .lx-hero-img{background:#FFFFFF}
 html:root:not(#_) .bulk-actions{margin:14px -16px -16px!important;position:sticky;bottom:-16px;z-index:3;background:var(--surface);padding:12px 16px 16px;border-top:1px solid var(--outline)}
 @media (min-width:700px){.bulk-row .bk-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,1fr)}.bulk-row .bk-cat{grid-column:1;grid-row:1}.bulk-row .bk-grid .bk-name{grid-column:2;grid-row:1}.bulk-row .bk-colw{grid-column:3;grid-row:1}}
 
+/* v72 · masukan pengguna: judul jendela (padanan, look, tambah dari foto) tetap di atas dan tidak tembus pandang saat isi digulir */
+html:root:not(#_) .modal>.win>.bar{position:sticky!important;top:0!important;z-index:30!important;background:var(--surface)!important;border-bottom:1px solid var(--outline)!important;box-shadow:0 6px 14px -12px rgba(0,0,0,.35)}
+
 </style>
 </head>
 <body>
