@@ -2616,6 +2616,14 @@ html:root:not(#_) #outfit-empty .who>b{font:600 13px var(--body)!important;lette
   html:root:not(#_) #outfit-empty h1 .hl1,html:root:not(#_) #outfit-empty h1 .hl2{display:block!important;white-space:nowrap!important}
 }
 
+/* =====================================================================
+   v79 · orang = ilustrasi, benda = foto (banner setiap menu)
+   ===================================================================== */
+html:root:not(#_) .lx-hero-img.lx-photo{mix-blend-mode:normal!important}
+html:root:not(#_) .lx-hero-img.lx-photo img{left:0!important;right:0!important;top:0!important;bottom:0!important;transform:none!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 22%!important;mix-blend-mode:normal!important}
+html:root:not(#_) .lx-ph:is([data-tab="lemari"],[data-tab="warna"],[data-tab="riwayat"]) .lx-hero-img.lx-photo img{object-position:50% 50%!important}
+html:root:not(#_)[data-theme="dark"] .lx-hero-img.lx-photo{background:#2a211d!important}
+
 </style>
 </head>
 <body>
@@ -5110,7 +5118,7 @@ function fillStock(recs){
 var LX_TITLES={outfit:'Beranda',lemari:'Lemari',tema:'Outfit',warna:'Personal Color',riwayat:'Riwayat',beauty:'Beauty',profil:'Profil'};
 function lxTab(){ var s=[].slice.call(document.querySelectorAll('main > section')).find(function(x){return !x.classList.contains('hidden');}); return s?s.id.replace('tab-',''):'outfit'; }
 function lxSync(){ var t=lxTab(); document.body.setAttribute('data-tab',t); var tt=LX_TITLES[t]||''; if(t==='beauty'&&state.gender==='pria')tt='Grooming'; var el=$('#lx-title'); if(el)el.textContent=tt; lxHero(); }
-function lxHeroSrc(){ return 'img/hero-'+figVariant()+(document.documentElement.getAttribute('data-theme')==='dark'?'-dark':'')+'.webp'; }
+function lxHeroSrc(){ return 'img/hero-'+figVariant()+'.webp'; }
 function lxHero(){
   var homme=styleG()==='pria';
   var h=$('#lx-h1'), s=$('#lx-sub'), k=$('#lx-kicker'), sb=$('#lx-short-beauty');
@@ -5338,6 +5346,24 @@ function bulkSave(){
 
 // ---------- v78: judul "Contoh padanan" di atas kartu contoh sampul ----------
 (function(){ var rw=$('#runway'); if(rw&&!(rw.previousElementSibling&&rw.previousElementSibling.classList.contains('lx-cv-h'))){ var wr=document.createElement('div'); wr.className='lx-cv-run'; rw.parentNode.insertBefore(wr,rw); var hd=document.createElement('div'); hd.className='lx-cv-h'; hd.innerHTML='<b>Contoh padanan</b><span>dari lemari contoh</span>'; wr.appendChild(hd); wr.appendChild(rw); } })();
+
+// ---------- v79: banner foto benda + ilustrasi orang ----------
+function lxPhotoSrc(tab){ var v=figVariant(); if(v==='hijab'&&/^(tema|lemari|warna|riwayat)$/.test(tab))v='wanita'; return (/^(profil|beauty)$/.test(tab)?'img/ill/':'img/ph/')+tab+'-'+v+'.webp'; }
+document.addEventListener('load',function(e){ var t=e.target; if(t&&t.tagName==='IMG'&&t.parentNode&&t.parentNode.classList&&t.parentNode.classList.contains('lx-hero-img'))t.parentNode.classList.toggle('lx-photo',/img\/ph\//.test(t.getAttribute('src')||'')); },true);
+(function(){
+  var base=lxPageHero;
+  lxPageHero=function(tab){
+    base(tab);
+    var sec=$('#tab-'+tab), el=sec&&sec.querySelector(':scope>.lx-ph'); if(!el)return;
+    el.setAttribute('data-tab',tab);
+    var im=el.querySelector('.lx-hero-img img'), src=lxPhotoSrc(tab);
+    if(el.getAttribute('data-nophoto')===src||im.getAttribute('src')===src)return;
+    var fb=im.getAttribute('data-src');
+    im.onerror=function(){ this.onerror=null; el.setAttribute('data-nophoto',src); this.src=fb; };
+    im.src=src;
+  };
+  try{ lxPageHeroes(); }catch(e){}
+})();
 // ---------- Init ----------
 applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
