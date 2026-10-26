@@ -2479,6 +2479,20 @@ html:root:not(#_) .lx-search-slot .qbox .lx-sbtn svg{stroke:currentColor!importa
 html:root:not(#_) .lx-search-slot .lx-sbtn{color:var(--accent-ink)!important}
 html:root:not(#_)[data-g="pria"] .lx-search-slot .lx-sbtn{background:var(--ink)!important;color:var(--surface)!important}
 
+/* =====================================================================
+   v70 · masukan pengguna: banner selebar halaman di desktop, ilustrasi orang tampil utuh
+   ===================================================================== */
+.lx-ph{grid-column:1 / -1}
+/* the figure always fits the banner height (head to toe), centred in the art panel; only the white margin left and right is trimmed */
+html:root:not(#_) .lx-hero-img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%);mask-image:linear-gradient(90deg,transparent 0%,#000 26%)}
+html:root:not(#_) .lx-hero-img img{position:absolute!important;top:0!important;bottom:0!important;left:50%!important;transform:translateX(-50%)!important;height:100%!important;width:auto!important;max-width:none!important;object-fit:contain!important;-webkit-mask-image:none!important;mask-image:none!important}
+html:root:not(#_):not([data-theme="dark"]) .lx-hero-img{mix-blend-mode:multiply}
+html:root:not(#_)[data-theme="dark"] .lx-hero-img{background:#FFFFFF}
+@media (min-width:900px){
+  html:root:not(#_) .lx-hero-img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 18%);mask-image:linear-gradient(90deg,transparent 0%,#000 18%)}
+  html:root:not(#_) .lx-hero-img img{top:4%!important;height:96%!important}
+}
+
 </style>
 </head>
 <body>
