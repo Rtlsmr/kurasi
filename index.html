@@ -2526,6 +2526,49 @@ html:root:not(#_) .modal>.win>.bar{position:sticky!important;top:0!important;z-i
 html:not([data-g="pria"]) .ic-groom{display:none}
 html[data-g="pria"] .ic-beauty{display:none}
 
+/* =====================================================================
+   v74 · polesan "luxury": italic hemat, kartu isi lebih tenang, label terbaca, form rapi, mode gelap berbingkai
+   ===================================================================== */
+/* 1. italic hanya di kalimat dan judul serif; navigasi, tombol, chip, label tegak */
+html:root:not(#_) :is(.dock,.lx-short,.lx-chips,.closet-tabs,.seg,.tg,.toggles,.btn,.lx-cta,.lx-sheet,.chip,.qchip,.lx-kicker,.lx-title,.rcard small,.linkbtn,.shop,.pin,.toast,.lbl,legend,.eyebrow,.bk-st) em.fx{font-style:normal!important}
+html:root:not(#_) :is(.dock button,.lx-short .l,.lx-chips button,.closet-tabs button,.seg span,.btn,.lx-cta,.lx-sheet .it span){font-style:normal!important}
+
+html:root:not(#_) :is(.btn,.lx-cta) em.fx{display:contents!important}
+html:root:not(#_) .seg:not(.btabs) span{font-family:var(--body)!important;font-size:13.5px!important;font-weight:500!important;font-style:normal!important;letter-spacing:.01em!important}
+
+/* 2. kartu isi: judul serif tanpa garis pemisah, tanpa ornamen, ruang lebih lega */
+html:root:not(#_) main .win:not(.cover)>.bar{border-bottom:0!important;padding:22px 22px 2px!important;min-height:0!important;background:transparent!important}
+html:root:not(#_) main .win:not(.cover)>.bar>span:first-child{font-family:var(--title)!important;font-weight:500!important;font-size:23px!important;letter-spacing:0!important;text-transform:none!important;color:var(--ink)!important}
+html:root:not(#_) main .win>.bar .deco{display:none!important}
+html:root:not(#_) main .win:not(.cover)>.body{padding:14px 22px 22px!important}
+html:root:not(#_) main .win{border-radius:calc(var(--rc) + 6px)!important}
+
+/* 3. label dan legend: sans kecil yang jelas, bukan serif mungil */
+html:root:not(#_) :is(.lbl,legend,.pseg .lbl,fieldset.q>legend){font-family:var(--body)!important;font-size:13px!important;font-weight:600!important;letter-spacing:.01em!important;text-transform:none!important;color:var(--ink)!important;margin:0 0 8px!important;font-style:normal!important}
+html:root:not(#_) main .muted.small,html:root:not(#_) main .small.muted{color:var(--muted)!important;line-height:1.55!important}
+
+/* 4. kolom isian dan pilihan: lebih tinggi, sudut lembut, panah halus */
+html:root:not(#_) main :is(input[type=text],input[type=url],input[type=number],input[type=date],input[type=search]:not(#q-search),select),html:root:not(#_) .modal :is(input[type=text],input[type=url],input[type=number],input[type=date],select){min-height:46px;border-radius:12px!important;border:1px solid var(--outline2)!important;padding-left:14px!important;font:400 15px var(--body)!important;box-shadow:none!important}
+html:root:not(#_)[data-g="pria"] main :is(input[type=text],input[type=url],input[type=number],input[type=date],select),html:root:not(#_)[data-g="pria"] .modal :is(input[type=text],input[type=url],input[type=number],input[type=date],select){border-radius:8px!important}
+html:root:not(#_) main select,html:root:not(#_) .modal select{-webkit-appearance:none;appearance:none;padding-right:38px!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238A7369' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right 12px center!important;background-size:16px!important}
+html:root:not(#_)[data-theme="dark"] main select,html:root:not(#_)[data-theme="dark"] .modal select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BCA79C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")!important}
+html:root:not(#_) .bulk-row select,html:root:not(#_) .bulk-row input[type=text]{min-height:40px;height:40px;font-size:13.5px!important;padding-left:10px!important}
+html:root:not(#_) .bulk-row .bk-colw select{padding-left:30px!important}
+
+/* 5. tombol Homme: huruf biasa, bukan kapital berjarak lebar */
+html:root:not(#_)[data-g="pria"] :is(.btn,label.btn,a.btn,.lx-cta){text-transform:none!important;letter-spacing:.01em!important;font-weight:600!important}
+
+html:root:not(#_) main :is(.btn,label.btn){font-size:14px!important;font-weight:600!important;min-height:44px;padding-left:20px!important;padding-right:20px!important}
+html:root:not(#_) #tab-lemari .row{gap:8px!important}
+html:root:not(#_) #tab-lemari .row :is(.btn,label.btn){padding-left:16px!important;padding-right:16px!important}
+/* 6. ritme jarak Beranda */
+html:root:not(#_) #outfit-main>#recs-today{margin-bottom:34px!important}
+
+/* 7. mode gelap: ilustrasi tampil sebagai cetakan berbingkai, bukan panel putih yang memudar */
+html:root:not(#_)[data-theme="dark"] .lx-hero-img{top:14px!important;bottom:14px!important;right:14px!important;width:31%!important;border-radius:16px!important;background:#F6F0EA!important;-webkit-mask-image:none!important;mask-image:none!important;overflow:hidden!important;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+html:root:not(#_)[data-theme="dark"] .lx-hero-img img{mix-blend-mode:multiply!important;top:3%!important;height:94%!important}
+@media (min-width:900px){html:root:not(#_)[data-theme="dark"] .lx-hero-img{top:22px!important;bottom:22px!important;right:22px!important;width:34%!important}}
+
 </style>
 </head>
 <body>
