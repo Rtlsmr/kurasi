@@ -2451,6 +2451,29 @@ html:root:not(#_) .lx-chips button,html:root:not(#_) .closet-tabs button{display
 /* v65 · masukan pengguna: teks kartu "Rekomendasi untukmu" tidak menempel ke garis kiri */
 html:root:not(#_) #recs-today .rcard .rtt,html:root:not(#_) #season-recs .rcard .rtt{padding:12px 14px 14px!important;gap:4px!important}
 
+/* =====================================================================
+   v66 · masukan pengguna: banner (hero) seperti Beranda di setiap menu
+   ===================================================================== */
+.lx-ph{min-height:270px;margin-bottom:22px}
+.lx-ph .lx-hero-txt{padding:26px 20px 22px}
+html:root:not(#_) .lx-ph-t{font-family:var(--title)!important;font-weight:500!important;font-size:clamp(26px,7.4vw,36px)!important;line-height:1.06!important;letter-spacing:-.01em!important;margin:0 0 10px!important;color:var(--ink)!important;max-width:none!important}
+html:root:not(#_) .lx-ph-t>span{display:block;white-space:nowrap}
+.lx-ph .lx-sub{max-width:min(17em,56%)}
+.lx-ph .lx-cta{margin-top:2px}
+.lx-ph .lx-hero-img img{object-position:50% 14%}
+.lx-ph[data-art="face"] .lx-hero-img img{object-position:50% 20%}
+/* the hero replaces the plain title and intro paragraph */
+html:root:not(#_) main>section:not(#tab-outfit)>h1:first-of-type{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;margin:0!important;padding:0!important}
+html:root:not(#_) main>section:not(#tab-outfit)>h1:first-of-type+.lede{display:none!important}
+html:root:not(#_) #lx-pc{display:none!important}
+html:root:not(#_) #tab-lemari #btn-add{display:none!important}
+@media (min-width:900px){
+  .lx-ph{min-height:340px;margin-bottom:28px}
+  .lx-ph .lx-hero-txt{padding:44px 48px;max-width:540px}
+  html:root:not(#_) .lx-ph-t{font-size:clamp(40px,3.8vw,54px)!important}
+  .lx-ph .lx-sub{max-width:24em}
+}
+
 </style>
 </head>
 <body>
@@ -5021,6 +5044,48 @@ function lxPcHero(){ var im=$('#lx-pc-img'); if(!im)return; var v=figVariant(), 
   var go=$('#lx-pc-go'); if(go)go.addEventListener('click',function(){ var q=$('#quiz'); if(q){ q.scrollIntoView({behavior:'smooth',block:'start'}); var f=q.querySelector('input'); if(f)setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } });
   var hs=lxHero; lxHero=function(){ hs.apply(this,arguments); try{lxPcHero();}catch(e){} };
   lxPcHero();
+})();
+
+// ---------- v66: banner (hero) di setiap menu ----------
+function lxCount(){ try{ return state.items.filter(forG).length; }catch(e){ return state.items.length; } }
+var LX_PH={
+  tema:{k:function(){return 'Outfit & tema';},t:['Padu Padan','Sesuai Tema'],s:'Pilih tema dan look-nya, lalu Kurasi memadukan isi lemarimu agar sesuai.',c:'Buat tema dengan AI',art:[0,0],
+    go:function(){ var f=$('#ai-theme'); if(f){ f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }},
+  lemari:{k:function(){ var n=lxCount(); return n?n+' item di lemarimu':'Lemari masih kosong'; },t:['Atelier','Lemarimu'],s:'Simpan pakaian dan aksesori, lalu padukan dalam sekali ketuk.',c:'Tambah item',art:[1,2],
+    go:function(){ var b=$('#btn-add'); if(b)b.click(); }},
+  beauty:{k:function(){ return state.gender==='pria'?'Grooming':'Beauty'; },t:function(){ return state.gender==='pria'?['Grooming','Lebih Teratur']:['Rawat Cantikmu','Lebih Teliti']; },
+    s:function(){ return state.gender==='pria'?'Pantau kedaluwarsa produk, cek rutinitas skincare, dan jaga wishlist.':'Pantau kedaluwarsa makeup, cek rutinitas skincare, dan jaga wishlist.'; },c:'Tambah produk',art:'face',
+    go:function(){ var r=document.querySelector('input[name=btab][value=pao]'); if(r&&!r.checked)r.click(); var b=$('#pao-add'); if(b)setTimeout(function(){ b.click(); },60); }},
+  warna:{k:function(){return 'Personal Color';},t:['Temukan Warna','Terbaikmu'],s:'Kuis singkat untuk mengenali <i>undertone</i> dan musim warnamu.',c:'Mulai analisis',art:'pc',
+    go:function(){ var q=$('#quiz'); if(q){ q.scrollIntoView({behavior:'smooth',block:'start'}); var f=q.querySelector('input'); if(f)setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }},
+  riwayat:{k:function(){return 'Riwayat';},t:['Jejak Gaya','Minggu Ini'],s:'Item yang sudah dipakai beristirahat 7 hari agar gayamu tetap segar.',c:'Kurasi outfit hari ini',art:[3,0],
+    go:function(){ showTab('outfit'); window.scrollTo(0,0); setTimeout(function(){ var b=$('#hero-go'); if(b)b.click(); },80); }},
+  profil:{k:function(){ var n=state.profile&&state.profile.name; return n?'Hai, '+n:'Profil'; },t:['Gayamu,','Ceritamu'],s:'Atur nama, gaya, dan warna kulit agar Kurasi makin mengenalmu.',c:'Ubah profil',art:[2,1],
+    go:function(){ var f=$('#p-name'); if(f){ f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ try{f.focus({preventScroll:true});}catch(e){} },450); } }}
+};
+function lxArtSrc(a){ var v=figVariant(); if(a==='face')return 'img/avatar-'+v+'.webp'; if(a==='pc')return 'img/pc-hero-'+v+'.webp'; return 'img/look-'+a[0]+'-'+a[1]+'-'+v+'.webp'; }
+function lxPageHero(tab){
+  var cfg=LX_PH[tab], sec=$('#tab-'+tab); if(!cfg||!sec)return;
+  var el=sec.querySelector(':scope>.lx-ph');
+  if(!el){
+    el=document.createElement('section'); el.className='lx-hero lx-ph'; el.setAttribute('aria-labelledby','lx-ph-'+tab);
+    el.innerHTML='<div class="lx-hero-img" aria-hidden="true"><img alt="" decoding="async"></div><div class="lx-hero-txt"><p class="lx-kicker" data-nofx></p><h2 class="lx-ph-t" id="lx-ph-'+tab+'"></h2><p class="lx-sub"></p><button class="lx-cta" type="button"><span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>';
+    sec.insertBefore(el,sec.firstChild);
+    el.querySelector('.lx-cta').addEventListener('click',function(){ cfg.go(); });
+  }
+  var t=typeof cfg.t==='function'?cfg.t():cfg.t, s=typeof cfg.s==='function'?cfg.s():cfg.s;
+  el.setAttribute('data-art',cfg.art==='face'||cfg.art==='pc'?'face':'look');
+  el.querySelector('.lx-kicker').textContent=cfg.k();
+  el.querySelector('.lx-ph-t').innerHTML='<span>'+esc(t[0])+'</span> <span>'+esc(t[1])+'</span>';
+  el.querySelector('.lx-sub').innerHTML=s.indexOf('<i>')>-1?s:esc(s);
+  el.querySelector('.lx-cta span').textContent=cfg.c;
+  var im=el.querySelector('.lx-hero-img img'), src=lxArtSrc(cfg.art);
+  if(im.getAttribute('data-src')!==src){ im.setAttribute('data-src',src); im.onerror=function(){ this.onerror=null; this.src='img/avatar-'+figVariant()+'.webp'; }; im.src=src; }
+}
+function lxPageHeroes(){ Object.keys(LX_PH).forEach(function(k){ try{ lxPageHero(k); }catch(e){} }); }
+(function(){
+  var hs=lxHero; lxHero=function(){ hs.apply(this,arguments); lxPageHeroes(); };
+  lxPageHeroes();
 })();
 // ---------- Init ----------
 applyGenderTheme();
