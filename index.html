@@ -2624,6 +2624,24 @@ html:root:not(#_) .lx-hero-img.lx-photo img{left:0!important;right:0!important;t
 html:root:not(#_) .lx-ph:is([data-tab="lemari"],[data-tab="warna"],[data-tab="riwayat"]) .lx-hero-img.lx-photo img{object-position:50% 50%!important}
 html:root:not(#_)[data-theme="dark"] .lx-hero-img.lx-photo{background:#2a211d!important}
 
+/* =====================================================================
+   v80 · rekomendasi hemat kuota: contoh dari lemari contoh, gambar AI hanya saat diminta
+   ===================================================================== */
+html:root:not(#_) .rimg .rsample{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12% 12% 22%;box-sizing:border-box}
+html:root:not(#_) .rimg .rtag{position:absolute;left:10px;top:10px;font:600 9.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#8A7369;background:#fff;border:1px solid rgba(138,115,105,.3);border-radius:999px;padding:5px 8px;display:inline-flex;align-items:center;gap:6px}
+html:root:not(#_) .rimg .rtag .dot{width:9px!important;height:9px!important;border-radius:50%;margin:0!important;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+html:root:not(#_) .rimg .rgen{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);white-space:nowrap;font:600 12px/1 var(--body);padding:9px 14px;border-radius:999px;border:1px solid rgba(138,115,105,.35);background:#fff;color:#3A2A24;cursor:pointer;box-shadow:0 4px 14px rgba(60,40,30,.12)}
+html:root:not(#_)[data-g="pria"] .rimg :is(.rgen,.rtag){border-radius:7px}
+html:root:not(#_) .rimg .rgen[disabled]{opacity:.7;cursor:progress}
+html:root:not(#_) .rimg .rmsg{position:absolute;left:8px;right:8px;bottom:10px;text-align:center;font:500 11.5px/1.4 var(--body);color:#8A7369}
+html:root:not(#_) .recs>.rec:only-child{grid-column:1 / -1;flex-direction:row}
+html:root:not(#_) .recs>.rec:only-child>.rimg{flex:0 0 42%;padding-top:0!important;height:auto!important;align-self:stretch;min-height:230px;border-right:1px solid var(--outline)}
+html:root:not(#_) .recs>.rec:only-child>.rtx{flex:1;min-width:0;padding:14px 14px 16px}
+html:root:not(#_) .lx-mnote{display:flex;align-items:center;gap:8px;margin:0 0 12px;padding:10px 14px;border:1px solid var(--outline);border-radius:12px;background:var(--surface2,var(--surface));font:500 12.5px/1.45 var(--body);color:var(--muted)}
+html:root:not(#_) .lx-mnote svg{flex:0 0 16px;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+html:root:not(#_) .lx-mnote+.board{margin-bottom:18px!important}
+html:root:not(#_) .tag.hot{display:inline-block!important;width:max-content!important;max-width:100%;white-space:nowrap!important;font-size:11px!important;line-height:1.3!important;padding:3px 9px!important;margin-top:5px!important}
+
 </style>
 </head>
 <body>
@@ -4316,7 +4334,7 @@ $('#f-redraw').addEventListener('click',function(){
     b.disabled=false; if(tok!==FORM.token)return;
     if(u){ FORM.ill=u; FORM.illSrc=FORM.photo?'p':'a'; showFormArt(); photoNote('Ilustrasi baru siap. Simpan untuk memakainya.'); }
     else photoNote('Ilustrasi belum bisa dibuat. Coba lagi sebentar lagi.');
-  },function(e){ b.disabled=false; photoNote(e&&e.quota?'Kuota AI gratis hari ini habis, coba lagi besok pagi.':'AI sedang tidak bisa dihubungi, coba lagi sebentar lagi.'); });
+  },function(e){ b.disabled=false; photoNote(e&&e.quota?'Kuota AI gratis hari ini habis, pulih pukul 07.00 WIB.':'AI sedang tidak bisa dihubungi, coba lagi sebentar lagi.'); });
 });
 document.addEventListener('change',function(e){ if((e.target.name==='f-cat'||e.target.name==='f-color'||e.target.id==='f-motif')&&!FORM.ill&&!FORM.photo&&!FORM.item)showFormArt(); });
 
@@ -4709,7 +4727,7 @@ function fillRecImages(recs){
     aiPost({type:'item',text:recText(r)},50000).then(function(j){return j.image?shrinkItem(j.image):null;}).then(function(u){
       delete REC_BUSY[k]; if(u){ ITEM_IMG[k]=u; idbPut(k,u); var el=$('#look-win [data-rec="'+n+'"]'); if(el&&LOOKP.recs===recs)el.innerHTML='<img src="'+u+'" alt="">'; }
       next();
-    },function(e){ delete REC_BUSY[k]; var el=$('#look-win [data-rec="'+n+'"] .wait'); if(el){el.classList.add('off');el.lastChild.textContent=e&&e.quota?'Kuota AI habis, coba lagi besok':'Gambar belum tersedia';} if(!(e&&e.quota))next(); });
+    },function(e){ delete REC_BUSY[k]; var el=$('#look-win [data-rec="'+n+'"] .wait'); if(el){el.classList.add('off');el.lastChild.textContent=e&&e.quota?'Kuota AI hari ini habis, pulih pukul 07.00 WIB':'Gambar belum tersedia';} if(!(e&&e.quota))next(); });
   })();
 }
 $('#look-modal').addEventListener('click',function(e){ if(e.target.id==='look-modal')closeModal('look-modal'); });
@@ -5363,6 +5381,59 @@ document.addEventListener('load',function(e){ var t=e.target; if(t&&t.tagName===
     im.src=src;
   };
   try{ lxPageHeroes(); }catch(e){}
+})();
+
+// ---------- v80: rekomendasi hemat kuota ----------
+var AI_RESET='Kuota AI hari ini habis, pulih pukul 07.00 WIB', REC_QUOTA=false;
+function recSample(r){ var g=state.gender==='pria'?'pria':'wanita', L=SAMPLE[g]||[], best=-1, bs=-1, kw=(r.kw||'').toLowerCase();
+  for(var i=0;i<L.length;i++){ if(L[i][0]!==r.cat)continue; var nm=L[i][1].toLowerCase().replace(/ motif$/,''), sc=(L[i][2]===r.color?2:0)+(kw.indexOf(nm)>-1||nm.indexOf(kw)>-1?1:0)+(!L[i][3]===!r.motif?0.5:0);
+    if(sc>bs){ bs=sc; best=i; } }
+  return best<0?null:'img/item/'+(g==='pria'?'p':'w')+best+'.webp'; }
+function recVisual(r,i,msg){
+  var s=recSample(r), can=state.aiImg&&state.worker&&!REC_QUOTA;
+  return (s?'<img class="rsample" src="'+s+'" alt=""><span class="rtag" title="Contoh bentuk dari lemari contoh; warnanya mengikuti titik warna">'+dot(r.color)+'Contoh bentuk</span>':'<span class="wait off"><span class="hanger">'+FORM_ICO+'</span></span>')+
+    (msg?'<span class="rmsg">'+esc(msg)+'</span>':(can?'<button type="button" class="rgen" data-rgen="'+i+'">Lihat gambar AI</button>':''));
+}
+(function(){
+  var base=recCard;
+  recCard=function(r,i){ var h=base(r,i); if(ITEM_IMG[recKey(r)])return h;
+    return h.replace(/(<div class="rimg" data-rec="\d+">)[\s\S]*?(<\/div><div class="rtx">)/,function(m,a,b){ return a+recVisual(r,i)+b; }); };
+  fillRecImages=function(){};
+  var w=$('#look-win'); if(w)w.addEventListener('click',function(e){ var b=e.target.closest('[data-rgen]'); if(b){ e.preventDefault(); genRec(+b.getAttribute('data-rgen')); } });
+})();
+function genRec(n){
+  var recs=LOOKP&&LOOKP.recs, r=recs&&recs[n]; if(!r)return; var k=recKey(r); if(ITEM_IMG[k]||REC_BUSY[k])return;
+  var box=function(){ return LOOKP.recs===recs?$('#look-win [data-rec="'+n+'"]'):null; };
+  var b=box()&&box().querySelector('.rgen'); if(b){ b.disabled=true; b.textContent='Menggambar…'; }
+  REC_BUSY[k]=1;
+  aiPost({type:'item',text:recText(r)},50000).then(function(j){ return j.image?shrinkItem(j.image):null; }).then(function(u){
+    delete REC_BUSY[k]; var el=box(); if(u){ ITEM_IMG[k]=u; idbPut(k,u); if(el)el.innerHTML='<img src="'+u+'" alt="">'; } else if(el)el.innerHTML=recVisual(r,n,'Gambar belum tersedia, coba lagi nanti');
+  },function(e){
+    delete REC_BUSY[k]; if(e&&e.quota){ REC_QUOTA=true; $$('#look-win .rgen').forEach(function(x){ x.remove(); }); }
+    var el=box(); if(el)el.innerHTML=recVisual(r,n,e&&e.quota?AI_RESET:'Gambar belum tersedia, coba lagi nanti');
+  });
+}
+
+// Di model: saat kuota habis atau gagal, tampilkan Flat-lay di tempat yang sama
+var AI_QUOTA_OUT=false;
+function mirrorFallback(c,why){ return '<p class="lx-mnote" role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.2v.1"/></svg><span>'+why+' Sementara ditampilkan Flat-lay.</span></p>'+boardHTML(c,'kolase'); }
+(function(){
+  var baseM=mirrorHTML;
+  mirrorHTML=function(c,pose){ var cached=state.aiImg?imgGet(imgKey(comboPrompt(c))):null;
+    if(!cached&&AI_QUOTA_OUT&&state.aiImg&&state.worker) return mirrorFallback(c,'Ilustrasi model pulih pukul 07.00 WIB.');
+    return baseM(c,pose); };
+  var baseF=fillMirrorAI;
+  fillMirrorAI=function(box,c,stillOk){
+    if(AI_QUOTA_OUT)return;
+    var prompt=comboPrompt(c); if(!state.aiImg||!state.worker||imgGet(imgKey(prompt)))return;
+    aiImage(prompt).then(function(u){ return (u||AI_LAST_ERR==='quota')?u:new Promise(function(r){setTimeout(r,1500);}).then(function(){ return aiImage(prompt); }); }).then(function(u){
+      if(!stillOk())return; var m=box.querySelector('.mirror'), cap=box.querySelector('.figcap'); if(!m)return;
+      if(u){ var w=m.querySelector('.wait'); if(w)w.remove(); m.insertAdjacentHTML('beforeend',imgTag(u)); if(cap)cap.textContent='Ilustrasi AI'; return; }
+      if(AI_LAST_ERR==='quota')AI_QUOTA_OUT=true;
+      var why=AI_LAST_ERR==='quota'?'Kuota AI hari ini habis, ilustrasi model pulih pukul 07.00 WIB.':(AI_LAST_ERR==='timeout'||AI_LAST_ERR==='net'?'Koneksi ke AI terputus, ilustrasi model belum bisa dibuat.':'Ilustrasi model untuk padanan ini belum bisa dibuat.');
+      if(cap)cap.remove(); m.outerHTML=mirrorFallback(c,why);
+    });
+  };
 })();
 // ---------- Init ----------
 applyGenderTheme();
