@@ -2642,6 +2642,16 @@ html:root:not(#_) .lx-mnote svg{flex:0 0 16px;width:16px;height:16px;fill:none;s
 html:root:not(#_) .lx-mnote+.board{margin-bottom:18px!important}
 html:root:not(#_) .tag.hot{display:inline-block!important;width:max-content!important;max-width:100%;white-space:nowrap!important;font-size:11px!important;line-height:1.3!important;padding:3px 9px!important;margin-top:5px!important}
 
+/* =====================================================================
+   v81 · warna dari foto lebih akurat + pilihan warna cepat
+   ===================================================================== */
+html:root:not(#_) .lx-calt{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0 10px}
+html:root:not(#_) .lx-calt[hidden]{display:none}
+html:root:not(#_) .lx-calt>span{font:500 12.5px var(--body);color:var(--muted);margin-right:2px}
+html:root:not(#_) .lx-calt button{display:inline-flex;align-items:center;gap:6px;font:600 12.5px/1 var(--body);padding:7px 11px;border-radius:999px;border:1px solid var(--outline);background:var(--surface);color:var(--ink);cursor:pointer}
+html:root:not(#_)[data-g="pria"] .lx-calt button{border-radius:7px}
+html:root:not(#_) .lx-calt button .dot{width:11px!important;height:11px!important;margin:0!important;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+
 </style>
 </head>
 <body>
@@ -4298,7 +4308,7 @@ function photoChosen(file){
     URL.revokeObjectURL(url);
     if(!im){ photoNote('<span style="color:var(--danger)">Foto tidak bisa dibuka. Coba foto lain (JPG atau PNG).</span>'); return; }
     FORM.photo=downscale(im,448,0.85); showFormArt();
-    var col=detectColor(im); if(col){ setFormColor(col); FORM.auto.color=col; }
+    var det=detectColorX(im); FORM.det=det; var col=det&&det.best; if(col){ setFormColor(col); FORM.auto.color=col; } colorAlts();
     if(!state.worker||!state.aiImg){ photoNote('Warna terdeteksi: <b>'+colorLabel(col)+'</b>. Ilustrasi AI sedang dimatikan, item akan memakai sketsa.'); return; }
     photoNote('<span class="spin" aria-hidden="true"></span> Warna terdeteksi: <b>'+colorLabel(col)+'</b>. AI sedang mengenali item dan menggambar ilustrasinya…');
     var done=0, cls=null, ill=null, failed=[];
@@ -4313,7 +4323,7 @@ function photoChosen(file){
       if(tok===FORM.token){
         if(r.cat&&catsFor(state.gender).some(function(c){return c.k===r.cat;})){ var rb=$('input[name=f-cat][value='+r.cat+']'); if(rb)rb.checked=true; }
         if(r.name&&(!$('#f-name').value.trim()||$('#f-name').value===FORM.auto.name)){ $('#f-name').value=r.name; FORM.auto.name=r.name; }
-        if(r.color&&PAL[r.color]){ setFormColor(r.color); }
+        if(r.color&&PAL[r.color]&&aiColorOk(r.color,FORM.det)){ setFormColor(r.color); } colorAlts(r.color);
         $('#f-motif').checked=!!r.motif;
         if(!FORM.ill)showFormArt();
       }
@@ -5297,7 +5307,7 @@ function bulkClassify(){
       (function(i){ var r=BULK.rows[i]; running++;
         var go=(!state.worker||BULK.quota)?Promise.reject({skip:true}):aiPost({type:'classify',photo:r.photo},30000);
         go.then(function(j){ if(tok!==BULK.tok)return; r.en=j.en||''; r.motif=!!j.motif;
-          bulkSet(i,{cat:j.cat,name:j.name,color:j.color,st:'Dikenali'+(j.cat&&CATL[j.cat]?' sebagai <b>'+esc(CATL[j.cat])+'</b>':'')+'. Periksa sebelum menyimpan.',ok:true}); },
+          bulkSet(i,{cat:j.cat,name:j.name,color:(j.color&&aiColorOk(j.color,r.det))?j.color:r.color,st:'Dikenali'+(j.cat&&CATL[j.cat]?' sebagai <b>'+esc(CATL[j.cat])+'</b>':'')+'. Periksa sebelum menyimpan.',ok:true}); },
           function(e){ if(tok!==BULK.tok)return; if(e&&e.quota)BULK.quota=true;
           bulkSet(i,{st:(BULK.quota||!state.worker)?'Warna terdeteksi dari foto. Pilih kategorinya.':'AI belum bisa mengenali foto ini. Pilih kategorinya.'}); })
         .then(function(){ r.done=true; running--; bulkNote(); pump(); });
@@ -5315,7 +5325,7 @@ function bulkOpen(files){
   $('#bulk-note').innerHTML='<span class="spin" aria-hidden="true"></span> Membuka '+files.length+' foto…';
   openModal('bulk-modal');
   var tok=BULK.tok;
-  Promise.all(files.map(function(file){ var url=URL.createObjectURL(file); return loadImg(url).then(function(im){ URL.revokeObjectURL(url); if(!im)return null; return {photo:downscale(im,448,0.85),thumb:bulkThumb(im),color:detectColor(im)}; }); }))
+  Promise.all(files.map(function(file){ var url=URL.createObjectURL(file); return loadImg(url).then(function(im){ URL.revokeObjectURL(url); if(!im)return null; var dt=detectColorX(im); return {photo:downscale(im,448,0.85),thumb:bulkThumb(im),color:dt&&dt.best,det:dt}; }); }))
   .then(function(list){
     if(tok!==BULK.tok)return;
     BULK.rows=list.filter(Boolean);
@@ -5435,6 +5445,87 @@ function mirrorFallback(c,why){ return '<p class="lx-mnote" role="status"><svg v
     });
   };
 })();
+
+// ---------- v81: warna dari foto lebih akurat ----------
+var DET_CFG={kL:3.0,neu:8,lit:25,wb:0.9,wt:74,gt:52}; // hasil uji 288 foto contoh (6 kondisi cahaya/latar)
+function colSq(v){return v*v;}
+function palLab(){ if(!PAL_LAB)PAL_LAB=PALETTE.map(function(p){var h=p.h.replace('#','');return {k:p.k,lab:rgb2lab(parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16))};}); return PAL_LAB; }
+function palDist(L,P){ var C1=Math.sqrt(L[1]*L[1]+L[2]*L[2]), C2=Math.sqrt(P[1]*P[1]+P[2]*P[2]), dL=(L[0]-P[0])/DET_CFG.kL, dC=C1-C2, dH2=colSq(L[1]-P[1])+colSq(L[2]-P[2])-dC*dC;
+  return Math.sqrt(dL*dL+colSq(dC/(1+0.045*C1))+Math.max(0,dH2)/colSq(1+0.015*C1)); }
+function rankPal(L){
+  var C=Math.sqrt(L[1]*L[1]+L[2]*L[2]), r=palLab().map(function(p){ return {k:p.k,d:palDist(L,p.lab)}; });
+  if(C<DET_CFG.neu){ // netral: kamera membuat putih tampak abu-abu, jadi pakai ambang yang disesuaikan foto
+    var k=L[0]>=DET_CFG.wt?((L[2]>=6&&L[1]>=-1)?'cream':'putih'):L[0]>=DET_CFG.gt?'abumuda':L[0]>=30?'abutua':'hitam';
+    r.forEach(function(x){ if(x.k===k)x.d=Math.min(x.d,0); });
+  }
+  return r.sort(function(a,b){return a.d-b.d;});
+}
+function detectColorX(im){ try{
+  var S=96,c=document.createElement('canvas'); c.width=S; c.height=S; var x=c.getContext('2d'); x.drawImage(im,0,0,S,S);
+  var d=x.getImageData(0,0,S,S).data, N=S*S, i, t, LAB=new Array(N), RGB=new Array(N);
+  for(i=0;i<N;i++){ RGB[i]=[d[i*4],d[i*4+1],d[i*4+2]]; LAB[i]=rgb2lab(RGB[i][0],RGB[i][1],RGB[i][2]); }
+  function med(a){ a=a.slice().sort(function(p,q){return p-q;}); return a[a.length>>1]; }
+  var bi=[]; for(i=0;i<S;i++)for(t=0;t<2;t++)bi.push(t*S+i,(S-1-t)*S+i,i*S+t,i*S+S-1-t);
+  var bg=[0,1,2].map(function(ch){ return med(bi.map(function(k){return RGB[k][ch];})); }), bgL=rgb2lab(bg[0],bg[1],bg[2]);
+  function dist(a,b){ return Math.sqrt(colSq(a[0]-b[0])+colSq(a[1]-b[1])+colSq(a[2]-b[2])); }
+  var spread=med(bi.map(function(k){return dist(LAB[k],bgL);})), T=Math.max(12,spread*2.5+6), fg=new Uint8Array(N), nf=0;
+  for(i=0;i<N;i++) if(dist(LAB[i],bgL)>T){ fg[i]=1; nf++; }
+  var frac=nf/N, useBg=frac>0.06&&frac<0.9;
+  if(useBg&&bgL[0]>55&&Math.sqrt(bgL[1]*bgL[1]+bgL[2]*bgL[2])<28){ // koreksi lampu kuning/biru dari warna latar
+    var m=(bg[0]+bg[1]+bg[2])/3, gr=bg.map(function(v){ return 1+DET_CFG.wb*(m/Math.max(v,1)-1); });
+    for(i=0;i<N;i++) if(fg[i]) LAB[i]=rgb2lab(Math.min(255,RGB[i][0]*gr[0]),Math.min(255,RGB[i][1]*gr[1]),Math.min(255,RGB[i][2]*gr[2]));
+  }
+  var P=[],W=[];
+  for(var y=0;y<S;y++)for(var xx=0;xx<S;xx++){ i=y*S+xx; var cx=(xx+.5)/S-.5, cy=(y+.5)/S-.5, r=Math.sqrt(cx*cx+cy*cy)/0.7071;
+    if(useBg?!fg[i]:r>0.55)continue; P.push(LAB[i]); W.push(1+1.5*Math.max(0,1-r)); }
+  if(P.length<20)return null;
+  // k-means (k=4) di ruang Lab
+  var K=Math.min(4,P.length), cen=[], idx=P.map(function(p,n){return n;}).sort(function(a,b){return P[a][0]-P[b][0];});
+  for(t=0;t<K;t++)cen.push(P[idx[Math.floor((t+.5)*idx.length/K)]].slice());
+  var as=new Array(P.length);
+  for(var it=0;it<10;it++){
+    for(i=0;i<P.length;i++){ var b=0,bd=1e9; for(t=0;t<K;t++){ var dd=colSq(P[i][0]-cen[t][0])*0.5+colSq(P[i][1]-cen[t][1])+colSq(P[i][2]-cen[t][2]); if(dd<bd){bd=dd;b=t;} } as[i]=b; }
+    var acc=[]; for(t=0;t<K;t++)acc.push([0,0,0,0]);
+    for(i=0;i<P.length;i++){ var a2=acc[as[i]]; a2[0]+=P[i][0]*W[i]; a2[1]+=P[i][1]*W[i]; a2[2]+=P[i][2]*W[i]; a2[3]+=W[i]; }
+    for(t=0;t<K;t++) if(acc[t][3]>0) cen[t]=[acc[t][0]/acc[t][3],acc[t][1]/acc[t][3],acc[t][2]/acc[t][3]];
+  }
+  var cl=[]; for(t=0;t<K;t++)cl.push({c:cen[t],w:0,m:[t]}); for(i=0;i<P.length;i++)cl[as[i]].w+=W[i];
+  // gabungkan klaster yang warnanya sama tapi beda terang (bayangan/sorotan lipatan kain)
+  function hue(c){ return Math.atan2(c[2],c[1])*180/Math.PI; }
+  function chroma(c){ return Math.sqrt(c[1]*c[1]+c[2]*c[2]); }
+  function same(p,q){ var cp=chroma(p.c), cq=chroma(q.c);
+    if(cp<9&&cq<9) return Math.abs(p.c[0]-q.c[0])<22;
+    if(cp<9||cq<9) return false;
+    var dh=Math.abs(hue(p.c)-hue(q.c)); if(dh>180)dh=360-dh; return dh<22&&Math.abs(p.c[0]-q.c[0])<40; }
+  cl=cl.filter(function(q){return q.w>0;}).sort(function(a,b){return b.w-a.w;});
+  var grp=[]; cl.forEach(function(q){ var g=grp.find(function(g){return same(g[0],q);}); if(g)g.push(q); else grp.push([q]); });
+  var tot=cl.reduce(function(s,q){return s+q.w;},0);
+  var G=grp.map(function(g){ var w=g.reduce(function(s,q){return s+q.w;},0);
+    // ambil bagian kain yang terkena cahaya: rata-rata berbobot dengan sedikit condong ke klaster lebih terang
+    var sw=0, c=[0,0,0]; g.forEach(function(q){ var ww=q.w*(1+Math.max(0,q.c[0]-g[0].c[0])/DET_CFG.lit); c[0]+=q.c[0]*ww; c[1]+=q.c[1]*ww; c[2]+=q.c[2]*ww; sw+=ww; });
+    return {lab:[c[0]/sw,c[1]/sw,c[2]/sw], w:w/tot}; }).sort(function(a,b){return b.w-a.w;});
+  var top=G[0], rk=rankPal(top.lab), best=rk[0].k, alts=[];
+  rk.slice(1,3).forEach(function(r){ if(r.d<rk[0].d+18)alts.push(r.k); });
+  if(G[1]&&G[1].w>0.22){ var k2=rankPal(G[1].lab)[0].k; if(k2!==best&&alts.indexOf(k2)<0)alts.unshift(k2); }
+  return {best:best, alts:alts.slice(0,3), lab:top.lab, d:rk[0].d};
+}catch(e){ return null; } }
+
+detectColor=function(im){ var d=detectColorX(im); return d&&d.best; };
+function aiColorOk(k,det){ if(!det||!PAL[k])return true; if(k===det.best||det.alts.indexOf(k)>-1)return true;
+  var L=palLab(), lb=function(x){ var p=L.find(function(q){return q.k===x;}); return p&&p.lab; };
+  return palDist(det.lab,lb(k))<=palDist(det.lab,lb(det.best))+14; }
+function colorAlts(extra){
+  var el=$('#f-color-alt'); if(!el){ var n=$('#f-photo-note'); if(!n)return; el=document.createElement('div'); el.id='f-color-alt'; el.className='lx-calt'; n.parentNode.insertBefore(el,n.nextSibling);
+    el.addEventListener('click',function(e){ var b=e.target.closest('[data-c]'); if(b){ e.preventDefault(); setFormColor(b.getAttribute('data-c')); colorAlts(FORM.aiColor); } }); }
+  if(extra)FORM.aiColor=extra;
+  var det=FORM.det; if(!FORM.photo||!det){ el.hidden=true; el.innerHTML=''; return; }
+  var cur=($('input[name=f-color]:checked')||{}).value, list=[];
+  [det.best].concat(det.alts,[FORM.aiColor]).forEach(function(k){ if(k&&PAL[k]&&k!==cur&&list.indexOf(k)<0)list.push(k); });
+  list=list.slice(0,3); if(!list.length){ el.hidden=true; return; }
+  el.hidden=false; el.innerHTML='<span>Warnanya kurang pas? Pilih cepat:</span>'+list.map(function(k){ return '<button type="button" data-c="'+k+'">'+dot(k)+colorLabel(k)+'</button>'; }).join('');
+}
+(function(){ var b=showFormArt; showFormArt=function(){ b.apply(this,arguments); if(!FORM.photo){ FORM.det=null; FORM.aiColor=null; colorAlts(); } }; })();
+document.addEventListener('change',function(e){ if(e.target&&e.target.name==='f-color'&&FORM.det)colorAlts(); });
 // ---------- Init ----------
 applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
