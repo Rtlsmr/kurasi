@@ -4495,7 +4495,7 @@ function profileHTML(px){
   function chips(name,list,type,cls){ return '<div class="chips'+(cls?' '+cls:'')+'">'+list.map(function(o){return '<label class="chip"><input type="'+(type||'radio')+'" name="'+px+name+'" value="'+o.k+'"><span>'+o.l+'</span></label>';}).join('')+'</div>'; }
   return ''+
   '<fieldset class="pstep" data-step="1"><legend>Kenalan dulu</legend>'+
-    '<label class="lbl" for="'+px+'name">Nama panggilan</label><input type="text" id="'+px+'name" maxlength="20" placeholder="Contoh: Adhesty" style="margin-bottom:14px">'+
+    '<label class="lbl" for="'+px+'name">Nama panggilan</label><input type="text" id="'+px+'name" maxlength="20" placeholder="Contoh: Ophelia" style="margin-bottom:14px">'+
     '<div class="pseg"><span class="lbl">Padu padan untuk</span><div class="seg" role="radiogroup" aria-label="Padu padan untuk"><label><input type="radio" name="'+px+'gender" value="wanita"><span>Femme</span></label><label><input type="radio" name="'+px+'gender" value="pria"><span>Homme</span></label></div></div>'+
   '</fieldset>'+
   '<fieldset class="pstep" data-step="2"><legend>Rambut dan hijab</legend>'+
