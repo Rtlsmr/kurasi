@@ -2652,6 +2652,20 @@ html:root:not(#_) .lx-calt button{display:inline-flex;align-items:center;gap:6px
 html:root:not(#_)[data-g="pria"] .lx-calt button{border-radius:7px}
 html:root:not(#_) .lx-calt button .dot{width:11px!important;height:11px!important;margin:0!important;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
 
+/* =====================================================================
+   v82 · motif terdeteksi dari foto + sakelar Bermotif di unggah banyak foto
+   ===================================================================== */
+html:root:not(#_) .bulk-row .bk-mot{grid-column:1 / -1;display:inline-flex;align-items:center;gap:8px;font:500 13px/1.3 var(--body);color:var(--ink);cursor:pointer;margin-top:2px}
+html:root:not(#_) .bulk-row .bk-mot input{width:18px;height:18px;accent-color:var(--accent);margin:0}
+html:root:not(#_) .bulk-row .bk-mot small{color:var(--muted);font-size:11.5px}
+@media (max-width:699px){
+  html:root:not(#_) .bulk-row .bk-grid{grid-template-columns:minmax(0,1fr)!important}
+  html:root:not(#_) .bulk-row .bk-cat{grid-column:1!important;grid-row:1!important}
+  html:root:not(#_) .bulk-row .bk-colw{grid-column:1!important;grid-row:2!important}
+  html:root:not(#_) .bulk-row .bk-grid .bk-name{grid-column:1!important;grid-row:3!important}
+  html:root:not(#_) .bulk-row .bk-mot{grid-row:4}
+}
+
 </style>
 </head>
 <body>
@@ -4308,7 +4322,7 @@ function photoChosen(file){
     URL.revokeObjectURL(url);
     if(!im){ photoNote('<span style="color:var(--danger)">Foto tidak bisa dibuka. Coba foto lain (JPG atau PNG).</span>'); return; }
     FORM.photo=downscale(im,448,0.85); showFormArt();
-    var det=detectColorX(im); FORM.det=det; var col=det&&det.best; if(col){ setFormColor(col); FORM.auto.color=col; } colorAlts();
+    var det=detectColorX(im); FORM.det=det; if(det)$('#f-motif').checked=!!det.motif; var col=det&&det.best; if(col){ setFormColor(col); FORM.auto.color=col; } colorAlts();
     if(!state.worker||!state.aiImg){ photoNote('Warna terdeteksi: <b>'+colorLabel(col)+'</b>. Ilustrasi AI sedang dimatikan, item akan memakai sketsa.'); return; }
     photoNote('<span class="spin" aria-hidden="true"></span> Warna terdeteksi: <b>'+colorLabel(col)+'</b>. AI sedang mengenali item dan menggambar ilustrasinya…');
     var done=0, cls=null, ill=null, failed=[];
@@ -5307,7 +5321,7 @@ function bulkClassify(){
       (function(i){ var r=BULK.rows[i]; running++;
         var go=(!state.worker||BULK.quota)?Promise.reject({skip:true}):aiPost({type:'classify',photo:r.photo},30000);
         go.then(function(j){ if(tok!==BULK.tok)return; r.en=j.en||''; r.motif=!!j.motif;
-          bulkSet(i,{cat:j.cat,name:j.name,color:(j.color&&aiColorOk(j.color,r.det))?j.color:r.color,st:'Dikenali'+(j.cat&&CATL[j.cat]?' sebagai <b>'+esc(CATL[j.cat])+'</b>':'')+'. Periksa sebelum menyimpan.',ok:true}); },
+          bulkSet(i,{cat:j.cat,name:j.name,motif:!!j.motif,color:(j.color&&aiColorOk(j.color,r.det))?j.color:r.color,st:'Dikenali'+(j.cat&&CATL[j.cat]?' sebagai <b>'+esc(CATL[j.cat])+'</b>':'')+'. Periksa sebelum menyimpan.',ok:true}); },
           function(e){ if(tok!==BULK.tok)return; if(e&&e.quota)BULK.quota=true;
           bulkSet(i,{st:(BULK.quota||!state.worker)?'Warna terdeteksi dari foto. Pilih kategorinya.':'AI belum bisa mengenali foto ini. Pilih kategorinya.'}); })
         .then(function(){ r.done=true; running--; bulkNote(); pump(); });
@@ -5325,7 +5339,7 @@ function bulkOpen(files){
   $('#bulk-note').innerHTML='<span class="spin" aria-hidden="true"></span> Membuka '+files.length+' foto…';
   openModal('bulk-modal');
   var tok=BULK.tok;
-  Promise.all(files.map(function(file){ var url=URL.createObjectURL(file); return loadImg(url).then(function(im){ URL.revokeObjectURL(url); if(!im)return null; var dt=detectColorX(im); return {photo:downscale(im,448,0.85),thumb:bulkThumb(im),color:dt&&dt.best,det:dt}; }); }))
+  Promise.all(files.map(function(file){ var url=URL.createObjectURL(file); return loadImg(url).then(function(im){ URL.revokeObjectURL(url); if(!im)return null; var dt=detectColorX(im); return {photo:downscale(im,448,0.85),thumb:bulkThumb(im),color:dt&&dt.best,det:dt,motif:!!(dt&&dt.motif)}; }); }))
   .then(function(list){
     if(tok!==BULK.tok)return;
     BULK.rows=list.filter(Boolean);
@@ -5343,12 +5357,12 @@ function bulkSave(){
     if(!el.querySelector('.bk-inc input').checked)return;
     var cat=el.querySelector('.bk-cat').value, col=el.querySelector('.bk-col').value, name=el.querySelector('.bk-name').value.trim();
     if(!cat||!col){ el.classList.add('bad'); bad++; return; }
-    add.push({r:r,cat:cat,color:col,name:name||CATL[cat]});
+    var mc=el.querySelector('.bk-motif'); add.push({r:r,cat:cat,color:col,name:name||CATL[cat],mot:mc?mc.checked:!!r.motif});
   });
   if(bad){ $('#bulk-err').textContent=bad+' foto belum punya kategori atau warna. Lengkapi, atau hapus centangnya.'; var f=document.querySelector('#bulk-list .bulk-row.bad'); if(f)f.scrollIntoView({behavior:'smooth',block:'center'}); return; }
   if(!add.length){ $('#bulk-err').textContent='Belum ada foto yang dicentang.'; return; }
   add.forEach(function(a){
-    var it={id:uid(),cat:a.cat,name:a.name,color:a.color,motif:!!a.r.motif,styles:['kerja','santai','formal'],lastWorn:null,g:state.gender};
+    var it={id:uid(),cat:a.cat,name:a.name,color:a.color,motif:!!a.mot,styles:['kerja','santai','formal'],lastWorn:null,g:state.gender};
     if(a.r.en)it.en=a.r.en;
     it.ill='q'; ILLQ.failed[it.id]=0;
     ITEM_IMG['it.'+it.id]=a.r.thumb; idbPut('it.'+it.id,a.r.thumb); idbPut('ph.'+it.id,a.r.photo);
@@ -5447,7 +5461,7 @@ function mirrorFallback(c,why){ return '<p class="lx-mnote" role="status"><svg v
 })();
 
 // ---------- v81: warna dari foto lebih akurat ----------
-var DET_CFG={kL:3.0,neu:8,lit:25,wb:0.9,wt:74,gt:52}; // hasil uji 288 foto contoh (6 kondisi cahaya/latar)
+var DET_CFG={mt:14,mf:0.38,kL:3.0,neu:8,lit:25,wb:0.9,wt:74,gt:52}; // hasil uji 288 foto contoh (6 kondisi cahaya/latar)
 function colSq(v){return v*v;}
 function palLab(){ if(!PAL_LAB)PAL_LAB=PALETTE.map(function(p){var h=p.h.replace('#','');return {k:p.k,lab:rgb2lab(parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16))};}); return PAL_LAB; }
 function palDist(L,P){ var C1=Math.sqrt(L[1]*L[1]+L[2]*L[2]), C2=Math.sqrt(P[1]*P[1]+P[2]*P[2]), dL=(L[0]-P[0])/DET_CFG.kL, dC=C1-C2, dH2=colSq(L[1]-P[1])+colSq(L[2]-P[2])-dC*dC;
@@ -5504,10 +5518,19 @@ function detectColorX(im){ try{
     // ambil bagian kain yang terkena cahaya: rata-rata berbobot dengan sedikit condong ke klaster lebih terang
     var sw=0, c=[0,0,0]; g.forEach(function(q){ var ww=q.w*(1+Math.max(0,q.c[0]-g[0].c[0])/DET_CFG.lit); c[0]+=q.c[0]*ww; c[1]+=q.c[1]*ww; c[2]+=q.c[2]*ww; sw+=ww; });
     return {lab:[c[0]/sw,c[1]/sw,c[2]/sw], w:w/tot}; }).sort(function(a,b){return b.w-a.w;});
+  // motif: perubahan terang/warna yang tajam di bagian dalam kain (lipatan kain polos berubah perlahan)
+  var ms=0, mn=0, mh=0;
+  for(var yy=3;yy<S-3;yy++)for(var x4=3;x4<S-3;x4++){ var q=yy*S+x4;
+    if(useBg){ if(!(fg[q]&&fg[q-2]&&fg[q+2]&&fg[q-2*S]&&fg[q+2*S]))continue; }
+    else { var cx2=(x4+.5)/S-.5, cy2=(yy+.5)/S-.5; if(Math.sqrt(cx2*cx2+cy2*cy2)>0.4)continue; }
+    var a0=LAB[q], a1=LAB[q+1], a2=LAB[q+S];
+    var gg=Math.abs(a1[0]-a0[0])+Math.abs(a2[0]-a0[0])+0.7*(Math.abs(a1[1]-a0[1])+Math.abs(a1[2]-a0[2])+Math.abs(a2[1]-a0[1])+Math.abs(a2[2]-a0[2]));
+    mn++; if(gg>DET_CFG.mt)mh++; }
+  var mf=mn>50?mh/mn:0;
   var top=G[0], rk=rankPal(top.lab), best=rk[0].k, alts=[];
   rk.slice(1,3).forEach(function(r){ if(r.d<rk[0].d+18)alts.push(r.k); });
   if(G[1]&&G[1].w>0.22){ var k2=rankPal(G[1].lab)[0].k; if(k2!==best&&alts.indexOf(k2)<0)alts.unshift(k2); }
-  return {best:best, alts:alts.slice(0,3), lab:top.lab, d:rk[0].d};
+  return {best:best, alts:alts.slice(0,3), lab:top.lab, d:rk[0].d, mf:mf, motif:mf>=DET_CFG.mf};
 }catch(e){ return null; } }
 
 detectColor=function(im){ var d=detectColorX(im); return d&&d.best; };
@@ -5526,6 +5549,20 @@ function colorAlts(extra){
 }
 (function(){ var b=showFormArt; showFormArt=function(){ b.apply(this,arguments); if(!FORM.photo){ FORM.det=null; FORM.aiColor=null; colorAlts(); } }; })();
 document.addEventListener('change',function(e){ if(e.target&&e.target.name==='f-color'&&FORM.det)colorAlts(); });
+
+// ---------- v82: motif di unggah banyak foto ----------
+(function(){
+  var NOMOT=/^(sepatu|tas|aksesoris)$/;
+  var baseRow=bulkRowHTML;
+  bulkRowHTML=function(r,i){ return baseRow(r,i).replace('</div></div></li>','<label class="bk-mot"><input type="checkbox" class="bk-motif"'+(r.motif?' checked':'')+'> Bermotif'+(r.motif?' <small>(terdeteksi dari foto)</small>':'')+'</label></div></div></li>'); };
+  var baseSet=bulkSet;
+  bulkSet=function(i,o){ baseSet(i,o); var el=bulkEl(i), r=BULK.rows[i]; if(!el||!r||o.motif===undefined||r.motifTouched)return;
+    var cb=el.querySelector('.bk-motif'); if(cb){ r.motif=!!o.motif&&!NOMOT.test(r.cat||''); cb.checked=r.motif; var sm=el.querySelector('.bk-mot small'); if(sm)sm.remove(); } };
+  var list=$('#bulk-list'); if(list)list.addEventListener('change',function(e){ var row=e.target.closest('.bulk-row'); if(!row)return; var r=BULK.rows[+row.getAttribute('data-i')]; if(!r)return;
+    if(e.target.classList.contains('bk-motif')){ r.motif=e.target.checked; r.motifTouched=true; var sm=row.querySelector('.bk-mot small'); if(sm)sm.remove(); }
+    if(e.target.classList.contains('bk-cat')){ r.cat=e.target.value; if(!r.motifTouched&&NOMOT.test(r.cat)){ r.motif=false; var cb=row.querySelector('.bk-motif'); if(cb)cb.checked=false; var sm2=row.querySelector('.bk-mot small'); if(sm2)sm2.remove(); } }
+  });
+})();
 // ---------- Init ----------
 applyGenderTheme();
 (function migrate(){ var ch=false; state.items.forEach(function(it){ if(it.sample)return; ['wanita','pria'].forEach(function(g){ SAMPLE[g].forEach(function(x,i){ if(!it.sample&&x[0]===it.cat&&x[1]===it.name&&x[2]===it.color){ it.sample=(g==='pria'?'p':'w')+i; ch=true; } }); }); }); if(ch)save('items',state.items); })();
