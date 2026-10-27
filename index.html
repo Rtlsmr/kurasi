@@ -4334,7 +4334,7 @@ $('#f-redraw').addEventListener('click',function(){
     b.disabled=false; if(tok!==FORM.token)return;
     if(u){ FORM.ill=u; FORM.illSrc=FORM.photo?'p':'a'; showFormArt(); photoNote('Ilustrasi baru siap. Simpan untuk memakainya.'); }
     else photoNote('Ilustrasi belum bisa dibuat. Coba lagi sebentar lagi.');
-  },function(e){ b.disabled=false; photoNote(e&&e.quota?'Kuota AI gratis hari ini habis, pulih pukul 07.00 WIB.':'AI sedang tidak bisa dihubungi, coba lagi sebentar lagi.'); });
+  },function(e){ b.disabled=false; photoNote(e&&e.quota?'Kuota AI gratis hari ini sudah habis, coba lagi nanti.':'AI sedang tidak bisa dihubungi, coba lagi sebentar lagi.'); });
 });
 document.addEventListener('change',function(e){ if((e.target.name==='f-cat'||e.target.name==='f-color'||e.target.id==='f-motif')&&!FORM.ill&&!FORM.photo&&!FORM.item)showFormArt(); });
 
@@ -4426,7 +4426,7 @@ function fillMirrorAI(box,c,stillOk){
   aiImage(prompt).then(function(u){ return (u||AI_LAST_ERR==='quota')?u:new Promise(function(r){setTimeout(r,1500);}).then(function(){ return aiImage(prompt); }); }).then(function(u){ if(!stillOk())return; var m=box.querySelector('.mirror'), cap=box.querySelector('.figcap'); if(!m)return;
     var w=m.querySelector('.wait');
     if(u){ if(w)w.remove(); m.insertAdjacentHTML('beforeend',imgTag(u)); if(cap)cap.textContent='Ilustrasi AI'; }
-    else { if(box&&box.id==='result'&&!RV_USER&&resultView==='model'){ resultView='flat'; renderResult(); return; } if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">'+FORM_ICO+'</span><span>'+(AI_LAST_ERR==='quota'?'Jatah AI gratis hari ini sudah habis, jadi ilustrasi model belum bisa dibuat. Jatah kembali pukul 07.00 WIB.':(AI_LAST_ERR==='timeout'||AI_LAST_ERR==='net'?'Koneksi ke AI terputus, ilustrasi model belum bisa dibuat. Coba lagi sebentar lagi.':'Ilustrasi model untuk padanan ini gagal dibuat. Coba Ganti outfit atau buka lagi nanti.'))+' Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
+    else { if(box&&box.id==='result'&&!RV_USER&&resultView==='model'){ resultView='flat'; renderResult(); return; } if(w){ w.classList.add('off'); w.innerHTML='<span class="hanger">'+FORM_ICO+'</span><span>'+(AI_LAST_ERR==='quota'?'Jatah AI gratis hari ini sudah habis, jadi ilustrasi model belum bisa dibuat. Coba lagi nanti.':(AI_LAST_ERR==='timeout'||AI_LAST_ERR==='net'?'Koneksi ke AI terputus, ilustrasi model belum bisa dibuat. Coba lagi sebentar lagi.':'Ilustrasi model untuk padanan ini gagal dibuat. Coba Ganti outfit atau buka lagi nanti.'))+' Padanannya tetap bisa dilihat di Flat-lay.</span>'; } if(cap)cap.innerHTML='&nbsp;'; } });
 }
 function viewTabs(name,cur,opts){ return '<div class="seg small" role="radiogroup" aria-label="'+opts.label+'">'+opts.items.map(function(o){return '<label><input type="radio" name="'+name+'" value="'+o[0]+'"'+(cur===o[0]?' checked':'')+'><span>'+o[1]+'</span></label>';}).join('')+'</div>'; }
 function renderBoard(){
@@ -4727,7 +4727,7 @@ function fillRecImages(recs){
     aiPost({type:'item',text:recText(r)},50000).then(function(j){return j.image?shrinkItem(j.image):null;}).then(function(u){
       delete REC_BUSY[k]; if(u){ ITEM_IMG[k]=u; idbPut(k,u); var el=$('#look-win [data-rec="'+n+'"]'); if(el&&LOOKP.recs===recs)el.innerHTML='<img src="'+u+'" alt="">'; }
       next();
-    },function(e){ delete REC_BUSY[k]; var el=$('#look-win [data-rec="'+n+'"] .wait'); if(el){el.classList.add('off');el.lastChild.textContent=e&&e.quota?'Kuota AI hari ini habis, pulih pukul 07.00 WIB':'Gambar belum tersedia';} if(!(e&&e.quota))next(); });
+    },function(e){ delete REC_BUSY[k]; var el=$('#look-win [data-rec="'+n+'"] .wait'); if(el){el.classList.add('off');el.lastChild.textContent=e&&e.quota?'Kuota AI gratis hari ini sudah habis, coba lagi nanti':'Gambar belum tersedia';} if(!(e&&e.quota))next(); });
   })();
 }
 $('#look-modal').addEventListener('click',function(e){ if(e.target.id==='look-modal')closeModal('look-modal'); });
@@ -5384,7 +5384,7 @@ document.addEventListener('load',function(e){ var t=e.target; if(t&&t.tagName===
 })();
 
 // ---------- v80: rekomendasi hemat kuota ----------
-var AI_RESET='Kuota AI hari ini habis, pulih pukul 07.00 WIB', REC_QUOTA=false;
+var AI_RESET='Kuota AI gratis hari ini sudah habis, coba lagi nanti', REC_QUOTA=false;
 function recSample(r){ var g=state.gender==='pria'?'pria':'wanita', L=SAMPLE[g]||[], best=-1, bs=-1, kw=(r.kw||'').toLowerCase();
   for(var i=0;i<L.length;i++){ if(L[i][0]!==r.cat)continue; var nm=L[i][1].toLowerCase().replace(/ motif$/,''), sc=(L[i][2]===r.color?2:0)+(kw.indexOf(nm)>-1||nm.indexOf(kw)>-1?1:0)+(!L[i][3]===!r.motif?0.5:0);
     if(sc>bs){ bs=sc; best=i; } }
@@ -5420,7 +5420,7 @@ function mirrorFallback(c,why){ return '<p class="lx-mnote" role="status"><svg v
 (function(){
   var baseM=mirrorHTML;
   mirrorHTML=function(c,pose){ var cached=state.aiImg?imgGet(imgKey(comboPrompt(c))):null;
-    if(!cached&&AI_QUOTA_OUT&&state.aiImg&&state.worker) return mirrorFallback(c,'Ilustrasi model pulih pukul 07.00 WIB.');
+    if(!cached&&AI_QUOTA_OUT&&state.aiImg&&state.worker) return mirrorFallback(c,'Kuota AI gratis hari ini sudah habis.');
     return baseM(c,pose); };
   var baseF=fillMirrorAI;
   fillMirrorAI=function(box,c,stillOk){
@@ -5430,7 +5430,7 @@ function mirrorFallback(c,why){ return '<p class="lx-mnote" role="status"><svg v
       if(!stillOk())return; var m=box.querySelector('.mirror'), cap=box.querySelector('.figcap'); if(!m)return;
       if(u){ var w=m.querySelector('.wait'); if(w)w.remove(); m.insertAdjacentHTML('beforeend',imgTag(u)); if(cap)cap.textContent='Ilustrasi AI'; return; }
       if(AI_LAST_ERR==='quota')AI_QUOTA_OUT=true;
-      var why=AI_LAST_ERR==='quota'?'Kuota AI hari ini habis, ilustrasi model pulih pukul 07.00 WIB.':(AI_LAST_ERR==='timeout'||AI_LAST_ERR==='net'?'Koneksi ke AI terputus, ilustrasi model belum bisa dibuat.':'Ilustrasi model untuk padanan ini belum bisa dibuat.');
+      var why=AI_LAST_ERR==='quota'?'Kuota AI gratis hari ini sudah habis, ilustrasi model belum bisa dibuat.':(AI_LAST_ERR==='timeout'||AI_LAST_ERR==='net'?'Koneksi ke AI terputus, ilustrasi model belum bisa dibuat.':'Ilustrasi model untuk padanan ini belum bisa dibuat.');
       if(cap)cap.remove(); m.outerHTML=mirrorFallback(c,why);
     });
   };
